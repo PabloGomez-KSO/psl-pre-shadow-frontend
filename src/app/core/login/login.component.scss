@@ -1,0 +1,29 @@
+.login-container{
+  height: 450px;
+  width: 800px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  background-color:	#2d2045;
+  border: 1px solid black;
+  margin-top: 160px;
+
+  .login-form-row{
+    margin-bottom: 10px;
+
+    &__input{
+      width: 80%;
+      padding: 15px;
+    }
+    &__icon{
+      background-color: gray;
+      padding: 19.2px;
+    }
+    &__text{
+      color: white;
+    }
+
+  }
+}
