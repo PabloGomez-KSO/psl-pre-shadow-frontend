@@ -4,16 +4,20 @@ import { CreateCandidateComponent } from './create-candidate/create-candidate.co
 import { UpdateCandidateComponent } from './update-candidate/update-candidate.component';
 import { ListCandidatesComponent } from './list-candidates/list-candidates.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { AdminNavbarComponent } from './admin-navbar/admin-navbar.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ],
   declarations: [
     CreateCandidateComponent,
     UpdateCandidateComponent,
     ListCandidatesComponent,
-    AdminDashboardComponent
+    AdminDashboardComponent,
+    AdminNavbarComponent
   ],
   exports: [
     AdminDashboardComponent

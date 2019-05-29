@@ -1,29 +1,52 @@
-.login-container{
-  height: 450px;
-  width: 800px;
+@import '../../../assets/scss/variables';
+
+.login-container {
+  height: 560px;
+  width: 700px;
   margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
-  background-color:	#2d2045;
+  background-color: $purple_logo_psl;
   border: 1px solid black;
   margin-top: 160px;
+  border-radius: 8px;
 
-  .login-form-row{
-    margin-bottom: 10px;
-
-    &__input{
-      width: 80%;
-      padding: 15px;
+  .login-form {
+    width: 100%;
+    height: 100%;
+    .login-form-row {
+      width: 100%;
+      margin-bottom: 30px;
+      display: flex;
+      justify-content: center;
+      text-align: center;
+      &__input {
+        padding: 20px;
+        &:focus {
+          border: 2px solid dodgerblue;
+        }
+      }
+      &__icon {
+        background-color: gray;
+        padding: 20px;
+      }
+      &__text {
+        color: white;
+        padding: 35px;
+        font-family: $main_font;
+        font-size: 16px;
+        font-weight: bold;
+      }
+      &__btn {
+        margin-bottom: 80px;
+        height: 50px;
+      }
+      &__image{
+        height: 80px;
+        margin-top: 30px;
+      }
     }
-    &__icon{
-      background-color: gray;
-      padding: 19.2px;
-    }
-    &__text{
-      color: white;
-    }
-
   }
 }

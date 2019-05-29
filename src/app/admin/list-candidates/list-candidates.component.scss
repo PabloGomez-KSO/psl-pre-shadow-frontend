@@ -1,0 +1,17 @@
+@import '../../../assets/scss/variables';
+
+.candidates_table {
+  width: 70%;
+  margin: 0 auto;
+  font-family: $main_font;
+  margin-top: 50px;
+
+  &__row{
+    border: 1px solid #ddd;
+    overflow-x: scroll;
+    &__item{
+      text-align: center;
+      padding: 0.25em;
+    }
+  }
+}

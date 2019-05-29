@@ -1,27 +1,33 @@
 <div class="login-container">
-  <form>
+  <form class="login-form">
     <div class="login-form-row">
-      <img src="../../../assets/images/psllogo.png">
+      <img class="login-form-row__image" src="../../../assets/images/psllogo.png">
     </div>
     <div class="login-form-row">
-        <span class="login-form-row__text"> Welcome to the Pre Shadow Platform</span>
+      <span class="login-form-row__text"> Welcome to the Pre Shadow Platform</span>
     </div>
     <div class="login-form-row">
-      <i class="fas fa-unlock-alt login-form-row__icon"></i>
+      <i class="fa fa-user icon login-form-row__icon"></i>
       <input class="login-form-row__input"
              type="text"
              placeholder="Username"
-             name="username">
+             name="username"
+             [(ngModel)]="username"
+             >
     </div>
     <div class="login-form-row">
       <i class="fas fa-unlock-alt login-form-row__icon"></i>
       <input class="login-form-row__input"
              type="password"
-             placeholder="Passsword"
-             name="password">
+             placeholder="Password"
+             name="password"
+             [(ngModel)]="password"
+             >
     </div>
-    <div class="col-sm-12 text-center">
-      <button type="button" class="btn btn-secondary btn-lg btn-dark">Log In</button>
+    <div class="login-form-row">
+      <button type="button" class="btn btn-primary login-form-row__btn" (click)="logIn()">
+        <span class="login-form-row__text">Log In</span>
+      </button>
     </div>
   </form>
 </div>

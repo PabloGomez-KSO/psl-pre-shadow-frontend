@@ -1,0 +1,24 @@
+@import '../../../assets/scss/variables';
+
+.navbar-custom {
+  background-color: $purple_logo_psl;
+  padding: 6px;
+  width: 100%;
+  min-width: 361px;
+
+  .dashboard_navbar{
+    &__logo{
+       height: 50px;
+    }
+  }
+  .navbar-list{
+    margin-left: 20px;
+    font-family: $main_font;
+  }
+  .navbar-btn {
+    margin-right: 15px;
+    &__text{
+      font-family: $main_font;
+    }
+  }
+}

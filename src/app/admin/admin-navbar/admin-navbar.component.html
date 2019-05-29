@@ -1,0 +1,20 @@
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+  <a class="dashboard_navbar" href="#">
+    <img class="dashboard_navbar__logo" src="../../../assets/images/psllogo_navbar.png">
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto navbar-list">
+      <li class="nav-item navbar-list__item" routerLinkActive="active">
+        <a class="nav-link navbar-list__item__text" [routerLink]="['/admin-dashboard']">Dashboard </a>
+      </li>
+    </ul>
+    <button type="button" class="btn btn-primary navbar-btn">
+      <span class="navbar-btn__text">Log Out</span>
+    </button>
+  </div>
+</nav>
