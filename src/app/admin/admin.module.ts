@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CreateCandidateComponent } from './create-candidate/create-candidate.component';
 import { UpdateCandidateComponent } from './update-candidate/update-candidate.component';
 import { ListCandidatesComponent } from './list-candidates/list-candidates.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 
 @NgModule({
   imports: [
@@ -11,7 +12,11 @@ import { ListCandidatesComponent } from './list-candidates/list-candidates.compo
   declarations: [
     CreateCandidateComponent,
     UpdateCandidateComponent,
-    ListCandidatesComponent
+    ListCandidatesComponent,
+    AdminDashboardComponent
+  ],
+  exports: [
+    AdminDashboardComponent
   ]
 })
 export class AdminModule { }
