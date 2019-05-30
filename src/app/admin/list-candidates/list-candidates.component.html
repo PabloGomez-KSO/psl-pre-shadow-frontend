@@ -1,6 +1,12 @@
+<div class="create_user_container">
+  <button type="button" class="btn btn-primary create_user_container__btn" (click)="createCandidate()">
+    <span class="create_user_container__btn__text">Create Candidate</span>
+  </button>
+</div>
 <table class="candidates_table">
   <tr class="candidates_table__row">
     <th class="candidates_table__row__item">Name</th>
+    <th class="candidates_table__row__item">Email</th>
     <th class="candidates_table__row__item">Age</th>
     <th class="candidates_table__row__item">Start Date</th>
     <th class="candidates_table__row__item">Release Date</th>
@@ -9,13 +15,15 @@
   </tr>
   <tr class="candidates_table__row">
     <td class="candidates_table__row__item">Pablo Villegas </td>
-    <td class="candidates_table__row__item">22<td>
-    <td class="candidates_table__row__item">other data</td>
-    <td class="candidates_table__row__item">ye?</td>
+    <td class="candidates_table__row__item">pvillegasg@psl.com.co</td>
+    <td class="candidates_table__row__item">22</td>
+    <td class="candidates_table__row__item">22/04/2019</td>
+    <td class="candidates_table__row__item">22/07/2019</td>
+    <td class="candidates_table__row__item">Frontend</td>
     <td class="edit-buttons">
-    <button type="button" class="btn btn-primary navbar-btn" (click)="editCandidate()">
-      <span class="navbar-btn__text">Edit</span>
-   </button>
+      <button type="button" class="btn btn-primary candidates_table__btn" (click)="editCandidate()">
+        <span class="candidates_table__btn__text">Edit</span>
+      </button>
     </td>
-   </tr>
+  </tr>
 </table>

@@ -1,3 +1,22 @@
-<p>
-  create-candidate works!
-</p>
+<div class="create-candidate-container">
+    <form>
+        <div class="create-candidate-row">
+            <label class="create-candidate-row__data" for="email"> <strong> Email</strong> </label>
+            <input class="create-candidate-row__input" type="email" name="email" [(ngModel)]="email" placeholder="Enter a email">
+        </div>
+        <div class="create-candidate-row">
+            <label class="create-candidate-row__data" for="pass"> <strong> Password </strong></label>
+            <input class="create-candidate-row__input" type="password" name="pass" [(ngModel)]="password">
+        </div>
+        <div class="create-candidate-buttons">
+            <button type="button" class="create-candidate-button__option" >
+                <i class="fas fa-undo"></i>
+                <label> Go Back</label>
+            </button>
+            <button type="submit" class="create-candidate-button__option" (click)="onCreateCandidate()">
+                <i class="fas fa-edit"></i>
+                <label> Create</label>
+            </button>
+        </div>
+    </form>
+  </div>

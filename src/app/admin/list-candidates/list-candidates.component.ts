@@ -16,4 +16,8 @@ export class ListCandidatesComponent implements OnInit {
     this.router.navigate(['/admin-dashboard/update_candidate']);
   }
 
+  createCandidate(){
+    this.router.navigate(['/admin-dashboard/create_candidate']);
+  }
+
 }

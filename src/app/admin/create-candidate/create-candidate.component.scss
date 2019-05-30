@@ -1,0 +1,38 @@
+@import '../../../assets/scss/variables';
+
+.create-candidate-container {
+  background: $purple_psl_opacity;
+  margin: 0 auto;
+  padding: 10px;
+  align-items: center;
+  min-height: 40%;
+  width: 670px;
+  margin-top: 80px;
+  background-color: $blue_logo_psl;
+
+  .create-candidate-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5em;
+    font-family: $main_font;
+    font-size: 18px;
+    margin-bottom: 15px;
+
+    &__data {
+      padding: 10px 5px 5px 10px;
+      margin-top: 20px;
+      margin-right: 15px;
+      width: 150px;
+    }
+
+    &__input {
+      padding: 15px;
+      margin-top: 15px;
+      width: 320px;
+      font-family: $main_font;
+      font-size: 18px;
+    }
+  }
+
+}

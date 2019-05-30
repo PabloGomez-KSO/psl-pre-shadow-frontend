@@ -2,9 +2,9 @@
 
 .navbar-custom {
   background-color: $purple_logo_psl;
-  padding: 6px;
+  padding: 9px;
   width: 100%;
-  min-width: 361px;
+  min-width: 469px;
 
   .dashboard_navbar{
     &__logo{
@@ -14,11 +14,13 @@
   .navbar-list{
     margin-left: 20px;
     font-family: $main_font;
+    font-size: $size_main_font;
   }
   .navbar-btn {
     margin-right: 15px;
     &__text{
       font-family: $main_font;
+      font-size: $size_main_font;
     }
   }
 }

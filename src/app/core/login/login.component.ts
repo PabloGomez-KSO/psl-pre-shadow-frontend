@@ -17,9 +17,7 @@ export class LoginComponent implements OnInit {
   }
   /*Missing implementation, testing purposes*/
   logIn(){
-    if(this.authService.logInFirebase(this.username, this.password)){
-      this.redirectToAdmin();
-    }
+    this.redirectToAdmin();
   }
 
   redirectToAdmin(){
