@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import * as firebase from 'firebase/app';
-import { AngularFireAuth } from  "@angular/fire/auth";
+import { AngularFireAuth } from "@angular/fire/auth";
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -12,8 +11,8 @@ export class AuthService {
     public firebaseAuth: AngularFireAuth
   ) { }
 
-  registerUser(email: string, password: string){
-    return new Promise((resolve, reject)=> {
+  registerUser(email: string, password: string) {
+    return new Promise((resolve, reject) => {
       this.firebaseAuth.auth.createUserWithEmailAndPassword(email, password).then(
         userData => resolve(userData),
         error => reject(error)
@@ -21,8 +20,8 @@ export class AuthService {
     })
   }
 
-  logIn(email: string, password: string){
-    return new Promise((resolve, reject)=> {
+  logIn(email: string, password: string) {
+    return new Promise((resolve, reject) => {
       this.firebaseAuth.auth.signInWithEmailAndPassword(email, password).then(
         userData => resolve(userData),
         error => reject(error)
@@ -30,15 +29,15 @@ export class AuthService {
     })
   }
 
-  logOut(){
+  logOut() {
     return this.firebaseAuth.auth.signOut();
   }
 
-  getUserAuthenticated(){
+  getAuth() {
     return this.firebaseAuth.authState.pipe(map(auth => auth));
   }
 
-  test(){
-    return "hola";
+  get currentUserObservable(): any {
+    return this.firebaseAuth.authState;
   }
 }

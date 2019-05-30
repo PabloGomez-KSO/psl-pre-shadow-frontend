@@ -4,6 +4,4 @@ export class User {
   picture: string;
   nickname: string;
   startDate: Date;
-
-
 }

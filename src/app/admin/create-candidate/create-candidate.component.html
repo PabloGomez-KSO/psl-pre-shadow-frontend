@@ -9,13 +9,13 @@
             <input class="create-candidate-row__input" type="password" name="pass" [(ngModel)]="password">
         </div>
         <div class="create-candidate-buttons">
-            <button type="button" class="create-candidate-button__option" >
-                <i class="fas fa-undo"></i>
-                <label> Go Back</label>
+            <button type="button" class="btn btn-primary create-candidate-buttons__option" >
+                <label class="create-candidate-buttons__option__text"> Go Back</label>
+                <i class="fas fa-undo create-candidate-buttons__option__icon"></i>
             </button>
-            <button type="submit" class="create-candidate-button__option" (click)="onCreateCandidate()">
-                <i class="fas fa-edit"></i>
-                <label> Create</label>
+            <button type="submit" class="btn btn-primary create-candidate-buttons__option" (click)="onCreateCandidate()">
+                <label class="create-candidate-buttons__option__text"> Create</label>
+                <i class="fas fa-edit create-candidate-buttons__option__icon"></i>
             </button>
         </div>
     </form>

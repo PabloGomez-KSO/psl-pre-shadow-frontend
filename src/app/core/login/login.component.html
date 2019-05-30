@@ -9,10 +9,10 @@
     <div class="login-form-row">
       <i class="fa fa-user icon login-form-row__icon"></i>
       <input class="login-form-row__input"
-             type="text"
-             placeholder="Username"
-             name="username"
-             [(ngModel)]="username"
+             type="email"
+             placeholder="Email"
+             name="email"
+             [(ngModel)]="email"
              >
     </div>
     <div class="login-form-row">
@@ -25,7 +25,7 @@
              >
     </div>
     <div class="login-form-row">
-      <button type="button" class="btn btn-primary login-form-row__btn" (click)="logIn()">
+      <button type="button" class="btn btn-primary login-form-row__btn" (click)="onLogIn()">
         <span class="login-form-row__text">Log In</span>
       </button>
     </div>

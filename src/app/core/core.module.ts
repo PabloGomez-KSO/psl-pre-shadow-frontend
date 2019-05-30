@@ -13,6 +13,9 @@ import { AdminModule } from '../admin/admin.module';
 //Enviroment.
 import {  environment } from '../../environments/environment';
 
+
+import {AuthGuard} from './guards/auth.guard';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -23,6 +26,9 @@ import {  environment } from '../../environments/environment';
   ],
   declarations: [
     LoginComponent
+  ],
+  providers: [
+    AuthGuard
   ],
   exports: [
     LoginComponent
