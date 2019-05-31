@@ -8,8 +8,10 @@ import { AppComponent } from './app.component';
 import { AdminModule } from './admin/admin.module';
 import { CandidateModule } from './candidate/candidate.module';
 import { CoreModule } from './core/core.module';
+import { SharedModule } from './shared/shared.module';
 //Routes
 import { APP_ROUTES } from './app-routing.module';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -20,7 +22,8 @@ import { APP_ROUTES } from './app-routing.module';
     CandidateModule,
     CoreModule,
     APP_ROUTES,
-    RouterModule
+    RouterModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

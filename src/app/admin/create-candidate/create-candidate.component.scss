@@ -6,8 +6,8 @@
   padding: 10px;
   align-items: center;
   min-height: 40%;
-  width: 670px;
-  margin-top: 80px;
+  width: 800px;
+  margin-top: 15px;
   background-color: $purple_logo_psl;
 
   .create-candidate-row {
@@ -27,10 +27,22 @@
     }
 
     &__input {
-      padding: 13px;
+      padding: 10px;
       margin-top: 15px;
       width: 320px;
       font-family: $main_font;
+      font-size: $size_main_font;
+    }
+
+    &__date{
+      padding: 10px;
+      width: 280px;
+      font-size: $size_main_font;
+      font-family: $main_font;
+    }
+
+    &__dateBtn{
+      padding: 13px;
     }
   }
 
@@ -38,11 +50,14 @@
     display: flex;
     justify-content: space-around;
     margin-top: 30px;
+    margin-bottom: 30px;
     &__option {
+      cursor: pointer;
       &__icon{
         margin-left: 10px;
       }
       &__text{
+        cursor: pointer;
         font-size: $size_main_font;
         font-family: $main_font;
       }
