@@ -13,13 +13,13 @@
     <th class="candidates_table__row__item">Preference</th>
     <th class="candidates_table__row__item"></th>
   </tr>
-  <tr class="candidates_table__row">
-    <td class="candidates_table__row__item">Pablo Villegas </td>
-    <td class="candidates_table__row__item">pvillegasg@psl.com.co</td>
-    <td class="candidates_table__row__item">22</td>
-    <td class="candidates_table__row__item">22/04/2019</td>
-    <td class="candidates_table__row__item">22/07/2019</td>
-    <td class="candidates_table__row__item">Frontend</td>
+  <tr *ngFor="let candidate of candidates" class="candidates_table__row">
+    <td class="candidates_table__row__item">{{candidate.name}} </td>
+    <td class="candidates_table__row__item">{{candidate.email}}</td>
+    <td class="candidates_table__row__item">{{candidate.age}}</td>
+    <td class="candidates_table__row__item">{{candidate.startDate | datePipe }} </td>
+    <td class="candidates_table__row__item">{{candidate.releaseDate | datePipe}} </td>
+    <td class="candidates_table__row__item">{{candidate.preference}}</td>
     <td class="edit-buttons">
       <button type="button" class="btn btn-primary candidates_table__btn" (click)="editCandidate()">
         <span class="candidates_table__btn__text">Edit</span>

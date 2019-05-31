@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "../auth.service";
 import { Router } from "@angular/router";
-import Swal from "sweetalert2";
 import { UserApiService } from '../../services/user-api.service';
 import { User } from "../../../shared/models/user";
 import { AlertService } from "../../../shared/notifications/alert.service";
@@ -32,7 +31,7 @@ export class LoginComponent implements OnInit {
         this.userApiService.getUserById(userId).subscribe((user: User) => {
           if (user) {
             this.alertNotification.closeNotification();
-            this.alertNotification.showSuccessMessageLogin();
+            this.alertNotification.showSuccessMessage('Welcome to our Pre Shadow platform');
             if (user.roles.admin) {
               this.redirectToAdmin();
             } else if (user.roles.candidate) {

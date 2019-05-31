@@ -16,12 +16,12 @@ export class AuthService {
     public angularFireStore: AngularFirestore
   ) {}
 
-  registerUser(email: string, password: string) {
+  registerUser(user: User, password: string) {
     return new Promise((resolve, reject) => {
       this.firebaseAuth.auth
-        .createUserWithEmailAndPassword(email, password)
-        .then(userData => {
-          resolve(userData), this.updateUserData(userData.user);
+        .createUserWithEmailAndPassword(user.email, password)
+        .then(data => {
+          resolve(data.user), this.updateUserData(data.user.uid, user);
         })
         .catch(err => console.log(reject(err)));
     });
@@ -43,24 +43,17 @@ export class AuthService {
     return this.firebaseAuth.authState.pipe(map(auth => auth));
   }
 
-  updateUserData(user) {
+  updateUserData(userId: string, user: User) {
     const userRef: AngularFirestoreDocument<any> = this.angularFireStore.doc(
-      `users/${user.uid}`
+      `users/${userId}`
     );
 
-    const data: User = {
-      id: user.uid,
-      preference: "Frontend",
-      name: 'Pablo Villegas',
-      age: 24,
-      username: 'pvillegasg',
-      email: user.email,
-      roles: {
-        candidate: true
-      }
+    const userForDatabase: User = {
+     ...user,
+     id: userId
     };
 
-    return userRef.set(data, { merge: true });
+    return userRef.set(userForDatabase, { merge: true });
   }
 
   get currentUserObservable(): any {

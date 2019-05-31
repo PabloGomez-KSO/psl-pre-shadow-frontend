@@ -8,11 +8,11 @@ export class AlertService {
 
   constructor() { }
 
-  showSuccessMessageLogin() {
+  showSuccessMessage(message: string) {
     Swal.fire({
       allowOutsideClick: false,
       type: 'success',
-      text: 'Welcome to our Pre Shadow platform'
+      text: message
     });
   }
 
