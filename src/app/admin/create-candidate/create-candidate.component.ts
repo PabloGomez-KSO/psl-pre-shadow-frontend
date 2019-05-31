@@ -27,7 +27,7 @@ export class CreateCandidateComponent implements OnInit {
       name: "",
       username: "",
       email: "",
-      age: 0,
+      age: null,
       startDate: "",
       releaseDate: "",
       preference: "",
