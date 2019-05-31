@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../core/auth/auth.service';
 import { Router } from '@angular/router'
 import Swal from 'sweetalert2';
+import { UserApiService } from "../../core/services/user-api.service";
+import { User } from "../../shared/models/user";
 @Component({
   selector: 'app-admin-navbar',
   templateUrl: './admin-navbar.component.html',
@@ -9,9 +11,14 @@ import Swal from 'sweetalert2';
 })
 export class AdminNavbarComponent implements OnInit {
 
-  constructor(private authService: AuthService, private router: Router) { }
+  email: string;
+
+  constructor(private authService: AuthService, private router: Router, private userApiService: UserApiService) { }
 
   ngOnInit() {
+    this.userApiService.getUserById(localStorage.getItem('userId')).subscribe((user: User) => {
+      this.email = user.email;
+    });
   }
 
   onClickLogOut(){
@@ -19,9 +26,10 @@ export class AdminNavbarComponent implements OnInit {
       Swal.fire({
         allowOutsideClick: false,
         type: 'info',
-        text: 'Come Back Again :('
+        text: 'Goodbye my friend'
       });
-
+      localStorage.removeItem('rol');
+      localStorage.removeItem('userId');
       this.router.navigate(['/login']);
     })
   }

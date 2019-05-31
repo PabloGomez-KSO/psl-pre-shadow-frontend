@@ -464,6 +464,13 @@
     lodash.camelcase "^4.3.0"
     protobufjs "^6.8.6"
 
+"@ng-bootstrap/ng-bootstrap@^4.2.0":
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/@ng-bootstrap/ng-bootstrap/-/ng-bootstrap-4.2.0.tgz#17152252834f3b5dc50742f3aafeaa9eb27a05f8"
+  integrity sha512-41Sg9RKgFGfnkWJhzPJIumYbib+GCTZ8N17q3PGfLORqtIN25KUFHGuO8EYOYd+zrDVYe8g4JYZoxQZvxaxm6w==
+  dependencies:
+    tslib "^1.9.0"
+
 "@ngtools/webpack@6.2.9":
   version "6.2.9"
   resolved "https://registry.yarnpkg.com/@ngtools/webpack/-/webpack-6.2.9.tgz#4614f770da86a08fa6d750c50fd4a1033e6a7128"
@@ -7271,6 +7278,11 @@ supports-color@^6.1.0:
   integrity sha512-qe1jfm1Mg7Nq/NSh6XE24gPXROEVsWHxC1LIx//XNlD9iw7YZQGjZNjYN7xGaEG6iKdA8EtNFW6R0gjnVXp+wQ==
   dependencies:
     has-flag "^3.0.0"
+
+sweetalert2@^8.11.6:
+  version "8.11.6"
+  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-8.11.6.tgz#7687c5e5744f216ceae294c10e224bf111479413"
+  integrity sha512-UFtFNdlwk+NgsRIlGMFA/yz9Pq7D8c32Y11TGEc4t3avrn8f0EFlxP2+Q0JLL219w6PsEglZFfVDmIDEr1816Q==
 
 symbol-observable@1.2.0:
   version "1.2.0"

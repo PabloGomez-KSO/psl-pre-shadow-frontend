@@ -5,12 +5,14 @@ import { CandidateNavbarComponent } from "./candidate-navbar/candidate-navbar.co
 import { CandidateDashboardComponent } from "./candidate-dashboard/candidate-dashboard.component";
 import { RouterModule } from "@angular/router";
 import { FormsModule } from "@angular/forms";
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
-    CommonModule, 
+    CommonModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ],
   declarations: [
     CandidateInformationComponent,

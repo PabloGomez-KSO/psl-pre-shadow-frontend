@@ -9,7 +9,7 @@ import { User } from "../../shared/models/user";
   styleUrls: ["./list-candidates.component.scss"]
 })
 export class ListCandidatesComponent implements OnInit {
-  private candidates: User[] = [];
+  public candidates: User[] = [];
 
   constructor(private router: Router, private userApiService: UserApiService) {}
 

@@ -31,10 +31,14 @@ export class LoginComponent implements OnInit {
         this.userApiService.getUserById(userId).subscribe((user: User) => {
           if (user) {
             this.alertNotification.closeNotification();
-            this.alertNotification.showSuccessMessage('Welcome to our Pre Shadow platform');
+            localStorage.setItem('userId', userId);
             if (user.roles.admin) {
+              this.alertNotification.showSuccessMessage(`Welcome Admin: ${user.name} to the Pre Shadow Platform`);
+              localStorage.setItem('rol','Admin');
               this.redirectToAdmin();
             } else if (user.roles.candidate) {
+              this.alertNotification.showSuccessMessage(`Welcome ${user.name} to the Pre Shadow Program, We hope you learn a lot`);
+              localStorage.setItem('rol','Candidate');
               this.redirectToCandidate();
             }
           } else {

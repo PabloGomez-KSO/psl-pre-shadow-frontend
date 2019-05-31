@@ -6,21 +6,28 @@
   width: 100%;
   min-width: 469px;
 
-  .dashboard_navbar{
-    &__logo{
-       height: 50px;
+  .dashboard_navbar {
+    &__logo {
+      height: 50px;
     }
   }
-  .navbar-list{
+  .navbar-list {
     margin-left: 20px;
     font-family: $main_font;
     font-size: $size_main_font;
   }
   .navbar-btn {
     margin-right: 15px;
-    &__text{
+    &__text {
       font-family: $main_font;
       font-size: $size_main_font;
     }
+  }
+
+  .navbar_text {
+    font-family: $main_font;
+    font-size: $size_main_font;
+    color: white;
+    margin-right: 10px;
   }
 }

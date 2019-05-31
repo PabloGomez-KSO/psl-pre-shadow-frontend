@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router'
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { AuthService } from '../../core/auth/auth.service';
 
@@ -15,18 +15,18 @@ export class CandidateNavbarComponent implements OnInit {
   ngOnInit() {
   }
 
-
-  onClickLogOut(){
+  onClickLogOut() {
     this.authService.logOut().then(() => {
       Swal.fire({
         allowOutsideClick: false,
         type: 'info',
-        text: 'Come Back Again :('
+        text: 'Goodbye my friend'
       });
-
+      localStorage.removeItem('rol');
+      localStorage.removeItem('userId');
       this.router.navigate(['/login']);
     })
   }
-  
+
 
 }

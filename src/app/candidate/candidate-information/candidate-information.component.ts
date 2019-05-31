@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+import { UserApiService } from "../../core/services/user-api.service";
+import { User } from "../../shared/models/user";
 @Component({
   selector: 'app-candidate-information',
   templateUrl: './candidate-information.component.html',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CandidateInformationComponent implements OnInit {
 
-  constructor() { }
+  candidate: User;
+
+  constructor(private userApiService: UserApiService) { }
 
   ngOnInit() {
+    this.userApiService.getUserById(localStorage.getItem('userId')).subscribe((user: User) => {
+      this.candidate = user;
+    });
   }
 
 }

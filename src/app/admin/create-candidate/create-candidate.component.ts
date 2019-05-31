@@ -60,7 +60,7 @@ export class CreateCandidateComponent implements OnInit {
     for(let i in this.candidateForm.controls){
       this.candidateForm.controls[i].markAsTouched();
     }
-    
+
     console.log(this.user);
     this.authService
       .registerUser(this.user, this.password)

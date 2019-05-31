@@ -1,0 +1,9 @@
+.candidate-info-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 60px;
+  .card {
+    width: 500px;
+  }
+}

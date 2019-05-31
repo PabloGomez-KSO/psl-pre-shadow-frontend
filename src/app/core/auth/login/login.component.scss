@@ -2,7 +2,7 @@
 
 .login-container {
   height: 560px;
-  width: 700px;
+  width: 40%;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -50,4 +50,13 @@
       }
     }
   }
+}
+
+
+@media all and (max-width: 700px) {
+  .login-container {
+    width: 80%;
+    min-width: 320px;
+  }
+
 }
