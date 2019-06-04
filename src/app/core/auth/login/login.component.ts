@@ -4,6 +4,7 @@ import { Router } from "@angular/router";
 import { UserApiService } from '../../services/user-api.service';
 import { User } from "../../../shared/models/user";
 import { AlertService } from "../../../shared/notifications/alert.service";
+import * as _ from 'lodash';
 @Component({
   selector: "app-login",
   templateUrl: "./login.component.html",
@@ -18,8 +19,8 @@ export class LoginComponent {
     private router: Router,
     private userApiService: UserApiService,
     private alertNotification: AlertService
-  ) {}
- 
+  ) { }
+
   onLogIn() {
     this.alertNotification.showLoadingInfoMessageLogin();
     this.authService
@@ -29,35 +30,34 @@ export class LoginComponent {
         this.alertNotification.showInvalidCredentialsMessage();
       });
   }
-  
-
-  callUserApiServiceToGetUser(userId: string){
-    this.userApiService.getUserById(userId).subscribe((user: User) => {
-      if (user) { //[To Study ] Function.
-        this.alertNotification.closeNotification();
-        localStorage.setItem('userId', userId); // [To Study] SessionStorage.
-        if (user.roles.admin) {
-          this.alertNotification.showSuccessMessage(`Welcome Admin: ${user.name} to the Pre Shadow Platform`);
-          localStorage.setItem('rol','Admin');
-          this.redirectToAdmin();
-        } else if (user.roles.candidate) {
-          this.alertNotification.showSuccessMessage(`Welcome ${user.name} to the Pre Shadow Program, We hope you learn a lot`);
-          localStorage.setItem('rol','Candidate');
-          this.redirectToCandidate();
-        }
-      } else {
-        this.alertNotification.closeNotification();
-      }
-    });
 
 
+  callUserApiServiceToGetUser(userId: string) {
+    this.userApiService.getUserById(userId).subscribe((user: User) => this.verifyUserRoleToRedirect(user, userId));
+  }
+
+  verifyUserRoleToRedirect(user: User, userId: string) {
+    console.log("hola");
+
+    sessionStorage.setItem('userId', userId);
+    if (user.roles.admin) {
+      this.alertNotification.showSuccessMessage(`Welcome Admin: ${user.name} to the Pre Shadow Platform`);
+      sessionStorage.setItem('rol', 'Admin');
+      this.redirectToAdmin();
+    } else if (user.roles.candidate) {
+      this.alertNotification.showSuccessMessage(`Welcome ${user.name} to the Pre Shadow Program, We hope you learn a lot`);
+      sessionStorage.setItem('rol', 'Candidate');
+      this.redirectToCandidate();
+    }
+
+    this.alertNotification.closeNotification();
   }
 
   redirectToAdmin() {
     this.router.navigate(["/admin-dashboard"]);
   }
 
-  redirectToCandidate(){
+  redirectToCandidate() {
     this.router.navigate(["/candidate_dashboard"]);
   }
 }

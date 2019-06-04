@@ -6,7 +6,6 @@ import {
   AngularFirestoreDocument
 } from "@angular/fire/firestore";
 import { User } from "../../shared/models/user";
-
 @Injectable({
   providedIn: "root"
 })
@@ -14,7 +13,7 @@ export class AuthService {
   constructor(
     public firebaseAuth: AngularFireAuth,
     public angularFireStore: AngularFirestore
-  ) {}
+  ) { }
 
   registerUser(user: User, password: string) {
     return new Promise((resolve, reject) => {
@@ -49,14 +48,10 @@ export class AuthService {
     );
 
     const userForDatabase: User = {
-     ...user,
-     id: userId
+      ...user,
+      id: userId
     };
 
     return userRef.set(userForDatabase, { merge: true });
-  }
-
-  get currentUserObservable(): any {
-    return this.firebaseAuth.authState;
   }
 }

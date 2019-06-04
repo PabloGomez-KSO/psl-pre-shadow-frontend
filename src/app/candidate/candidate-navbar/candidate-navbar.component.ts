@@ -22,8 +22,7 @@ export class CandidateNavbarComponent implements OnInit {
         type: 'info',
         text: 'Goodbye my friend'
       });
-      localStorage.removeItem('rol');
-      localStorage.removeItem('userId');
+      sessionStorage.clear();
       this.router.navigate(['/login']);
     })
   }

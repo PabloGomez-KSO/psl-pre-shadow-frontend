@@ -7,7 +7,6 @@ import {
 } from "@angular/fire/firestore";
 import { User } from "../../shared/models/user";
 import { Observable } from "rxjs";
-
 @Injectable({
   providedIn: "root"
 })
@@ -16,8 +15,7 @@ export class UserApiService {
   private userCollection: AngularFirestoreCollection<User>;
 
   constructor(public angularFireStore: AngularFirestore) {}
-  //[To do ]Create functions to divide the responsability.
-  //Try to reduce code in conditionals. It is not necessary else.
+
   getUserById(id: string): Observable<User> {
     this.userDocument = this.getUserDocumentById(id);
     return this.userDocument
@@ -27,7 +25,6 @@ export class UserApiService {
 
   getCandidates() {
     this.userCollection = this.getUsersCollection();
-    // [to do ] Reduce responsability ( Pattern ) create functions. Be careful with return
     return this.userCollection
       .snapshotChanges()
       .pipe(map(changes => this.handleUserData(changes)));

@@ -13,9 +13,8 @@ export class CandidateInformationComponent implements OnInit {
   constructor(private userApiService: UserApiService) { }
 
   ngOnInit() {
-    this.userApiService.getUserById(localStorage.getItem('userId')).subscribe((user: User) => {
-      this.candidate = user;
-    });
+    const userId = sessionStorage.getItem('userId');
+    this.userApiService.getUserById(userId).subscribe((user: User) => this.candidate = user);
   }
 
 }

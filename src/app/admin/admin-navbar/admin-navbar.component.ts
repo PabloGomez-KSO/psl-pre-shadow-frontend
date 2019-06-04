@@ -16,20 +16,20 @@ export class AdminNavbarComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router, private userApiService: UserApiService) { }
 
   ngOnInit() {
-    this.userApiService.getUserById(localStorage.getItem('userId')).subscribe((user: User) => {
+    this.userApiService.getUserById(sessionStorage.getItem('userId')).subscribe((user: User) => {
       this.email = user.email;
     });
   }
 
-  onClickLogOut(){
+  onClickLogOut() {
     this.authService.logOut().then(() => {
       Swal.fire({
         allowOutsideClick: false,
         type: 'info',
         text: 'Goodbye my friend'
       });
-      localStorage.removeItem('rol');
-      localStorage.removeItem('userId');
+      sessionStorage.removeItem('rol');
+      sessionStorage.removeItem('userId');
       this.router.navigate(['/login']);
     })
   }
