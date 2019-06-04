@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { AuthService } from "../auth.service";
 import { Router } from "@angular/router";
 import { UserApiService } from '../../services/user-api.service';
@@ -9,7 +9,7 @@ import { AlertService } from "../../../shared/notifications/alert.service";
   templateUrl: "./login.component.html",
   styleUrls: ["./login.component.scss"]
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   public email: string;
   public password: string;
 
@@ -19,36 +19,38 @@ export class LoginComponent implements OnInit {
     private userApiService: UserApiService,
     private alertNotification: AlertService
   ) {}
-
-  ngOnInit() {}
-
+ 
   onLogIn() {
     this.alertNotification.showLoadingInfoMessageLogin();
     this.authService
       .logIn(this.email, this.password)
-      .then(data => {
-        let userId = data["user"].uid;
-        this.userApiService.getUserById(userId).subscribe((user: User) => {
-          if (user) {
-            this.alertNotification.closeNotification();
-            localStorage.setItem('userId', userId);
-            if (user.roles.admin) {
-              this.alertNotification.showSuccessMessage(`Welcome Admin: ${user.name} to the Pre Shadow Platform`);
-              localStorage.setItem('rol','Admin');
-              this.redirectToAdmin();
-            } else if (user.roles.candidate) {
-              this.alertNotification.showSuccessMessage(`Welcome ${user.name} to the Pre Shadow Program, We hope you learn a lot`);
-              localStorage.setItem('rol','Candidate');
-              this.redirectToCandidate();
-            }
-          } else {
-            this.alertNotification.closeNotification();
-          }
-        });
-      })
+      .then(data => this.callUserApiServiceToGetUser(data['user'].uid))
       .catch(() => {
         this.alertNotification.showInvalidCredentialsMessage();
       });
+  }
+  
+
+  callUserApiServiceToGetUser(userId: string){
+    this.userApiService.getUserById(userId).subscribe((user: User) => {
+      if (user) { //[To Study ] Function.
+        this.alertNotification.closeNotification();
+        localStorage.setItem('userId', userId); // [To Study] SessionStorage.
+        if (user.roles.admin) {
+          this.alertNotification.showSuccessMessage(`Welcome Admin: ${user.name} to the Pre Shadow Platform`);
+          localStorage.setItem('rol','Admin');
+          this.redirectToAdmin();
+        } else if (user.roles.candidate) {
+          this.alertNotification.showSuccessMessage(`Welcome ${user.name} to the Pre Shadow Program, We hope you learn a lot`);
+          localStorage.setItem('rol','Candidate');
+          this.redirectToCandidate();
+        }
+      } else {
+        this.alertNotification.closeNotification();
+      }
+    });
+
+
   }
 
   redirectToAdmin() {

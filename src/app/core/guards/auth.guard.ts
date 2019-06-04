@@ -13,19 +13,16 @@ export class AuthGuard implements CanActivate {
 
   constructor(
      private router: Router,
-     private firebaseAuth: AngularFireAuth,
      private authService: AuthService
   ){}
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-
+    
      return this.authService.currentUserObservable.pipe(
         take(1),
-        map(user => {
-            return !!user
-        }),
+        map(user => !!user),
         tap( loggedIn => {
             if (!loggedIn) {
                 this.router.navigate(['/login']);

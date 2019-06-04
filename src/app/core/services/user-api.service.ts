@@ -6,6 +6,7 @@ import {
   AngularFirestoreCollection
 } from "@angular/fire/firestore";
 import { User } from "../../shared/models/user";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root"
@@ -15,36 +16,50 @@ export class UserApiService {
   private userCollection: AngularFirestoreCollection<User>;
 
   constructor(public angularFireStore: AngularFirestore) {}
-
-  getUserById(id: string) {
-    this.userDocument = this.angularFireStore.doc<User>(`users/${id}`);
-
-    return this.userDocument.snapshotChanges().pipe(
-      map(action => {
-        if (action.payload.exists === false) {
-          return null;
-        } else {
-          const data = action.payload.data() as User;
-          return data;
-        }
-      })
-    );
+  //[To do ]Create functions to divide the responsability.
+  //Try to reduce code in conditionals. It is not necessary else.
+  getUserById(id: string): Observable<User> {
+    this.userDocument = this.getUserDocumentById(id);
+    return this.userDocument
+      .snapshotChanges()
+      .pipe(map(action => this.verificateExistanceOfUser(action)));
   }
 
   getCandidates() {
-    this.userCollection = this.angularFireStore.collection<User>("users");
+    this.userCollection = this.getUsersCollection();
+    // [to do ] Reduce responsability ( Pattern ) create functions. Be careful with return
+    return this.userCollection
+      .snapshotChanges()
+      .pipe(map(changes => this.handleUserData(changes)));
+  }
 
-    return this.userCollection.snapshotChanges().pipe(
-      map(changes => {
-        return changes
-          .map(action => {
-            const user = action.payload.doc.data() as User;
-            return user;
-          })
-          .filter(user => {
-            if (user.roles.candidate) return user;
-          });
-      })
-    );
+  handleUserData(changes) {
+    return changes
+      .map(action => this.getUserData(action))
+      .filter((user: User) => this.verficateCandidate(user));
+  }
+
+  getUserDocumentById(id: string) {
+    return this.angularFireStore.doc<User>(`users/${id}`);
+  }
+
+  getUsersCollection() {
+    return this.angularFireStore.collection<User>("users");
+  }
+
+  verificateExistanceOfUser(action): User {
+    if (action.payload.exists) {
+      return action.payload.data() as User;
+    }
+  }
+
+  getUserData(action): User {
+    return action.payload.doc.data() as User;
+  }
+
+  verficateCandidate(user: User): User {
+    if (user.roles.candidate) {
+      return user;
+    }
   }
 }

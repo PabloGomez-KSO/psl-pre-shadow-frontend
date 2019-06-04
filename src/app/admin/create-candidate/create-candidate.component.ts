@@ -57,9 +57,6 @@ export class CreateCandidateComponent implements OnInit {
   }
 
   onCreateCandidate() {
-    for(let i in this.candidateForm.controls){
-      this.candidateForm.controls[i].markAsTouched();
-    }
 
     console.log(this.user);
     this.authService
@@ -76,7 +73,7 @@ export class CreateCandidateComponent implements OnInit {
   goBack() {
     this.router.navigate(["/admin-dashboard/"]);
   }
-
+  //Transform to Arrow Function.
   noEqualPasswords(control: FormControl): { [s: string]: boolean } {
     let form: any = this;
     if (control.value !== form.controls["password"].value) {
