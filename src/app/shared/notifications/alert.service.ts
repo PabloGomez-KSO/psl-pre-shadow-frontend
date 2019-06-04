@@ -25,11 +25,19 @@ export class AlertService {
     Swal.showLoading();
   }
 
-  showInvalidCredentialsMessage(){
+  showInvalidCredentialsMessage(error: string){
     Swal.fire({
       allowOutsideClick: false,
       type: 'error',
-      text: 'Invalid Credentials'
+      text: error
+    });
+  }
+
+  showGoodByeMessage(){
+    Swal.fire({
+      allowOutsideClick: false,
+      type: 'info',
+      text: 'Goodbye'
     });
   }
 

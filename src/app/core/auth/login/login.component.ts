@@ -4,7 +4,6 @@ import { Router } from "@angular/router";
 import { UserApiService } from '../../services/user-api.service';
 import { User } from "../../../shared/models/user";
 import { AlertService } from "../../../shared/notifications/alert.service";
-import * as _ from 'lodash';
 @Component({
   selector: "app-login",
   templateUrl: "./login.component.html",
@@ -26,19 +25,17 @@ export class LoginComponent {
     this.authService
       .logIn(this.email, this.password)
       .then(data => this.callUserApiServiceToGetUser(data['user'].uid))
-      .catch(() => {
-        this.alertNotification.showInvalidCredentialsMessage();
+      .catch((error) => {
+        console.log(error);
+        this.alertNotification.showInvalidCredentialsMessage(error.message);
       });
   }
-
 
   callUserApiServiceToGetUser(userId: string) {
     this.userApiService.getUserById(userId).subscribe((user: User) => this.verifyUserRoleToRedirect(user, userId));
   }
 
   verifyUserRoleToRedirect(user: User, userId: string) {
-    console.log("hola");
-
     sessionStorage.setItem('userId', userId);
     if (user.roles.admin) {
       this.alertNotification.showSuccessMessage(`Welcome Admin: ${user.name} to the Pre Shadow Platform`);
@@ -49,7 +46,6 @@ export class LoginComponent {
       sessionStorage.setItem('rol', 'Candidate');
       this.redirectToCandidate();
     }
-
     this.alertNotification.closeNotification();
   }
 

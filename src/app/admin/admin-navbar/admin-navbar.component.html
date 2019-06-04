@@ -17,7 +17,7 @@
       <span class="navbar_text"> <strong> Admin: </strong> {{ this.email }} </span>
     </li>
     <div class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="text" placeholder="Search candidate">
+      <input #term (keyup)="updateTermToSearch(term.value)" class="form-control mr-sm-2" type="text" placeholder="Search candidate">
     </div>
     <button type="button" class="btn btn-primary navbar-btn">
       <span class="navbar-btn__text" (click)="onClickLogOut()">Log Out</span>

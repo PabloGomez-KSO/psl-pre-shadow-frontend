@@ -21,7 +21,8 @@
     <td class="candidates_table__row__item">{{candidate.releaseDate | datePipe}} </td>
     <td class="candidates_table__row__item">{{candidate.preference}}</td>
     <td class="edit-buttons">
-      <button type="button" class="btn btn-primary candidates_table__btn" (click)="editCandidate()">
+      <button type="button" class="btn btn-secondary candidates_table__btn" (click)="editCandidate()">
+        <i class="fas fa-edit"></i>
         <span class="candidates_table__btn__text">Edit</span>
       </button>
     </td>

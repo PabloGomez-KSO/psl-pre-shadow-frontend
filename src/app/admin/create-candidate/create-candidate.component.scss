@@ -6,72 +6,75 @@
   padding: 10px;
   align-items: center;
   margin-bottom: 30px;
-  height: 1000px;
+  height: 600px;
   max-height: 1400px;
-  overflow-y: scroll;
-  width: 800px;
-  margin-top: 15px;
+  width: 1050px;
+  margin-top: 50px;
   background-color: white;
   border: 1px solid $blue_font_bootstrap;
 
-  .create-candidate-row {
+  &__data {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: $main_font;
-    font-size: $size_main_font;
-    margin-bottom: 15px;
+    height: 400px;
+    .create-candidate-column {
+      margin-right: 18px;
+      .create-candidate-row {
+        align-items: center;
+        font-family: $main_font;
+        font-size: $size_main_font;
 
-    &__data {
-      padding: 10px 5px 5px 10px;
-      margin-top: 20px;
-      margin-right: 15px;
-      width: 150px;
-      color: $purple_logo_psl;
-      font-family: $main_font;
-    }
+        &__data {
+          padding: 10px 5px 5px 10px;
+          margin-top: 20px;
+          margin-right: 15px;
+          width: 150px;
+          color: $purple_logo_psl;
+          font-family: $main_font;
+        }
 
-    &__input {
-      padding: 10px;
-      margin-top: 15px;
-      width: 320px;
-      font-family: $main_font;
-      font-size: $size_main_font;
-    }
+        &__input {
+          padding: 10px;
+          margin-top: 15px;
+          width: 320px;
+          font-family: $main_font;
+          font-size: $size_main_font;
+        }
 
-    &__date{
-      padding: 10px;
-      width: 280px;
-      font-size: $size_main_font;
-      font-family: $main_font;
-      font-weight: bold;
-    }
+        &__date {
+          padding: 10px;
+          width: 280px;
+          font-size: 17px;
+          font-family: $main_font;
+          font-weight: bold;
+        }
 
-    &__error{
-      color: $blue_font_bootstrap;
-    }
+        &__error {
+          color: $validation_alert;
+          height: 18px;
+          font-size: $size_main_font;
+        }
 
-    &__dateBtn{
-      padding: 13px;
+        &__dateBtn {
+          padding: 13px;
+        }
+      }
     }
   }
 
-  .create-candidate-buttons{
+  &__buttons {
     display: flex;
     justify-content: space-around;
-    margin-top: 30px;
-    margin-bottom: 30px;
+    margin-top: 50px;
     &__option {
       cursor: pointer;
-      &__icon{
+      &__icon {
         margin-left: 10px;
       }
-      &__text{
+      &__text {
         cursor: pointer;
         font-size: $size_main_font;
         font-family: $main_font;
       }
     }
   }
-
 }

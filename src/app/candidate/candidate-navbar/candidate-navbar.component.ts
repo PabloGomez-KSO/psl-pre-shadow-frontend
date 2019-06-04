@@ -17,11 +17,6 @@ export class CandidateNavbarComponent implements OnInit {
 
   onClickLogOut() {
     this.authService.logOut().then(() => {
-      Swal.fire({
-        allowOutsideClick: false,
-        type: 'info',
-        text: 'Goodbye my friend'
-      });
       sessionStorage.clear();
       this.router.navigate(['/login']);
     })
