@@ -1,4 +1,4 @@
-@import "../../../assets/scss/variables";
+@import '../../../assets/scss/variables';
 
 .create-candidate-container {
   background: $purple_psl_opacity;
@@ -6,18 +6,16 @@
   padding: 10px;
   align-items: center;
   margin-bottom: 30px;
-  height: 600px;
-  max-height: 1400px;
-  width: 1050px;
+  height: 100%;
+  width: 50%;
   margin-top: 50px;
   background-color: white;
   border: 1px solid $blue_font_bootstrap;
 
-  .create-candidate-personal_info {
+  .create-candidate-personal-info {
     display: flex;
     flex-direction: column;
     align-items: center;
-
     &__title {
       font-family: $main_font;
       font-size: 22px;
@@ -27,58 +25,55 @@
       height: 50px;
     }
 
-    &__row {
-      font-family: $main_font;
-      font-size: $size_main_font;
+    &__wrap {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      &__element {
+        width: 400px;
+        min-width: 400px;
+        &__data {
+          font-size: $size_main_font;
+          display: flex;
+          justify-content: center;
+          &__text {
+            padding: 10px 5px 5px 10px;
+            margin-top: 20px;
+            margin-right: 10px;
+            width: 180px;
+            color: $purple_logo_psl;
+            font-family: $main_font;
+          }
 
-      &__data {
-        padding: 10px 5px 5px 10px;
-        margin-top: 20px;
-        margin-right: 10px;
-        width: 150px;
-        color: $purple_logo_psl;
-        font-family: $main_font;
-      }
-
-      &__input {
-        padding: 10px;
-        margin-top: 15px;
-        width: 250px;
-        font-family: $main_font;
-        font-size: $size_main_font;
-      }
-
-      &__date {
-        padding: 10px;
-        width: 280px;
-        font-size: 17px;
-        font-family: $main_font;
-        font-weight: bold;
-      }
-
-      &__error {
-        color: $validation_alert;
-        height: 18px;
-        font-size: $size_main_font;
-        margin-left: 150px;
-      }
-
-      &__dateBtn {
-        padding: 13px;
+          &__input {
+            padding: 11px;
+            margin-top: 15px;
+            width: 190px;
+            font-family: $main_font;
+            font-size: $size_main_font;
+            border: 1px solid black;
+          }
+        }
+        &__notification {
+          height: 30px;
+        }
       }
     }
 
     .create-candidate-column {
       margin-right: 18px;
       margin-left: 5px;
-     
     }
   }
 
-  .create-candidate-program{
+  .create-candidate-program {
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 100%;
+    margin-top: 60px;
     &__title {
       font-family: $main_font;
       font-size: 22px;
@@ -87,8 +82,66 @@
       height: 50px;
     }
 
-  }
+    &__wrap {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
 
+      &__element {
+        width: 400px;
+        min-width: 400px;
+        &__data {
+          font-size: $size_main_font;
+          display: flex;
+          justify-content: center;
+          &__text {
+            padding: 10px 5px 5px 10px;
+            margin-top: 20px;
+            margin-right: 10px;
+            width: 180px;
+            color: $purple_logo_psl;
+            font-family: $main_font;
+            word-wrap: break-word;
+          }
+
+          &__input {
+            padding: 11px;
+            margin-top: 15px;
+            width: 190px;
+            font-family: $main_font;
+            font-size: $size_main_font;
+            border: 1px solid black;
+          }
+
+          .create-candidate-program-dateContainer {
+            margin-top: 20px;
+            margin-right: 10px;
+            &__input {
+              padding: 11px;
+              width: 160px;
+              font-size: 17px;
+              font-family: $main_font;
+              font-weight: bold;
+              border: 1px solid black;
+            }
+
+            &__btn {
+              padding: 11px;
+            }
+          }
+        }
+        &__notification {
+          height: 30px;
+           &__error{
+             margin-left: 190px;
+             color: red;
+           }
+        }
+      }
+    }
+  }
 
   &__buttons {
     display: flex;
@@ -103,6 +156,42 @@
         cursor: pointer;
         font-size: $size_main_font;
         font-family: $main_font;
+      }
+    }
+  }
+}
+
+@media all and (max-width: 815px) {
+  .create-candidate-container {
+    width: 90%;
+    height: 100%;
+    .create-candidate-personal-info {
+      &__wrap {
+        justify-content: center;
+        &__element {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+          &__data {
+            flex-direction: column;
+          }
+        }
+      }
+    }
+
+    .create-candidate-program {
+      &__wrap {
+        justify-content: center;
+        &__element {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+          &__data {
+            flex-direction: column;
+          }
+        }
       }
     }
   }

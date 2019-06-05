@@ -56,6 +56,7 @@ export class CreateCandidateComponent implements OnInit {
   }
 
   onCreateCandidate() {
+    console.log(this.user);
     this.authService
       .registerUser(this.user, this.password)
       .then(() => {

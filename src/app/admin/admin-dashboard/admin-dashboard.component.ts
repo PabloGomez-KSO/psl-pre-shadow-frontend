@@ -16,10 +16,4 @@ export class AdminDashboardComponent {
   getCandidates() {
     this.userApiService.getCandidates().subscribe((candidates: User[]) => this.candidates = candidates);
   }
-
-  showTerm(event): void {
-    console.log("entramos aca");
-    console.log(event);
-  }
-
 }
