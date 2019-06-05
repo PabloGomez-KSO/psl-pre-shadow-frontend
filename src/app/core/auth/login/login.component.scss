@@ -25,6 +25,7 @@
       &__input {
         padding: 20px;
         font-family: $main_font;
+        font-size: $size_main_font;
         &:focus {
           border: 2px solid dodgerblue;
         }
@@ -37,7 +38,7 @@
         color: white;
         padding: 35px;
         font-family: $main_font;
-        font-size: 19px;
+        font-size: $size_main_font;
         font-weight: bold;
       }
       &__btn {

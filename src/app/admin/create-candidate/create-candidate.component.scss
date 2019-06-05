@@ -1,4 +1,4 @@
-@import '../../../assets/scss/variables';
+@import "../../../assets/scss/variables";
 
 .create-candidate-container {
   background: $purple_psl_opacity;
@@ -13,53 +13,82 @@
   background-color: white;
   border: 1px solid $blue_font_bootstrap;
 
-  &__data {
+  .create-candidate-personal_info {
     display: flex;
-    height: 400px;
-    .create-candidate-column {
-      margin-right: 18px;
-      .create-candidate-row {
-        align-items: center;
+    flex-direction: column;
+    align-items: center;
+
+    &__title {
+      font-family: $main_font;
+      font-size: 22px;
+      font-weight: bold;
+      align-items: center;
+      color: $purple_logo_psl;
+      height: 50px;
+    }
+
+    &__row {
+      font-family: $main_font;
+      font-size: $size_main_font;
+
+      &__data {
+        padding: 10px 5px 5px 10px;
+        margin-top: 20px;
+        margin-right: 10px;
+        width: 150px;
+        color: $purple_logo_psl;
+        font-family: $main_font;
+      }
+
+      &__input {
+        padding: 10px;
+        margin-top: 15px;
+        width: 250px;
         font-family: $main_font;
         font-size: $size_main_font;
+      }
 
-        &__data {
-          padding: 10px 5px 5px 10px;
-          margin-top: 20px;
-          margin-right: 15px;
-          width: 150px;
-          color: $purple_logo_psl;
-          font-family: $main_font;
-        }
+      &__date {
+        padding: 10px;
+        width: 280px;
+        font-size: 17px;
+        font-family: $main_font;
+        font-weight: bold;
+      }
 
-        &__input {
-          padding: 10px;
-          margin-top: 15px;
-          width: 320px;
-          font-family: $main_font;
-          font-size: $size_main_font;
-        }
+      &__error {
+        color: $validation_alert;
+        height: 18px;
+        font-size: $size_main_font;
+        margin-left: 150px;
+      }
 
-        &__date {
-          padding: 10px;
-          width: 280px;
-          font-size: 17px;
-          font-family: $main_font;
-          font-weight: bold;
-        }
-
-        &__error {
-          color: $validation_alert;
-          height: 18px;
-          font-size: $size_main_font;
-        }
-
-        &__dateBtn {
-          padding: 13px;
-        }
+      &__dateBtn {
+        padding: 13px;
       }
     }
+
+    .create-candidate-column {
+      margin-right: 18px;
+      margin-left: 5px;
+     
+    }
   }
+
+  .create-candidate-program{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &__title {
+      font-family: $main_font;
+      font-size: 22px;
+      font-weight: bold;
+      color: $purple_logo_psl;
+      height: 50px;
+    }
+
+  }
+
 
   &__buttons {
     display: flex;

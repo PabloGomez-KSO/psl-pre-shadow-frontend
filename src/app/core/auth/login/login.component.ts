@@ -1,13 +1,13 @@
-import { Component } from "@angular/core";
-import { AuthService } from "../auth.service";
-import { Router } from "@angular/router";
+import { Component } from '@angular/core';
+import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 import { UserApiService } from '../../services/user-api.service';
-import { User } from "../../../shared/models/user";
-import { AlertService } from "../../../shared/notifications/alert.service";
+import { User } from '../../../shared/models/user';
+import { AlertService } from '../../../shared/notifications/alert.service';
 @Component({
-  selector: "app-login",
-  templateUrl: "./login.component.html",
-  styleUrls: ["./login.component.scss"]
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
   public email: string;
@@ -26,7 +26,6 @@ export class LoginComponent {
       .logIn(this.email, this.password)
       .then(data => this.callUserApiServiceToGetUser(data['user'].uid))
       .catch((error) => {
-        console.log(error);
         this.alertNotification.showInvalidCredentialsMessage(error.message);
       });
   }
@@ -50,10 +49,10 @@ export class LoginComponent {
   }
 
   redirectToAdmin() {
-    this.router.navigate(["/admin-dashboard"]);
+    this.router.navigate(['/admin-dashboard']);
   }
 
   redirectToCandidate() {
-    this.router.navigate(["/candidate_dashboard"]);
+    this.router.navigate(['/candidate_dashboard']);
   }
 }

@@ -1,218 +1,136 @@
- <form [formGroup]="candidateForm" (ngSubmit)="onCreateCandidate()"
-     #myform="ngForm">
-     <div class="create-candidate-container">
-          <div class="create-candidate-container__data">
-               <div class="create-candidate-column">
-                    <div class="create-candidate-row">
-                         <label class="create-candidate-row__data"
-                              for="name"><strong>
-                                   Name</strong>
-                         </label>
-                         <input class="create-candidate-row__input"
-                              type="text"
-                              name="name"
-                              formControlName="name"
-                              [(ngModel)]="user.name">
-                    </div>
-                    <div class="create-candidate-row">
-                         <div class="create-candidate-row__error">
-                              <div *ngIf="candidateForm.get('name').errors">
-                                   <div *ngIf="candidateForm.get('name').errors['required'] && candidateForm.get('name')?.touched">
-                                        * Name is required
-                                   </div>
-                              </div>
-                         </div>
-                    </div>
-                    <div class="create-candidate-row">
-                         <label class="create-candidate-row__data"
-                              for="age">
-                              <strong>
-                                   Age</strong>
-                         </label>
-                         <input class="create-candidate-row__input"
-                              type="number"
-                              name="age"
-                              formControlName="age"
-                              [(ngModel)]="user.age">
-                    </div>
-                    <div class="create-candidate-row">
-                         <div class="create-candidate-row__error">
-                              <div
-                                   *ngIf="candidateForm.get('age').errors['required']
-                                   && candidateForm.get('age')?.touched">
-                                   * Age is required
-                              </div>
-                         </div>
-                    </div>
-                    <div class="create-candidate-row">
-                         <label class="create-candidate-row__data"
-                              for="username">
-                              <strong> Username</strong>
-                         </label>
-                         <input class="create-candidate-row__input"
-                              type="text"
-                              name="username"
-                              formControlName="username"
-                              [(ngModel)]="user.username">
-                    </div>
-                    <div class="create-candidate-row">
-                         <div class="create-candidate-row__error">
-                              <div
-                                   *ngIf="candidateForm.get('username').errors['required']
-                                   && candidateForm.get('username')?.touched">
-                                   * Username is required
-                              </div>
-                         </div>
-                    </div>
-                    <div class="create-candidate-row">
-                         <label class="create-candidate-row__data"
-                              for="email">
-                              <strong>
-                                   Email</strong>
-                         </label>
-                         <input class="create-candidate-row__input"
-                              type="email"
-                              name="email"
-                              [(ngModel)]="user.email"
-                              formControlName="email">
-                    </div>
-                    <div class="create-candidate-row">
-                         <div class="create-candidate-row__error">
-                              <div *ngIf="candidateForm.get('email').errors">
-                                   <div *ngIf="candidateForm.get('email').errors['required'] && candidateForm.get('email')?.touched">
-                                        * Email is required
-                                   </div>
-                              </div>
-                         </div>
-                    </div>
-                    <div class="create-candidate-row">
-                         <label class="create-candidate-row__data"
-                              for="release_date">
-                              <strong>
-                                   Preference </strong></label>
-                         <select class="create-candidate-row__input"
-                              formControlName="preference"
-                              name="preference"
-                              [(ngModel)]="user.preference">
-                              <option value="Frontend">Frontend</option>
-                              <option value="Backend">Backend</option>
-                              <option value="QA">QA</option>
-                              <option value="DevOps">DevOps</option>
-                              <option value="Business Analyst">Business
-                                   Analyst</option>
-                         </select>
-                    </div>
-                    <div class="create-candidate-row"
-                         *ngIf="candidateForm.get('preference').errors">
-                         <div class="create-candidate-row__error"
-                              *ngIf="candidateForm.get('preference').errors['required']
-                              &&
-                              candidateForm.get('preference')?.touched">
-                              * Preference is required
-                         </div>
-                    </div>
-               </div>
-               <div class="create-candidate-column">
-                    <div class="create-candidate-row">
-                         <label class="create-candidate-row__data"
-                              for="pass">
-                              <strong>
-                                   Password
-                              </strong></label>
-                         <input class="create-candidate-row__input"
-                              type="password"
-                              name="pass"
-                              formControlName="password"
-                              [(ngModel)]="password">
-                    </div>
-                    <div class="create-candidate-row">
-                         <label class="create-candidate-row__data"
-                              for="cpass">
-                              <strong>
-                                   Confirm
-                                   Password </strong></label>
-                         <input class="create-candidate-row__input"
-                              type="password"
-                              name="cpass"
-                              formControlName="cpassword">
-                    </div>
-                    <div class="create-candidate-row">
-                         <div class="create-candidate-row__error">
-                              <div
-                                   *ngIf="candidateForm.get('cpassword').errors['MatchPassword']
-                                   && candidateForm.get('cpassword')?.touched">
-                                   Passwords are not equal
-                              </div>
-                         </div>
-                    </div>
-                    <div class="create-candidate-row">
-                         <label class="create-candidate-row__data"
-                              for="start_date">
-                              <strong> Start
-                                   Date </strong></label>
-                         <input class="create-candidate-row__date"
-                              type="text"
-                              name="start_date"
-                              ngbDatepicker
-                              #d1="ngbDatepicker"
-                              formControlName="start_date"
-                              [(ngModel)]="user.startDate" />
-                         <button type="button" class="btn btn-primary
-                              create-candidate-row__dateBtn"
-                              (click)="d1.toggle()"><i
-                                   class="fas fa-calendar-alt"></i></button>
-                    </div>
-                    <div class="create-candidate-row__error">
-                         <div
-                              *ngIf="candidateForm.get('start_date').errors['required']
-                              && candidateForm.get('start_date')?.touched">
-                              * Start Date is required
-                         </div>
-                    </div>
-                    <div class="create-candidate-row">
-                         <label class="create-candidate-row__data"
-                              for="release_date">
-                              <strong>
-                                   Release Date </strong></label>
-                         <input class="create-candidate-row__date"
-                              type="text"
-                              name="release_date"
-                              ngbDatepicker
-                              #d2="ngbDatepicker"
-                              formControlName="release_date"
-                              [(ngModel)]="user.releaseDate" />
-                         <button type="button" class="btn btn-primary
-                              create-candidate-row__dateBtn"
-                              (click)="d2.toggle()"><i
-                                   class="fas fa-calendar-alt"></i></button>
-                    </div>
-                    <div class="create-candidate-row__error">
-                         <div
-                              *ngIf="candidateForm.get('release_date').errors['required']
-                              && candidateForm.get('release_date')?.touched">
-                              * Release Date is required
-                         </div>
-                    </div>
-               </div>
+<form [formGroup]="candidateForm" (ngSubmit)="onCreateCandidate()">
+  <div class="create-candidate-container">
+    <div class="create-candidate-personal_info">
+      <span class="create-candidate-personal_info__title">
+        Personal Info
+      </span>
+      <div class="create-candidate-personal_info__row">
+        <label class="create-candidate-personal_info__row__data" for="name"><strong>
+            Name</strong>
+        </label>
+        <input
+          class="create-candidate-personal_info__row__input"
+          type="text"
+          name="name"
+          formControlName="name"
+          [(ngModel)]="user.name"
+          />
+      </div>
+      <div class="create-candidate-personal_info__row">
+        <div class="create-candidate-personal_info__row__error">
+          <div *ngIf="candidateForm.get('name').errors">
+            <div
+              *ngIf="candidateForm.get('name').errors['required'] &&
+              candidateForm.get('name')?.touched">
+              * Name is required
+            </div>
           </div>
-          <div class="create-candidate-container__buttons">
-               <button type="button" class="btn btn-primary
-                    create-candidate-container__buttons__option"
-                    (click)="goBack()">
-                    <label
-                         class="create-candidate-container__buttons__option__text">
-                         Go Back</label>
-                    <i class="fas fa-undo
-                         create-candidate-container__buttons__option__icon"></i>
-               </button>
-               <button type="submit" class="btn btn-primary
-                    create-candidate-buttons__option">
-                    <label
-                         class="create-candidate-container__buttons__option__text">
-                         Create</label>
-                    <i class="fas fa-edit
-                         create-candidate-container__buttons__option__icon"></i>
-               </button>
+        </div>
+      </div>
+      <div class="create-candidate-personal_info__row">
+        <label class="create-candidate-personal_info__row__data" for="age">
+          <strong> Age</strong>
+        </label>
+        <input
+          class="create-candidate-personal_info__row__input"
+          type="number"
+          name="age"
+          formControlName="age"
+          [(ngModel)]="user.age"
+          />
+      </div>
+      <div class="create-candidate-personal_info__row">
+        <div class="create-candidate-personal_info__row__error">
+          <div
+            *ngIf="candidateForm.get('age').errors['required'] &&
+            candidateForm.get('age')?.touched">
+            * Age is required
           </div>
-     </div>
+        </div>
+      </div>
+      <div class="create-candidate-personal_info__row">
+        <label class="create-candidate-personal_info__row__data" for="email">
+          <strong> Email</strong>
+        </label>
+        <input
+          class="create-candidate-personal_info__row__input"
+          type="email"
+          name="email"
+          [(ngModel)]="user.email"
+          formControlName="email"
+          />
+      </div>
+      <div class="create-candidate-personal_info__row">
+        <div class="create-candidate-personal_info__row__error">
+          <div *ngIf="candidateForm.get('email').errors">
+            <div
+              *ngIf="candidateForm.get('email').errors['required'] &&
+              candidateForm.get('email')?.touched">
+              * Email is required
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="create-candidate-program">
+      <span class="create-candidate-personal_info__title">
+        Program Information
+      </span>
+      <div class="create-candidate-program__wrap">
+        <div class="row">
+          <div class="col">
+            <div class="create-candidate-row">
+              <label class="create-candidate-row__data"
+                for="username">
+                <strong> Username</strong>
+              </label>
+              <input class="create-candidate-row__input"
+                type="text"
+                name="username"
+                formControlName="username"
+                [(ngModel)]="user.username">
+            </div>
+            <div class="create-candidate-row">
+                <div class="create-candidate-row__error">
+                     <div
+                          *ngIf="candidateForm.get('username').errors['required']
+                          && candidateForm.get('username')?.touched">
+                          * Username is required
+                     </div>
+                </div>
+           </div>
+          </div>
+          
+          <div class="col">
+            <div class="create-candidate-row">
+              <label class="create-candidate-row__data"
+                for="release_date">
+                <strong>
+                  Preference </strong></label>
+              <select class="create-candidate-row__input"
+                formControlName="preference"
+                name="preference"
+                [(ngModel)]="user.preference">
+                <option value="Frontend">Frontend</option>
+                <option value="Backend">Backend</option>
+                <option value="QA">QA</option>
+                <option value="DevOps">DevOps</option>
+                <option value="Business Analyst">Business
+                  Analyst</option>
+              </select>
+            </div>
+            <div class="create-candidate-row"
+              *ngIf="candidateForm.get('preference').errors">
+              <div class="create-candidate-row__error"
+                *ngIf="candidateForm.get('preference').errors['required']
+                &&
+                candidateForm.get('preference')?.touched">
+                * Preference is required
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </form>

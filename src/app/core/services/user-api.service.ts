@@ -1,14 +1,14 @@
-import { Injectable } from "@angular/core";
-import { map } from "rxjs/operators";
+import { Injectable } from '@angular/core';
+import { map } from 'rxjs/operators';
 import {
   AngularFirestore,
   AngularFirestoreDocument,
   AngularFirestoreCollection
-} from "@angular/fire/firestore";
-import { User } from "../../shared/models/user";
-import { Observable } from "rxjs";
+} from '@angular/fire/firestore';
+import { User } from '../../shared/models/user';
+import { Observable } from 'rxjs';
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class UserApiService {
   private userDocument: AngularFirestoreDocument<User>;
@@ -41,7 +41,7 @@ export class UserApiService {
   }
 
   getUsersCollection() {
-    return this.angularFireStore.collection<User>("users");
+    return this.angularFireStore.collection<User>('users');
   }
 
   verificateExistanceOfUser(action): User {

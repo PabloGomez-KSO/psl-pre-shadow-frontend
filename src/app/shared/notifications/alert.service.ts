@@ -25,7 +25,7 @@ export class AlertService {
     Swal.showLoading();
   }
 
-  showInvalidCredentialsMessage(error: string){
+  showInvalidCredentialsMessage(error: string) {
     Swal.fire({
       allowOutsideClick: false,
       type: 'error',
@@ -33,7 +33,7 @@ export class AlertService {
     });
   }
 
-  showGoodByeMessage(){
+  showGoodByeMessage() {
     Swal.fire({
       allowOutsideClick: false,
       type: 'info',
