@@ -8,10 +8,15 @@
   justify-content: center;
   font-family: $main_font;
   &__btn {
-    width: 180px;
-    height: 55px;
+    width: 170px;
+    height: 50px;
     &__text {
       font-size: $size_main_font;
+      width: 80px;
+      font-weight: bold;
+    }
+    &__icon{
+      width: 40px;
     }
   }
 }

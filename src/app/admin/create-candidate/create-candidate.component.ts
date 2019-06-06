@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { AuthService } from '../../core/auth/auth.service';
 import { User } from '../../shared/models/user';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -10,7 +10,7 @@ import { PasswordValidation } from '../validators/passwordValidator';
   templateUrl: './create-candidate.component.html',
   styleUrls: ['./create-candidate.component.scss']
 })
-export class CreateCandidateComponent implements OnInit {
+export class CreateCandidateComponent implements OnInit, OnChanges {
   password: string;
   user: User;
   candidateForm: FormGroup;
@@ -56,8 +56,8 @@ export class CreateCandidateComponent implements OnInit {
   }
 
   onCreateCandidate() {
-    console.log(this.user);
-    this.authService
+    if (this.candidateForm.valid) {
+      this.authService
       .registerUser(this.user, this.password)
       .then(() => {
         this.alertService.showSuccessMessage('User succesfully created');
@@ -66,10 +66,15 @@ export class CreateCandidateComponent implements OnInit {
       .catch(err => {
         console.log(err);
       });
+    }
   }
 
   goBack() {
     this.router.navigate(['/admin-dashboard/']);
+  }
+
+  ngOnChanges(): void {
+    console.log(this.candidateForm);
   }
 
 }

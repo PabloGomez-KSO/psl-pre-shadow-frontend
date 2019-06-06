@@ -5,11 +5,5 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './update-candidate.component.html',
   styleUrls: ['./update-candidate.component.css']
 })
-export class UpdateCandidateComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+export class UpdateCandidateComponent {
 }

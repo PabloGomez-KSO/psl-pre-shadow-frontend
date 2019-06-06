@@ -1,70 +1,59 @@
-<form [formGroup]="candidateForm" (ngSubmit)="onCreateCandidate()">
+<form [formGroup]="candidateForm" (ngSubmit)="onCreateCandidate()" #cForm="ngForm">
 	<div class="create-candidate-container">
 		<div class="create-candidate-personal-info">
-			<span class="create-candidate-personal-info__title">
-				Personal Information
-			</span>
+			<span class="create-candidate-personal-info__title">Personal Information</span>
 			<div class="create-candidate-personal-info__wrap">
 				<div class="create-candidate-personal-info__wrap__element">
 					<div class="create-candidate-personal-info__wrap__element__data">
-						<label class="create-candidate-personal-info__wrap__element__data__text"
-							for="username">
-							<strong> Name</strong>
-						</label>
+						<label class="create-candidate-personal-info__wrap__element__data__text" for="username">Name</label>
 						<input class="create-candidate-personal-info__wrap__element__data__input"
-							type="text" name="username"
-							formControlName="name"
-							[(ngModel)]="user.name">
+                   type="text"
+                   name="username"
+							     formControlName="name"
+							     [(ngModel)]="user.name">
 					</div>
 					<div class="create-candidate-personal-info__wrap__element__notification">
-						<div class="create-candidate-program__wrap__element__notification__error">
+						<div class="create-candidate-personal-info__wrap__element__notification__error">
 							<div *ngIf="candidateForm.get('name').errors">
-								<div *ngIf="candidateForm.get('name').errors['required'] &&
-									candidateForm.get('name')?.touched">
-									*Name is required
-								</div>
-						    </div>
+                <div *ngIf="(candidateForm.get('name').errors['required'] && candidateForm.get('name')?.touched) ||
+                            (candidateForm.get('name').errors['required'] && cForm.submitted)">Type your name</div>
+						  </div>
 						</div>
 					</div>
 				</div>
 				<div class="create-candidate-personal-info__wrap__element">
 					<div class="create-candidate-personal-info__wrap__element__data">
-						<label class="create-candidate-personal-info__wrap__element__data__text"
-							for="age">
-							<strong> Age</strong>
-						</label>
-						<input class="create-candidate-personal-info__wrap__element__data__input"
-							type="number" name="age" formControlName="age" [(ngModel)]="user.age">
+              <label class="create-candidate-personal-info__wrap__element__data__text" for="age">Age</label>
+              <input class="create-candidate-personal-info__wrap__element__data__input"
+                     type="number"
+                     name="age"
+                     formControlName="age"
+                     [(ngModel)]="user.age">
 					</div>
 					<div class="create-candidate-personal-info__wrap__element__notification">
 						<div class="create-candidate-program__wrap__element__notification__error">
 						    <div *ngIf="candidateForm.get('age').errors">
-								<div *ngIf="candidateForm.get('age').errors['required'] &&
-									candidateForm.get('age')?.touched">
-									* Age is required
-								</div>
-							</div>
+                  <div *ngIf="(candidateForm.get('age').errors['required'] && candidateForm.get('age')?.touched) ||
+                              (candidateForm.get('age').errors['required'] && cForm.submitted)">Type your age</div>
+						  	</div>
 						</div>
 					</div>
 				</div>
 				<div class="create-candidate-personal-info__wrap__element">
 					<div class="create-candidate-personal-info__wrap__element__data">
-						<label class="create-candidate-personal-info__wrap__element__data__text"
-							for="email">
-							<strong> Email</strong>
-						</label>
+						<label class="create-candidate-personal-info__wrap__element__data__text" for="email">Email</label>
 						<input class="create-candidate-personal-info__wrap__element__data__input"
-							type="email" name="email" formControlName="email"
-							[(ngModel)]="user.email">
+                   type="email"
+                   name="email"
+                   formControlName="email"
+							     [(ngModel)]="user.email">
 					</div>
 					<div class="create-candidate-personal-info__wrap__element__notification">
 						<div class="create-candidate-program__wrap__element__notification__error">
 							<div *ngIf="candidateForm.get('email').errors">
-								<div *ngIf="candidateForm.get('email').errors['required'] &&
-									candidateForm.get('email')?.touched">
-									* Email is required
-								</div>
-						    </div>
+                <div *ngIf="(candidateForm.get('email').errors['required'] && candidateForm.get('email')?.touched) ||
+                            (candidateForm.get('email').errors['required'] && cForm.submitted)">Type your email</div>
+              </div>
 						</div>
 					</div>
 				</div>
@@ -77,77 +66,78 @@
 			<div class="create-candidate-program__wrap">
 				<div class="create-candidate-program__wrap__element">
 					<div class="create-candidate-program__wrap__element__data">
-						<label class="create-candidate-program__wrap__element__data__text"
-							for="username">
-							<strong> Username</strong>
+						<label class="create-candidate-program__wrap__element__data__text" for="username">
+							Username
 						</label>
 						<input class="create-candidate-program__wrap__element__data__input"
-							type="text" name="username" formControlName="username"
-							[(ngModel)]="user.username">
+                   type="text"
+                   name="username"
+                   formControlName="username"
+						       [(ngModel)]="user.username">
 					</div>
 					<div class="create-candidate-program__wrap__element__notification">
 						<div class="create-candidate-program__wrap__element__notification__error">
 							<div *ngIf="candidateForm.get('username').errors">
-								<div *ngIf="candidateForm.get('username').errors['required'] &&
-										candidateForm.get('username')?.touched">
-										* Username is required
-								</div>
+                <div *ngIf="(candidateForm.get('username').errors['required'] && candidateForm.get('username')?.touched) ||
+                            (candidateForm.get('username').errors['required'] && cForm.submitted)">Type your username</div>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="create-candidate-program__wrap__element">
 					<div class="create-candidate-program__wrap__element__data">
-						<label class="create-candidate-program__wrap__element__data__text"
-							for="username">
-							<strong>Start Date
-							</strong>
+						<label class="create-candidate-program__wrap__element__data__text" for="username">
+							 Start Date
 						</label>
 						<div class="create-candidate-program-dateContainer">
-							<input class="create-candidate-program-dateContainer__input"
-								type="text" name="start_date" ngbDatepicker #d1="ngbDatepicker"
-								formControlName="start_date" [(ngModel)]="user.startDate" />
-							<button type="button" class="btn btn-primary
-								create-candidate-program-dateContainer__btn"
-								(click)="d1.toggle()"><i
-									class="fas fa-calendar-alt"></i></button>
+                <input class="create-candidate-program-dateContainer__input"
+                       type="text"
+                       name="start_date"
+                       ngbDatepicker
+                       #d1="ngbDatepicker"
+                       formControlName="start_date"
+                       [(ngModel)]="user.startDate" />
+                <button type="button"
+                        class="btn btn-primary create-candidate-program-dateContainer__btn"
+                        (click)="d1.toggle()">
+                <i class="fas fa-calendar-alt"></i>
+              </button>
 						</div>
 					</div>
 					<div class="create-candidate-program__wrap__element__notification">
 						<div class="create-candidate-program__wrap__element__notification__error">
 							<div *ngIf="candidateForm.get('start_date').errors">
-								<div *ngIf="candidateForm.get('start_date').errors['required']
-									&& candidateForm.get('start_date')?.touched">
-									Start date is required
-								</div>
+                <div *ngIf="(candidateForm.get('start_date').errors['required'] && candidateForm.get('start_date')?.touched) ||
+                            (candidateForm.get('start_date').errors['required'] && cForm.submitted)">Select start date</div>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="create-candidate-program__wrap__element">
 					<div class="create-candidate-program__wrap__element__data">
-						<label class="create-candidate-program__wrap__element__data__text"
-							for="username">
-							<strong>Release Date
-							</strong>
+						<label class="create-candidate-program__wrap__element__data__text" for="username">
+	            Release Date
 						</label>
 						<div class="create-candidate-program-dateContainer">
-							<input class="create-candidate-program-dateContainer__input"
-								type="text" name="release_date" ngbDatepicker #d2="ngbDatepicker"
-								formControlName="release_date" [(ngModel)]="user.releaseDate" />
-							<button type="button" class="btn btn-primary
-								create-candidate-program-dateContainer__btn"
-								(click)="d2.toggle()"><i
-									class="fas fa-calendar-alt"></i></button>
+                <input class="create-candidate-program-dateContainer__input"
+                       type="text"
+                       name="release_date"
+                       ngbDatepicker
+                       #d2="ngbDatepicker"
+                       formControlName="release_date"
+                      [(ngModel)]="user.releaseDate" />
+                <button type="button"
+                        class="btn btn-primary create-candidate-program-dateContainer__btn"
+                        (click)="d2.toggle()">
+                        <i class="fas fa-calendar-alt"></i>
+                </button>
 						</div>
 					</div>
 					<div class="create-candidate-program__wrap__element__notification">
 						<div class="create-candidate-program__wrap__element__notification__error">
 							<div *ngIf="candidateForm.get('release_date').errors">
-								<div *ngIf="candidateForm.get('release_date').errors['required']
-									&& candidateForm.get('release_date')?.touched">
-									Release date is required
-								</div>
+                <div *ngIf="(candidateForm.get('release_date').errors['required'] && candidateForm.get('release_date')?.touched) ||
+                            (candidateForm.get('release_date').errors['required'] && cForm.submitted)">Select release date</div>
 							</div>
 						</div>
 					</div>
@@ -159,64 +149,59 @@
 							<strong> Preference </strong>
 						</label>
 						<select class="create-candidate-program__wrap__element__data__input"
-							formControlName="preference" name="preference"
-							[(ngModel)]="user.preference">
-							<option value="Frontend">Frontend</option>
-							<option value="Backend">Backend</option>
-							<option value="QA">QA</option>
-							<option value="DevOps">DevOps</option>
-							<option value="Business Analyst">Business Analyst</option>
+                    formControlName="preference"
+                    name="preference"
+							     [(ngModel)]="user.preference">
+                  <option value="Frontend">Frontend</option>
+                  <option value="Backend">Backend</option>
+                  <option value="QA">QA</option>
+                  <option value="DevOps">DevOps</option>
+                  <option value="Business Analyst">Business Analyst</option>
 						</select>
 					</div>
 					<div class="create-candidate-program__wrap__element__notification">
 						<div class="create-candidate-program__wrap__element__notification__error">
 							<div *ngIf="candidateForm.get('preference').errors">
-								<div *ngIf="candidateForm.get('preference').errors['required']
-									&&
-									candidateForm.get('preference')?.touched">
-									Preference is required
-								</div>
+                <div *ngIf="(candidateForm.get('preference').errors['required'] && candidateForm.get('preference')?.touched) ||
+                            (candidateForm.get('preference').errors['required'] && cForm.submitted)">Select preference</div>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="create-candidate-program__wrap__element">
 					<div class="create-candidate-program__wrap__element__data">
-						<label class="create-candidate-program__wrap__element__data__text"
-							for="pass">
-							<strong>
-								Password
-							</strong></label>
+						<label class="create-candidate-program__wrap__element__data__text" for="pass">
+                Password
+            </label>
 						<input class="create-candidate-program__wrap__element__data__input"
-							type="password" name="pass" formControlName="password"
-							[(ngModel)]="password">
+                   type="password"
+                   name="pass"
+                   formControlName="password"
+							     [(ngModel)]="password">
 					</div>
-					<div class="create-candidate-program__wrap__element__notification">
+          <div class="create-candidate-program__wrap__element__notification">
 						<div class="create-candidate-program__wrap__element__notification__error">
 							<div *ngIf="candidateForm.get('password').errors">
-								<div *ngIf="candidateForm.get('password').errors['required']
-									&& candidateForm.get('password')?.touched">
-									Password is required
-								</div>
+									<div *ngIf="(candidateForm.get('password').errors['required'] && candidateForm.get('password')?.touched) || 
+									            (candidateForm.get('password').errors['required'] && cForm.submitted)">Type your password</div>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="create-candidate-program__wrap__element">
 					<div class="create-candidate-program__wrap__element__data">
-						<label class="create-candidate-program__wrap__element__data__text"
-							for="cpass">
-							<strong>
-								Confirm Password
-							</strong></label>
+						<label class="create-candidate-program__wrap__element__data__text" for="cpass">
+                Confirm Password
+            </label>
 						<input class="create-candidate-program__wrap__element__data__input"
 							type="password" name="cpass" formControlName="cpassword">
 					</div>
 					<div class="create-candidate-program__wrap__element__notification">
 						<div class="create-candidate-program__wrap__element__notification__error">
 							<div *ngIf="candidateForm.get('cpassword').errors">
-								<div *ngIf="candidateForm.get('cpassword').errors['MatchPassword'] &&
-									candidateForm.get('cpassword')?.touched">
+								<div *ngIf="(candidateForm.get('cpassword').errors['MatchPassword'] &&
+                            candidateForm.get('cpassword')?.touched) || 
+                            (candidateForm.get('cpassword').errors['MatchPassword'] && cForm.submitted)">
 									Passwords are not equal
 								</div>
 							</div>
@@ -226,21 +211,15 @@
 			</div>
 		</div>
 		<div class="create-candidate-container__buttons">
-			<button type="button" class="btn btn-primary
-				create-candidate-container__buttons__option" (click)="goBack()">
-				<label
-					class="create-candidate-container__buttons__option__text">
-					Go Back</label>
-				<i class="fas fa-undo
-					create-candidate-container__buttons__option__icon"></i>
+			<button type="button" class="btn btn-primary create-candidate-container__buttons__option" (click)="goBack()">
+				<label class="create-candidate-container__buttons__option__text">
+          Go Back
+        </label>
+				<i class="fas fa-undo create-candidate-container__buttons__option__icon"></i>
 			</button>
-			<button type="submit" class="btn btn-primary
-				create-candidate-buttons__option">
-				<label
-					class="create-candidate-container__buttons__option__text">
-					Create</label>
-				<i class="fas fa-edit
-					create-candidate-container__buttons__option__icon"></i>
+			<button type="submit" class="btn btn-primary create-candidate-buttons__option">
+				<label class="create-candidate-container__buttons__option__text">Create</label>
+				<i class="fas fa-edit create-candidate-container__buttons__option__icon"></i>
 			</button>
 		</div>
 	</div>
