@@ -48,6 +48,9 @@ export class LoginComponent {
     this.alertNotification.closeNotification();
   }
 
+  //Rol, Mensaje
+
+
   redirectToAdmin() {
     this.router.navigate(['/admin-dashboard']);
   }

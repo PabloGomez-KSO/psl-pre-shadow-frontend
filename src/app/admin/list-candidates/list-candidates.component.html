@@ -3,15 +3,21 @@
     <i class="fas fa-user-plus create_user_container__btn__icon"></i>
     <span class="create_user_container__btn__text">Create</span>
   </button>
+  <div class="create_user_container__criteria-text">
+    Criteria
+  </div>
+  <div class="create_user_container__criteria-list">
+    <select class="create_user_container__criteria-list__select" name="criteria-list" [(ngModel)]="selectedCriteriaToSearch">
+      <option *ngFor="let option of criteriaOptions" [value]="option"> {{option}} </option>
+    </select>
+  </div>
+  <input #term (keyup.enter)="searchByCriteria(term.value)" class="form-control mr-sm-2 create_user_container__search" type="text" placeholder="Search">
 </div>
 <table class="candidates_table">
   <tr class="candidates_table__row">
-    <th class="candidates_table__row__item">Name</th>
-    <th class="candidates_table__row__item">Email</th>
-    <th class="candidates_table__row__item">Age</th>
-    <th class="candidates_table__row__item">Start Date</th>
-    <th class="candidates_table__row__item">Release Date</th>
-    <th class="candidates_table__row__item">Preference</th>
+    <th class="candidates_table__row__item" *ngFor="let option of criteriaOptions">
+      {{option}}
+    </th>
     <th class="candidates_table__row__item"></th>
   </tr>
   <tr *ngFor="let candidate of candidates" class="candidates_table__row">

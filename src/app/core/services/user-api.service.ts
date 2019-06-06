@@ -20,7 +20,7 @@ export class UserApiService {
     this.userDocument = this.getUserDocumentById(id);
     return this.userDocument
       .snapshotChanges()
-      .pipe(map(action => this.verificateExistanceOfUser(action)));
+      .pipe(map(this.verificateExistanceOfUser));
   }
 
   getCandidates() {

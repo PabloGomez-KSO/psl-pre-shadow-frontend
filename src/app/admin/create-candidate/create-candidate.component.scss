@@ -1,25 +1,4 @@
-@import "../../../assets/scss/variables";
-
-@mixin input_properties {
-  padding: 10px 5px 5px 10px;
-  margin-top: 20px;
-  margin-right: 10px;
-  width: 180px;
-  color: $purple_logo_psl;
-  font-family: $main_font;
-  font-weight: bold;
-  border: 2px solid #dfe1e5;
-}
-
-@mixin text_settings {
-  padding: 10px 5px 5px 10px;
-  margin-top: 20px;
-  margin-right: 10px;
-  width: 180px;
-  color: $purple_logo_psl;
-  font-family: $main_font;
-  font-weight: bold;
-}
+@import '../../../assets/scss/variables';
 
 @mixin title_settings {
   font-family: $main_font;
@@ -30,12 +9,6 @@
   height: 50px;
 }
 
-@mixin data_settings {
-  font-size: $size_main_font;
-  display: flex;
-  justify-content: center;
-}
-
 @mixin notification_settings {
   height: 30px;
   font-family: $main_font;
@@ -43,30 +16,6 @@
   font-weight: bold;
   color: $validation_alert;
   margin-left: 195px;
-}
-
-@mixin test_settings {
-  padding: 10px 5px 5px 10px;
-  margin-top: 20px;
-  margin-right: 10px;
-  width: 180px;
-  color: $purple_logo_psl;
-  font-family: $main_font;
-  font-weight: bold;
-}
-
-@mixin grap_settings {
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-@mixin create_section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .create-candidate-container {
@@ -82,53 +31,54 @@
   background-color: white;
   border: 1px solid $blue_font_bootstrap;
 
-  .create-candidate-personal-info {
-    @include create_section;
-    &__title {
-      @include title_settings;
-    }
-    &__wrap {
-      @include grap_settings;
-      &__element {
-        width: 400px;
-        min-width: 400px;
-        &__data {
-          @include data_settings;
-          &__text {
-            @include text_settings;
-          }
-          &__input {
-            @include input_properties;
-          }
-        }
-        &__notification {
-          @include notification_settings;
-        }
-      }
-    }
-  }
+  .create-candidate-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-  .create-candidate-program {
-    @include create_section;
-    height: 100%;
-    margin-top: 60px;
-    &__title {
+    &__personal-title {
       @include title_settings;
     }
+
+    &__program-title {
+      @include title_settings;
+      margin-top: 30px;
+    }
+
     &__wrap {
-      @include grap_settings;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
       &__element {
         width: 400px;
         min-width: 400px;
         &__data {
-          @include data_settings;
+          font-size: $size_main_font;
+          display: flex;
+          justify-content: center;
           &__text {
-            @include text_settings;
+            padding: 10px 5px 5px 10px;
+            margin-top: 20px;
+            margin-right: 10px;
+            width: 180px;
+            color: $purple_logo_psl;
+            font-family: $main_font;
+            font-weight: bold;
           }
           &__input {
-            @include input_properties;
+            padding: 10px 5px 5px 10px;
+            margin-top: 20px;
+            margin-right: 10px;
+            width: 180px;
+            color: $purple_logo_psl;
+            font-family: $main_font;
+            font-weight: bold;
+            border: 2px solid #dfe1e5;
+            height: 51.5px !important;
           }
-          .create-candidate-program-dateContainer {
+          &__dateContainer {
             display: flex;
             align-items: center;
             margin-top: 15px;
@@ -137,8 +87,7 @@
               width: 150px;
               font-family: $main_font;
               font-size: $size_main_font;
-              border: 1px solid #dfe1e5;
-              box-shadow: 0 0 3px #888;
+              border: 2px solid #dfe1e5;
             }
             &__btn {
               padding: 14px;
@@ -174,24 +123,7 @@
   .create-candidate-container {
     width: 90%;
     height: 100%;
-    .create-candidate-personal-info {
-      &__wrap {
-        justify-content: center;
-        &__element {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-direction: column;
-          &__data {
-            flex-direction: column;
-          }
-          &__notification {
-            margin-left: 0px;
-          }
-        }
-      }
-    }
-    .create-candidate-program {
+    .create-candidate-info {
       &__wrap {
         justify-content: center;
         &__element {
