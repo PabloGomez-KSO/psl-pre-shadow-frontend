@@ -75,7 +75,9 @@
             color: $purple_logo_psl;
             font-family: $main_font;
             font-weight: bold;
-            border: 2px solid #dfe1e5;
+            border: 1px solid rgba(0,0,0,0.15);
+            box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+            border-radius: .7rem;
             height: 51.5px !important;
           }
           &__dateContainer {
@@ -87,10 +89,13 @@
               width: 150px;
               font-family: $main_font;
               font-size: $size_main_font;
-              border: 2px solid #dfe1e5;
+              border: 1px solid rgba(0,0,0,0.15);
+              box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+              border-radius: .7rem;
             }
             &__btn {
               padding: 14px;
+              border-radius: .7rem;
             }
           }
         }

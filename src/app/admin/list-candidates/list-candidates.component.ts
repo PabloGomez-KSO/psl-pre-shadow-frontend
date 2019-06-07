@@ -12,24 +12,28 @@ export class ListCandidatesComponent implements OnInit {
   candidates: User[] = [];
   candidatesComplete: User[] = [];
 
-  criteriaOptions: string[] = ["name", "email", "age", "startDate", "releaseDate", "preference"];
+  criteriaOptions: string[] = [
+    'name',
+    'email',
+    'age',
+    'startDate',
+    'releaseDate',
+    'preference'
+  ];
 
-  selectedCriteriaToSearch: string = "";
+  selectedCriteriaToSearch = '';
 
-  constructor(private router: Router, private userApiService: UserApiService) {
-  }
+  constructor(private router: Router, private userApiService: UserApiService) {}
 
   ngOnInit(): void {
     this.getCandidates();
   }
 
   getCandidates() {
-    this.userApiService
-      .getCandidates()
-      .subscribe((candidates: User[]) => {
-        this.candidates = candidates;
-        this.candidatesComplete = candidates;
-      });
+    this.userApiService.getCandidates().subscribe((candidates: User[]) => {
+      this.candidates = candidates;
+      this.candidatesComplete = candidates;
+    });
   }
 
   editCandidate() {
@@ -41,11 +45,12 @@ export class ListCandidatesComponent implements OnInit {
   }
 
   searchByCriteria(term: string) {
-    console.log(this.candidates);
-    console.log(term);
-    console.log(this.selectedCriteriaToSearch);
-    this.candidates = _.filter(this.candidatesComplete, { [this.selectedCriteriaToSearch]: term });
-    console.log(this.candidates);
+    this.candidates = _.filter(this.candidatesComplete, (cand: User) =>
+      _.startsWith(cand[this.selectedCriteriaToSearch], term)
+    );
+  }
 
+  sortCandidatesAscendent() {
+    this.candidates = _.sortBy(this.candidatesComplete, this.selectedCriteriaToSearch, ['asc']);
   }
 }

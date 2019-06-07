@@ -12,11 +12,19 @@
     </select>
   </div>
   <input #term (keyup.enter)="searchByCriteria(term.value)" class="form-control mr-sm-2 create_user_container__search" type="text" placeholder="Search">
+  <div class="create_user_container__sort-buttons">
+    <button type="button" class="btn btn-primary create_user_container__sort-buttons__option" (click)="sortCandidatesAscendent()">
+      <i class="fas fa-arrow-circle-up create_user_container__sort-buttons__icon"></i> 
+    </button>
+    <button type="button" class="btn btn-primary create_user_container__sort-buttons__option">
+      <i class="fas fa-arrow-circle-down create_user_container__sort-buttons__icon"></i>
+    </button>
+  </div>
 </div>
 <table class="candidates_table">
   <tr class="candidates_table__row">
     <th class="candidates_table__row__item" *ngFor="let option of criteriaOptions">
-      {{option}}
+      {{option }}
     </th>
     <th class="candidates_table__row__item"></th>
   </tr>
