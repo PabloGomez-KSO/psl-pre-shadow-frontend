@@ -6,7 +6,8 @@
 				<div class="create-candidate-info__wrap__element">
 					<div class="create-candidate-info__wrap__element__data">
 						<label class="create-candidate-info__wrap__element__data__text" for="username">Name</label>
-						<input class="create-candidate-info__wrap__element__data__input"
+						<input [ngClass]="{'create-candidate-info__wrap__element__data__input--invalid': candidateForm.get('name').errors && cForm.submitted}"
+						       class="create-candidate-info__wrap__element__data__input"
                    type="text"
                    name="username"
 							     formControlName="name"

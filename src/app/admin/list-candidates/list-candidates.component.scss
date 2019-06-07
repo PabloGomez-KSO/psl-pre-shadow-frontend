@@ -17,12 +17,11 @@
     height: 40px;
     margin-top: 50px;
     &__text {
-     @include text;
-     min-width: 58.33px !important;
+      @include text;
+      min-width: 58.33px !important;
     }
     &__icon {
       width: 40px !important;
-
     }
   }
 
@@ -60,7 +59,26 @@
       text-align: center;
       padding: 0.25em;
       margin-bottom: 15px;
+      &__data {
+        display: flex;
+        justify-content: center;
+        &__btn {
+          display: flex;
+          flex-direction: column;
+          margin-left: 10px;
+          color: white;
+          background-color: #29465b;
+          border: 0;
+          &__icon {
+            background-color: #29465b;
+            margin-bottom: 2px;
+            width: 15px;
+            height: 15px;
+            margin-bottom: 5px;
 
+          }
+        }
+      }
     }
   }
   &__btn {

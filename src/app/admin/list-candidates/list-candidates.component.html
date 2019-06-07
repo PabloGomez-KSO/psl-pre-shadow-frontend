@@ -10,7 +10,7 @@
   </div>
 
   <div class="list_candidates_container__criteria-list">
-    <select class="list_candidates_container__criteria-list__select" name="criteria-list" [(ngModel)]="selectedCriteria">
+    <select class="list_candidates_container__criteria-list__select" name="criteria-list" [(ngModel)]="selectedCriteriaToSearch">
       <option *ngFor="let option of criteriaOptions" [value]="option"> {{option}} </option>
     </select>
   </div>
@@ -23,18 +23,23 @@
 
   <thead class="thead-dark">
     <tr class="candidates_table__row">
-      <th class="candidates_table__row__item" *ngFor="let option of criteriaOptions" (click)="prueba()">
-       {{option | titlecase}}
-        <button type="button" class="candidates_table__row__item__btn" (click)="selectedCriteria = option">
-            <i  click="isSortedAscendent = true" class="fas fa-arrow-up fa-xs candidates_table__row__item__btn__icon"></i>
-            <i  click="isSortedAscendent = false" class="fas fa-arrow-down fa-xs candidates_table__row__item__btn__icon"></i>
-        </button>
+      <th class="candidates_table__row__item" *ngFor="let option of criteriaOptions">
+        <div class="candidates_table__row__item__data">
+          <div class="candidates_table__row__item__data__text">
+              {{option | titlecase}}
+          </div>
+          <button type="button" class="candidates_table__row__item__data__btn">
+              <i (click)="isSortedAscendent = true; sortByCriteria(); selectedCriteriaToSort = option" class="fas fa-arrow-up fa-xs candidates_table__row__item__data__btn__icon"></i>
+              <i (click)="isSortedAscendent = false; sortByCriteria(); selectedCriteriaToSort = option" class="fas fa-arrow-down fa-xs candidates_table__row__item__data__btn__icon"></i>
+          </button>
+        </div>
       </th>
+      <th class="candidates_table__row__item"></th>
     </tr>
   </thead>
 
   <tbody>
-    <tr *ngFor="let candidate of candidates | sortCandidates:isSortedAscendent:this.selectedCriteria" class="candidates_table__row" #tabla>
+    <tr *ngFor="let candidate of candidates" class="candidates_table__row" #tabla>
       <td class="candidates_table__row__item">{{candidate.name}} </td>
       <td class="candidates_table__row__item">{{candidate.email}}</td>
       <td class="candidates_table__row__item">{{candidate.age}}</td>
