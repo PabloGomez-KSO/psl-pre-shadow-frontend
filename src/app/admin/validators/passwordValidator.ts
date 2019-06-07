@@ -1,12 +1,13 @@
-import {AbstractControl} from '@angular/forms';
+import {FormGroup} from '@angular/forms';
 export class PasswordValidation {
 
-    static MatchPassword(control: AbstractControl) {
-       const password = control.get('password').value;
-       const confirmPassword = control.get('cpassword').value;
+    static MatchPassword(form: FormGroup) {
+       const password = form.get('password').value;
+       const confirmPassword = form.get('cpassword').value;
         if (password !== confirmPassword) {
-            control.get('cpassword').setErrors( {MatchPassword: true} );
+            form.get('cpassword').setErrors( {MatchPassword: true} );
         } else {
+            //lodash noop
             return null;
         }
     }

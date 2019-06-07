@@ -151,12 +151,8 @@
 						<select class="create-candidate-info__wrap__element__data__input"
                     formControlName="preference"
                     name="preference"
-							      [(ngModel)]="user.preference">
-            	<option value="Frontend">Frontend</option>
-              <option value="Backend">Backend</option>
-              <option value="QA">QA</option>
-              <option value="DevOps">DevOps</option>
-                  <option value="Business Analyst">Business Analyst</option>
+										[(ngModel)]="user.preference">
+							<option *ngFor="let role of softwareRoles" [value]="role">{{ role }}</option>
 						</select>
 					</div>
 					<div class="create-candidate-info__wrap__element__notification">
@@ -212,12 +208,10 @@
 		</div>
 		<div class="create-candidate-container__buttons">
 			<button type="button" class="btn btn-primary create-candidate-container__buttons__option" (click)="goBack()">
-				<label class="create-candidate-container__buttons__option__text">
           Go Back
-        </label>
 				<i class="fas fa-undo create-candidate-container__buttons__option__icon"></i>
 			</button>
-			<button type="submit" class="btn btn-primary create-candidate-buttons__option">
+			<button type="submit" class="btn btn-primary create-candidate-container__buttons__option">
 				Create
 				<i class="fas fa-edit create-candidate-container__buttons__option__icon"></i>
 			</button>

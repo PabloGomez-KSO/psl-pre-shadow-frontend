@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from '../shared/shared.module';
+import { SortCandidatesPipe } from './pipes/sort-candidates.pipe';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { SharedModule } from '../shared/shared.module';
     UpdateCandidateComponent,
     ListCandidatesComponent,
     AdminDashboardComponent,
-    AdminNavbarComponent
+    AdminNavbarComponent,
+    SortCandidatesPipe
   ],
   exports: [
     AdminDashboardComponent

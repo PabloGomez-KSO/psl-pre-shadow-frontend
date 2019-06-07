@@ -1,0 +1,86 @@
+@import '../../../assets/scss/variables';
+
+.update_candidate_container {
+  background: $purple_psl_opacity;
+  margin: 0 auto;
+  padding: 10px;
+  align-items: center;
+  margin-bottom: 30px;
+  height: 80%;
+  width: 50%;
+  margin-top: 50px;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .update-candidate-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: $main_font;
+    font-size: $size_main_font;
+    margin-bottom: 15px;
+
+    &__data {
+      padding: 10px 5px 5px 10px;
+      margin-top: 20px;
+      margin-right: 15px;
+      width: 150px;
+      color: $purple_logo_psl;
+      font-family: $main_font;
+    }
+
+    &__input {
+      padding: 10px;
+      margin-top: 15px;
+      width: 320px;
+      font-family: $main_font;
+      font-size: $size_main_font;
+      border-radius: .7rem;
+      border: 1px solid rgba(0,0,0,0.15);
+      box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+    }
+
+    &__date {
+      padding: 10px;
+      width: 280px;
+      font-size: $size_main_font;
+      font-family: $main_font;
+      font-weight: bold;
+      border-radius: .7rem;
+      border: 1px solid rgba(0,0,0,0.15);
+      box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+    }
+
+    &__error {
+      color: $blue_font_bootstrap;
+    }
+
+    &__dateBtn {
+      padding: 13px;
+    }
+  }
+
+  .update-candidate-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+    margin-bottom: 60px;
+    &__option {
+      border-radius: .7rem;
+      margin-bottom: 60px;
+      cursor: pointer;
+      &__icon {
+        margin-left: 10px;
+      }
+      &__text {
+        cursor: pointer;
+        font-size: $size_main_font;
+        font-family: $main_font;
+      }
+    }
+  }
+}

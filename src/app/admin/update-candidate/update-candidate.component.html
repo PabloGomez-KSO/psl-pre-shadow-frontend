@@ -1,3 +1,51 @@
-<p>
-  update-candidate works!
-</p>
+<div class="update_candidate_container">
+    <form [formGroup]="updateCandidateForm" (ngSubmit)="updateCandidate()">
+        <div class="update-candidate-row">
+            <label class="update-candidate-row__data" for="name">
+                <strong> Name</strong> </label>
+            <input class="update-candidate-row__input" type="text" name="name" formControlName="name"
+                [(ngModel)]="user.name">
+        </div>
+        <div class="update-candidate-row">
+            <label class="update-candidate-row__data" for="age"> <strong> Age</strong> </label>
+            <input class="update-candidate-row__input" type="number" name="age" formControlName="age"
+                [(ngModel)]="user.age">
+        </div>
+        <div class="update-candidate-row">
+            <label class="update-candidate-row__data" for="username"> <strong> Username</strong> </label>
+            <input class="update-candidate-row__input" type="text" name="username" formControlName="username"
+                [(ngModel)]="user.username">
+        </div>
+        <div class=" update-candidate-row">
+                <label class="update-candidate-row__data" for="start_date"> <strong> Start Date </strong></label>
+                <input class="update-candidate-row__date" type="text" name="start_date" ngbDatepicker
+                    #d1="ngbDatepicker" formControlName="start_date" [(ngModel)]="user.startDate" />
+                <button type="button" class="btn btn-primary update-candidate-row__dateBtn" (click)="d1.toggle()"><i
+                        class="fas fa-calendar-alt"></i></button>
+            </div>
+            <div class="update-candidate-row">
+                <label class="update-candidate-row__data" for="release_date"> <strong> Release Date </strong></label>
+                <input class="update-candidate-row__date" type="text" name="release_date" ngbDatepicker
+                    #d2="ngbDatepicker" formControlName="release_date" [(ngModel)]="user.releaseDate" />
+                <button type="button" class="btn btn-primary update-candidate-row__dateBtn" (click)="d2.toggle()"><i
+                        class="fas fa-calendar-alt"></i></button>
+            </div>
+            <div class="update-candidate-row">
+                <label class="update-candidate-row__data" for="release_date"> <strong> Preference </strong></label>
+                <select class="update-candidate-row__input" formControlName="preference" name="preference"
+                    [(ngModel)]="user.preference">
+                    <option *ngFor="let role of softwareRoles" [value]="role">{{ role }}</option>
+                </select>
+            </div>
+            <div class="update-candidate-buttons">
+                <button type="button" class="btn btn-primary update-candidate-buttons__option" (click)="goBack()">
+                    <label class="update-candidate-buttons__option__text"> Go Back</label>
+                    <i class="fas fa-undo update-candidate-buttons__option__icon"></i>
+                </button>
+                <button type="submit" class="btn btn-primary update-candidate-buttons__option">
+                    <label class="update-candidate-buttons__option__text"> Update </label>
+                    <i class="fas fa-edit create-candidate-buttons__option__icon"></i>
+                </button>
+            </div>
+    </form>
+</div>

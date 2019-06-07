@@ -5,7 +5,7 @@
   width: 80px;
   font-weight: bold;
 }
-.create_user_container {
+.list_candidates_container {
   width: 70%;
   height: 70px;
   margin: 0 auto;
@@ -13,14 +13,16 @@
   font-family: $main_font;
   align-items: center;
   &__btn {
-    width: 170px;
+    min-width: 100px;
     height: 40px;
     margin-top: 50px;
     &__text {
      @include text;
+     min-width: 58.33px !important;
     }
     &__icon {
-      width: 40px;
+      width: 40px !important;
+
     }
   }
 
@@ -58,6 +60,7 @@
       text-align: center;
       padding: 0.25em;
       margin-bottom: 15px;
+
     }
   }
   &__btn {
