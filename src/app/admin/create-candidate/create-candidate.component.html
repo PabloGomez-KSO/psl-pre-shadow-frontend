@@ -3,6 +3,7 @@
 		<div class="create-candidate-info">
 			<span class="create-candidate-info__personal-title">Personal Information</span>
 			<div class="create-candidate-info__wrap">
+
 				<div class="create-candidate-info__wrap__element">
 					<div class="create-candidate-info__wrap__element__data">
 						<label class="create-candidate-info__wrap__element__data__text" for="username">Name</label>
@@ -16,16 +17,19 @@
 					<div class="create-candidate-info__wrap__element__notification">
 						<div class="create-candidate-info__wrap__element__notification__error">
 							<div *ngIf="candidateForm.get('name').errors">
-                <div *ngIf="(candidateForm.get('name').errors['required'] && candidateForm.get('name')?.touched) ||
-                            (candidateForm.get('name').errors['required'] && cForm.submitted)">Type your name</div>
+                <div *ngIf="(cForm.submitted || candidateForm.get('name')?.touched) && candidateForm.get('name').errors['required']">
+									Type your name
+								</div>
 						  </div>
 						</div>
 					</div>
 				</div>
+
 				<div class="create-candidate-info__wrap__element">
 					<div class="create-candidate-info__wrap__element__data">
               <label class="create-candidate-info__wrap__element__data__text" for="age">Age</label>
-              <input class="create-candidate-info__wrap__element__data__input"
+							<input class="create-candidate-info__wrap__element__data__input"
+						      	 [ngClass]="{'create-candidate-info__wrap__element__data__input--invalid': candidateForm.get('age').errors && cForm.submitted}"
                      type="number"
                      name="age"
                      formControlName="age"
@@ -34,18 +38,19 @@
 					<div class="create-candidate-info__wrap__element__notification">
 						<div class="create-candidate-info__wrap__element__notification__error">
 						    <div *ngIf="candidateForm.get('age').errors">
-                  <div *ngIf="(candidateForm.get('age').errors['required'] && candidateForm.get('age')?.touched) ||
-															(candidateForm.get('age').errors['required'] && cForm.submitted)">
-								    Type your age
-								  </div>
+									<div *ngIf="(cForm.submitted || candidateForm.get('age')?.touched) && candidateForm.get('age').errors['required']">
+										Type your age
+									</div>
 						  	</div>
 						</div>
 					</div>
 				</div>
+
 				<div class="create-candidate-info__wrap__element">
 					<div class="create-candidate-info__wrap__element__data">
 						<label class="create-candidate-info__wrap__element__data__text" for="email">Email</label>
 						<input class="create-candidate-info__wrap__element__data__input"
+					      	 [ngClass]="{'create-candidate-info__wrap__element__data__input--invalid': candidateForm.get('email').errors && cForm.submitted}"
                    type="email"
                    name="email"
                    formControlName="email"
@@ -54,18 +59,21 @@
 					<div class="create-candidate-info__wrap__element__notification">
 						<div class="create-candidate-info__wrap__element__notification__error">
 							<div *ngIf="candidateForm.get('email').errors">
-                <div *ngIf="(candidateForm.get('email').errors['required'] && candidateForm.get('email')?.touched) ||
-                            (candidateForm.get('email').errors['required'] && cForm.submitted)">Type your email</div>
+								<div *ngIf="(cForm.submitted || candidateForm.get('email')?.touched) && candidateForm.get('email').errors['required']">
+									Type your age
+								</div>
               </div>
 						</div>
 					</div>
 				</div>
+
 			</div>
 		</div>
 		<div class="create-candidate-info">
 			<span class="create-candidate-info__program-title">
 				Program Information
 			</span>
+
 			<div class="create-candidate-info__wrap">
 				<div class="create-candidate-info__wrap__element">
 					<div class="create-candidate-info__wrap__element__data">
@@ -73,6 +81,7 @@
 							Username
 						</label>
 						<input class="create-candidate-info__wrap__element__data__input"
+						       [ngClass]="{'create-candidate-info__wrap__element__data__input--invalid': candidateForm.get('username').errors && cForm.submitted}"
                    type="text"
                    name="username"
                    formControlName="username"
@@ -81,19 +90,23 @@
 					<div class="create-candidate-info__wrap__element__notification">
 						<div class="create-candidate-info__wrap__element__notification__error">
 							<div *ngIf="candidateForm.get('username').errors">
-                <div *ngIf="(candidateForm.get('username').errors['required'] && candidateForm.get('username')?.touched) ||
-                            (candidateForm.get('username').errors['required'] && cForm.submitted)">Type your username</div>
+								<div *ngIf="(cForm.submitted || candidateForm.get('username')?.touched) && candidateForm.get('username').errors['required']">
+                  Type your username
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
+
 				<div class="create-candidate-info__wrap__element">
 					<div class="create-candidate-info__wrap__element__data">
 						<label class="create-candidate-info__wrap__element__data__text" for="username">
 							 Start Date
 						</label>
 						<div class="create-candidate-info__wrap__element__data__dateContainer">
-                <input class="create-candidate-info__wrap__element__data__dateContainer__input"
+								<input class="create-candidate-info__wrap__element__data__dateContainer__input"
+											 [ngClass]="{'create-candidate-info__wrap__element__data__dateContainer__input--invalid':
+											            candidateForm.get('start_date').errors && cForm.submitted}"
                        type="text"
                        name="start_date"
                        ngbDatepicker
@@ -110,17 +123,21 @@
 					<div class="create-candidate-info__wrap__element__notification">
 						<div class="create-candidate-info__wrap__element__notification__error">
 							<div *ngIf="candidateForm.get('start_date').errors">
-                <div *ngIf="(candidateForm.get('start_date').errors['required'] && candidateForm.get('start_date')?.touched) ||
-                            (candidateForm.get('start_date').errors['required'] && cForm.submitted)">Select start date</div>
+								<div *ngIf="(cForm.submitted || candidateForm.get('start_date')?.touched) && candidateForm.get('start_date').errors['required']">
+									Select start date
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
+
 				<div class="create-candidate-info__wrap__element">
 					<div class="create-candidate-info__wrap__element__data">
 						<label class="create-candidate-info__wrap__element__data__text" for="username"> Release Date</label>
 						<div class="create-candidate-info__wrap__element__data__dateContainer">
-                <input class="create-candidate-info__wrap__element__data__dateContainer__input"
+								<input class="create-candidate-info__wrap__element__data__dateContainer__input"
+											 [ngClass]="{'create-candidate-info__wrap__element__data__dateContainer__input--invalid':
+											             candidateForm.get('release_date').errors && cForm.submitted}"
                        type="text"
                        name="release_date"
                        ngbDatepicker
@@ -137,12 +154,14 @@
 					<div class="create-candidate-info__wrap__element__notification">
 						<div class="create-candidate-info__wrap__element__notification__error">
 							<div *ngIf="candidateForm.get('release_date').errors">
-                <div *ngIf="(candidateForm.get('release_date').errors['required'] && candidateForm.get('release_date')?.touched) ||
-                            (candidateForm.get('release_date').errors['required'] && cForm.submitted)">Select release date</div>
+                <div *ngIf="(cForm.submitted || candidateForm.get('release_date')?.touched) && candidateForm.get('release_date').errors['required']">
+											Select release date
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
+
 				<div class="create-candidate-info__wrap__element">
 					<div class="create-candidate-info__wrap__element__data">
 						<label class="create-candidate-info__wrap__element__data__text"
@@ -150,6 +169,7 @@
 							<strong> Preference </strong>
 						</label>
 						<select class="create-candidate-info__wrap__element__data__input"
+						        [ngClass]="{'create-candidate-info__wrap__element__data__input--invalid': candidateForm.get('preference').errors && cForm.submitted}"
                     formControlName="preference"
                     name="preference"
 										[(ngModel)]="user.preference">
@@ -159,18 +179,21 @@
 					<div class="create-candidate-info__wrap__element__notification">
 						<div class="create-candidate-info__wrap__element__notification__error">
 							<div *ngIf="candidateForm.get('preference').errors">
-                <div *ngIf="(candidateForm.get('preference').errors['required'] && candidateForm.get('preference')?.touched) ||
-                            (candidateForm.get('preference').errors['required'] && cForm.submitted)">Select preference</div>
+								<div *ngIf="(cForm.submitted || candidateForm.get('preference')?.touched) && candidateForm.get('preference').errors['required']">
+									Select preference
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
+
 				<div class="create-candidate-info__wrap__element">
 					<div class="create-candidate-info__wrap__element__data">
 						<label class="create-candidate-info__wrap__element__data__text" for="pass">
                 Password
             </label>
 						<input class="create-candidate-info__wrap__element__data__input"
+					         [ngClass]="{'create-candidate-info__wrap__element__data__input--invalid': candidateForm.get('password').errors && cForm.submitted}"
                    type="password"
                    name="pass"
                    formControlName="password"
@@ -179,32 +202,36 @@
           <div class="create-candidate-info__wrap__element__notification">
 						<div class="create-candidate-info__wrap__element__notification__error">
 							<div *ngIf="candidateForm.get('password').errors">
-									<div *ngIf="(candidateForm.get('password').errors['required'] && candidateForm.get('password')?.touched) ||
-									            (candidateForm.get('password').errors['required'] && cForm.submitted)">Type your password</div>
+								<div *ngIf="(cForm.submitted || candidateForm.get('password')?.touched) && candidateForm.get('password').errors['required']">
+									Type a password
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
+
 				<div class="create-candidate-info__wrap__element">
 					<div class="create-candidate-info__wrap__element__data">
 						<label class="create-candidate-info__wrap__element__data__text" for="cpass">
                 Confirm Password
             </label>
 						<input class="create-candidate-info__wrap__element__data__input"
-							type="password" name="cpass" formControlName="cpassword">
+					     	   [ngClass]="{'create-candidate-info__wrap__element__data__input--invalid': candidateForm.get('cpassword').errors && cForm.submitted}"
+									 type="password"
+									 name="cpass"
+									 formControlName="cpassword">
 					</div>
 					<div class="create-candidate-info__wrap__element__notification">
 						<div class="create-candidate-info__wrap__element__notification__error">
 							<div *ngIf="candidateForm.get('cpassword').errors">
-								<div *ngIf="(candidateForm.get('cpassword').errors['MatchPassword'] &&
-                            candidateForm.get('cpassword')?.touched) ||
-                            (candidateForm.get('cpassword').errors['MatchPassword'] && cForm.submitted)">
-									Passwords are not equal
+								<div *ngIf="(cForm.submitted || candidateForm.get('cpassword')?.touched) && candidateForm.get('cpassword').errors['MatchPassword']">
+									Password does not match
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
+
 			</div>
 		</div>
 		<div class="create-candidate-container__buttons">

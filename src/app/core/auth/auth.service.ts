@@ -11,22 +11,22 @@ import { User } from "../../shared/models/user";
 })
 export class AuthService {
   constructor(
-    public firebaseAuth: AngularFireAuth,
-    public angularFireStore: AngularFirestore
+    private firebaseAuth: AngularFireAuth,
+    private angularFireStore: AngularFirestore
   ) { }
 
-  registerUser(user: User, password: string) {
+  registerUser(user: User, password: string): Promise<any> {
     return new Promise((resolve, reject) => {
       this.firebaseAuth.auth
         .createUserWithEmailAndPassword(user.email, password)
         .then(data => {
           resolve(data.user), this.updateUserData(data.user.uid, user);
         })
-        .catch(err => console.log(reject(err)));
+        .catch(err => reject(err));
     });
   }
 
-  logIn(email: string, password: string) {
+  logIn(email: string, password: string): Promise<any> {
     return new Promise((resolve, reject) => {
       this.firebaseAuth.auth
         .signInWithEmailAndPassword(email, password)
@@ -34,7 +34,8 @@ export class AuthService {
     });
   }
 
-  logOut() {
+  logOut(): Promise<any> {
+    console.log(typeof this.firebaseAuth.auth.signOut() );
     return this.firebaseAuth.auth.signOut();
   }
 

@@ -1,43 +1,94 @@
-<div class="update_candidate_container">
-        <form [formGroup]="updateCandidateForm" (ngSubmit)="updateCandidate()">
-            <div class="update-candidate-row">
-                <label class="update-candidate-row__data" for="name">
-                    <strong> Name</strong> </label>
-                <input class="update-candidate-row__input" type="text" name="name" formControlName="name" [(ngModel)]="candidateToUpdate.name">
-            </div>
-            <div class="update-candidate-row">
-                <label class="update-candidate-row__data" for="age"> <strong> Age</strong> </label>
-                <input class="update-candidate-row__input" type="number" name="age" formControlName="age" [(ngModel)]="candidateToUpdate.age">
-            </div>
-            <div class=" update-candidate-row">
-                    <label class="update-candidate-row__data" for="start_date"> <strong> Start Date </strong></label>
-                    <input class="update-candidate-row__date" type="text" name="start_date" ngbDatepicker
-                        #d1="ngbDatepicker" formControlName="start_date"  [(ngModel)]="candidateToUpdate.startDate"/>
-                    <button type="button" class="btn btn-primary update-candidate-row__dateBtn" (click)="d1.toggle()"><i
-                            class="fas fa-calendar-alt"></i></button>
-                </div>
-                <div class="update-candidate-row">
-                    <label class="update-candidate-row__data" for="release_date"> <strong> Release Date </strong></label>
-                    <input class="update-candidate-row__date" type="text" name="release_date" ngbDatepicker
-                        #d2="ngbDatepicker" formControlName="release_date" [(ngModel)]="candidateToUpdate.releaseDate"  />
-                    <button type="button" class="btn btn-primary update-candidate-row__dateBtn" (click)="d2.toggle()"><i
-                            class="fas fa-calendar-alt"></i></button>
-                </div>
-                <div class="update-candidate-row">
-                    <label class="update-candidate-row__data" for="release_date"> <strong> Preference </strong></label>
-                    <select class="update-candidate-row__input" formControlName="preference" [(ngModel)]="candidateToUpdate.preference" name="preference">
-                        <option *ngFor="let role of softwareRoles" [value]="role">{{ role }}</option>
-                    </select>
-                </div>
-                <div class="update-candidate-buttons">
-                    <button type="button" class="btn btn-primary update-candidate-buttons__option" (click)="goBack()">
-                        <label class="update-candidate-buttons__option__text"> Go Back</label>
-                        <i class="fas fa-undo update-candidate-buttons__option__icon"></i>
-                    </button>
-                    <button type="submit" class="btn btn-primary update-candidate-buttons__option">
-                        <label class="update-candidate-buttons__option__text"> Update </label>
-                        <i class="fas fa-edit create-candidate-buttons__option__icon"></i>
-                    </button>
-                </div>
-        </form>
-    </div>
+<form [formGroup]="updateCandidateForm" (ngSubmit)="updateCandidate()">
+	<div class="update-candidate-container">
+		<div class="update-candidate-info">
+			<div class="update-candidate-info__wrap">
+				<div class="update-candidate-info__wrap__element">
+					<div class="update-candidate-info__wrap__element__data">
+						<label class="update-candidate-info__wrap__element__data__text" for="username">Name</label>
+						<input
+						       class="update-candidate-info__wrap__element__data__input"
+                   type="text"
+                   name="username"
+							     formControlName="name"
+							     [(ngModel)]="candidateToUpdate.name">
+					</div>
+				</div>
+				<div class="update-candidate-info__wrap__element">
+					<div class="update-candidate-info__wrap__element__data">
+              <label class="update-candidate-info__wrap__element__data__text" for="age">Age</label>
+              <input class="update-candidate-info__wrap__element__data__input"
+                     type="number"
+                     name="age"
+										 formControlName="age"
+										 [(ngModel)]="candidateToUpdate.age"
+                     >
+					</div>
+				</div>
+				<div class="update-candidate-info__wrap__element">
+					<div class="update-candidate-info__wrap__element__data">
+						<label class="update-candidate-info__wrap__element__data__text" for="username">
+							 Start Date
+						</label>
+						<div class="update-candidate-info__wrap__element__data__dateContainer">
+                <input class="update-candidate-info__wrap__element__data__dateContainer__input"
+                       type="text"
+                       name="start_date"
+                       ngbDatepicker
+                       #d1="ngbDatepicker"
+                       formControlName="start_date"
+                       [(ngModel)]="candidateToUpdate.startDate" />
+                <button type="button"
+                        class="btn btn-primary update-candidate-info__wrap__element__data__dateContainer__btn"
+                        (click)="d1.toggle()">
+                <i class="fas fa-calendar-alt"></i>
+              </button>
+						</div>
+					</div>
+				</div>
+				<div class="update-candidate-info__wrap__element">
+					<div class="update-candidate-info__wrap__element__data">
+						<label class="update-candidate-info__wrap__element__data__text" for="username"> Release Date</label>
+						<div class="update-candidate-info__wrap__element__data__dateContainer">
+                <input class="update-candidate-info__wrap__element__data__dateContainer__input"
+                       type="text"
+                       name="release_date"
+                       ngbDatepicker
+                       #d2="ngbDatepicker"
+                       formControlName="release_date"
+                      [(ngModel)]="candidateToUpdate.releaseDate" />
+                <button type="button"
+                        class="btn btn-primary update-candidate-info__wrap__element__data__dateContainer__btn"
+                        (click)="d2.toggle()">
+                        <i class="fas fa-calendar-alt"></i>
+                </button>
+						</div>
+					</div>
+				</div>
+				<div class="update-candidate-info__wrap__element">
+					<div class="update-candidate-info__wrap__element__data">
+						<label class="update-candidate-info__wrap__element__data__text"
+							for="Preference">
+							<strong> Preference </strong>
+						</label>
+						<select class="update-candidate-info__wrap__element__data__input"
+                    formControlName="preference"
+                    name="preference"
+										[(ngModel)]="candidateToUpdate.preference">
+							<option *ngFor="let role of softwareRoles" [value]="role">{{ role }}</option>
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="update-candidate-container__buttons">
+			<button type="button" class="btn btn-primary update-candidate-container__buttons__option" (click)="goBack()">
+          Go Back
+				<i class="fas fa-undo update-candidate-container__buttons__option__icon"></i>
+			</button>
+			<button type="submit" class="btn btn-primary update-candidate-container__buttons__option">
+				Update
+				<i class="fas fa-edit update-candidate-container__buttons__option__icon"></i>
+			</button>
+		</div>
+	</div>
+</form>

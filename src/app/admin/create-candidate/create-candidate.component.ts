@@ -42,7 +42,7 @@ export class CreateCandidateComponent implements OnInit {
         this.router.navigate(['/admin-dashboard/']);
       })
       .catch(err => {
-        console.log(err);
+        this.alertService.showInvalidMessage(err);
       });
     }
   }
@@ -50,5 +50,4 @@ export class CreateCandidateComponent implements OnInit {
   goBack() {
     this.router.navigate(['/admin-dashboard/']);
   }
-
 }

@@ -43,7 +43,7 @@
     &__select {
       height: 40px;
       width: 140px;
-      
+
     }
   }
   &__search {
@@ -63,19 +63,16 @@
   margin-bottom: 100px;
   &__row {
     border: 1px solid #ddd;
-    overflow-x: scroll;
-
     &__item {
-      padding: 0.25em;
+      padding: 1.1rem;
       margin-bottom: 15px;
       height: 20px !important;
       &__data {
         display: flex;
-        justify-content: space-between;
         &__btn {
           display: flex;
           flex-direction: column;
-          margin-left: 50px;
+          margin-left: 20px;
           color: $purple_logo_psl;
           background-color: white;
           border: 0;
@@ -109,7 +106,10 @@
 }
 
 @media all and (max-width: 815px) {
-  .candidates_table {
-    width: 100%;
-  }
+
+    .candidates_table {
+      width: 375px;
+      overflow-x: scroll;
+    }
+
 }

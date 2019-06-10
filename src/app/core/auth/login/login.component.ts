@@ -20,42 +20,41 @@ export class LoginComponent {
     private alertNotification: AlertService
   ) { }
 
-  onLogIn() {
+  onLogIn(): void {
     this.alertNotification.showLoadingInfoMessageLogin();
     this.authService
       .logIn(this.email, this.password)
       .then(data => this.callUserApiServiceToGetUser(data['user'].uid))
       .catch((error) => {
-        this.alertNotification.showInvalidCredentialsMessage(error.message);
+        this.alertNotification.showInvalidMessage(error.message);
       });
   }
 
-  callUserApiServiceToGetUser(userId: string) {
+  callUserApiServiceToGetUser(userId: string): void {
     this.userApiService.getUserById(userId).subscribe((user: User) => this.verifyUserRoleToRedirect(user, userId));
   }
 
-  verifyUserRoleToRedirect(user: User, userId: string) {
+  verifyUserRoleToRedirect(user: User, userId: string): void{
     sessionStorage.setItem('userId', userId);
     if (user.roles.admin) {
-      this.alertNotification.showSuccessMessage(`Welcome Admin: ${user.name} to the Pre Shadow Platform`);
-      sessionStorage.setItem('rol', 'Admin');
+      this.sendMessageAndAssignRole(`Welcome Admin: ${user.name} to the Pre Shadow Platform`, 'admin');
       this.redirectToAdmin();
     } else if (user.roles.candidate) {
-      this.alertNotification.showSuccessMessage(`Welcome ${user.name} to the Pre Shadow Program, We hope you learn a lot`);
-      sessionStorage.setItem('rol', 'Candidate');
+      this.sendMessageAndAssignRole(`Welcome ${user.name} to the Pre Shadow Program, We hope you learn a lot`, 'Candidate');
       this.redirectToCandidate();
     }
+  }
+  sendMessageAndAssignRole(message: string, userRol: string): void{
+    this.alertNotification.showSuccessMessage(message);
+    sessionStorage.setItem('rol', userRol);
     this.alertNotification.closeNotification();
   }
 
-  //Rol, Mensaje
-
-
-  redirectToAdmin() {
+  redirectToAdmin(): void {
     this.router.navigate(['/admin-dashboard']);
   }
 
-  redirectToCandidate() {
+  redirectToCandidate(): void {
     this.router.navigate(['/candidate_dashboard']);
   }
 }

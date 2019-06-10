@@ -16,7 +16,7 @@
 
 </div>
 
-<table class="table table-striped table-bordered candidates_table">
+<table class="table table-striped candidates_table">
     <thead>
         <tr class="candidates_table__row">
             <th scope="col" class="candidates_table__row__item" *ngFor="let option of criteriaOptions">
@@ -24,15 +24,17 @@
                   <div class="candidates_table__row__item__data__text">
                       {{option | titlecase | convertTitle}}
                   </div>
-                  <button type="button" class="candidates_table__row__item__data__btn">
-                      <i (click)="isSortedAscendent = true; sortByCriteria(); selectedCriteriaToSort = option" class="fas fa-arrow-up fa-xs candidates_table__row__item__data__btn__icon"></i>
-                      <i (click)="isSortedAscendent = false; sortByCriteria(); selectedCriteriaToSort = option" class="fas fa-arrow-down fa-xs candidates_table__row__item__data__btn__icon"></i>
+                  <button (click)="executeSort(option)" type="button"
+                          class="candidates_table__row__item__data__btn">
+                      <i  *ngIf="isSortedAscendent"
+                          class="fas fa-sort-up candidates_table__row__item__data__btn__icon"></i>
+                      <i  *ngIf="!isSortedAscendent"
+                          class="fas fa-sort-down candidates_table__row__item__data__btn__icon"></i>
                   </button>
                 </div>
               </th>
               <th scope="col" class="candidates_table__row__item"></th>
          </tr>
-        
     </thead>
     <tbody>
         <tr *ngFor="let candidate of candidates" class="candidates_table__row" #tabla>
@@ -45,10 +47,9 @@
             <td class="edit-buttons">
                 <button type="button" class="btn btn-outline-primary candidates_table__btn" (click)="editCandidate(candidate.id)">
                   <i class="fas fa-edit"></i>
-                  
                 </button>
               </td>
           </tr>
     </tbody>
   </table>
-  
+

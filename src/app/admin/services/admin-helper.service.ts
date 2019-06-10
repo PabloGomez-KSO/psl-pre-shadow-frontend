@@ -2,7 +2,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PasswordValidation } from '../validators/passwordValidator';
 import { Injectable } from '@angular/core';
 import { User } from 'src/app/shared/models/user';
-
+import { Subject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -19,6 +19,16 @@ export class AdminHelperService {
   ];
 
   private softwareRoles: string[] = ['Frontend', 'Backend', 'QA', 'DevOps', 'Business Analyst'];
+
+  private generalSearchObservable = new Subject();
+
+  getGeneralSearchValue(){
+    return this.generalSearchObservable;
+  }
+
+  updateGeneralSearchValue(value: string){
+    this.generalSearchObservable.next(value);
+  }
 
   getCandidateCreateFormValidator(): FormGroup {
     return new FormGroup({

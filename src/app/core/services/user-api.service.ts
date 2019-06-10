@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
 })
 export class UserApiService {
 
-  constructor(public angularFireStore: AngularFirestore) {}
+  constructor(public angularFireStore: AngularFirestore) { }
 
   getUserById(id: string): Observable<User> {
     const userDocument = this.getUserDocumentById(id);
@@ -22,14 +22,14 @@ export class UserApiService {
       .pipe(map(this.verificateExistanceOfUser));
   }
 
-  getCandidates() {
-    const userCollection  = this.getUsersCollection();
+  getCandidates(): Observable<User[]> {
+    const userCollection = this.getUsersCollection();
     return userCollection
       .snapshotChanges()
       .pipe(map(changes => this.handleUserData(changes)));
   }
 
-  updateUser(user: User) {
+  updateUser(user: User): Promise<any> {
     const userDocument = this.getUserDocumentById(user.id);
     return userDocument.update(user);
   }
@@ -40,11 +40,11 @@ export class UserApiService {
       .filter((user: User) => this.verficateCandidate(user));
   }
 
-  getUserDocumentById(id: string) {
+  getUserDocumentById(id: string): AngularFirestoreDocument<User> {
     return this.angularFireStore.doc<User>(`users/${id}`);
   }
 
-  getUsersCollection() {
+  getUsersCollection(): AngularFirestoreCollection<User> {
     return this.angularFireStore.collection<User>('users');
   }
 

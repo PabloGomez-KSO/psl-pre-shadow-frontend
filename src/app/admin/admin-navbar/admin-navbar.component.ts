@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { UserApiService } from '../../core/services/user-api.service';
 import { User } from '../../shared/models/user';
 import { AlertService } from '../../shared/notifications/alert.service';
+import { AdminHelperService  } from '../services/admin-helper.service';
 @Component({
   selector: 'app-admin-navbar',
   templateUrl: './admin-navbar.component.html',
@@ -11,13 +12,13 @@ import { AlertService } from '../../shared/notifications/alert.service';
 })
 export class AdminNavbarComponent implements OnInit {
   email: string;
-  @Output() termToSearch = new EventEmitter();
 
   constructor(
     private authService: AuthService,
     private router: Router,
     private userApiService: UserApiService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private adminHelper: AdminHelperService
   ) {}
 
   ngOnInit() {
@@ -35,8 +36,6 @@ export class AdminNavbarComponent implements OnInit {
   }
 
   updateTermToSearch(term: string) {
-    if (!term) {
-      this.termToSearch.emit(term);
-    }
+    this.adminHelper.updateGeneralSearchValue(term);
   }
 }

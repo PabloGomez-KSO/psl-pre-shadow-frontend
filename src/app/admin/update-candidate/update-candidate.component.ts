@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AdminHelperService } from '../services/admin-helper.service';
 import { User } from 'src/app/shared/models/user';
 import { UserApiService } from '../../core/services/user-api.service';
+import { AlertService } from '../../shared/notifications/alert.service';
 @Component({
   selector: 'app-update-candidate',
   templateUrl: './update-candidate.component.html',
@@ -19,8 +20,9 @@ export class UpdateCandidateComponent implements OnInit {
     private adminHelper: AdminHelperService,
     private router: Router,
     private userApiService: UserApiService,
-    private activatedRoute: ActivatedRoute
-    ) {
+    private activatedRoute: ActivatedRoute,
+    private alertService: AlertService
+  ) {
   }
 
   ngOnInit() {
@@ -31,17 +33,17 @@ export class UpdateCandidateComponent implements OnInit {
     this.userApiService.getUserById(userIdToUpdate).subscribe((cand: User) => this.candidateToUpdate = cand);
   }
 
-  setFormValidators() {
-     this.updateCandidateForm = this.adminHelper.getUpdateFormValidator();
+  setFormValidators(): void {
+    this.updateCandidateForm = this.adminHelper.getUpdateFormValidator();
   }
 
-  updateCandidate() {
-    this.userApiService.updateUser(this.candidateToUpdate).then(data => {
-      console.log(data);
-    });
+  updateCandidate(): void {
+    this.userApiService.
+          updateUser(this.candidateToUpdate).then(() => this.alertService.showSuccessMessage('User updated successfully'));
+
   }
 
-  goBack() {
+  goBack(): void {
     this.router.navigate(['/admin-dashboard/']);
   }
 }

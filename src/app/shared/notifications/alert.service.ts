@@ -25,7 +25,7 @@ export class AlertService {
     Swal.showLoading();
   }
 
-  showInvalidCredentialsMessage(error: string) {
+  showInvalidMessage(error: string) {
     Swal.fire({
       allowOutsideClick: false,
       type: 'error',
