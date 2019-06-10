@@ -33,7 +33,6 @@ export class ListCandidatesComponent implements OnInit {
     this.userApiService.getCandidates().subscribe((candidates: User[]) => {
       this.candidates = candidates;
       this.candidatesComplete = candidates;
-      this.adminHelper.setCandidates(candidates);
       this.defaultSort();
     });
   }

@@ -8,7 +8,6 @@ import { Subject } from 'rxjs';
 })
 export class AdminHelperService {
 
-  private candidates: User[];
   private criteriaOptions: string[] = [
     'name',
     'email',
@@ -73,14 +72,6 @@ export class AdminHelperService {
       }
     };
     return user;
-  }
-
-  setCandidates(candidates: User[]): void {
-    this.candidates = candidates;
-  }
-
-  getCandidates(): User[] {
-    return this.candidates;
   }
 
   getCriteraOptions(): string[] {
