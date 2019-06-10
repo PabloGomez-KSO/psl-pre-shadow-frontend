@@ -7,27 +7,31 @@ import {
 } from '@angular/fire/firestore';
 import { User } from '../../shared/models/user';
 import { Observable } from 'rxjs';
+
 @Injectable({
   providedIn: 'root'
 })
 export class UserApiService {
-  private userDocument: AngularFirestoreDocument<User>;
-  private userCollection: AngularFirestoreCollection<User>;
 
   constructor(public angularFireStore: AngularFirestore) {}
 
   getUserById(id: string): Observable<User> {
-    this.userDocument = this.getUserDocumentById(id);
-    return this.userDocument
+    const userDocument = this.getUserDocumentById(id);
+    return userDocument
       .snapshotChanges()
       .pipe(map(this.verificateExistanceOfUser));
   }
 
   getCandidates() {
-    this.userCollection = this.getUsersCollection();
-    return this.userCollection
+    const userCollection  = this.getUsersCollection();
+    return userCollection
       .snapshotChanges()
       .pipe(map(changes => this.handleUserData(changes)));
+  }
+
+  updateUser(user: User) {
+    const userDocument = this.getUserDocumentById(user.id);
+    return userDocument.update(user);
   }
 
   handleUserData(changes) {
