@@ -26,23 +26,11 @@ export class CreateCandidateComponent implements OnInit {
   ngOnInit() {
     this.setCandidateFormValidators();
     this.softwareRoles = this.adminHelper.getSoftwareRoles();
-    this.user = {
-      id: '',
-      name: '',
-      username: '',
-      email: '',
-      age: null,
-      startDate: '',
-      releaseDate: '',
-      preference: '',
-      roles: {
-        candidate: true
-      }
-    };
+    this.user = this.adminHelper.getUserRebooted();
   }
 
   setCandidateFormValidators() {
-    this.candidateForm = this.adminHelper.getCandidateFormValidators();
+    this.candidateForm = this.adminHelper.getCandidateCreateFormValidator();
   }
 
   onCreateCandidate() {

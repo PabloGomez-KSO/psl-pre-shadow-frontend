@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from '../shared/shared.module';
 import { SortCandidatesPipe } from './pipes/sort-candidates.pipe';
+import { ConvertTitlePipe } from './pipes/convert-title.pipe';
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import { SortCandidatesPipe } from './pipes/sort-candidates.pipe';
     ListCandidatesComponent,
     AdminDashboardComponent,
     AdminNavbarComponent,
-    SortCandidatesPipe
+    SortCandidatesPipe,
+    ConvertTitlePipe
   ],
   exports: [
     AdminDashboardComponent

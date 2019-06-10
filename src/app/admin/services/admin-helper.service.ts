@@ -20,9 +20,9 @@ export class AdminHelperService {
 
   private softwareRoles: string[] = ['Frontend', 'Backend', 'QA', 'DevOps', 'Business Analyst'];
 
-  getCandidateFormValidators(): FormGroup {
+  getCandidateCreateFormValidator(): FormGroup {
     return new FormGroup({
-      name: new FormControl('', [Validators.required, Validators.minLength(5)]),
+      name: new FormControl('', [Validators.required, Validators.minLength(4)]),
       age: new FormControl('', [Validators.required, Validators.min(18)]),
       username: new FormControl('', [Validators.required, Validators.min(3)]),
       email: new FormControl('', [Validators.required]),
@@ -38,7 +38,34 @@ export class AdminHelperService {
     );
   }
 
-  setCandidates(candidates: User[]): void{
+  getUpdateFormValidator(): FormGroup {
+    return new FormGroup({
+      name: new FormControl('', [Validators.required, Validators.minLength(4)]),
+      age: new FormControl('', [Validators.required, Validators.min(18)]),
+      start_date: new FormControl('', [Validators.required]),
+      release_date: new FormControl('', [Validators.required]),
+      preference: new FormControl('', [Validators.required])
+    });
+  }
+
+  getUserRebooted(): User {
+    const user: User = {
+      id: '',
+      name: '',
+      username: '',
+      email: '',
+      age: null,
+      startDate: '',
+      releaseDate: '',
+      preference: '',
+      roles: {
+        candidate: true
+      }
+    };
+    return user;
+  }
+
+  setCandidates(candidates: User[]): void {
     this.candidates = candidates;
   }
 

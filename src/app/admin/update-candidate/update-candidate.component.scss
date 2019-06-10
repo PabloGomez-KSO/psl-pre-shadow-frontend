@@ -4,7 +4,6 @@
   background: $purple_psl_opacity;
   margin: 0 auto;
   padding: 10px;
-  align-items: center;
   margin-bottom: 30px;
   height: 80%;
   width: 50%;
@@ -12,14 +11,11 @@
   background-color: white;
   border: 1px solid rgba(0, 0, 0, 0.15);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+
 
   .update-candidate-row {
     display: flex;
     justify-content: center;
-    align-items: center;
     font-family: $main_font;
     font-size: $size_main_font;
     margin-bottom: 15px;
@@ -36,7 +32,8 @@
     &__input {
       padding: 10px;
       margin-top: 15px;
-      width: 320px;
+      height: 60px;  
+      width: 240px;
       font-family: $main_font;
       font-size: $size_main_font;
       border-radius: .7rem;
@@ -46,7 +43,8 @@
 
     &__date {
       padding: 10px;
-      width: 280px;
+      width: 210px;
+      height: 60px;  
       font-size: $size_main_font;
       font-family: $main_font;
       font-weight: bold;

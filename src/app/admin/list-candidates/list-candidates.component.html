@@ -5,12 +5,9 @@
     <span class="list_candidates_container__btn__text">Create</span>
   </button>
 
-  <div class="list_candidates_container__criteria-text">
-    Criteria
-  </div>
-
   <div class="list_candidates_container__criteria-list">
     <select class="list_candidates_container__criteria-list__select" name="criteria-list" [(ngModel)]="selectedCriteriaToSearch">
+        <option value="" disabled selected>Criteria</option>
       <option *ngFor="let option of criteriaOptions" [value]="option"> {{option}} </option>
     </select>
   </div>
@@ -19,40 +16,39 @@
 
 </div>
 
-<table class="table candidates_table">
-
-  <thead class="thead-dark">
-    <tr class="candidates_table__row">
-      <th class="candidates_table__row__item" *ngFor="let option of criteriaOptions">
-        <div class="candidates_table__row__item__data">
-          <div class="candidates_table__row__item__data__text">
-              {{option | titlecase}}
-          </div>
-          <button type="button" class="candidates_table__row__item__data__btn">
-              <i (click)="isSortedAscendent = true; sortByCriteria(); selectedCriteriaToSort = option" class="fas fa-arrow-up fa-xs candidates_table__row__item__data__btn__icon"></i>
-              <i (click)="isSortedAscendent = false; sortByCriteria(); selectedCriteriaToSort = option" class="fas fa-arrow-down fa-xs candidates_table__row__item__data__btn__icon"></i>
-          </button>
-        </div>
-      </th>
-      <th class="candidates_table__row__item"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <tr *ngFor="let candidate of candidates" class="candidates_table__row" #tabla>
-      <td class="candidates_table__row__item">{{candidate.name}} </td>
-      <td class="candidates_table__row__item">{{candidate.email}}</td>
-      <td class="candidates_table__row__item">{{candidate.age}}</td>
-      <td class="candidates_table__row__item">{{candidate.startDate | datePipe }} </td>
-      <td class="candidates_table__row__item">{{candidate.releaseDate | datePipe}} </td>
-      <td class="candidates_table__row__item">{{candidate.preference}}</td>
-      <td class="edit-buttons">
-        <button type="button" class="btn btn-secondary candidates_table__btn" (click)="editCandidate()">
-          <i class="fas fa-edit"></i>
-          <span class="candidates_table__btn__text">Edit</span>
-        </button>
-      </td>
-    </tr>
-  </tbody>
-
-</table>
+<table class="table table-striped table-bordered candidates_table">
+    <thead>
+        <tr class="candidates_table__row">
+            <th scope="col" class="candidates_table__row__item" *ngFor="let option of criteriaOptions">
+                <div class="candidates_table__row__item__data">
+                  <div class="candidates_table__row__item__data__text">
+                      {{option | titlecase | convertTitle}}
+                  </div>
+                  <button type="button" class="candidates_table__row__item__data__btn">
+                      <i (click)="isSortedAscendent = true; sortByCriteria(); selectedCriteriaToSort = option" class="fas fa-arrow-up fa-xs candidates_table__row__item__data__btn__icon"></i>
+                      <i (click)="isSortedAscendent = false; sortByCriteria(); selectedCriteriaToSort = option" class="fas fa-arrow-down fa-xs candidates_table__row__item__data__btn__icon"></i>
+                  </button>
+                </div>
+              </th>
+              <th scope="col" class="candidates_table__row__item"></th>
+         </tr>
+        
+    </thead>
+    <tbody>
+        <tr *ngFor="let candidate of candidates" class="candidates_table__row" #tabla>
+            <td class="candidates_table__row__item">{{candidate.name}} </td>
+            <td class="candidates_table__row__item">{{candidate.email}}</td>
+            <td class="candidates_table__row__item">{{candidate.age}}</td>
+            <td class="candidates_table__row__item">{{candidate.startDate | datePipe }} </td>
+            <td class="candidates_table__row__item">{{candidate.releaseDate | datePipe}} </td>
+            <td class="candidates_table__row__item">{{candidate.preference}}</td>
+            <td class="edit-buttons">
+                <button type="button" class="btn btn-outline-primary candidates_table__btn" (click)="editCandidate(candidate.id)">
+                  <i class="fas fa-edit"></i>
+                  
+                </button>
+              </td>
+          </tr>
+    </tbody>
+  </table>
+  

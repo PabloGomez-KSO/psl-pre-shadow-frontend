@@ -6,7 +6,7 @@ import {AuthGuard} from '../core/guards/auth.guard';
 
 export const ADMIN_ROUTES: Routes = [
   { path: 'list_candidates', component: ListCandidatesComponent, canActivate: [AuthGuard] },
-  { path: 'update_candidate', component: UpdateCandidateComponent, canActivate: [AuthGuard]},
+  { path: 'update_candidate/:id', component: UpdateCandidateComponent, canActivate: [AuthGuard]},
   { path: 'create_candidate', component: CreateCandidateComponent, canActivate: [AuthGuard]},
   { path: '**', pathMatch: 'full', redirectTo: 'list_candidates' }
 ];

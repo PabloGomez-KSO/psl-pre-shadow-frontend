@@ -11,7 +11,7 @@ export class SortCandidatesPipe implements PipeTransform {
   transform(value: User[], isAscedent: boolean, criteria: string): User[] {
     const wayOfOrder =  isAscedent ? 'asc' : 'desc';
 
-    if (criteria == "startDate" || criteria == "releaseDate") {
+    if (criteria === 'startDate' || criteria === 'releaseDate') {
       return _.orderBy(value, (cand: User) => moment(cand[criteria]), wayOfOrder);
     }
     return _.orderBy(value, criteria, wayOfOrder);
