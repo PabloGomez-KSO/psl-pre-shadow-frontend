@@ -6,13 +6,15 @@ import {
   AngularFirestoreDocument
 } from "@angular/fire/firestore";
 import { User } from "../../shared/models/user";
+import { HelperService } from '../../shared/services/helper.service';
 @Injectable({
   providedIn: "root"
 })
 export class AuthService {
   constructor(
     private firebaseAuth: AngularFireAuth,
-    private angularFireStore: AngularFirestore
+    private angularFireStore: AngularFirestore,
+    private helperService: HelperService
   ) { }
 
   registerUser(user: User, password: string): Promise<any> {
@@ -45,12 +47,7 @@ export class AuthService {
 
   updateUserData(userId: string, user: User) {
     const userRef: AngularFirestoreDocument<any> = this.angularFireStore.doc(`users/${userId}`);
-
-    const userForDatabase: User = {
-      ...user,
-      id: userId
-    };
-
-    return userRef.set(userForDatabase, { merge: true });
+    const userToDB = this.helperService.setUserForDatabase(userId, user);
+    return userRef.set(userToDB, { merge: true });
   }
 }

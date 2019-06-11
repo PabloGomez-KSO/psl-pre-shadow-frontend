@@ -5,7 +5,7 @@ import {
   AngularFirestoreDocument,
   AngularFirestoreCollection
 } from '@angular/fire/firestore';
-import { User } from '../../shared/models/user';
+import { User } from '../models/user';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -15,11 +15,24 @@ export class UserApiService {
 
   constructor(public angularFireStore: AngularFirestore) { }
 
+  getUserDocumentById(id: string): AngularFirestoreDocument<User> {
+    return this.angularFireStore.doc<User>(`users/${id}`);
+  }
+
+  getUsersCollection(): AngularFirestoreCollection<User> {
+    return this.angularFireStore.collection<User>('users');
+  }
+
   getUserById(id: string): Observable<User> {
     const userDocument = this.getUserDocumentById(id);
     return userDocument
       .snapshotChanges()
       .pipe(map(this.verificateExistanceOfUser));
+  }
+
+  deleteUserById(id: string) {
+    const userDocument = this.getUserDocumentById(id);
+    return userDocument.delete();
   }
 
   getCandidates(): Observable<User[]> {
@@ -38,14 +51,6 @@ export class UserApiService {
     return changes
       .map(action => this.getUserData(action))
       .filter((user: User) => this.verficateCandidate(user));
-  }
-
-  getUserDocumentById(id: string): AngularFirestoreDocument<User> {
-    return this.angularFireStore.doc<User>(`users/${id}`);
-  }
-
-  getUsersCollection(): AngularFirestoreCollection<User> {
-    return this.angularFireStore.collection<User>('users');
   }
 
   verificateExistanceOfUser(action): User {

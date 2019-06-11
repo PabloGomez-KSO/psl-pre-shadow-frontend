@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
-import { UserApiService } from '../../services/user-api.service';
+import { UserApiService } from '../../../shared/services/user-api.service';
 import { User } from '../../../shared/models/user';
 import { AlertService } from '../../../shared/notifications/alert.service';
 @Component({
@@ -30,11 +30,18 @@ export class LoginComponent {
       });
   }
 
+
   callUserApiServiceToGetUser(userId: string): void {
-    this.userApiService.getUserById(userId).subscribe((user: User) => this.verifyUserRoleToRedirect(user, userId));
+    this.userApiService.getUserById(userId).subscribe((user: User) => {
+      if (user) {
+        this.verifyUserRoleToRedirect(user, userId);
+      } else {
+        this.alertNotification.showInvalidMessage('Invalid credentials');
+      }
+    });
   }
 
-  verifyUserRoleToRedirect(user: User, userId: string): void{
+  verifyUserRoleToRedirect(user: User, userId: string): void {
     sessionStorage.setItem('userId', userId);
     if (user.roles.admin) {
       this.sendMessageAndAssignRole(`Welcome Admin: ${user.name} to the Pre Shadow Platform`, 'admin');
@@ -44,7 +51,7 @@ export class LoginComponent {
       this.redirectToCandidate();
     }
   }
-  sendMessageAndAssignRole(message: string, userRol: string): void{
+  sendMessageAndAssignRole(message: string, userRol: string): void {
     this.alertNotification.showSuccessMessage(message);
     sessionStorage.setItem('rol', userRol);
     this.alertNotification.closeNotification();

@@ -21,11 +21,11 @@ export class AdminHelperService {
 
   private generalSearchObservable = new Subject();
 
-  getGeneralSearchValue(){
+  getGeneralSearchValue() {
     return this.generalSearchObservable;
   }
 
-  updateGeneralSearchValue(value: string){
+  updateGeneralSearchValue(value: string) {
     this.generalSearchObservable.next(value);
   }
 
@@ -64,8 +64,8 @@ export class AdminHelperService {
       username: '',
       email: '',
       age: null,
-      startDate: '',
-      releaseDate: '',
+      startDate: null,
+      releaseDate: null,
       preference: '',
       roles: {
         candidate: true

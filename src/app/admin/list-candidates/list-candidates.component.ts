@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserApiService } from '../../core/services/user-api.service';
+import { UserApiService } from '../../shared/services/user-api.service';
 import { User } from '../../shared/models/user';
 import { AdminHelperService } from '../services/admin-helper.service';
 import * as _ from 'lodash';
 import * as moment from 'moment';
+import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import { AlertService } from '../../shared/notifications/alert.service';
+
 @Component({
   selector: 'app-list-candidates',
   templateUrl: './list-candidates.component.html',
@@ -15,13 +18,15 @@ export class ListCandidatesComponent implements OnInit {
   candidatesComplete: User[] = [];
   criteriaOptions: string[] = [];
   selectedCriteriaToSearch = '';
+  selectedCriteriaToSort = '';
   isSortedAscendent = true;
 
   constructor(
     private router: Router,
     private userApiService: UserApiService,
-    private adminHelper: AdminHelperService
-  ) {}
+    private adminHelper: AdminHelperService,
+    private alertService: AlertService
+  ) { }
 
   ngOnInit(): void {
     this.getCandidates();
@@ -29,7 +34,7 @@ export class ListCandidatesComponent implements OnInit {
     this.criteriaOptions = this.adminHelper.getCriteraOptions();
   }
 
-  getCandidates(): void{
+  getCandidates(): void {
     this.userApiService.getCandidates().subscribe((candidates: User[]) => {
       this.candidates = candidates;
       this.candidatesComplete = candidates;
@@ -38,16 +43,36 @@ export class ListCandidatesComponent implements OnInit {
   }
 
   defaultSort(): void {
-    this.sortByCriteria('name');
+    this.selectedCriteriaToSort = 'name';
+    this.sortByCriteria();
+  }
+
+  sortWhenColumnHeaderIsClicked(option: string) {
+    if (this.selectedCriteriaToSort !== option) {
+      this.selectedCriteriaToSort = option;
+      this.isSortedAscendent = true;
+      this.sortByCriteria();
+    }
   }
 
   editCandidate(id: string): void {
     this.router.navigate(['/admin-dashboard/update_candidate', id]);
   }
 
-  executeSort(selectedCriteria: string): void{
+  removeCandidate(id: string) {
+    this.alertService.showDeleteAskNotification().then((result) => {
+      if (result.value) {
+        _.remove(this.candidatesComplete, (cand: User) => cand.id === id);
+        this.candidates = this.candidatesComplete;
+        this.userApiService.deleteUserById(id);
+        this.alertService.showDeleteNotification();
+      }
+    });
+  }
+
+  sortWhenIconIsClicked(): void {
     this.isSortedAscendent = !this.isSortedAscendent;
-    this.sortByCriteria(selectedCriteria);
+    this.sortByCriteria();
   }
 
   createCandidate(): void {
@@ -55,29 +80,28 @@ export class ListCandidatesComponent implements OnInit {
   }
 
   searchByCriteria(term: string): void {
-    this.candidates = _.filter(this.candidatesComplete, (cand: User) =>
-      _.startsWith(cand[this.selectedCriteriaToSearch], term)
-    );
+    this.candidates = _.filter(this.candidatesComplete, (cand: User) => {
+      return _.includes(cand[this.selectedCriteriaToSearch].toString().toLowerCase(), term.toLowerCase());
+    });
   }
 
-  generalSearch(term: string): void{
+  generalSearch(term: string): void {
     let candidatesThatApply: User[] = [];
 
     this.criteriaOptions.forEach((criteria) => {
-      candidatesThatApply = _.concat(candidatesThatApply,_.filter(this.candidatesComplete,
-         (cand: User) =>  _.startsWith(cand[criteria], term)) );
+      candidatesThatApply = _.concat(candidatesThatApply, _.filter(this.candidatesComplete,
+        (cand: User) => _.includes(cand[criteria].toString().toLowerCase(), term.toLowerCase())));
     });
-
     this.candidates = _.uniq(candidatesThatApply);
   }
 
-  sortByCriteria(criteriaToSort: string): void {
-    const wayOfOrder = this.isSortedAscendent ? 'asc' : 'desc';
-    if ( criteriaToSort === 'startDate' || criteriaToSort === 'releaseDate') {
+  sortByCriteria(): void {
+    const order = this.isSortedAscendent ? 'asc' : 'desc';
+    if (this.selectedCriteriaToSort === 'startDate' || this.selectedCriteriaToSort === 'releaseDate') {
       this.candidates = _.orderBy(this.candidatesComplete,
-        (cand: User) => moment(cand[criteriaToSort]), wayOfOrder);
+        (cand: User) => moment(cand[this.selectedCriteriaToSort]), order);
     } else {
-      this.candidates = _.orderBy(this.candidatesComplete, criteriaToSort, wayOfOrder);
+      this.candidates = _.orderBy(this.candidatesComplete, this.selectedCriteriaToSort, order);
     }
   }
 }

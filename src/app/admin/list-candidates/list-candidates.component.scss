@@ -1,8 +1,37 @@
-@import "../../../assets/scss/variables";
+@import '../../../assets/scss/variables';
 
 @mixin text {
   font-size: 17px;
   font-weight: bold;
+}
+
+@mixin row_mixin {
+  border: 1px solid #ddd;
+  &__item {
+    padding: 1.1rem;
+    margin-bottom: 15px;
+    height: 20px !important;
+    &__data {
+      display: flex;
+      &__btn {
+        display: flex;
+        flex-direction: column;
+        margin-left: 20px;
+        color: $purple_logo_psl;
+        background-color: white;
+        border: 0;
+        width: 18px !important;
+        align-items: center;
+        justify-content: center;
+        &__icon {
+          background-color: white;
+          margin-bottom: 2px;
+          width: 15px;
+          height: 15px;
+        }
+      }
+    }
+  }
 }
 
 .list_candidates_container {
@@ -24,10 +53,10 @@
 
     &__text {
       @include text;
-      min-width: 58.33px !important;
+      min-width: 58.33px;
     }
     &__icon {
-      width: 40px !important;
+      width: 40px;
     }
   }
 
@@ -43,7 +72,6 @@
     &__select {
       height: 40px;
       width: 140px;
-
     }
   }
   &__search {
@@ -61,55 +89,28 @@
   font-size: $size_main_font;
   margin-top: 50px;
   margin-bottom: 100px;
-  &__row {
-    border: 1px solid #ddd;
-    &__item {
-      padding: 1.1rem;
-      margin-bottom: 15px;
-      height: 20px !important;
-      &__data {
-        display: flex;
-        &__btn {
-          display: flex;
-          flex-direction: column;
-          margin-left: 20px;
-          color: $purple_logo_psl;
-          background-color: white;
-          border: 0;
-          border: gray 1px solid;
-          width: 18px !important;
-          align-items: center;
-          justify-content: center;
-          &__icon {
-            background-color: white;
-            margin-bottom: 2px;
-            width: 15px;
-            height: 15px;
-          }
-        }
-      }
-    }
+
+  &__row-header {
+    cursor: pointer;
+    @include row_mixin;
   }
+
+  &__row-body {
+    @include row_mixin;
+    height: 53px;
+  }
+
   .edit-buttons {
-    &__btn {
-      width: 120px;
-      height: 50px;
-      margin-bottom: 15px;
-      margin-top: 15px;
-      &__text {
-        font-size: $size_main_font;
-        margin-left: 20px;
-        font-weight: bold;
-      }
+    &__option {
+      width: 40px;
+      margin-right: 10px;
     }
   }
 }
 
 @media all and (max-width: 815px) {
-
-    .candidates_table {
-      width: 375px;
-      overflow-x: scroll;
-    }
-
+  .candidates_table {
+    width: 375px;
+    overflow-x: scroll;
+  }
 }

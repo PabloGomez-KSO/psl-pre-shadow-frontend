@@ -16,40 +16,44 @@
 
 </div>
 
-<table class="table table-striped candidates_table">
+<div class="table-responsive">
+  <table class="table candidates_table table-hover table-striped ">
     <thead>
-        <tr class="candidates_table__row">
-            <th scope="col" class="candidates_table__row__item" *ngFor="let option of criteriaOptions">
-                <div class="candidates_table__row__item__data">
-                  <div class="candidates_table__row__item__data__text">
-                      {{option | titlecase | convertTitle}}
-                  </div>
-                  <button (click)="executeSort(option)" type="button"
-                          class="candidates_table__row__item__data__btn">
-                      <i  *ngIf="isSortedAscendent"
-                          class="fas fa-sort-up candidates_table__row__item__data__btn__icon"></i>
-                      <i  *ngIf="!isSortedAscendent"
-                          class="fas fa-sort-down candidates_table__row__item__data__btn__icon"></i>
-                  </button>
-                </div>
-              </th>
-              <th scope="col" class="candidates_table__row__item"></th>
-         </tr>
+      <tr class="candidates_table__row-header">
+          <th scope="col" class="candidates_table__row-header_item" (click)="sortWhenColumnHeaderIsClicked(option)" *ngFor="let option of criteriaOptions">
+            <div class="candidates_table__row-header__item__data">
+              <div class="candidates_table__row-header__item__data__text">
+                  {{option | titlecase | convertTitle}}
+              </div>
+              <button (click)="sortWhenIconIsClicked()" *ngIf="selectedCriteriaToSort === option" type="button"
+                      class="candidates_table__row-header__item__data__btn">
+                  <i  *ngIf="isSortedAscendent"
+                      class="fas fa-sort-up candidates_table__row-header__item__data__btn__icon"></i>
+                  <i  *ngIf="!isSortedAscendent"
+                      class="fas fa-sort-down candidates_table__row-header__item__data__btn__icon"></i>
+              </button>
+            </div>
+          </th>
+        <th scope="col" class="candidates_table__row-body__item"></th>
+      </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let candidate of candidates" class="candidates_table__row" #tabla>
-            <td class="candidates_table__row__item">{{candidate.name}} </td>
-            <td class="candidates_table__row__item">{{candidate.email}}</td>
-            <td class="candidates_table__row__item">{{candidate.age}}</td>
-            <td class="candidates_table__row__item">{{candidate.startDate | datePipe }} </td>
-            <td class="candidates_table__row__item">{{candidate.releaseDate | datePipe}} </td>
-            <td class="candidates_table__row__item">{{candidate.preference}}</td>
-            <td class="edit-buttons">
-                <button type="button" class="btn btn-outline-primary candidates_table__btn" (click)="editCandidate(candidate.id)">
-                  <i class="fas fa-edit"></i>
-                </button>
-              </td>
-          </tr>
+      <tr *ngFor="let candidate of candidates" class="candidates_table__row-body">
+        <td class="candidates_table__row-body__item">{{candidate.name}} </td>
+        <td class="candidates_table__row-body__item">{{candidate.email}}</td>
+        <td class="candidates_table__row-body__item">{{candidate.age}}</td>
+        <td class="candidates_table__row-body__item">{{candidate.startDate  }} </td>
+        <td class="candidates_table__row-body__item">{{candidate.releaseDate}} </td>
+        <td class="candidates_table__row-body__item">{{candidate.preference}}</td>
+        <td class="edit-buttons">
+            <button type="button" class="btn btn-outline-primary edit-buttons__option" (click)="editCandidate(candidate.id)">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button type="button" class="btn btn-outline-danger edit-buttons__option" (click)="removeCandidate(candidate.id)">
+              <i class="fas fa-trash-alt"></i>
+            </button>
+        </td>
+      </tr>
     </tbody>
   </table>
-
+</div>

@@ -1,4 +1,5 @@
 import { Roles } from './roles';
+import {NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 export interface User {
   id?: string;

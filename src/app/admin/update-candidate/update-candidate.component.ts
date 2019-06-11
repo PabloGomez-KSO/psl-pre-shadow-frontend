@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AdminHelperService } from '../services/admin-helper.service';
 import { User } from 'src/app/shared/models/user';
-import { UserApiService } from '../../core/services/user-api.service';
+import { UserApiService } from '../../shared/services/user-api.service';
 import { AlertService } from '../../shared/notifications/alert.service';
 @Component({
   selector: 'app-update-candidate',

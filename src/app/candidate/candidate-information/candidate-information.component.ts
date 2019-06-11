@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserApiService } from "../../core/services/user-api.service";
+import { UserApiService } from "../../shared/services/user-api.service";
 import { User } from "../../shared/models/user";
 @Component({
   selector: 'app-candidate-information',

@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { AuthService } from '../../core/auth/auth.service';
 import { Router } from '@angular/router';
-import { UserApiService } from '../../core/services/user-api.service';
+import { UserApiService } from '../../shared/services/user-api.service';
 import { User } from '../../shared/models/user';
 import { AlertService } from '../../shared/notifications/alert.service';
 import { AdminHelperService  } from '../services/admin-helper.service';
