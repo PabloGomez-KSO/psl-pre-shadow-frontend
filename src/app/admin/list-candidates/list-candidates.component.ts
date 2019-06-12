@@ -51,8 +51,7 @@ export class ListCandidatesComponent implements OnInit {
       this.selectedCriteriaToSort = option;
       this.isSortedAscendent = true;
       this.sortByCriteria();
-    }
-    else{
+    } else {
       this.isSortedAscendent = !this.isSortedAscendent;
       this.sortByCriteria();
     }

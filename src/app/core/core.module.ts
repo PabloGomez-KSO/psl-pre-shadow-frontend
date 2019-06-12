@@ -16,7 +16,6 @@ import { AdminModule } from "../admin/admin.module";
 
 //Enviroment.
 import { environment } from "../../environments/environment";
-
 import { AuthGuard } from "./guards/auth.guard";
 
 @NgModule({
