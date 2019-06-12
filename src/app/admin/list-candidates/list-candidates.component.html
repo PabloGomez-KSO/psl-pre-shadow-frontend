@@ -16,44 +16,46 @@
 
 </div>
 
-<div class="table-responsive">
-  <table class="table candidates_table table-hover table-striped ">
-    <thead>
-      <tr class="candidates_table__row-header">
-          <th scope="col" class="candidates_table__row-header_item" (click)="sortWhenColumnHeaderIsClicked(option)" *ngFor="let option of criteriaOptions">
-            <div class="candidates_table__row-header__item__data">
-              <div class="candidates_table__row-header__item__data__text">
-                  {{option | titlecase | convertTitle}}
+<ng-container *ngIf="candidates.length > 0">
+  <div class="table-responsive">
+    <table class="table candidates_table table-hover table-striped ">
+      <thead>
+        <tr class="candidates_table__row-header">
+            <th scope="col" class="candidates_table__row-header_item" (click)="sortWhenClicked(option)" *ngFor="let option of criteriaOptions">
+              <div class="candidates_table__row-header__item__data">
+                <div class="candidates_table__row-header__item__data__text">
+                    {{option | titlecase | convertTitle}}
+                </div>
+                <button *ngIf="selectedCriteriaToSort === option" type="button"
+                        class="candidates_table__row-header__item__data__btn">
+                    <i  *ngIf="isSortedAscendent"
+                        class="fas fa-sort-up candidates_table__row-header__item__data__btn__icon"></i>
+                    <i  *ngIf="!isSortedAscendent"
+                        class="fas fa-sort-down candidates_table__row-header__item__data__btn__icon"></i>
+                </button>
               </div>
-              <button (click)="sortWhenIconIsClicked()" *ngIf="selectedCriteriaToSort === option" type="button"
-                      class="candidates_table__row-header__item__data__btn">
-                  <i  *ngIf="isSortedAscendent"
-                      class="fas fa-sort-up candidates_table__row-header__item__data__btn__icon"></i>
-                  <i  *ngIf="!isSortedAscendent"
-                      class="fas fa-sort-down candidates_table__row-header__item__data__btn__icon"></i>
+            </th>
+          <th scope="col" class="candidates_table__row-body__item"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let candidate of candidates" class="candidates_table__row-body">
+          <td class="candidates_table__row-body__item">{{candidate.name}} </td>
+          <td class="candidates_table__row-body__item">{{candidate.email}}</td>
+          <td class="candidates_table__row-body__item">{{candidate.age}}</td>
+          <td class="candidates_table__row-body__item">{{candidate.startDate }} </td>
+          <td class="candidates_table__row-body__item">{{candidate.releaseDate}} </td>
+          <td class="candidates_table__row-body__item">{{candidate.preference}}</td>
+          <td class="edit-buttons">
+              <button type="button" class="btn  edit-buttons__option" (click)="editCandidate(candidate.id)">
+                <i class="fas fa-edit"></i>
               </button>
-            </div>
-          </th>
-        <th scope="col" class="candidates_table__row-body__item"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let candidate of candidates" class="candidates_table__row-body">
-        <td class="candidates_table__row-body__item">{{candidate.name}} </td>
-        <td class="candidates_table__row-body__item">{{candidate.email}}</td>
-        <td class="candidates_table__row-body__item">{{candidate.age}}</td>
-        <td class="candidates_table__row-body__item">{{candidate.startDate  }} </td>
-        <td class="candidates_table__row-body__item">{{candidate.releaseDate}} </td>
-        <td class="candidates_table__row-body__item">{{candidate.preference}}</td>
-        <td class="edit-buttons">
-            <button type="button" class="btn btn-outline-primary edit-buttons__option" (click)="editCandidate(candidate.id)">
-              <i class="fas fa-edit"></i>
-            </button>
-            <button type="button" class="btn btn-outline-danger edit-buttons__option" (click)="removeCandidate(candidate.id)">
-              <i class="fas fa-trash-alt"></i>
-            </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+              <button type="button" class="btn  edit-buttons__option" (click)="removeCandidate(candidate.id)">
+                <i class="fas fa-trash-alt"></i>
+              </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</ng-container>

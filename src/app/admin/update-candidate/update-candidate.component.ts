@@ -40,7 +40,6 @@ export class UpdateCandidateComponent implements OnInit {
   updateCandidate(): void {
     this.userApiService.
           updateUser(this.candidateToUpdate).then(() => this.alertService.showSuccessMessage('User updated successfully'));
-
   }
 
   goBack(): void {

@@ -5,7 +5,6 @@ import { User } from '../../shared/models/user';
 import { AdminHelperService } from '../services/admin-helper.service';
 import * as _ from 'lodash';
 import * as moment from 'moment';
-import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { AlertService } from '../../shared/notifications/alert.service';
 
 @Component({
@@ -47,10 +46,14 @@ export class ListCandidatesComponent implements OnInit {
     this.sortByCriteria();
   }
 
-  sortWhenColumnHeaderIsClicked(option: string) {
+  sortWhenClicked(option: string) {
     if (this.selectedCriteriaToSort !== option) {
       this.selectedCriteriaToSort = option;
       this.isSortedAscendent = true;
+      this.sortByCriteria();
+    }
+    else{
+      this.isSortedAscendent = !this.isSortedAscendent;
       this.sortByCriteria();
     }
   }
@@ -68,11 +71,6 @@ export class ListCandidatesComponent implements OnInit {
         this.alertService.showDeleteNotification();
       }
     });
-  }
-
-  sortWhenIconIsClicked(): void {
-    this.isSortedAscendent = !this.isSortedAscendent;
-    this.sortByCriteria();
   }
 
   createCandidate(): void {
