@@ -33,6 +33,10 @@ export class ListCandidatesComponent implements OnInit {
     this.criteriaOptions = this.adminHelper.getCriteraOptions();
   }
 
+  scrollHandler(e) {
+    console.log(e);
+  }
+
   getCandidates(): void {
     this.userApiService.getCandidates().subscribe((candidates: User[]) => {
       this.candidates = candidates;

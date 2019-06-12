@@ -11,6 +11,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from '../shared/shared.module';
 import { SortCandidatesPipe } from './pipes/sort-candidates.pipe';
 import { ConvertTitlePipe } from './pipes/convert-title.pipe';
+import { ScrollableDirective } from './directives/scrollable.directive';
 
 @NgModule({
   imports: [
@@ -28,7 +29,8 @@ import { ConvertTitlePipe } from './pipes/convert-title.pipe';
     AdminDashboardComponent,
     AdminNavbarComponent,
     SortCandidatesPipe,
-    ConvertTitlePipe
+    ConvertTitlePipe,
+    ScrollableDirective
   ],
   exports: [
     AdminDashboardComponent

@@ -88,7 +88,9 @@
   font-family: $main_font;
   font-size: $size_main_font;
   margin-top: 50px;
-  margin-bottom: 100px;
+  margin-bottom: 10px;
+  overflow-y: scroll;
+  max-height: 100vh;
 
   &__row-header {
     cursor: pointer;
@@ -98,6 +100,11 @@
   &__row-body {
     @include row_mixin;
     height: 53px;
+
+    &__spinner{
+      width: 100%;
+      margin: 0 auto;
+    }
   }
 
   .edit-buttons {
@@ -107,13 +114,16 @@
     }
   }
 }
+.candidates_spinner{
+  margin-bottom: 50px;
+}
 
 @media all and (max-width: 815px) {
 
   .list_candidates_container {
     display: flex;
     flex-direction: column;
-    margin-bottom: 210px; 
+    margin-bottom: 210px;
   }
   .candidates_table {
     width: 375px;
