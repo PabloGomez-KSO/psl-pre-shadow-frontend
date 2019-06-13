@@ -7,11 +7,11 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { AdminNavbarComponent } from './admin-navbar/admin-navbar.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from '../shared/shared.module';
 import { SortCandidatesPipe } from './pipes/sort-candidates.pipe';
 import { ConvertTitlePipe } from './pipes/convert-title.pipe';
-import { ScrollableDirective } from './directives/scrollable.directive';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
   imports: [
@@ -20,7 +20,8 @@ import { ScrollableDirective } from './directives/scrollable.directive';
     FormsModule,
     NgbModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    InfiniteScrollModule
   ],
   declarations: [
     CreateCandidateComponent,
@@ -29,8 +30,7 @@ import { ScrollableDirective } from './directives/scrollable.directive';
     AdminDashboardComponent,
     AdminNavbarComponent,
     SortCandidatesPipe,
-    ConvertTitlePipe,
-    ScrollableDirective
+    ConvertTitlePipe
   ],
   exports: [
     AdminDashboardComponent

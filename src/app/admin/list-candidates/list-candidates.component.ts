@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { UserApiService } from '../../shared/services/user-api.service';
 import { User } from '../../shared/models/user';
 import { AdminHelperService } from '../services/admin-helper.service';
+import { AdminApiService } from '../services/admin-api.service';
 import * as _ from 'lodash';
 import * as moment from 'moment';
 import { AlertService } from '../../shared/notifications/alert.service';
@@ -24,17 +25,20 @@ export class ListCandidatesComponent implements OnInit {
     private router: Router,
     private userApiService: UserApiService,
     private adminHelper: AdminHelperService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    public adminApiService: AdminApiService
   ) { }
 
   ngOnInit(): void {
-    this.getCandidates();
+    // this.getCandidates();
+    this.adminApiService.getFirstBatchOfUsers();
     this.adminHelper.getGeneralSearchValue().subscribe((searchValue: string) => this.generalSearch(searchValue));
     this.criteriaOptions = this.adminHelper.getCriteraOptions();
   }
 
-  scrollHandler(e) {
-    console.log(e);
+  onScroll() {
+    console.log('scroll down');
+    this.adminApiService.getMoreUsers();
   }
 
   getCandidates(): void {

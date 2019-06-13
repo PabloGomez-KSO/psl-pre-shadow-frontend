@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { User } from '../../shared/models/user';
 import * as _ from 'lodash';
-import * as moment from 'moment'
+import * as moment from 'moment';
 
 @Pipe({
   name: 'sortCandidates'
