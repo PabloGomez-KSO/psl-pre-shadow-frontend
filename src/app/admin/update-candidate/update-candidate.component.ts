@@ -30,16 +30,26 @@ export class UpdateCandidateComponent implements OnInit {
     this.setFormValidators();
     this.softwareRoles = this.adminHelper.getSoftwareRoles();
     const userIdToUpdate = this.activatedRoute.snapshot.params.id;
-    this.userApiService.getUserById(userIdToUpdate).subscribe((cand: User) => this.candidateToUpdate = cand);
+    this.userApiService.getUserById(userIdToUpdate).subscribe((cand: User) => {
+     this.candidateToUpdate = cand;
+     this.candidateToUpdate.startDate = this.setNgBootstrapDate(this.candidateToUpdate.startDate);
+     this.candidateToUpdate.releaseDate = this.setNgBootstrapDate(this.candidateToUpdate.releaseDate);
+    }
+    );
   }
 
   setFormValidators(): void {
     this.updateCandidateForm = this.adminHelper.getUpdateFormValidator();
   }
 
+  setNgBootstrapDate(stringDate: string) {
+    return this.adminHelper.convertStringIntoNgBootstrapDate(stringDate);
+  }
+
   updateCandidate(): void {
     this.userApiService.
-          updateUser(this.candidateToUpdate).then(() => this.alertService.showSuccessMessage('User updated successfully'));
+          updateUser(this.candidateToUpdate).then(() =>
+            this.alertService.showSuccessMessage('User updated successfully'));
   }
 
   goBack(): void {

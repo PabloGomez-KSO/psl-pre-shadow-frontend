@@ -3,6 +3,8 @@ import { PasswordValidation } from '../validators/passwordValidator';
 import { Injectable } from '@angular/core';
 import { User } from 'src/app/shared/models/user';
 import { Subject } from 'rxjs';
+import * as moment from 'moment';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 @Injectable({
   providedIn: 'root'
 })
@@ -80,5 +82,10 @@ export class AdminHelperService {
 
   getSoftwareRoles(): string[] {
     return this.softwareRoles;
+  }
+
+  convertStringIntoNgBootstrapDate(s: string): any {
+    const date = moment(s, 'YYYY/MM/DD');
+    return { day: date.format('D'), month: date.format('M'), year: date.format('YYYY')};
   }
 }

@@ -19,12 +19,23 @@ export class UserApiService {
     return this.angularFireStore.doc<User>(`users/${id}`);
   }
 
+  getUserDocumentByEmail(email: string): AngularFirestoreDocument<User> {
+    return this.angularFireStore.doc<User>(`users/${email}`);
+  }
+
   getUsersCollection(): AngularFirestoreCollection<User> {
     return this.angularFireStore.collection<User>('users');
   }
 
   getUserById(id: string): Observable<User> {
     const userDocument = this.getUserDocumentById(id);
+    return userDocument
+      .snapshotChanges()
+      .pipe(map(this.verificateExistanceOfUser));
+  }
+
+  getUserByEmail(email: string): Observable<User> {
+    const userDocument = this.getUserDocumentById(email);
     return userDocument
       .snapshotChanges()
       .pipe(map(this.verificateExistanceOfUser));
