@@ -19,8 +19,6 @@ export class CandidateNavbarComponent implements OnInit {
     this.authService.logOut().then(() => {
       sessionStorage.clear();
       this.router.navigate(['/login']);
-    })
+    });
   }
-
-
 }

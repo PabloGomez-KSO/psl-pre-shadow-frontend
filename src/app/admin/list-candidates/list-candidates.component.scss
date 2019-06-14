@@ -109,6 +109,17 @@
     &__option {
       width: 40px;
       margin-right: 10px;
+      &__delete{
+        &:hover {
+          background-color: red;
+        }
+      }
+
+      &__edit{
+        &:hover {
+          background-color:  #0069d9;
+        }
+      }
     }
   }
 }

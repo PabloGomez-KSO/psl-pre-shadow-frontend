@@ -3,7 +3,6 @@ import { BehaviorSubject } from 'rxjs';
 import { Observable } from 'rxjs';
 import {
   AngularFirestore,
-  AngularFirestoreDocument,
   AngularFirestoreCollection
 } from '@angular/fire/firestore';
 import { scan, tap } from 'rxjs/operators';
@@ -19,7 +18,7 @@ export class AdminApiService {
   users: Observable<any>;
   done: Observable<boolean> = this._done.asObservable();
   loading: Observable<boolean> = this._loading.asObservable();
-  batchSize = 8;
+  batchSize = 13;
   prepend: false;
 
   constructor(public afs: AngularFirestore) {}

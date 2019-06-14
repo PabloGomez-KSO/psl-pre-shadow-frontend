@@ -2,14 +2,14 @@ import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { LoginComponent  } from './core/auth/login/login.component';
 
-//Components
+// Components
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 import { CandidateDashboardComponent } from './candidate/candidate-dashboard/candidate-dashboard.component';
 
 import {AuthGuard} from './core/guards/auth.guard';
-//Routes from Admin.
+// Routes from Admin.
 import { ADMIN_ROUTES } from './admin/admin.routes';
-//Routes from Candidate.
+// Routes from Candidate.
 import { CANDIDATE_ROUTES } from './candidate/candidate.routes';
 const routes: Routes = [
   { path: 'login', component: LoginComponent },

@@ -4,11 +4,16 @@ import { Injectable } from '@angular/core';
 import { User } from 'src/app/shared/models/user';
 import { Subject } from 'rxjs';
 import * as moment from 'moment';
+import { AuthService } from '../../core/auth/auth.service';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 @Injectable({
   providedIn: 'root'
 })
 export class AdminHelperService {
+
+
+  constructor(private authService: AuthService) {
+  }
 
   private criteriaOptions: string[] = [
     'name',
@@ -84,8 +89,14 @@ export class AdminHelperService {
     return this.softwareRoles;
   }
 
-  convertStringIntoNgBootstrapDate(s: string): any {
-    const date = moment(s, 'YYYY/MM/DD');
-    return { day: date.format('D'), month: date.format('M'), year: date.format('YYYY')};
+  convertStringIntoNgBootstrapDate(s: string): NgbDateStruct {
+
+    const date = new Date(s);
+    console.log(date.toDateString());
+    const ngbDateStruct = { day: date.getUTCDay(), month: date.getUTCMonth(), year: date.getUTCFullYear()};
+    return ngbDateStruct;
+
+    /*const date = moment(s, 'YYYY/MM/DD');
+    return { day: date.format('DD'), month: date.format('MM'), year: date.format('YYYY')};*/
   }
 }

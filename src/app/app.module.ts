@@ -1,15 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-//Components
+// Components
 import { AppComponent } from './app.component';
 
-//Modules
+// Modules
 import { AdminModule } from './admin/admin.module';
 import { CandidateModule } from './candidate/candidate.module';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
-//Routes
+// Routes
 import { APP_ROUTES } from './app-routing.module';
 
 @NgModule({

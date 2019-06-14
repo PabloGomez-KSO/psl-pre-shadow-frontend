@@ -1,14 +1,14 @@
-import { Injectable } from "@angular/core";
-import { AngularFireAuth } from "@angular/fire/auth";
-import { map } from "rxjs/operators";
+import { Injectable } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { map } from 'rxjs/operators';
 import {
   AngularFirestore,
   AngularFirestoreDocument
-} from "@angular/fire/firestore";
-import { User } from "../../shared/models/user";
+} from '@angular/fire/firestore';
+import { User } from '../../shared/models/user';
 import { HelperService } from '../../shared/services/helper.service';
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class AuthService {
   constructor(

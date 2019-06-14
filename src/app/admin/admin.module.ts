@@ -12,6 +12,7 @@ import { SharedModule } from '../shared/shared.module';
 import { SortCandidatesPipe } from './pipes/sort-candidates.pipe';
 import { ConvertTitlePipe } from './pipes/convert-title.pipe';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { ScrollableDirective } from './directives/scrollable.directive';
 
 @NgModule({
   imports: [
@@ -30,7 +31,8 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     AdminDashboardComponent,
     AdminNavbarComponent,
     SortCandidatesPipe,
-    ConvertTitlePipe
+    ConvertTitlePipe,
+    ScrollableDirective
   ],
   exports: [
     AdminDashboardComponent

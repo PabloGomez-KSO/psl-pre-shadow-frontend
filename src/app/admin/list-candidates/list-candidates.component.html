@@ -17,10 +17,7 @@
 </div>
 
 
-<div class="table-responsive candidates_table"   infiniteScroll
-         [infiniteScrollDistance]="2"
-         [infiniteScrollThrottle]="2000"
-         (scrolled)="onScroll()">
+<div class="table-responsive candidates_table" appScrollable (scrollPosition)="scrollHandler($event)">
       <table class="table table-hover table-striped ">
         <thead>
           <tr class="candidates_table__row-header">
@@ -52,10 +49,10 @@
                     <td class="candidates_table__row-body__item">{{user.releaseDate}} </td>
                     <td class="candidates_table__row-body__item">{{user.preference}}</td>
                     <td class="edit-buttons">
-                        <button type="button" class="btn  edit-buttons__option" (click)="editCandidate(user.id)">
+                        <button type="button" class="btn  edit-buttons__option__edit" (click)="editCandidate(user.id)">
                           <i class="fas fa-edit"></i>
                         </button>
-                        <button type="button" class="btn  edit-buttons__option" (click)="removeCandidate(user.id)">
+                        <button type="button" class="btn  edit-buttons__option__delete" (click)="removeCandidate(user.id)">
                           <i class="fas fa-trash-alt"></i>
                         </button>
                     </td>

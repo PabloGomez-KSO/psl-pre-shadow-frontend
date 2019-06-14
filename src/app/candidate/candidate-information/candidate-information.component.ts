@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UserApiService } from "../../shared/services/user-api.service";
-import { User } from "../../shared/models/user";
+import { UserApiService } from '../../shared/services/user-api.service';
+import { User } from '../../shared/models/user';
 @Component({
   selector: 'app-candidate-information',
   templateUrl: './candidate-information.component.html',

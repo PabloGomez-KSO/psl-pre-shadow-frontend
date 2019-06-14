@@ -7,6 +7,7 @@ import { AdminApiService } from '../services/admin-api.service';
 import * as _ from 'lodash';
 import * as moment from 'moment';
 import { AlertService } from '../../shared/notifications/alert.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-list-candidates',
@@ -20,6 +21,7 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
   selectedCriteriaToSearch = '';
   selectedCriteriaToSort = '';
   isSortedAscendent = true;
+  userSubscription: Subscription;
 
   constructor(
     private router: Router,
@@ -31,15 +33,16 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.adminApiService.getFirstBatchOfUsers();
+
     this.adminHelper
       .getGeneralSearchValue()
       .subscribe((searchValue: string) => this.generalSearch(searchValue));
     this.criteriaOptions = this.adminHelper.getCriteraOptions();
-    this.adminApiService.users.subscribe((users: User[]) => this.setUsers(users));
+    this.userSubscription = this.adminApiService.users.subscribe((users: User[]) => this.setUsers(users));
   }
 
-  onScroll(): void {
-    if ( !this.adminApiService._done.value) {
+  scrollHandler(e): void {
+    if ( e === 'bottom' && !this.adminApiService._done.value) {
       this.adminApiService.getMoreUsers();
     }
   }
@@ -121,5 +124,6 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.adminApiService.reset();
+    this.userSubscription.unsubscribe();
   }
 }

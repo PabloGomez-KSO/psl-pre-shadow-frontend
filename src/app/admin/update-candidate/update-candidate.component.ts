@@ -5,6 +5,7 @@ import { AdminHelperService } from '../services/admin-helper.service';
 import { User } from 'src/app/shared/models/user';
 import { UserApiService } from '../../shared/services/user-api.service';
 import { AlertService } from '../../shared/notifications/alert.service';
+import { HelperService } from '../../shared/services/helper.service';
 @Component({
   selector: 'app-update-candidate',
   templateUrl: './update-candidate.component.html',
@@ -18,6 +19,7 @@ export class UpdateCandidateComponent implements OnInit {
 
   constructor(
     private adminHelper: AdminHelperService,
+    private helperService: HelperService,
     private router: Router,
     private userApiService: UserApiService,
     private activatedRoute: ActivatedRoute,
@@ -47,9 +49,15 @@ export class UpdateCandidateComponent implements OnInit {
   }
 
   updateCandidate(): void {
+    this.castUserDates();
     this.userApiService.
           updateUser(this.candidateToUpdate).then(() =>
             this.alertService.showSuccessMessage('User updated successfully'));
+  }
+
+  castUserDates ()  {
+    this.candidateToUpdate.startDate = this.helperService.castNgbDateStructIntoString(this.candidateToUpdate.startDate);
+    this.candidateToUpdate.releaseDate = this.helperService.castNgbDateStructIntoString(this.candidateToUpdate.releaseDate);
   }
 
   goBack(): void {

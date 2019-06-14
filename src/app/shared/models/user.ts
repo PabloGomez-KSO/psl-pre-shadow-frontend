@@ -6,8 +6,8 @@ export interface User {
   name?: string;
   email: string;
   age?: number;
-  startDate?: string;
-  releaseDate?: string;
+  startDate?: any ;
+  releaseDate?: any;
   preference?: string;
   username?: string;
   roles: Roles;
