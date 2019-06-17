@@ -1,34 +1,39 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { Observable } from 'rxjs';
 import {
   AngularFirestore,
   AngularFirestoreCollection
 } from '@angular/fire/firestore';
-import { scan, tap } from 'rxjs/operators';
+import { scan, tap, map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminApiService {
-   _done = new BehaviorSubject(false);
-   _loading = new BehaviorSubject(true);
-   _users = new BehaviorSubject([]);
+  _done = new BehaviorSubject(false);
+  _loading = new BehaviorSubject(false);
+  _users = new BehaviorSubject([]);
 
   users: Observable<any>;
   done: Observable<boolean> = this._done.asObservable();
   loading: Observable<boolean> = this._loading.asObservable();
-  batchSize = 13;
+
+  userCollectionSubsciption: Subscription;
+
+  batchSize = 12;
   prepend: false;
 
-  constructor(public afs: AngularFirestore) {}
+  constructor(public afs: AngularFirestore) { }
 
   getFirstBatchOfUsers() {
-    const first = this.afs.collection('users', ref => {
+    const firstBatch = this.afs.collection('users', ref => {
       return ref.orderBy('name').limit(this.batchSize);
     });
 
-    this.mapAndUpdate(first);
+   // firstBatch.snapshotChanges().pipe(map(changes => changes.map(action => console.log(action.payload.doc.data())))).subscribe();
+
+    this.mapAndUpdate(firstBatch);
 
     this.users = this._users.asObservable().pipe(
       scan((acc, val) => {
@@ -54,7 +59,6 @@ export class AdminApiService {
         .limit(this.batchSize)
         .startAfter(cursor);
     });
-
     this.mapAndUpdate(more);
   }
 
@@ -63,23 +67,27 @@ export class AdminApiService {
       return null;
     }
 
-    userCollection
+    this._loading.next(true);
+
+
+    userCollection.snapshotChanges().pipe(map(changes => changes.map(action => console.log(action.payload.doc.data())))).subscribe();
+
+     userCollection
       .snapshotChanges()
       .pipe(
         tap(arr => {
           const values = arr.map(action => {
             const data = action.payload.doc.data();
+            console.log(data);
             const doc = action.payload.doc;
             return { ...data, doc };
           });
 
-
           this._users.next(values);
-          this._loading.next(true);
+          this._loading.next(false);
 
           if (!values.length) {
             this._done.next(true);
-            this._loading.next(false);
           }
         })
       )

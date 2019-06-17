@@ -29,20 +29,27 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
     private adminHelper: AdminHelperService,
     private alertService: AlertService,
     public adminApiService: AdminApiService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.adminApiService.getFirstBatchOfUsers();
+
+    console.log(this.candidates);
+    console.log(this.candidatesComplete);
 
     this.adminHelper
       .getGeneralSearchValue()
       .subscribe((searchValue: string) => this.generalSearch(searchValue));
     this.criteriaOptions = this.adminHelper.getCriteraOptions();
-    this.userSubscription = this.adminApiService.users.subscribe((users: User[]) => this.setUsers(users));
+    this.userSubscription = this.adminApiService.users.subscribe((users: User[]) =>{
+      this.setUsers(users);
+
+    } );
   }
 
   scrollHandler(e): void {
     if ( e === 'bottom' && !this.adminApiService._done.value) {
+      console.log('oelo');
       this.adminApiService.getMoreUsers();
     }
   }
@@ -100,9 +107,9 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
   generalSearch(term: string): void {
     let candidatesThatApply: User[] = [];
 
-    this.criteriaOptions.forEach(criteria => { candidatesThatApply = _.concat( candidatesThatApply,
-        _.filter(this.candidatesComplete, (cand: User) =>
-          _.includes(
+    this.criteriaOptions.forEach(criteria => {
+      candidatesThatApply = _.concat(candidatesThatApply,
+        _.filter(this.candidatesComplete, (cand: User) => _.includes(
             cand[criteria].toString().toLowerCase(), term.toLowerCase()
           )
         )
@@ -113,9 +120,9 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
 
   sortByCriteria(): void {
     const order = this.isSortedAscendent ? 'asc' : 'desc';
-    if ( this.selectedCriteriaToSort === 'startDate' || this.selectedCriteriaToSort === 'releaseDate') {
+    if (this.selectedCriteriaToSort === 'startDate' || this.selectedCriteriaToSort === 'releaseDate') {
       this.candidates = _.orderBy(this.candidatesComplete,
-                    (cand: User) => moment(cand[this.selectedCriteriaToSort]), order
+        (cand: User) => moment(cand[this.selectedCriteriaToSort]), order
       );
     } else {
       this.candidates = _.orderBy(this.candidatesComplete, this.selectedCriteriaToSort, order);

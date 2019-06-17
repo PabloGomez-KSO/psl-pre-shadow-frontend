@@ -112,12 +112,14 @@
       &__delete{
         &:hover {
           background-color: red;
+          color: white;
         }
       }
 
       &__edit{
         &:hover {
           background-color:  #0069d9;
+          color: white;
         }
       }
     }
