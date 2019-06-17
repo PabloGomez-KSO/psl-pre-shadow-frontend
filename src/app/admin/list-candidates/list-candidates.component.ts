@@ -32,24 +32,18 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+    this.adminApiService.isListActivated = true;
     this.adminApiService.getFirstBatchOfUsers();
-
-    console.log(this.candidates);
-    console.log(this.candidatesComplete);
 
     this.adminHelper
       .getGeneralSearchValue()
       .subscribe((searchValue: string) => this.generalSearch(searchValue));
     this.criteriaOptions = this.adminHelper.getCriteraOptions();
-    this.userSubscription = this.adminApiService.users.subscribe((users: User[]) =>{
-      this.setUsers(users);
-
-    } );
+    this.userSubscription = this.adminApiService.users.subscribe((users: User[]) => this.setUsers(users));
   }
 
   scrollHandler(e): void {
     if ( e === 'bottom' && !this.adminApiService._done.value) {
-      console.log('oelo');
       this.adminApiService.getMoreUsers();
     }
   }
@@ -58,11 +52,6 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
     this.candidates = users;
     this.candidatesComplete = users;
     this.selectedCriteriaToSort = 'name';
-  }
-
-  defaultSort(): void {
-    this.selectedCriteriaToSort = 'name';
-    this.sortByCriteria();
   }
 
   sortWhenClicked(option: string): void {
@@ -130,6 +119,7 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.adminApiService.isListActivated = false;
     this.adminApiService.reset();
     this.userSubscription.unsubscribe();
   }

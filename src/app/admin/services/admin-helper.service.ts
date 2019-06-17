@@ -89,14 +89,15 @@ export class AdminHelperService {
     return this.softwareRoles;
   }
 
-  convertStringIntoNgBootstrapDate(s: string): NgbDateStruct {
+  convertStringIntoNgBootstrapDate(stringDate: string): NgbDateStruct {
 
-    const date = new Date(s);
-    console.log(date.toDateString());
-    const ngbDateStruct = { day: date.getUTCDay(), month: date.getUTCMonth(), year: date.getUTCFullYear()};
+    const date = moment(stringDate);
+    const ngbDateStruct = {
+      day: Number(date.format('D')),
+      month: Number(date.format('M')),
+      year: Number(date.format('Y'))
+    };
     return ngbDateStruct;
 
-    /*const date = moment(s, 'YYYY/MM/DD');
-    return { day: date.format('DD'), month: date.format('MM'), year: date.format('YYYY')};*/
   }
 }

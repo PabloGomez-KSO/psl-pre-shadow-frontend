@@ -10,9 +10,11 @@
   &__item {
     padding: 1.1rem;
     margin-bottom: 15px;
-    height: 20px !important;
+    height: 20px;
+    width: 500px;
     &__data {
       display: flex;
+
       &__btn {
         display: flex;
         flex-direction: column;
@@ -20,7 +22,7 @@
         color: $purple_logo_psl;
         background-color: white;
         border: 0;
-        width: 18px !important;
+        width: 30px;
         align-items: center;
         justify-content: center;
         &__icon {

@@ -37,7 +37,7 @@ export class CreateCandidateComponent implements OnInit {
   onCreateCandidate() {
     if (this.candidateForm.valid) {
       this.authService
-      .registerUser(this.user, this.password)
+      .registerUser({...this.user}, this.password)
       .then(() => {
         this.alertService.showSuccessMessage('User succesfully created');
         this.router.navigate(['/admin-dashboard/']);

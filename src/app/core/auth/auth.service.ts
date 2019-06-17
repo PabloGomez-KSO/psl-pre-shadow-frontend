@@ -37,7 +37,6 @@ export class AuthService {
   }
 
   logOut(): Promise<any> {
-    console.log(typeof this.firebaseAuth.auth.signOut() );
     return this.firebaseAuth.auth.signOut();
   }
 

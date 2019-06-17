@@ -5,7 +5,7 @@ import {
   AngularFirestore,
   AngularFirestoreCollection
 } from '@angular/fire/firestore';
-import { scan, tap, map} from 'rxjs/operators';
+import { scan, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -20,18 +20,16 @@ export class AdminApiService {
   loading: Observable<boolean> = this._loading.asObservable();
 
   userCollectionSubsciption: Subscription;
-
-  batchSize = 12;
+  batchSize = 13;
   prepend: false;
 
-  constructor(public afs: AngularFirestore) { }
+  isListActivated = false;
+
+  constructor(public angularFirestore: AngularFirestore) { }
 
   getFirstBatchOfUsers() {
-    const firstBatch = this.afs.collection('users', ref => {
-      return ref.orderBy('name').limit(this.batchSize);
-    });
-
-   // firstBatch.snapshotChanges().pipe(map(changes => changes.map(action => console.log(action.payload.doc.data())))).subscribe();
+    const firstBatch = this.angularFirestore.collection('users',
+      ref => ref.orderBy('name').limit(this.batchSize));
 
     this.mapAndUpdate(firstBatch);
 
@@ -42,22 +40,23 @@ export class AdminApiService {
     );
   }
 
-  getCursor() {
-    const current = this._users.value;
-    if (current.length) {
-      return this.prepend ? current[0].doc : current[current.length - 1].doc;
+  getLastVisibleDocument() {
+    const documentsArray = this._users.value;
+    const documentsArraySize = documentsArray.length;
+
+    if (documentsArraySize) {
+      return documentsArray[documentsArraySize - 1].doc;
     }
-    return null;
   }
 
   getMoreUsers() {
-    const cursor = this.getCursor();
+    const lastVisibleDocument = this.getLastVisibleDocument();
 
-    const more = this.afs.collection('users', ref => {
+    const more = this.angularFirestore.collection('users', ref => {
       return ref
         .orderBy('name')
         .limit(this.batchSize)
-        .startAfter(cursor);
+        .startAfter(lastVisibleDocument);
     });
     this.mapAndUpdate(more);
   }
@@ -69,28 +68,26 @@ export class AdminApiService {
 
     this._loading.next(true);
 
-
-    userCollection.snapshotChanges().pipe(map(changes => changes.map(action => console.log(action.payload.doc.data())))).subscribe();
-
-     userCollection
+    this.userCollectionSubsciption = userCollection
       .snapshotChanges()
       .pipe(
         tap(arr => {
           const values = arr.map(action => {
             const data = action.payload.doc.data();
-            console.log(data);
             const doc = action.payload.doc;
             return { ...data, doc };
           });
 
-          this._users.next(values);
-          this._loading.next(false);
+          if (this.isListActivated) {
 
-          if (!values.length) {
-            this._done.next(true);
+            this._users.next(values);
+            this._loading.next(false);
+
+            if (!values.length) {
+              this._done.next(true);
+            }
           }
-        })
-      )
+        }))
       .subscribe();
   }
 
