@@ -12,9 +12,10 @@ export class ScrollableDirective {
 
   @HostListener('window:scroll', ['$event'])
   onScroll() {
-
-      if (Math.round(document.documentElement.scrollTop + window.innerHeight)
-          === Math.round(document.documentElement.offsetHeight)) {
+    console.log(document.documentElement.scrollTop + window.innerHeight);
+    console.log(document.documentElement.offsetHeight);
+      if (document.documentElement.scrollTop + window.innerHeight + 2 >= document.documentElement.offsetHeight) {
+        console.log('got it ');
         this.scrollPosition.emit('bottom');
       }
   }

@@ -26,7 +26,7 @@
                   <div class="candidates_table__row-header__item__data__text">
                       {{option | titlecase | convertTitle}}
                   </div>
-                  <button [ngClass]="[selectedCriteriaToSort !== option ? 'display' : 'none']" type="button"
+                  <button *ngIf="selectedCriteriaToSort === option" type="button"
                           class="candidates_table__row-header__item__data__btn">
                       <i  *ngIf="isSortedAscendent"
                           class="fas fa-sort-up candidates_table__row-header__item__data__btn__icon"></i>

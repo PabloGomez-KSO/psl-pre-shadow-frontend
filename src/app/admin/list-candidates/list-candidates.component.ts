@@ -44,6 +44,7 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
 
   scrollHandler(e): void {
     if ( e === 'bottom' && !this.adminApiService._done.value) {
+      console.log('hello');
       this.adminApiService.getMoreUsers();
     }
   }
