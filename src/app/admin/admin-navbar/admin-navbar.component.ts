@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { UserApiService } from '../../shared/services/user-api.service';
 import { User } from '../../shared/models/user';
 import { AlertService } from '../../shared/notifications/alert.service';
-import { AdminHelperService  } from '../services/admin-helper.service';
+import { AdminHelperService } from '../services/admin-helper.service';
 @Component({
   selector: 'app-admin-navbar',
   templateUrl: './admin-navbar.component.html',
@@ -19,7 +19,7 @@ export class AdminNavbarComponent implements OnInit {
     private userApiService: UserApiService,
     private alertService: AlertService,
     private adminHelper: AdminHelperService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.userApiService
@@ -28,7 +28,7 @@ export class AdminNavbarComponent implements OnInit {
   }
 
   onClickLogOut() {
-    this.authService.logOut().then(() => {
+    this.authService.logOut().subscribe(() => {
       this.alertService.showGoodByeMessage();
       sessionStorage.clear();
       this.router.navigate(['/login']);

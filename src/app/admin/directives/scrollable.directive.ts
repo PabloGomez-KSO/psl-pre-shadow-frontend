@@ -12,8 +12,6 @@ export class ScrollableDirective {
 
   @HostListener('window:scroll', ['$event'])
   onScroll() {
-    console.log(document.documentElement.scrollTop + window.innerHeight);
-    console.log(document.documentElement.offsetHeight);
       if (document.documentElement.scrollTop + window.innerHeight + 2 >= document.documentElement.offsetHeight) {
         console.log('got it ');
         this.scrollPosition.emit('bottom');

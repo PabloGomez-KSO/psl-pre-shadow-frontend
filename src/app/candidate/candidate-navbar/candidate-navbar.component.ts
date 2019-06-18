@@ -16,7 +16,7 @@ export class CandidateNavbarComponent implements OnInit {
   }
 
   onClickLogOut() {
-    this.authService.logOut().then(() => {
+    this.authService.logOut().subscribe(() => {
       sessionStorage.clear();
       this.router.navigate(['/login']);
     });

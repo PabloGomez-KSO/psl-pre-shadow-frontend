@@ -22,14 +22,11 @@ export class LoginComponent {
 
   onLogIn(): void {
     this.alertNotification.showLoadingInfoMessageLogin();
-    this.authService
-      .logIn(this.email, this.password)
-      .then(data => this.callUserApiServiceToGetUser(data['user'].uid))
-      .catch((error) => {
-        this.alertNotification.showInvalidMessage(error.message);
-      });
+    this.authService.logIn(this.email, this.password).subscribe(
+      data => this.callUserApiServiceToGetUser(data['user'].uid),
+      error => this.alertNotification.showInvalidMessage(error.message)
+    );
   }
-
 
   callUserApiServiceToGetUser(userId: string): void {
     this.userApiService.getUserById(userId).subscribe((user: User) => {

@@ -1,7 +1,4 @@
-import { spy,  stub, sinon } from 'sinon';
-import * as chai from 'chai';
-import * as sinonChai from 'sinon-chai';
-chai.use(sinonChai);
+import * as sinon from 'sinon';
 import {
   AngularFirestore,
   AngularFirestoreDocument,
@@ -9,34 +6,25 @@ import {
 } from '@angular/fire/firestore';
 import { UserApiService } from './user-api.service';
 import { User } from '../models/user';
+import * as chai from 'chai';
 
 
-describe('Shared - User-Api-Service', () => {
+describe('user-api.service', () => {
 
   let userApiService: UserApiService;
-  /*let mock = {
-    AngularFirestore: sinon.stub()
-  }*/
-
-  /*beforeEach(() => {
-    userApiService = new UserApiService(mock);
-  });
-*/
-  it('Should return an AngularFireStoreDocument', () => {
-
-
-    var stub = sinon.stub();
-
-     stub.returns(54)
-
-     console.log(stub);
-
-    ///expect(userApiService.getUserDocumentById('2d')).toBe
-
+  const createComponent = (params: any) => new UserApiService(params.angularFireStore);
+  const userApimock = {
+    angularFireStore: {
+      doc: sinon.stub(),
+      collection: sinon.stub()
+    }
+  };
+  beforeEach(() => {
+    userApiService = createComponent(userApimock);
   });
 
-
-
-
-
+  describe('getUserDocumentById', () => {
+    userApiService.getUserDocumentById('2d3d');
+    e
+  });
 });

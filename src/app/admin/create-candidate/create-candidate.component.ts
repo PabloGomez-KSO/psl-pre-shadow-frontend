@@ -1,21 +1,25 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../core/auth/auth.service';
 import { User } from '../../shared/models/user';
-import { FormGroup} from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertService } from '../../shared/notifications/alert.service';
 import { AdminHelperService } from '../services/admin-helper.service';
+import { Subscription } from 'rxjs';
+import { PasswordValidation } from '../validators/passwordValidator';
+import { UserApiService } from 'src/app/shared/services/user-api.service';
 
 @Component({
   selector: 'app-create-candidate',
   templateUrl: './create-candidate.component.html',
   styleUrls: ['./create-candidate.component.scss']
 })
-export class CreateCandidateComponent implements OnInit {
+export class CreateCandidateComponent implements OnInit{
   password: string;
   user: User;
   candidateForm: FormGroup;
   softwareRoles: string[];
+  authRegisterSubscription: Subscription;
 
   constructor(
     private authService: AuthService,
@@ -31,20 +35,32 @@ export class CreateCandidateComponent implements OnInit {
   }
 
   setCandidateFormValidators() {
-    this.candidateForm = this.adminHelper.getCandidateCreateFormValidator();
+
+    const userRebooted: User = this.adminHelper.getUserRebooted();
+
+    this.candidateForm = new FormGroup({
+      name: new FormControl('', [Validators.required, Validators.minLength(4)]),
+      age: new FormControl('', [Validators.required, Validators.min(18)]),
+      username: new FormControl('', [Validators.required, Validators.min(3)]),
+      email: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required]),
+      cpassword: new FormControl('', Validators.required),
+      start_date: new FormControl('', [Validators.required]),
+      release_date: new FormControl('', [Validators.required]),
+      preference: new FormControl('', [Validators.required])
+    },
+      {
+        validators: PasswordValidation.MatchPassword
+      }
+    );
   }
 
   onCreateCandidate() {
     if (this.candidateForm.valid) {
-      this.authService
-      .registerUser({...this.user}, this.password)
-      .then(() => {
-        this.alertService.showSuccessMessage('User succesfully created');
-        this.router.navigate(['/admin-dashboard/']);
-      })
-      .catch(err => {
-        this.alertService.showInvalidMessage(err);
-      });
+      this.authRegisterSubscription = this.authService.registerUser({ ...this.user }, this.password).subscribe(
+        () => this.alertService.showSuccessMessage('User succesfully created'),
+        error => this.alertService.showInvalidMessage(error.message)
+      );
     }
   }
 

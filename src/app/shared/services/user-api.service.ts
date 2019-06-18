@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
 })
 export class UserApiService {
 
-  constructor(public angularFireStore: AngularFirestore) { }
+  constructor(private angularFireStore: AngularFirestore) { }
 
   getUserDocumentById(id: string): AngularFirestoreDocument<User> {
     return this.angularFireStore.doc<User>(`users/${id}`);
@@ -31,7 +31,8 @@ export class UserApiService {
     const userDocument = this.getUserDocumentById(id);
     return userDocument
       .snapshotChanges()
-      .pipe(map(this.verificateExistanceOfUser));
+      .pipe(map((action) => this.verificateExistanceOfUser(action))
+           );
   }
 
   getUserByEmail(email: string): Observable<User> {
@@ -41,7 +42,7 @@ export class UserApiService {
       .pipe(map(this.verificateExistanceOfUser));
   }
 
-  deleteUserById(id: string) {
+  deleteUserById(id: string): Promise<any> {
     const userDocument = this.getUserDocumentById(id);
     return userDocument.delete();
   }
@@ -66,6 +67,7 @@ export class UserApiService {
 
   verificateExistanceOfUser(action): User {
     if (action.payload.exists) {
+      console.log(action.payload);
       return action.payload.data() as User;
     }
   }

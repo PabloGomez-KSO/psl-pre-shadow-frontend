@@ -36,24 +36,6 @@ export class AdminHelperService {
     this.generalSearchObservable.next(value);
   }
 
-  getCandidateCreateFormValidator(): FormGroup {
-    return new FormGroup({
-      name: new FormControl('', [Validators.required, Validators.minLength(4)]),
-      age: new FormControl('', [Validators.required, Validators.min(18)]),
-      username: new FormControl('', [Validators.required, Validators.min(3)]),
-      email: new FormControl('', [Validators.required]),
-      password: new FormControl('', [Validators.required]),
-      cpassword: new FormControl('', Validators.required),
-      start_date: new FormControl('', [Validators.required]),
-      release_date: new FormControl('', [Validators.required]),
-      preference: new FormControl('', [Validators.required])
-    },
-      {
-        validators: PasswordValidation.MatchPassword
-      }
-    );
-  }
-
   getUpdateFormValidator(): FormGroup {
     return new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(4)]),

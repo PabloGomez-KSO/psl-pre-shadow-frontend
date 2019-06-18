@@ -7,6 +7,7 @@ import {
 } from '@angular/fire/firestore';
 import { User } from '../../shared/models/user';
 import { HelperService } from '../../shared/services/helper.service';
+import { Observable, from } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -17,36 +18,30 @@ export class AuthService {
     private helperService: HelperService
   ) { }
 
-  registerUser(user: User, password: string): Promise<any> {
-    return new Promise((resolve, reject) => {
-      this.firebaseAuth.auth
-        .createUserWithEmailAndPassword(user.email, password)
-        .then(data => {
-          resolve(data.user), this.updateUserData(data.user.uid, user);
-        })
-        .catch(err => reject(err));
-    });
+  registerUser(user: User, password: string): Observable<any> {
+    return from(this.firebaseAuth.auth.createUserWithEmailAndPassword(user.email, password))
+     .pipe(map(data => {
+        this.updateUserData(data.user.uid, user);
+        return data.user;
+       })
+      );
   }
 
-  logIn(email: string, password: string): Promise<any> {
-    return new Promise((resolve, reject) => {
-      this.firebaseAuth.auth
-        .signInWithEmailAndPassword(email, password)
-        .then(userData => resolve(userData), error => reject(error));
-    });
+  logIn(email: string, password: string): Observable<any> {
+    return from(this.firebaseAuth.auth.signInWithEmailAndPassword(email, password));
   }
 
-  logOut(): Promise<any> {
-    return this.firebaseAuth.auth.signOut();
+  logOut(): Observable<any> {
+    return from(this.firebaseAuth.auth.signOut());
   }
 
-  getAuth() {
+  getAuth(): Observable<any> {
     return this.firebaseAuth.authState.pipe(map(auth => auth));
   }
 
-  updateUserData(userId: string, user: User) {
+  updateUserData(userId: string, user: User): void {
     const userRef: AngularFirestoreDocument<any> = this.angularFireStore.doc(`users/${userId}`);
     const userToDB = this.helperService.setUserForDatabase(userId, user);
-    return userRef.set(userToDB, { merge: true });
+    userRef.set(userToDB, { merge: true });
   }
 }

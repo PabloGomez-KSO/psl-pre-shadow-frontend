@@ -22,29 +22,32 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
   selectedCriteriaToSort = '';
   isSortedAscendent = true;
   userSubscription: Subscription;
+  searchSubscription: Subscription;
 
   constructor(
     private router: Router,
     private userApiService: UserApiService,
     private adminHelper: AdminHelperService,
     private alertService: AlertService,
-    public adminApiService: AdminApiService
+    private adminApiService: AdminApiService
   ) { }
 
   ngOnInit(): void {
     this.adminApiService.isListActivated = true;
     this.adminApiService.getFirstBatchOfUsers();
-
-    this.adminHelper
-      .getGeneralSearchValue()
-      .subscribe((searchValue: string) => this.generalSearch(searchValue));
     this.criteriaOptions = this.adminHelper.getCriteraOptions();
+    this.initObservables();
+  }
+
+  initObservables(): void {
+    this.searchSubscription = this.adminHelper.getGeneralSearchValue()
+      .subscribe((searchValue: string) => this.generalSearch(searchValue));
+
     this.userSubscription = this.adminApiService.users.subscribe((users: User[]) => this.setUsers(users));
   }
 
-  scrollHandler(e): void {
-    if ( e === 'bottom' && !this.adminApiService._done.value) {
-      console.log('hello');
+  scrollHandler(scrollEvent): void {
+    if (scrollEvent === 'bottom' && !this.adminApiService._done.value) {
       this.adminApiService.getMoreUsers();
     }
   }
@@ -86,22 +89,29 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
   }
 
   searchByCriteria(term: string): void {
-    this.candidates = _.filter(this.candidatesComplete, (cand: User) => {
-      return _.includes(
-        cand[this.selectedCriteriaToSearch].toString().toLowerCase(),
-        term.toLowerCase()
-      );
+    this.candidates = _.filter(this.candidatesComplete, (user: User) => {
+      if (user.roles.candidate) {
+        return _.includes(
+          user[this.selectedCriteriaToSearch].toString().toLowerCase(),
+          term.toLowerCase()
+        );
+      }
     });
   }
 
   generalSearch(term: string): void {
+
     let candidatesThatApply: User[] = [];
 
     this.criteriaOptions.forEach(criteria => {
       candidatesThatApply = _.concat(candidatesThatApply,
-        _.filter(this.candidatesComplete, (cand: User) => _.includes(
-            cand[criteria].toString().toLowerCase(), term.toLowerCase()
-          )
+        _.filter(this.candidatesComplete, (user: User) => {
+          if (user.roles.candidate) {
+            return _.includes(
+              user[criteria].toString().toLowerCase(), term.toLowerCase()
+            );
+          }
+        }
         )
       );
     });
@@ -123,5 +133,6 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
     this.adminApiService.isListActivated = false;
     this.adminApiService.reset();
     this.userSubscription.unsubscribe();
+    this.searchSubscription.unsubscribe();
   }
 }
