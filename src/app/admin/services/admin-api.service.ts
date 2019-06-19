@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { Observable, of } from 'rxjs';
 import {
   AngularFirestore,
   AngularFirestoreCollection
 } from '@angular/fire/firestore';
-import { scan, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -15,23 +14,20 @@ export class AdminApiService {
   _loading = new BehaviorSubject(false);
   _users = new BehaviorSubject([]);
 
-  done: Observable<boolean> = this._done.asObservable();
-  loading: Observable<boolean> = this._loading.asObservable();
-
   userCollectionSubsciption: Subscription;
   batchSize = 13;
   prepend: false;
 
   constructor(public angularFirestore: AngularFirestore) { }
 
-  getFirstBatchOfUsers() {
+  getFirstBatchOfUsers(): void {
     const firstBatch = this.angularFirestore.collection('users',
       ref => ref.orderBy('name').limit(this.batchSize));
 
     this.mapAndUpdate(firstBatch);
   }
 
-  getMoreUsers(lastVisibleDocument: any) {
+  getMoreUsers(lastVisibleDocument: any): void {
 
     const more = this.angularFirestore.collection('users', ref => {
       return ref
@@ -42,7 +38,7 @@ export class AdminApiService {
     this.mapAndUpdate(more);
   }
 
-  mapAndUpdate(userCollection: AngularFirestoreCollection<any>) {
+  mapAndUpdate(userCollection: AngularFirestoreCollection<any>): void {
     if (this._done.value) {
       return null;
     }

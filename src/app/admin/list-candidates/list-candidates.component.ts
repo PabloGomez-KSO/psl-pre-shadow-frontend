@@ -7,8 +7,8 @@ import { AdminApiService } from '../services/admin-api.service';
 import * as _ from 'lodash';
 import * as moment from 'moment';
 import { AlertService } from '../../shared/notifications/alert.service';
-import { Subscription, Observable, of } from 'rxjs';
-import { scan, tap } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+import { scan } from 'rxjs/operators';
 
 @Component({
   selector: 'app-list-candidates',
@@ -46,14 +46,12 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
   }
 
   getPage() {
-    // if(!isLoading) {
     if (this.candidates.length) {
       const lastVisibleDocument = this.getLastVisibileDocument();
       this.adminApiService.getMoreUsers(lastVisibleDocument);
     } else {
       this.adminApiService.getFirstBatchOfUsers();
     }
-    // }
   }
 
   getLastVisibileDocument() {
@@ -78,6 +76,7 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
 
   addUsers(users: User[]): void {
     this.candidates.push(...users);
+    this.candidatesComplete.push(...users);
     // TODO: ARREGLAR ESTO
     // this.candidatesComplete = users;
     this.selectedCriteriaToSort = 'name';
@@ -104,6 +103,7 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
         this.userApiService.deleteUserById(id);
         this.alertService.showDeleteNotification();
         this.candidates = [];
+        this.adminApiService._users.next([]);
         this.getPage();
       }
     });

@@ -60,7 +60,7 @@
           </ng-container>
         </tbody>
       </table>
-      <div class="candidates_spinner"  *ngIf="adminApiService.loading | async">
+      <div class="candidates_spinner"  *ngIf="adminApiService._loading.value">
           <app-loading-spinner></app-loading-spinner>
       </div>
 </div>
