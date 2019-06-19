@@ -13,6 +13,7 @@ import { SortCandidatesPipe } from './pipes/sort-candidates.pipe';
 import { ConvertTitlePipe } from './pipes/convert-title.pipe';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { ScrollableDirective } from './directives/scrollable.directive';
+import { CandidateFormComponent } from './candidate-form/candidate-form.component';
 
 @NgModule({
   imports: [
@@ -32,7 +33,8 @@ import { ScrollableDirective } from './directives/scrollable.directive';
     AdminNavbarComponent,
     SortCandidatesPipe,
     ConvertTitlePipe,
-    ScrollableDirective
+    ScrollableDirective,
+    CandidateFormComponent
   ],
   exports: [
     AdminDashboardComponent

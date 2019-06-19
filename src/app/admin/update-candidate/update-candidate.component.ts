@@ -14,8 +14,9 @@ import { HelperService } from '../../shared/services/helper.service';
 export class UpdateCandidateComponent implements OnInit {
 
   updateCandidateForm: FormGroup;
-  candidateToUpdate: User;
+  user: User;
   softwareRoles: string[];
+  action = 'update';
 
   constructor(
     private adminHelper: AdminHelperService,
@@ -28,14 +29,15 @@ export class UpdateCandidateComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.candidateToUpdate = this.adminHelper.getUserRebooted();
-    this.setFormValidators();
+    // this.user = this.adminHelper.getUserRebooted();
+    // this.setFormValidators();
     this.softwareRoles = this.adminHelper.getSoftwareRoles();
     const userIdToUpdate = this.activatedRoute.snapshot.params.id;
     this.userApiService.getUserById(userIdToUpdate).subscribe((cand: User) => {
-     this.candidateToUpdate = cand;
-     this.candidateToUpdate.startDate = this.setNgBootstrapDate(this.candidateToUpdate.startDate);
-     this.candidateToUpdate.releaseDate = this.setNgBootstrapDate(this.candidateToUpdate.releaseDate);
+      this.user = cand;
+      this.user.startDate = this.setNgBootstrapDate(this.user.startDate);
+      this.user.releaseDate = this.setNgBootstrapDate(this.user.releaseDate);
+      console.log(this.user);
     }
     );
   }
@@ -51,13 +53,13 @@ export class UpdateCandidateComponent implements OnInit {
   updateCandidate(): void {
     this.castUserDates();
     this.userApiService.
-          updateUser(this.candidateToUpdate).then(() =>
-            this.alertService.showSuccessMessage('User updated successfully'));
+      updateUser(this.user).then(() =>
+        this.alertService.showSuccessMessage('User updated successfully'));
   }
 
-  castUserDates ()  {
-    this.candidateToUpdate.startDate = this.helperService.castNgbDateStructIntoString(this.candidateToUpdate.startDate);
-    this.candidateToUpdate.releaseDate = this.helperService.castNgbDateStructIntoString(this.candidateToUpdate.releaseDate);
+  castUserDates() {
+    this.user.startDate = this.helperService.castNgbDateStructIntoString(this.user.startDate);
+    this.user.releaseDate = this.helperService.castNgbDateStructIntoString(this.user.releaseDate);
   }
 
   goBack(): void {

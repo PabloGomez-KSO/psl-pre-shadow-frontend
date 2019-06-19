@@ -1,0 +1,254 @@
+<form [formGroup]="candidateForm" (ngSubmit)="submitForm()" #cForm="ngForm">
+    <div class="create-candidate-container">
+      <p> {{ candidateForm.valid }}</p>
+      <div class="create-candidate-info">
+        <span class="create-candidate-info__personal-title">Personal Information</span>
+        <div class="create-candidate-info__wrap">
+          <div class="create-candidate-info__wrap__element">
+            <div class="create-candidate-info__wrap__element__data">
+              <label class="create-candidate-info__wrap__element__data__text" for="username">Name</label>
+              <input [ngClass]="{'create-candidate-info__wrap__element__data__input--invalid': candidateForm.get('name').errors && cForm.submitted}"
+                     class="create-candidate-info__wrap__element__data__input"
+                     type="text"
+                     name="username"
+                     formControlName="name"
+                    >
+            </div>
+            <div class="create-candidate-info__wrap__element__notification">
+              <div class="create-candidate-info__wrap__element__notification__error">
+                <div *ngIf="candidateForm.get('name').errors">
+                  <div *ngIf="(cForm.submitted || candidateForm.get('name')?.touched) && candidateForm.get('name').errors['required']">
+                    Type your name
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="create-candidate-info__wrap__element">
+            <div class="create-candidate-info__wrap__element__data">
+                <label class="create-candidate-info__wrap__element__data__text" for="age">Age</label>
+                <input class="create-candidate-info__wrap__element__data__input"
+                       [ngClass]="{'create-candidate-info__wrap__element__data__input--invalid': candidateForm.get('age').errors && cForm.submitted}"
+                       type="number"
+                       name="age"
+                       formControlName="age"
+                       >
+            </div>
+            <div class="create-candidate-info__wrap__element__notification">
+              <div class="create-candidate-info__wrap__element__notification__error">
+                  <div *ngIf="candidateForm.get('age').errors">
+                    <div *ngIf="(cForm.submitted || candidateForm.get('age')?.touched) && candidateForm.get('age').errors['required']">
+                      Type your age
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="create-candidate-info__wrap__element" *ngIf="this.action === formActions.createAction">
+            <div class="create-candidate-info__wrap__element__data">
+              <label class="create-candidate-info__wrap__element__data__text" for="email">Email</label>
+              <input class="create-candidate-info__wrap__element__data__input"
+                     [ngClass]="{'create-candidate-info__wrap__element__data__input--invalid': candidateForm.get('email').errors && cForm.submitted}"
+                     type="email"
+                     name="email"
+                     formControlName="email"
+              >
+            </div>
+            <div class="create-candidate-info__wrap__element__notification">
+              <div class="create-candidate-info__wrap__element__notification__error">
+                <div *ngIf="candidateForm.get('email').errors">
+                  <div *ngIf="(cForm.submitted || candidateForm.get('email')?.touched) && candidateForm.get('email').errors['required']">
+                    Type your email
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="create-candidate-info">
+        <span class="create-candidate-info__program-title">
+          Program Information
+        </span>
+
+        <div class="create-candidate-info__wrap">
+          <div class="create-candidate-info__wrap__element">
+            <div class="create-candidate-info__wrap__element__data">
+              <label class="create-candidate-info__wrap__element__data__text" for="username">
+                Username
+              </label>
+              <input class="create-candidate-info__wrap__element__data__input"
+                     [ngClass]="{'create-candidate-info__wrap__element__data__input--invalid': candidateForm.get('username').errors && cForm.submitted}"
+                     type="text"
+                     name="username"
+                     formControlName="username"
+              >
+            </div>
+            <div class="create-candidate-info__wrap__element__notification">
+              <div class="create-candidate-info__wrap__element__notification__error">
+                <div *ngIf="candidateForm.get('username').errors">
+                  <div *ngIf="(cForm.submitted || candidateForm.get('username')?.touched) && candidateForm.get('username').errors['required']">
+                    Type your username
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="create-candidate-info__wrap__element">
+            <div class="create-candidate-info__wrap__element__data">
+              <label class="create-candidate-info__wrap__element__data__text" for="username">
+                 Start Date
+              </label>
+              <div class="create-candidate-info__wrap__element__data__dateContainer">
+                  <input class="create-candidate-info__wrap__element__data__dateContainer__input"
+                         [ngClass]="{'create-candidate-info__wrap__element__data__dateContainer__input--invalid':
+                                    candidateForm.get('start_date').errors && cForm.submitted}"
+                         type="text"
+                         name="start_date"
+                         ngbDatepicker
+                         #d1="ngbDatepicker"
+                         formControlName="start_date"
+                  />
+                  <button type="button"
+                          class="btn btn-primary create-candidate-info__wrap__element__data__dateContainer__btn"
+                          (click)="d1.toggle()">
+                  <i class="fas fa-calendar-alt"></i>
+                </button>
+              </div>
+            </div>
+            <div class="create-candidate-info__wrap__element__notification">
+              <div class="create-candidate-info__wrap__element__notification__error">
+                <div *ngIf="candidateForm.get('start_date').errors">
+                  <div *ngIf="(cForm.submitted || candidateForm.get('start_date')?.touched) && candidateForm.get('start_date').errors['required']">
+                    Select start date
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="create-candidate-info__wrap__element">
+            <div class="create-candidate-info__wrap__element__data">
+              <label class="create-candidate-info__wrap__element__data__text" for="username"> Release Date</label>
+              <div class="create-candidate-info__wrap__element__data__dateContainer">
+                  <input class="create-candidate-info__wrap__element__data__dateContainer__input"
+                         [ngClass]="{'create-candidate-info__wrap__element__data__dateContainer__input--invalid':
+                                     candidateForm.get('release_date').errors && cForm.submitted}"
+                         type="text"
+                         name="release_date"
+                         ngbDatepicker
+                         #d2="ngbDatepicker"
+                         formControlName="release_date"
+                  />
+                  <button type="button"
+                          class="btn btn-primary create-candidate-info__wrap__element__data__dateContainer__btn"
+                          (click)="d2.toggle()">
+                          <i class="fas fa-calendar-alt"></i>
+                  </button>
+              </div>
+            </div>
+            <div class="create-candidate-info__wrap__element__notification">
+              <div class="create-candidate-info__wrap__element__notification__error">
+                <div *ngIf="candidateForm.get('release_date').errors">
+                  <div *ngIf="(cForm.submitted || candidateForm.get('release_date')?.touched) && candidateForm.get('release_date').errors['required']">
+                        Select release date
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="create-candidate-info__wrap__element" >
+            <div class="create-candidate-info__wrap__element__data">
+              <label class="create-candidate-info__wrap__element__data__text"
+                for="Preference">
+                <strong> Preference </strong>
+              </label>
+              <select class="create-candidate-info__wrap__element__data__input"
+                      [ngClass]="{'create-candidate-info__wrap__element__data__input--invalid': candidateForm.get('preference').errors && cForm.submitted}"
+                      formControlName="preference"
+                      name="preference"
+              >
+                <option *ngFor="let role of softwareRoles" [value]="role">{{ role }}</option>
+              </select>
+            </div>
+            <div class="create-candidate-info__wrap__element__notification">
+              <div class="create-candidate-info__wrap__element__notification__error">
+                <div *ngIf="candidateForm.get('preference').errors">
+                  <div *ngIf="(cForm.submitted || candidateForm.get('preference')?.touched) && candidateForm.get('preference').errors['required']">
+                    Select preference
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="create-candidate-info__wrap__element" *ngIf="this.action === formActions.createAction">
+            <div class="create-candidate-info__wrap__element__data">
+              <label class="create-candidate-info__wrap__element__data__text" for="pass">
+                  Password
+              </label>
+              <input class="create-candidate-info__wrap__element__data__input"
+                     [ngClass]="{'create-candidate-info__wrap__element__data__input--invalid': candidateForm.get('password').errors && cForm.submitted}"
+                     type="password"
+                     name="pass"
+                     formControlName="password"
+                     >
+            </div>
+            <div class="create-candidate-info__wrap__element__notification">
+              <div class="create-candidate-info__wrap__element__notification__error">
+                <div *ngIf="candidateForm.get('password').errors">
+                  <div *ngIf="(cForm.submitted || candidateForm.get('password')?.touched) && candidateForm.get('password').errors['required']">
+                    Type a password
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="create-candidate-info__wrap__element" *ngIf="this.action === formActions.createAction">
+            <div class="create-candidate-info__wrap__element__data">
+              <label class="create-candidate-info__wrap__element__data__text" for="cpass">
+                  Confirm Password
+              </label>
+              <input class="create-candidate-info__wrap__element__data__input"
+                      [ngClass]="{'create-candidate-info__wrap__element__data__input--invalid': candidateForm.get('cpassword').errors && cForm.submitted}"
+                     type="password"
+                     name="cpass"
+                     formControlName="cpassword">
+            </div>
+            <div class="create-candidate-info__wrap__element__notification">
+              <div class="create-candidate-info__wrap__element__notification__error">
+                <div *ngIf="candidateForm.get('cpassword').errors">
+                  <div *ngIf="(cForm.submitted || candidateForm.get('cpassword')?.dirty) && candidateForm.get('cpassword').errors['MatchPassword']">
+                    Password does not match
+                  </div>
+                  <div *ngIf="(cForm.submitted || candidateForm.get('cpassword')?.dirty) && candidateForm.get('cpassword').errors['required']">
+                    Confirmation password is required
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="create-candidate-container__buttons">
+        <button type="button" class="btn btn-primary create-candidate-container__buttons__option" (click)="goBack()">
+          Go Back
+          <i class="fas fa-undo create-candidate-container__buttons__option__icon"></i>
+        </button>
+        <button type="submit" class="btn btn-primary create-candidate-container__buttons__option" *ngIf="this.action === formActions.createAction">
+           Create
+          <i class="fas fa-edit create-candidate-container__buttons__option__icon"></i>
+        </button>
+        <button type="submit" class="btn btn-primary create-candidate-container__buttons__option" *ngIf="this.action === formActions.updateAction">
+           Update
+          <i class="fas fa-edit create-candidate-container__buttons__option__icon"></i>
+         </button>
+      </div>
+    </div>
+  </form>

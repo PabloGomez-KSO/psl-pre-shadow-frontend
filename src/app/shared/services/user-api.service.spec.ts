@@ -24,7 +24,6 @@ describe('user-api.service', () => {
   });
 
   describe('getUserDocumentById', () => {
-    userApiService.getUserDocumentById('2d3d');
-    e
+
   });
 });

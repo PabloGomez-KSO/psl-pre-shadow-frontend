@@ -37,6 +37,7 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
     this.getPage();
     this.criteriaOptions = this.adminHelper.getCriteraOptions();
     this.initObservables();
+    this.selectedCriteriaToSort = 'name';
   }
 
   scrollHandler(scrollEvent): void {
@@ -56,7 +57,6 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
 
   getLastVisibileDocument() {
     const candidatesArraySize = this.candidates.length;
-    console.log('el ultimo documento visible', this.candidates[candidatesArraySize - 1]);
     return this.candidates[candidatesArraySize - 1].doc;
   }
 
@@ -66,20 +66,16 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
 
     this.userSubscription = this.adminApiService._users.pipe(
       scan((currentUsers, newUsers) => {
-        console.log(currentUsers);
-        console.log(newUsers);
-        this.addUsers(newUsers);
+
+        this.addNewUsers(newUsers);
         return currentUsers.concat(newUsers);
       })
     ).subscribe();
   }
 
-  addUsers(users: User[]): void {
+  addNewUsers(users: User[]): void {
     this.candidates.push(...users);
     this.candidatesComplete.push(...users);
-    // TODO: ARREGLAR ESTO
-    // this.candidatesComplete = users;
-    this.selectedCriteriaToSort = 'name';
   }
 
   sortWhenClicked(option: string): void {
@@ -100,7 +96,7 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
   removeCandidate(id: string) {
     this.alertService.showDeleteAskNotification().then(result => {
       if (result.value) {
-        this.userApiService.deleteUserById(id);
+        this.userApiService.deleteUserById(id).then(data => console.log(data));
         this.alertService.showDeleteNotification();
         this.candidates = [];
         this.adminApiService._users.next([]);
@@ -132,9 +128,7 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
       candidatesThatApply = _.concat(candidatesThatApply,
         _.filter(this.candidatesComplete, (user: User) => {
           if (user.roles.candidate) {
-            return _.includes(
-              user[criteria].toString().toLowerCase(), term.toLowerCase()
-            );
+            return _.includes(user[criteria].toString().toLowerCase(), term.toLowerCase());
           }
         }
         )
