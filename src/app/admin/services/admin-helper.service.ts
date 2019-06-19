@@ -63,6 +63,23 @@ export class AdminHelperService {
     return user;
   }
 
+  setUserWithFormValues(candidateFormValue): User {
+    const user: User = {
+      name: candidateFormValue.name,
+      username: candidateFormValue.username,
+      email: candidateFormValue.email,
+      age: candidateFormValue.age,
+      startDate: candidateFormValue.start_date,
+      releaseDate: candidateFormValue.release_date,
+      preference: candidateFormValue.preference,
+      password: candidateFormValue.password,
+      roles: {
+        candidate: true
+      }
+    };
+    return user;
+  }
+
   getCriteraOptions(): string[] {
     return this.criteriaOptions;
   }

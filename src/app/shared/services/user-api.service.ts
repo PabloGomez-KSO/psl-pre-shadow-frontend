@@ -67,7 +67,6 @@ export class UserApiService {
 
   verificateExistanceOfUser(action): User {
     if (action.payload.exists) {
-      console.log(action.payload);
       return action.payload.data() as User;
     }
   }

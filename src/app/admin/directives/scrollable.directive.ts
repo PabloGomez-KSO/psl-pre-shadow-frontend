@@ -8,12 +8,11 @@ export class ScrollableDirective {
 
   @Output() scrollPosition = new EventEmitter();
 
-  constructor(@Inject(DOCUMENT) public document: Document) { }
+  constructor() { }
 
   @HostListener('window:scroll', ['$event'])
   onScroll() {
       if (document.documentElement.scrollTop + window.innerHeight + 2 >= document.documentElement.offsetHeight) {
-        console.log('got it ');
         this.scrollPosition.emit('bottom');
       }
   }

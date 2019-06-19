@@ -18,8 +18,8 @@ export class AuthService {
     private helperService: HelperService
   ) { }
 
-  registerUser(user: User, password: string): Observable<any> {
-    return from(this.firebaseAuth.auth.createUserWithEmailAndPassword(user.email, password))
+  registerUser(user: User): Observable<any> {
+    return from(this.firebaseAuth.auth.createUserWithEmailAndPassword(user.email, user.password))
      .pipe(map(data => {
         this.updateUserData(data.user.uid, user);
         return data.user;
@@ -42,6 +42,7 @@ export class AuthService {
   updateUserData(userId: string, user: User): void {
     const userRef: AngularFirestoreDocument<any> = this.angularFireStore.doc(`users/${userId}`);
     const userToDB = this.helperService.setUserForDatabase(userId, user);
+    delete user.password;
     userRef.set(userToDB, { merge: true });
   }
 }

@@ -10,5 +10,6 @@ export interface User {
   releaseDate?: any;
   preference?: string;
   username?: string;
+  password?: string;
   roles: Roles;
 }

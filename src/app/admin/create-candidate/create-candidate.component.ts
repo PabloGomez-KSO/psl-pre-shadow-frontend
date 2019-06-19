@@ -14,7 +14,7 @@ import { UserApiService } from 'src/app/shared/services/user-api.service';
   templateUrl: './create-candidate.component.html',
   styleUrls: ['./create-candidate.component.scss']
 })
-export class CreateCandidateComponent implements OnInit{
+export class CreateCandidateComponent implements OnInit {
   password: string;
   user: User;
   candidateForm: FormGroup;
@@ -40,13 +40,13 @@ export class CreateCandidateComponent implements OnInit{
 
     this.candidateForm = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(4)]),
-      age: new FormControl('', [Validators.required, Validators.min(18)]),
+      age: new FormControl(null, [Validators.required, Validators.min(18)]),
       username: new FormControl('', [Validators.required, Validators.min(3)]),
       email: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required]),
-      cpassword: new FormControl('', Validators.required),
-      start_date: new FormControl('', [Validators.required]),
-      release_date: new FormControl('', [Validators.required]),
+      cpassword: new FormControl('', [Validators.required]),
+      start_date: new FormControl(null, [Validators.required]),
+      release_date: new FormControl(null, [Validators.required]),
       preference: new FormControl('', [Validators.required])
     },
       {
@@ -56,8 +56,9 @@ export class CreateCandidateComponent implements OnInit{
   }
 
   onCreateCandidate() {
+    const userToRegister: User = this.adminHelper.setUserWithFormValues(this.candidateForm.value);
     if (this.candidateForm.valid) {
-      this.authRegisterSubscription = this.authService.registerUser({ ...this.user }, this.password).subscribe(
+      this.authRegisterSubscription = this.authService.registerUser(userToRegister).subscribe(
         () => this.alertService.showSuccessMessage('User succesfully created'),
         error => this.alertService.showInvalidMessage(error.message)
       );

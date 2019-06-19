@@ -7,7 +7,8 @@ import { AdminApiService } from '../services/admin-api.service';
 import * as _ from 'lodash';
 import * as moment from 'moment';
 import { AlertService } from '../../shared/notifications/alert.service';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable, of } from 'rxjs';
+import { scan, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-list-candidates',
@@ -33,28 +34,52 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.adminApiService.isListActivated = true;
-    this.adminApiService.getFirstBatchOfUsers();
+    this.getPage();
     this.criteriaOptions = this.adminHelper.getCriteraOptions();
     this.initObservables();
+  }
+
+  scrollHandler(scrollEvent): void {
+    if (scrollEvent === 'bottom' && !this.adminApiService._done.value) {
+      this.getPage();
+    }
+  }
+
+  getPage() {
+    // if(!isLoading) {
+    if (this.candidates.length) {
+      const lastVisibleDocument = this.getLastVisibileDocument();
+      this.adminApiService.getMoreUsers(lastVisibleDocument);
+    } else {
+      this.adminApiService.getFirstBatchOfUsers();
+    }
+    // }
+  }
+
+  getLastVisibileDocument() {
+    const candidatesArraySize = this.candidates.length;
+    console.log('el ultimo documento visible', this.candidates[candidatesArraySize - 1]);
+    return this.candidates[candidatesArraySize - 1].doc;
   }
 
   initObservables(): void {
     this.searchSubscription = this.adminHelper.getGeneralSearchValue()
       .subscribe((searchValue: string) => this.generalSearch(searchValue));
 
-    this.userSubscription = this.adminApiService.users.subscribe((users: User[]) => this.setUsers(users));
+    this.userSubscription = this.adminApiService._users.pipe(
+      scan((currentUsers, newUsers) => {
+        console.log(currentUsers);
+        console.log(newUsers);
+        this.addUsers(newUsers);
+        return currentUsers.concat(newUsers);
+      })
+    ).subscribe();
   }
 
-  scrollHandler(scrollEvent): void {
-    if (scrollEvent === 'bottom' && !this.adminApiService._done.value) {
-      this.adminApiService.getMoreUsers();
-    }
-  }
-
-  setUsers(users: User[]): void {
-    this.candidates = users;
-    this.candidatesComplete = users;
+  addUsers(users: User[]): void {
+    this.candidates.push(...users);
+    // TODO: ARREGLAR ESTO
+    // this.candidatesComplete = users;
     this.selectedCriteriaToSort = 'name';
   }
 
@@ -76,10 +101,10 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
   removeCandidate(id: string) {
     this.alertService.showDeleteAskNotification().then(result => {
       if (result.value) {
-        _.remove(this.candidatesComplete, (cand: User) => cand.id === id);
-        this.candidates = this.candidatesComplete;
         this.userApiService.deleteUserById(id);
         this.alertService.showDeleteNotification();
+        this.candidates = [];
+        this.getPage();
       }
     });
   }
@@ -130,7 +155,6 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.adminApiService.isListActivated = false;
     this.adminApiService.reset();
     this.userSubscription.unsubscribe();
     this.searchSubscription.unsubscribe();

@@ -7,7 +7,6 @@ export class PasswordValidation {
         if (password !== confirmPassword) {
             form.get('cpassword').setErrors( {MatchPassword: true} );
         } else {
-            //lodash noop
             return null;
         }
     }
