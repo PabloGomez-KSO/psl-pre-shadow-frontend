@@ -6,7 +6,7 @@
   </button>
 
   <div class="list_candidates_container__criteria-list">
-    <select class="list_candidates_container__criteria-list__select" name="criteria-list" [(ngModel)]="selectedCriteriaToSearch">
+    <select class="custom-select list_candidates_container__criteria-list__select" name="criteria-list" [(ngModel)]="selectedCriteriaToSearch">
         <option value="" disabled selected>Criteria</option>
       <option *ngFor="let option of criteriaOptions" [value]="option"> {{option}} </option>
     </select>

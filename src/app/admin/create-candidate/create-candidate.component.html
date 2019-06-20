@@ -1,3 +1,5 @@
 <app-candidate-form  [user]="this.user"
-                     [action]="this.action">
+                     [action]="this.action"
+                     (formValueEmitted)="getFormOutput($event)"
+                     >
 </app-candidate-form>

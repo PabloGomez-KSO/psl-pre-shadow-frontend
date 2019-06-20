@@ -66,8 +66,8 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
 
     this.userSubscription = this.adminApiService._users.pipe(
       scan((currentUsers, newUsers) => {
-
         this.addNewUsers(newUsers);
+        console.log('wtf is going on', newUsers);
         return currentUsers.concat(newUsers);
       })
     ).subscribe();
@@ -75,6 +75,7 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
 
   addNewUsers(users: User[]): void {
     this.candidates.push(...users);
+    console.log(this.candidates);
     this.candidatesComplete.push(...users);
   }
 

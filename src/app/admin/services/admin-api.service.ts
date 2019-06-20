@@ -15,16 +15,19 @@ export class AdminApiService {
   _users = new BehaviorSubject([]);
 
   userCollectionSubsciption: Subscription;
-  batchSize = 13;
-  prepend: false;
+  batchSize = 14;
 
   constructor(public angularFirestore: AngularFirestore) { }
 
   getFirstBatchOfUsers(): void {
-    const firstBatch = this.angularFirestore.collection('users',
-      ref => ref.orderBy('name').limit(this.batchSize));
+    if (!this._done.value) {
 
-    this.mapAndUpdate(firstBatch);
+      const firstBatch = this.angularFirestore.collection('users',
+        ref => ref.orderBy('name').limit(this.batchSize));
+
+      this.mapAndUpdate(firstBatch);
+
+    }
   }
 
   getMoreUsers(lastVisibleDocument: any): void {
@@ -66,6 +69,7 @@ export class AdminApiService {
   }
 
   reset() {
+    console.log(' a resetear hpta');
     this._users.next([]);
     this._done.next(false);
     this._loading.next(true);

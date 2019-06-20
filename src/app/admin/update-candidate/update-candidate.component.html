@@ -1,5 +1,7 @@
-<p> this.action </p>
-
-<app-candidate-form  [user]="this.user"
-                     [action]="this.action">
+<app-candidate-form
+                     *ngIf="this.isUserInitialized"
+                     [user]="this.user"
+                     [action]="this.action"
+                     (formValueEmitted)="getFormOutput($event)"
+                     >
 </app-candidate-form>

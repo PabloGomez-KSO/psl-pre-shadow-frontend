@@ -106,12 +106,12 @@
               <div class="create-candidate-info__wrap__element__data__dateContainer">
                   <input class="create-candidate-info__wrap__element__data__dateContainer__input"
                          [ngClass]="{'create-candidate-info__wrap__element__data__dateContainer__input--invalid':
-                                    candidateForm.get('start_date').errors && cForm.submitted}"
+                                    candidateForm.get('startDate').errors && cForm.submitted}"
                          type="text"
-                         name="start_date"
+                         name="startDate"
                          ngbDatepicker
                          #d1="ngbDatepicker"
-                         formControlName="start_date"
+                         formControlName="startDate"
                   />
                   <button type="button"
                           class="btn btn-primary create-candidate-info__wrap__element__data__dateContainer__btn"
@@ -122,8 +122,8 @@
             </div>
             <div class="create-candidate-info__wrap__element__notification">
               <div class="create-candidate-info__wrap__element__notification__error">
-                <div *ngIf="candidateForm.get('start_date').errors">
-                  <div *ngIf="(cForm.submitted || candidateForm.get('start_date')?.touched) && candidateForm.get('start_date').errors['required']">
+                <div *ngIf="candidateForm.get('startDate').errors">
+                  <div *ngIf="(cForm.submitted || candidateForm.get('startDate')?.touched) && candidateForm.get('startDate').errors['required']">
                     Select start date
                   </div>
                 </div>
@@ -137,12 +137,12 @@
               <div class="create-candidate-info__wrap__element__data__dateContainer">
                   <input class="create-candidate-info__wrap__element__data__dateContainer__input"
                          [ngClass]="{'create-candidate-info__wrap__element__data__dateContainer__input--invalid':
-                                     candidateForm.get('release_date').errors && cForm.submitted}"
+                                     candidateForm.get('releaseDate').errors && cForm.submitted}"
                          type="text"
-                         name="release_date"
+                         name="releaseDate"
                          ngbDatepicker
                          #d2="ngbDatepicker"
-                         formControlName="release_date"
+                         formControlName="releaseDate"
                   />
                   <button type="button"
                           class="btn btn-primary create-candidate-info__wrap__element__data__dateContainer__btn"
@@ -153,8 +153,8 @@
             </div>
             <div class="create-candidate-info__wrap__element__notification">
               <div class="create-candidate-info__wrap__element__notification__error">
-                <div *ngIf="candidateForm.get('release_date').errors">
-                  <div *ngIf="(cForm.submitted || candidateForm.get('release_date')?.touched) && candidateForm.get('release_date').errors['required']">
+                <div *ngIf="candidateForm.get('releaseDate').errors">
+                  <div *ngIf="(cForm.submitted || candidateForm.get('releaseDate')?.touched) && candidateForm.get('releaseDate').errors['required']">
                         Select release date
                   </div>
                 </div>

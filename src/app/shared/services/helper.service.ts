@@ -14,13 +14,16 @@ export class HelperService {
     return this.ngbDateParserFormatter.format(date);
   }
 
-  setUserForDatabase(userId: string, user: User): User {
-     user.startDate = this.castNgbDateStructIntoString(user.startDate);
-     user.releaseDate = this.castNgbDateStructIntoString(user.releaseDate);
+  setCandidateForDatabase(userId: string, user: User): User {
+    user.startDate = this.castNgbDateStructIntoString(user.startDate);
+    user.releaseDate = this.castNgbDateStructIntoString(user.releaseDate);
 
     const userForDatabase: User = {
       ...user,
-      id: userId
+      id: userId,
+      roles: {
+        candidate: true
+      }
     };
 
     return userForDatabase;

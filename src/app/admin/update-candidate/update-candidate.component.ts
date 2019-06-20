@@ -1,54 +1,54 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { AdminHelperService } from '../services/admin-helper.service';
 import { User } from 'src/app/shared/models/user';
 import { UserApiService } from '../../shared/services/user-api.service';
-import { AlertService } from '../../shared/notifications/alert.service';
 import { HelperService } from '../../shared/services/helper.service';
+import { AlertService } from '../../shared/notifications/alert.service';
 @Component({
   selector: 'app-update-candidate',
   templateUrl: './update-candidate.component.html',
   styleUrls: ['./update-candidate.component.scss']
 })
 export class UpdateCandidateComponent implements OnInit {
-
   updateCandidateForm: FormGroup;
   user: User;
   softwareRoles: string[];
   action = 'update';
+  isUserInitialized = false;
 
   constructor(
     private adminHelper: AdminHelperService,
-    private helperService: HelperService,
-    private router: Router,
     private userApiService: UserApiService,
     private activatedRoute: ActivatedRoute,
+    private helperService: HelperService,
     private alertService: AlertService
   ) {
   }
 
   ngOnInit() {
-    // this.user = this.adminHelper.getUserRebooted();
-    // this.setFormValidators();
     this.softwareRoles = this.adminHelper.getSoftwareRoles();
     const userIdToUpdate = this.activatedRoute.snapshot.params.id;
     this.userApiService.getUserById(userIdToUpdate).subscribe((cand: User) => {
       this.user = cand;
       this.user.startDate = this.setNgBootstrapDate(this.user.startDate);
       this.user.releaseDate = this.setNgBootstrapDate(this.user.releaseDate);
-      console.log(this.user);
+      this.isUserInitialized = true;
     }
     );
-  }
-
-  setFormValidators(): void {
-    this.updateCandidateForm = this.adminHelper.getUpdateFormValidator();
   }
 
   setNgBootstrapDate(stringDate: string) {
     return this.adminHelper.convertStringIntoNgBootstrapDate(stringDate);
   }
+
+  getFormOutput($userEmmited) {
+    this.user = {...$userEmmited, id: this.user.id};
+    console.log(this.user);
+    this.updateCandidate();
+  }
+
 
   updateCandidate(): void {
     this.castUserDates();
@@ -62,7 +62,4 @@ export class UpdateCandidateComponent implements OnInit {
     this.user.releaseDate = this.helperService.castNgbDateStructIntoString(this.user.releaseDate);
   }
 
-  goBack(): void {
-    this.router.navigate(['/admin-dashboard/']);
-  }
 }

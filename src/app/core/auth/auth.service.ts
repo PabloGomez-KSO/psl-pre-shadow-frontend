@@ -43,8 +43,8 @@ export class AuthService {
 
   updateUserData(userId: string, user: User): void {
     const userRef: AngularFirestoreDocument<any> = this.angularFireStore.doc(`users/${userId}`);
-    const userToDB = this.helperService.setUserForDatabase(userId, user);
     delete user.password;
+    const userToDB = this.helperService.setCandidateForDatabase(userId, user);
     userRef.set(userToDB, { merge: true });
   }
 }
