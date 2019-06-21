@@ -24,12 +24,16 @@ export class AdminNavbarComponent implements OnInit {
   ngOnInit() {
     this.userApiService
       .getUserById(sessionStorage.getItem('userId'))
-      .subscribe((user: User) => (this.email = user.email));
+      .subscribe((user: User) => {
+        this.email = user.email;
+
+      }
+      );
   }
 
   onClickLogOut() {
     this.authService.logOut().subscribe(() => {
-      this.alertService.showGoodByeMessage();
+      this.alertService.showMessage('Goodbye', 'info', false);
       sessionStorage.clear();
       this.router.navigate(['/login']);
     });

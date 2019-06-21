@@ -21,10 +21,10 @@ export class LoginComponent {
   ) { }
 
   onLogIn(): void {
-    this.alertNotification.showLoadingInfoMessageLogin();
+    this.alertNotification.showMessage('Loading...', 'info', true);
     this.authService.logIn(this.email, this.password).subscribe(
       data => this.callUserApiServiceToGetUser(data['user'].uid),
-      error => this.alertNotification.showInvalidMessage(error.message)
+      error => this.alertNotification.showMessage(error.message, 'error', false)
     );
   }
 
@@ -33,7 +33,7 @@ export class LoginComponent {
       if (user) {
         this.verifyUserRoleToRedirect(user, userId);
       } else {
-        this.alertNotification.showInvalidMessage('Invalid credentials');
+        this.alertNotification.showMessage('Invalid credentials', 'error', false);
       }
     });
   }
@@ -49,7 +49,7 @@ export class LoginComponent {
     }
   }
   sendMessageAndAssignRole(message: string, userRol: string): void {
-    this.alertNotification.showSuccessMessage(message);
+    this.alertNotification.showMessage(message, 'success', false);
     sessionStorage.setItem('rol', userRol);
     this.alertNotification.closeNotification();
   }

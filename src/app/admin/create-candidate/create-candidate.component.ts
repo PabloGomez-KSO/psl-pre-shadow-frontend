@@ -4,7 +4,7 @@ import { User } from '../../shared/models/user';
 import { AlertService } from '../../shared/notifications/alert.service';
 import { AdminHelperService } from '../services/admin-helper.service';
 import { Subscription } from 'rxjs';
-import { CandidateFormComponent } from '../candidate-form/candidate-form.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-candidate',
@@ -12,7 +12,6 @@ import { CandidateFormComponent } from '../candidate-form/candidate-form.compone
   styleUrls: ['./create-candidate.component.scss']
 })
 export class CreateCandidateComponent implements OnInit {
-  @ViewChild(CandidateFormComponent) CandidateFormComponent: CandidateFormComponent;
   user: User;
   softwareRoles: string[];
   authRegisterSubscription: Subscription;
@@ -22,7 +21,8 @@ export class CreateCandidateComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private alertService: AlertService,
-    private adminHelper: AdminHelperService
+    private adminHelper: AdminHelperService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -32,6 +32,7 @@ export class CreateCandidateComponent implements OnInit {
   }
 
   getFormOutput($userEmmited) {
+    delete $userEmmited.cpassword;
     this.userToCreate = { ...$userEmmited };
     this.createCandidate();
   }
@@ -39,11 +40,10 @@ export class CreateCandidateComponent implements OnInit {
   createCandidate() {
     this.authRegisterSubscription = this.authService.registerUser(this.userToCreate).subscribe(
       () => {
-        this.alertService.showSuccessMessage('User succesfully created');
-        this.CandidateFormComponent.goBack();
+        this.alertService.showMessage('User succesfully created', 'success', false);
       },
       error => {
-        this.alertService.showInvalidMessage(error.message);
+        this.alertService.showMessage(error.message, 'error', false);
       }
     );
   }

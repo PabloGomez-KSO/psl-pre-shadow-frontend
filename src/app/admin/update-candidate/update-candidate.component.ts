@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AdminHelperService } from '../services/admin-helper.service';
@@ -6,6 +6,7 @@ import { User } from 'src/app/shared/models/user';
 import { UserApiService } from '../../shared/services/user-api.service';
 import { HelperService } from '../../shared/services/helper.service';
 import { AlertService } from '../../shared/notifications/alert.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-update-candidate',
   templateUrl: './update-candidate.component.html',
@@ -23,7 +24,8 @@ export class UpdateCandidateComponent implements OnInit {
     private userApiService: UserApiService,
     private activatedRoute: ActivatedRoute,
     private helperService: HelperService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private router: Router
   ) {
   }
 
@@ -44,7 +46,7 @@ export class UpdateCandidateComponent implements OnInit {
   }
 
   getFormOutput($userEmmited) {
-    this.user = {...$userEmmited, id: this.user.id};
+    this.user = { ...$userEmmited, id: this.user.id };
     console.log(this.user);
     this.updateCandidate();
   }
@@ -53,8 +55,10 @@ export class UpdateCandidateComponent implements OnInit {
   updateCandidate(): void {
     this.castUserDates();
     this.userApiService.
-      updateUser(this.user).then(() =>
-        this.alertService.showSuccessMessage('User updated successfully'));
+      updateUser(this.user).subscribe(() => {
+        this.alertService.showMessage('User updated successfully', 'success', false);
+        this.router.navigate(['/admin-dashboard/']);
+      });
   }
 
   castUserDates() {

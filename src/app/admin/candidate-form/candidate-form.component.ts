@@ -15,6 +15,7 @@ export class CandidateFormComponent implements OnInit {
   @Input() action: string;
   @Input() user: User;
   @Output() formValueEmitted = new EventEmitter<User>();
+
   candidateForm: FormGroup;
   softwareRoles: string[];
   formActions: any = enumActions;
@@ -30,7 +31,6 @@ export class CandidateFormComponent implements OnInit {
     this.softwareRoles = this.adminHelper.getSoftwareRoles();
     this.candidateForm = this.getCandidateForm();
     this.setUpdateControlsAndInputs();
-
   }
 
   setUpdateControlsAndInputs() {

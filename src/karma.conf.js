@@ -32,7 +32,7 @@ module.exports = function (config) {
       // (these files will be instrumented by Istanbul)
       'src/**/*.js': ['coverage']
     },
-    reporters: ['progress', 'kjhtml', 'coverage'],
+    reporters: ['progress', 'coverage'],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,

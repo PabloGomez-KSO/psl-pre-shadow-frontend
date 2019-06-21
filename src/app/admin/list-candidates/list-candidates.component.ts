@@ -34,13 +34,15 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.getPage();
+    console.log('hello');
     this.criteriaOptions = this.adminHelper.getCriteraOptions();
     this.initObservables();
+    this.getPage();
     this.selectedCriteriaToSort = 'name';
   }
 
   scrollHandler(scrollEvent): void {
+    console.log(this.adminApiService._done.value);
     if (scrollEvent === 'bottom' && !this.adminApiService._done.value) {
       this.getPage();
     }
@@ -67,7 +69,7 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
     this.userSubscription = this.adminApiService._users.pipe(
       scan((currentUsers, newUsers) => {
         this.addNewUsers(newUsers);
-        console.log('wtf is going on', newUsers);
+        console.log(newUsers);
         return currentUsers.concat(newUsers);
       })
     ).subscribe();
@@ -75,7 +77,6 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
 
   addNewUsers(users: User[]): void {
     this.candidates.push(...users);
-    console.log(this.candidates);
     this.candidatesComplete.push(...users);
   }
 
@@ -95,18 +96,17 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
   }
 
   removeCandidate(id: string) {
-    this.alertService.showDeleteAskNotification().then(result => {
-      if (result.value) {
-        this.userApiService.deleteUserById(id).then(data => console.log(data));
-        this.alertService.showDeleteNotification();
-        this.candidates = [];
-        this.adminApiService._users.next([]);
-        this.getPage();
-      }
-    });
+    this.alertService.showAskNotification('Are you sure about this ?', 'You wont be able to see the candidate anymore!', 'warning')
+      .subscribe(result => {
+        if (result.value) {
+          this.userApiService.deleteUserById(id).subscribe();
+          this.alertService.showMessage('Candidate has been deleted', 'info', false);
+        }
+      });
   }
 
   createCandidate(): void {
+    this.adminApiService.reset();
     this.router.navigate(['/admin-dashboard/create_candidate']);
   }
 

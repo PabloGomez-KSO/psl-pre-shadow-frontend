@@ -4,7 +4,7 @@ import {
   AngularFirestore,
   AngularFirestoreCollection
 } from '@angular/fire/firestore';
-import { tap } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -16,22 +16,25 @@ export class AdminApiService {
 
   userCollectionSubsciption: Subscription;
   batchSize = 14;
+  isFirstBatch = true;
 
   constructor(public angularFirestore: AngularFirestore) { }
 
   getFirstBatchOfUsers(): void {
-    if (!this._done.value) {
+    this.isFirstBatch = true;
+    const firstBatch = this.angularFirestore.collection(
+      'users',
+      ref => ref.orderBy('name').limit(this.batchSize)
+    );
 
-      const firstBatch = this.angularFirestore.collection('users',
-        ref => ref.orderBy('name').limit(this.batchSize));
+    // tslint:disable-next-line:max-line-length
+    firstBatch.snapshotChanges().pipe(map(changes =>  changes.map((action: any) => console.log(this.isFirstBatch + ' ' + action.payload.doc.data().name)))).subscribe();
 
-      this.mapAndUpdate(firstBatch);
-
-    }
+    this.mapAndUpdate(firstBatch);
   }
 
   getMoreUsers(lastVisibleDocument: any): void {
-
+    this.isFirstBatch = false;
     const more = this.angularFirestore.collection('users', ref => {
       return ref
         .orderBy('name')
@@ -47,6 +50,9 @@ export class AdminApiService {
     }
 
     this._loading.next(true);
+
+    // tslint:disable-next-line:max-line-length
+    userCollection.snapshotChanges().pipe(map(changes =>  changes.map((action: any) => console.log(this.isFirstBatch + ' en el 2 ' + action.payload.doc.data().name)))).subscribe();
 
     this.userCollectionSubsciption = userCollection
       .snapshotChanges()
@@ -69,7 +75,6 @@ export class AdminApiService {
   }
 
   reset() {
-    console.log(' a resetear hpta');
     this._users.next([]);
     this._done.next(false);
     this._loading.next(true);

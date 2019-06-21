@@ -28,12 +28,10 @@ export class AuthService {
   }
 
   logIn(email: string, password: string): Observable<any> {
-    console.log(this.firebaseAuth.auth.signInWithEmailAndPassword(email, password));
     return from(this.firebaseAuth.auth.signInWithEmailAndPassword(email, password));
   }
 
   logOut(): Observable<any> {
-    console.log(this.firebaseAuth.auth.signOut());
     return from(this.firebaseAuth.auth.signOut());
   }
 

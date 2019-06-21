@@ -6,7 +6,7 @@ import {
   AngularFirestoreCollection
 } from '@angular/fire/firestore';
 import { User } from '../models/user';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -42,9 +42,9 @@ export class UserApiService {
       .pipe(map(this.verificateExistanceOfUser));
   }
 
-  deleteUserById(id: string): Promise<any> {
+  deleteUserById(id: string): Observable<any> {
     const userDocument = this.getUserDocumentById(id);
-    return userDocument.delete();
+    return from(userDocument.delete());
   }
 
   getCandidates(): Observable<User[]> {
@@ -54,9 +54,9 @@ export class UserApiService {
       .pipe(map(changes => this.handleUserData(changes)));
   }
 
-  updateUser(user: User): Promise<any> {
+  updateUser(user: User): Observable<any> {
     const userDocument = this.getUserDocumentById(user.id);
-    return userDocument.update(user);
+    return from(userDocument.update(user));
   }
 
   handleUserData(changes) {
