@@ -2,10 +2,6 @@ import * as sinon from 'sinon';
 import { UserApiService } from './user-api.service';
 import * as spies from 'chai-spies';
 chai.use(spies);
-import { of } from 'rxjs';
-import * as sinonChai from 'sinon-chai';
-chai.use(sinonChai);
-
 describe('user-api.service', () => {
 
   let userApiService: UserApiService;
@@ -27,7 +23,7 @@ describe('user-api.service', () => {
 
     it('should verify that getUserDocumentById was called', () => {
       userApiService.getUserDocumentById('2dasbb55');
-      expect(userApimock.angularFireStore.doc).to.have.been.cal;
+      expect(userApimock.angularFireStore.doc).to.have.been.called.with()
 
     });
 
