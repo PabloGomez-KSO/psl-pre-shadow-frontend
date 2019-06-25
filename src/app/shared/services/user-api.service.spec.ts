@@ -1,6 +1,6 @@
 import * as sinon from 'sinon';
 import { UserApiService } from './user-api.service';
-import * as spies from 'chai-spies';
+const chai = require('chai') , spies = require('chai-spies');
 chai.use(spies);
 describe('user-api.service', () => {
 
@@ -23,8 +23,8 @@ describe('user-api.service', () => {
 
     it('should verify that getUserDocumentById was called', () => {
       userApiService.getUserDocumentById('2dasbb55');
-      expect(userApimock.angularFireStore.doc).to.have.been.called.with()
-
+      console.log(userApiService);
+       expect(userApiService).to.have.been.called();
     });
 
   });
