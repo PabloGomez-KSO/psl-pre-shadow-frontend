@@ -1,12 +1,13 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { PasswordValidation} from '../validators/passwordValidator';
-import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
+import { PasswordValidation } from '../validators/passwordValidator';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AdminHelperService } from '../services/admin-helper.service';
 import { User } from 'src/app/shared/models/user';
 import { enumActions } from './formActions.enum';
 import { Subscription } from 'rxjs';
-import { RepeatedEmailValidation } from '../validators/emailValidator';
+import { CustomEmailValidator } from '../validators/emailValidator';
+import { CustomUsernameValidator } from '../validators/usernameValidator';
 import { AngularFirestore } from '@angular/fire/firestore';
 @Component({
   selector: 'app-candidate-form',
@@ -26,13 +27,15 @@ export class CandidateFormComponent implements OnInit {
   constructor(
     private router: Router,
     private adminHelper: AdminHelperService,
-    private angularFirestore: AngularFirestore
+    private angularFirestore: AngularFirestore,
+    private formBuilder: FormBuilder
   ) {
   }
 
   ngOnInit() {
     this.softwareRoles = this.adminHelper.getSoftwareRoles();
     this.candidateForm = this.getCandidateForm();
+    console.log(this.user);
     this.setUpdateControlsAndInputs();
   }
 
@@ -41,24 +44,27 @@ export class CandidateFormComponent implements OnInit {
       this.candidateForm.controls.password.disable({ onlySelf: true });
       this.candidateForm.controls.cpassword.disable({ onlySelf: true });
       this.candidateForm.controls.email.disable({ onlySelf: true });
+      this.candidateForm.controls.username.disable({ onlySelf: true });
     }
   }
 
-  getCandidateForm(): FormGroup {
-    return new FormGroup({
-      name: new FormControl(this.user.name, [Validators.required, Validators.minLength(4)]),
-      age: new FormControl(this.user.age, [Validators.required, Validators.min(18)]),
-      username: new FormControl(this.user.username, [Validators.required, Validators.min(3)]),
-      email: new FormControl('', [Validators.required,
-                   RepeatedEmailValidation.checkeEmailDB(this.angularFirestore)]),
-      password: new FormControl('', [Validators.required]),
-      cpassword: new FormControl('', [Validators.required]),
-      startDate: new FormControl(this.user.startDate, [Validators.required]),
-      releaseDate: new FormControl(this.user.releaseDate, [Validators.required]),
-      preference: new FormControl(this.user.preference, [Validators.required])
-    },
+  getCandidateForm() {
+
+    return this.formBuilder.group(
       {
-        validators: PasswordValidation.MatchPassword
+        name: [this.user.name, [Validators.required, Validators.minLength(4)]],
+        age: [this.user.age, [Validators.required, Validators.min(18)]],
+        email: ['', Validators.required, CustomEmailValidator.emailValidator(this.angularFirestore)],
+        username: [this.user.username, [Validators.required, Validators.min(3)],
+        CustomUsernameValidator.usernameValidator(this.angularFirestore)],
+        password: ['', [Validators.required]],
+        cpassword: ['', [Validators.required]],
+        startDate: [this.user.startDate, [Validators.required]],
+        releaseDate: [this.user.releaseDate, [Validators.required]],
+        preference: [this.user.preference, [Validators.required]]
+      },
+      {
+        validator: PasswordValidation.MatchPassword
       }
     );
   }
@@ -68,9 +74,16 @@ export class CandidateFormComponent implements OnInit {
   }
 
   submitForm(): void {
-    console.log(this.candidateForm);
     if (this.candidateForm.valid) {
       this.formValueEmitted.emit(this.candidateForm.value);
     }
+  }
+
+  get email() {
+    return this.candidateForm.get('email');
+  }
+
+  get username() {
+    return this.candidateForm.get('username');
   }
 }

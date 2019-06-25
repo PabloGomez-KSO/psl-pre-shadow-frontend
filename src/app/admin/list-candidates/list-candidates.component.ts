@@ -46,10 +46,6 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
     }
   }
 
-  onScroll(){
-    this.getPage();
-  }
-
   getPage() {
     if (this.candidates.length) {
       const lastVisibleDocument = this.getLastVisibileDocument();
@@ -104,8 +100,6 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
           this.alertService.showMessage('Candidate has been deleted', 'info', false);
           this.candidates = [];
           this.candidatesComplete = [];
-          //this.getPage();
-
         }
       });
   }

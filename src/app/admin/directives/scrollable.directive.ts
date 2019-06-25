@@ -13,8 +13,8 @@ export class ScrollableDirective implements OnInit {
 
   ngOnInit() {
     this.scrollEvent.pipe(
-      debounceTime(1200)
-    ).subscribe(e => this.scrollPosition.emit('bottom'));
+      debounceTime(1400)
+    ).subscribe(() => this.scrollPosition.emit('bottom'));
   }
 
   constructor(private adminApiService: AdminApiService) { }
