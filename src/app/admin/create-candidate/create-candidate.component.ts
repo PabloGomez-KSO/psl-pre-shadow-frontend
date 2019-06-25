@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { AuthService } from '../../core/auth/auth.service';
 import { User } from '../../shared/models/user';
 import { AlertService } from '../../shared/notifications/alert.service';
@@ -41,6 +41,7 @@ export class CreateCandidateComponent implements OnInit {
     this.authRegisterSubscription = this.authService.registerUser(this.userToCreate).subscribe(
       () => {
         this.alertService.showMessage('User succesfully created', 'success', false);
+        setTimeout(() => this.router.navigate(['/admin-dashboard/']), 1500);
       },
       error => {
         this.alertService.showMessage(error.message, 'error', false);

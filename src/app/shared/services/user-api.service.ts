@@ -19,8 +19,9 @@ export class UserApiService {
     return this.angularFireStore.doc<User>(`users/${id}`);
   }
 
-  getUserDocumentByEmail(email: string): AngularFirestoreDocument<User> {
-    return this.angularFireStore.doc<User>(`users/${email}`);
+  getUserCollectionByEmail(email: string) {
+    return this.angularFireStore.collection('users', ref => ref.where('email', '==', email));
+
   }
 
   getUsersCollection(): AngularFirestoreCollection<User> {
@@ -35,11 +36,10 @@ export class UserApiService {
            );
   }
 
-  getUserByEmail(email: string): Observable<User> {
-    const userDocument = this.getUserDocumentById(email);
-    return userDocument
-      .snapshotChanges()
-      .pipe(map(this.verificateExistanceOfUser));
+
+  getUserByEmail(email: string): Observable<any> {
+    const userCollection = this.getUserCollectionByEmail(email);
+    return userCollection.snapshotChanges();
   }
 
   deleteUserById(id: string): Observable<any> {

@@ -6,18 +6,18 @@
   </button>
 
   <div class="list_candidates_container__criteria-list">
-    <select class="custom-select list_candidates_container__criteria-list__select" name="criteria-list" [(ngModel)]="selectedCriteriaToSearch">
+    <select class="btn-primary list_candidates_container__criteria-list__select" name="criteria-list" [(ngModel)]="selectedCriteriaToSearch">
         <option value="" disabled selected>Criteria</option>
-      <option *ngFor="let option of criteriaOptions" [value]="option"> {{option}} </option>
+      <option *ngFor="let option of criteriaOptions" [value]="option"> {{option | titlecase | convertTitle }} </option>
     </select>
-  </div>
 
-  <input #term (keyup)="searchByCriteria(term.value)" class="form-control mr-sm-2 list_candidates_container__search" type="text" placeholder="Search">
+    <input #term (keyup)="searchByCriteria(term.value)" class="form-control mr-sm-2 list_candidates_container__criteria-list__search" type="text" placeholder="Search by criteria">
+  </div>
 
 </div>
 
 
-<div class="table-responsive candidates_table"  appScrollable (scrollPosition)="scrollHandler($event)">
+<div class="table-responsive candidates_table"   appScrollable (scrollPosition)="scrollHandler($event)">
       <table class="table table-hover table-striped ">
         <thead>
           <tr class="candidates_table__row-header">
@@ -26,7 +26,8 @@
                   <div class="candidates_table__row-header__item__data__text">
                       {{option | titlecase | convertTitle}}
                   </div>
-                  <button *ngIf="selectedCriteriaToSort === option" type="button"
+                  
+                  <button [ngStyle]="{'visibility':selectedCriteriaToSort === option ? 'visible' : 'hidden'}" type="button"
                           class="candidates_table__row-header__item__data__btn">
                       <i  *ngIf="isSortedAscendent"
                           class="fas fa-sort-up candidates_table__row-header__item__data__btn__icon"></i>

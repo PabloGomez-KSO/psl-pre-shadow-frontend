@@ -47,7 +47,6 @@ export class UpdateCandidateComponent implements OnInit {
 
   getFormOutput($userEmmited) {
     this.user = { ...$userEmmited, id: this.user.id };
-    console.log(this.user);
     this.updateCandidate();
   }
 

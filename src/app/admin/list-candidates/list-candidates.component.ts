@@ -34,7 +34,6 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    console.log('hello');
     this.criteriaOptions = this.adminHelper.getCriteraOptions();
     this.initObservables();
     this.getPage();
@@ -42,10 +41,13 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
   }
 
   scrollHandler(scrollEvent): void {
-    console.log(this.adminApiService._done.value);
     if (scrollEvent === 'bottom' && !this.adminApiService._done.value) {
       this.getPage();
     }
+  }
+
+  onScroll(){
+    this.getPage();
   }
 
   getPage() {
@@ -69,7 +71,6 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
     this.userSubscription = this.adminApiService._users.pipe(
       scan((currentUsers, newUsers) => {
         this.addNewUsers(newUsers);
-        console.log(newUsers);
         return currentUsers.concat(newUsers);
       })
     ).subscribe();
@@ -101,6 +102,10 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
         if (result.value) {
           this.userApiService.deleteUserById(id).subscribe();
           this.alertService.showMessage('Candidate has been deleted', 'info', false);
+          this.candidates = [];
+          this.candidatesComplete = [];
+          //this.getPage();
+
         }
       });
   }

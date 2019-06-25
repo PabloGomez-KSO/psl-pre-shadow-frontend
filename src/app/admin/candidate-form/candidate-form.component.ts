@@ -1,11 +1,13 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { PasswordValidation } from '../validators/passwordValidator';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { PasswordValidation} from '../validators/passwordValidator';
+import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AdminHelperService } from '../services/admin-helper.service';
 import { User } from 'src/app/shared/models/user';
 import { enumActions } from './formActions.enum';
 import { Subscription } from 'rxjs';
+import { RepeatedEmailValidation } from '../validators/emailValidator';
+import { AngularFirestore } from '@angular/fire/firestore';
 @Component({
   selector: 'app-candidate-form',
   templateUrl: './candidate-form.component.html',
@@ -24,6 +26,7 @@ export class CandidateFormComponent implements OnInit {
   constructor(
     private router: Router,
     private adminHelper: AdminHelperService,
+    private angularFirestore: AngularFirestore
   ) {
   }
 
@@ -46,7 +49,8 @@ export class CandidateFormComponent implements OnInit {
       name: new FormControl(this.user.name, [Validators.required, Validators.minLength(4)]),
       age: new FormControl(this.user.age, [Validators.required, Validators.min(18)]),
       username: new FormControl(this.user.username, [Validators.required, Validators.min(3)]),
-      email: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required,
+                   RepeatedEmailValidation.checkeEmailDB(this.angularFirestore)]),
       password: new FormControl('', [Validators.required]),
       cpassword: new FormControl('', [Validators.required]),
       startDate: new FormControl(this.user.startDate, [Validators.required]),
@@ -64,6 +68,7 @@ export class CandidateFormComponent implements OnInit {
   }
 
   submitForm(): void {
+    console.log(this.candidateForm);
     if (this.candidateForm.valid) {
       this.formValueEmitted.emit(this.candidateForm.value);
     }
