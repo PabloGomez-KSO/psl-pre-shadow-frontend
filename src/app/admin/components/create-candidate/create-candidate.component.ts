@@ -1,8 +1,8 @@
 import { Component, OnInit} from '@angular/core';
-import { AuthService } from '../../core/auth/auth.service';
-import { User } from '../../shared/models/user';
-import { AlertService } from '../../shared/notifications/alert.service';
-import { AdminHelperService } from '../services/admin-helper.service';
+import { AuthService } from '../../../core/auth/auth.service';
+import { User } from '../../../shared/models/user';
+import { AlertService } from '../../../shared/notifications/alert.service';
+import { AdminHelperService } from '../../services/admin-helper.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 

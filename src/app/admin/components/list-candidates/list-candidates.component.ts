@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserApiService } from '../../shared/services/user-api.service';
-import { User } from '../../shared/models/user';
-import { AdminHelperService } from '../services/admin-helper.service';
-import { AdminApiService } from '../services/admin-api.service';
+import { UserApiService } from '../../../shared/services/user-api.service';
+import { User } from '../../../shared/models/user';
+import { AdminHelperService } from '../../services/admin-helper.service';
+import { AdminApiService } from '../../services/admin-api.service';
 import * as _ from 'lodash';
 import * as moment from 'moment';
-import { AlertService } from '../../shared/notifications/alert.service';
+import { AlertService } from '../../../shared/notifications/alert.service';
 import { Subscription } from 'rxjs';
 import { scan } from 'rxjs/operators';
 

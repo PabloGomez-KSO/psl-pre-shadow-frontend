@@ -1,10 +1,10 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { AuthService } from '../../core/auth/auth.service';
+import { AuthService } from '../../../core/auth/auth.service';
 import { Router } from '@angular/router';
-import { UserApiService } from '../../shared/services/user-api.service';
-import { User } from '../../shared/models/user';
-import { AlertService } from '../../shared/notifications/alert.service';
-import { AdminHelperService } from '../services/admin-helper.service';
+import { UserApiService } from '../../../shared/services/user-api.service';
+import { User } from '../../../shared/models/user';
+import { AlertService } from '../../../shared/notifications/alert.service';
+import { AdminHelperService } from '../../services/admin-helper.service';
 @Component({
   selector: 'app-admin-navbar',
   templateUrl: './admin-navbar.component.html',

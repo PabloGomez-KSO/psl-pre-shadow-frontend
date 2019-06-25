@@ -1,7 +1,7 @@
 import { Routes} from '@angular/router';
-import { CreateCandidateComponent } from './create-candidate/create-candidate.component';
-import { UpdateCandidateComponent } from './update-candidate/update-candidate.component';
-import { ListCandidatesComponent } from './list-candidates/list-candidates.component';
+import { CreateCandidateComponent } from './components/create-candidate/create-candidate.component';
+import { UpdateCandidateComponent } from './components/update-candidate/update-candidate.component';
+import { ListCandidatesComponent } from './components/list-candidates/list-candidates.component';
 import {AuthGuard} from '../core/guards/auth.guard';
 
 export const ADMIN_ROUTES: Routes = [

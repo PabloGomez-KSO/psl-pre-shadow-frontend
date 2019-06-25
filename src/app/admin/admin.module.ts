@@ -1,19 +1,27 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CreateCandidateComponent } from './create-candidate/create-candidate.component';
-import { UpdateCandidateComponent } from './update-candidate/update-candidate.component';
-import { ListCandidatesComponent } from './list-candidates/list-candidates.component';
-import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
-import { AdminNavbarComponent } from './admin-navbar/admin-navbar.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
+// Components
+import { CreateCandidateComponent } from './components/create-candidate/create-candidate.component';
+import { UpdateCandidateComponent } from './components/update-candidate/update-candidate.component';
+import { ListCandidatesComponent } from './components/list-candidates/list-candidates.component';
+import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
+import { AdminNavbarComponent } from './components/admin-navbar/admin-navbar.component';
+import { CandidateFormComponent } from './components/candidate-form/candidate-form.component';
 import { SharedModule } from '../shared/shared.module';
+
+// Pipes
 import { SortCandidatesPipe } from './pipes/sort-candidates.pipe';
 import { ConvertTitlePipe } from './pipes/convert-title.pipe';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+
+// Directives
 import { ScrollableDirective } from './directives/scrollable.directive';
-import { CandidateFormComponent } from './candidate-form/candidate-form.component';
+
+// NgRx.
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   imports: [
@@ -23,7 +31,9 @@ import { CandidateFormComponent } from './candidate-form/candidate-form.componen
     NgbModule,
     ReactiveFormsModule,
     SharedModule,
-    InfiniteScrollModule
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+    })
   ],
   declarations: [
     CreateCandidateComponent,

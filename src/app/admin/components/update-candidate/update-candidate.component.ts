@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { AdminHelperService } from '../services/admin-helper.service';
+import { AdminHelperService } from '../../services/admin-helper.service';
 import { User } from 'src/app/shared/models/user';
-import { UserApiService } from '../../shared/services/user-api.service';
-import { HelperService } from '../../shared/services/helper.service';
-import { AlertService } from '../../shared/notifications/alert.service';
+import { UserApiService } from '../../../shared/services/user-api.service';
+import { HelperService } from '../../../shared/services/helper.service';
+import { AlertService } from '../../../shared/notifications/alert.service';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-update-candidate',

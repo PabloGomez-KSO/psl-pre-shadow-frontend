@@ -1,18 +1,16 @@
 import * as sinon from 'sinon';
-import {
-  AngularFirestore,
-  AngularFirestoreDocument,
-  AngularFirestoreCollection
-} from '@angular/fire/firestore';
 import { UserApiService } from './user-api.service';
-import { User } from '../models/user';
-import { should, assert } from 'chai';
-import * as Chai from 'chai';
-let expect = Chai.expect;
+import * as spies from 'chai-spies';
+chai.use(spies);
+import { of } from 'rxjs';
+import * as sinonChai from 'sinon-chai';
+chai.use(sinonChai);
 
 describe('user-api.service', () => {
 
   let userApiService: UserApiService;
+  const should = chai.should();
+  const expect = chai.expect;
 
   const createComponent = (params: any) => new UserApiService(params.angularFireStore);
   const userApimock = {
@@ -26,15 +24,12 @@ describe('user-api.service', () => {
   });
 
   describe('getUserDocumentById', () => {
-    //const callToUserDocumentId = sinon.stub(userApiService.getUserDocumentById('2d'));
 
-    // expect(userApimock.angularFireStore.doc).toBe.call(onc)
+    it('should verify that getUserDocumentById was called', () => {
+      userApiService.getUserDocumentById('2dasbb55');
+      expect(userApimock.angularFireStore.doc).to.have.been.cal;
 
-    //expect(userApimock.angularFireStore.doc).toBe.
-
-    expect(1 + 1).to.equals(2);
-
-
+    });
 
   });
 });

@@ -16,12 +16,12 @@ export class UserApiService {
   constructor(private angularFireStore: AngularFirestore) { }
 
   getUserDocumentById(id: string): AngularFirestoreDocument<User> {
+    console.log(id);
     return this.angularFireStore.doc<User>(`users/${id}`);
   }
 
   getUserCollectionByEmail(email: string) {
     return this.angularFireStore.collection('users', ref => ref.where('email', '==', email));
-
   }
 
   getUsersCollection(): AngularFirestoreCollection<User> {

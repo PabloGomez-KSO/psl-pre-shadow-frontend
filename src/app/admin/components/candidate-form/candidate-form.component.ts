@@ -1,13 +1,13 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { PasswordValidation } from '../validators/passwordValidator';
+import { PasswordValidation } from '../../validators/passwordValidator';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AdminHelperService } from '../services/admin-helper.service';
+import { AdminHelperService } from '../../services/admin-helper.service';
 import { User } from 'src/app/shared/models/user';
 import { enumActions } from './formActions.enum';
 import { Subscription } from 'rxjs';
-import { CustomEmailValidator } from '../validators/emailValidator';
-import { CustomUsernameValidator } from '../validators/usernameValidator';
+import { CustomEmailValidator } from '../../validators/emailValidator';
+import { CustomUsernameValidator } from '../../validators/usernameValidator';
 import { AngularFirestore } from '@angular/fire/firestore';
 @Component({
   selector: 'app-candidate-form',

@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { LoginComponent  } from './core/auth/login/login.component';
 
 // Components
-import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
+import { AdminDashboardComponent } from './admin/components/admin-dashboard/admin-dashboard.component';
 import { CandidateDashboardComponent } from './candidate/candidate-dashboard/candidate-dashboard.component';
 
 import {AuthGuard} from './core/guards/auth.guard';
