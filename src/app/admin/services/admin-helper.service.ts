@@ -35,16 +35,6 @@ export class AdminHelperService {
     this.generalSearchObservable.next(value);
   }
 
-  getUpdateFormValidator(): FormGroup {
-    return new FormGroup({
-      name: new FormControl('', [Validators.required, Validators.minLength(4)]),
-      age: new FormControl('', [Validators.required, Validators.min(18)]),
-      start_date: new FormControl('', [Validators.required]),
-      release_date: new FormControl('', [Validators.required]),
-      preference: new FormControl('', [Validators.required])
-    });
-  }
-
   getUserRebooted(): User {
     const user: User = {
       id: '',
@@ -79,7 +69,7 @@ export class AdminHelperService {
     return user;
   }
 
-  getCriteraOptions(): string[] {
+  getCriteriaOptions(): string[] {
     return this.criteriaOptions;
   }
 

@@ -26,7 +26,7 @@ export class AdminApiService {
       'users',
       ref => ref.orderBy('name').limit(this.batchSize)
     );
-   
+
 // tslint:disable-next-line: max-line-length
    // firstBatch.snapshotChanges().pipe(map(changes =>  changes.map((action: any) => console.log(this.isFirstBatch + ' ' + action.payload.doc.data().name)))).subscribe();
 

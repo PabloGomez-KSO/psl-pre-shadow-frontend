@@ -151,6 +151,18 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 210px;
+    &__criteria-list {
+      &__text {
+        margin-right: 10px;
+      }
+      &__select {
+        width: 160px;
+      }
+
+      &__search {
+        width: 150px;
+      }
+    }
   }
   .candidates_table {
     width: 375px;

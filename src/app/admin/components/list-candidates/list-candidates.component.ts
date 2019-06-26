@@ -34,7 +34,7 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.criteriaOptions = this.adminHelper.getCriteraOptions();
+    this.criteriaOptions = this.adminHelper.getCriteriaOptions();
     this.initObservables();
     this.getPage();
     this.selectedCriteriaToSort = 'name';

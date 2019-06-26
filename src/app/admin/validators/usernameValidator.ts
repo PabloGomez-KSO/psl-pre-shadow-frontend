@@ -6,6 +6,8 @@ export class CustomUsernameValidator {
   static usernameValidator(angularFireStore: AngularFirestore) {
     return (control: AbstractControl) => {
 
+      console.log(control.get);
+
       const username = control.value.toLowerCase();
       return angularFireStore.collection('users', ref => ref.where('username', '==', username) )
         .valueChanges().pipe(
