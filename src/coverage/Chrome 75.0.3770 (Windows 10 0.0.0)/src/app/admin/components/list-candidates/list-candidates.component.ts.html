@@ -1,0 +1,536 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src\app\admin\components\list-candidates\list-candidates.component.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../../../index.html">all files</a> / <a href="index.html">src/app/admin/components/list-candidates/</a> list-candidates.component.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">58.76% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>57/97</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">42.86% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>21/49</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">44% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>11/25</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">58.24% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>53/91</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line medium'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Component, OnInit<span class="branch-1 cbranch-no" title="branch not covered" >, OnDestroy } fr</span>om '@angular/core';
+import { Router } from '@angular/router';<span class="branch-1 cbranch-no" title="branch not covered" ></span>
+impo<span class="missing-if-branch" title="if path not taken" >I</span>rt { UserApiService } from '../../../shared/services/user-api.service';<span class="cstat-no" title="statement not covered" ></span>
+import { User } from '../../../shared/models/user';<span class="branch-1 cbranch-no" title="branch not covered" ><span class="missing-if-branch" title="else path not taken" >E</span></span>
+import { AdminHelper<span class="branch-1 cbranch-no" title="branch not covered" >Se</span>rvi<span class="branch-2 cbranch-no" title="branch not covered" >ce } from '../../services/admin-helper</span>.service';
+import { AdminApiService } from '../../services/admin-api.service';
+import * as _ from 'lodash<span class="branch-1 cbranch-no" title="branch not covered" >';</span>
+impo<span class="missing-if-branch" title="else path not taken" >E</span>rt * as moment from 'moment';
+import { AlertService } from '../../../shared/notifications/alert.service';
+import { Subscription } from 'rxjs';
+import { scan } from 'rxjs/operators';
+&nbsp;
+@Component({
+  selector: 'app-list-candidates',
+  templateUrl: './list-candidates.component.html',
+  styleUrls: ['./list-candidates.component.scss']
+})
+export class ListCandidatesComponent implements OnInit, OnDestroy {
+  candidates: any[] = [];
+  candidatesComplete: User[] = [];
+  criteriaOptions: string[] = [];
+  selectedCriteriaToSearch = '';
+  selectedCriteriaToSort = '';
+  isSortedAscendent = true;
+  userSubscription: Subscription;
+  searchSubscription: Subscription;
+&nbsp;
+  constructor(
+    private router: Router,
+    private userApiService: UserApiService,
+    private adminHelper: AdminHelperService,
+    private alertService: AlertService,
+    private adminApiService: AdminApiService
+  ) { }
+&nbsp;
+  ngOnInit(): void {
+    this.criteriaOptions = this.adminHelper.getCriteriaOptions();
+    this.initObservables();
+    this.getPage();
+    this.selectedCriteriaToSort = 'name';
+    console.log('oelo', this.selectedCriteriaToSort);
+  }
+&nbsp;
+  scrollHandler(scrollEvent): void {
+    if (scrollEvent === 'bottom' &amp;&amp; !this.adminApiService._done.value) {
+      th<span class="missing-if-branch" title="if path not taken" >I</span>is.getPage();
+    }<span class="cstat-no" title="statement not covered" ></span>
+  }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+  getPage() {
+    if (this.candidates.length) {
+      const lastVisibleDocument = this.getLastVisibileDocument();
+      this.adminApiService.getMoreUsers(lastVisibleDocument);
+    } else {<span class="fstat-no" title="function not covered" ></span>
+      this.adminApiService.getFirs<span class="cstat-no" title="statement not covered" >tBatchOfUsers();</span>
+    }<span class="cstat-no" title="statement not covered" ></span>
+  }
+&nbsp;
+  getLastVisibileDocument() {
+    const candidatesArraySize = this.candidates.length;
+    return this.candidates[candidatesArraySize - 1].doc;
+  }<span class="fstat-no" title="function not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
+  initObserv<span class="cstat-no" title="statement not covered" >ables(): void {</span>
+    this.searchSubscription = this.adminHelper.getGeneralSearchValue()
+      .subscribe((searchValue: string) =&gt; this.generalSearch(searchValue));
+<span class="fstat-no" title="function not covered" ></span>
+    this.userSubscription = this.adminApiService._users.pipe(
+      sc<span class="cstat-no" title="statement not covered" >an((currentUsers, newUsers) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        this.addNewUsers(newUsers);</span>
+        return currentUsers.concat(newUsers);
+      })<span class="fstat-no" title="function not covered" ></span>
+    ).su<span class="cstat-no" title="statement not covered" >bscribe();</span>
+  }<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
+  addNewUser<span class="cstat-no" title="statement not covered" >s(users: User[]): void </span>{
+    this.candidates.push(...users);
+    this.candidatesComplete.push(...users);
+  }<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
+  sortWhenClicked(option: string): void {
+    if (this.selectedCriteriaToSort !== option) {
+      this.selectedCriteriaToSort = option;<span class="fstat-no" title="function not covered" ></span>
+      th<span class="cstat-no" title="statement not covered" >is.isSortedAscendent = true;</span>
+      this.sortByCriteria();
+    } else {<span class="fstat-no" title="function not covered" ></span>
+      this.isSortedA<span class="cstat-no" title="statement not covered" >scend</span>ent = !this.isSortedAscendent;
+      th<span class="cstat-no" title="statement not covered" >is.sortByCriteria();</span>
+    }<span class="fstat-no" title="function not covered" ></span>
+  }<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
+  editCandidate(<span class="cstat-no" title="statement not covered" >id: string): void {</span>
+    this.router.<span class="cstat-no" title="statement not covered" >navigate(['/admin-dashb</span>oard/update_candidate', id]);
+  }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+  removeCandidate(id: string) {
+    this.alertService.showAskNotification('Are you sure about this ?', 'You wont be able to see the candidate anymore!', 'warning')
+      .subscribe(result =&gt; {<span class="fstat-no" title="function not covered" ></span>
+<span class="cstat-no" title="statement not covered" >        if (result.value) {</span>
+<span class="cstat-no" title="statement not covered" >          this.userApiService.deleteUserById(id).subscribe();</span>
+          this.alertService.showMessage('Candidate has been deleted', 'info', false);
+          this.candidates = [];<span class="fstat-no" title="function not covered" ></span>
+          this.candi<span class="cstat-no" title="statement not covered" >dates</span>Complete = [];
+<span class="cstat-no" title="statement not covered" >        }<span class="fstat-no" title="function not covered" ></span></span>
+      });<span class="cstat-no" title="statement not covered" ></span>
+  }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+  createCandidate(): void {
+    this.adminApiService.reset();
+    this.router.navigate(['/admin-dashboard/create_candidate']);
+  }
+&nbsp;
+  searchByCriteria(term: string): void {
+    this.candidates = _.filter(this.candidatesComplete, (user: User) =&gt; {<span class="fstat-no" title="function not covered" ></span>
+      if (user.r<span class="cstat-no" title="statement not covered" >oles.candidate) {</span>
+        return _.inc<span class="cstat-no" title="statement not covered" >ludes(</span>
+          user[this.selectedCriteriaToSearch].toString().toLowerCase(),
+          term.toLowerCase()
+        );
+      }
+    });
+  }<span class="fstat-no" title="function not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
+  generalSearch(term<span class="cstat-no" title="statement not covered" >: string): void {</span>
+<span class="cstat-no" title="statement not covered" ></span>
+    let cand<span class="cstat-no" title="statement not covered" >idatesThatApply: User[] = [];<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span>
+&nbsp;
+    this.criteriaOptions.forEach(criteria =&gt; {
+      candid<span class="cstat-no" title="statement not covered" >atesThatApply = _.concat(candidatesThatApply,</span>
+        _.filter(this.candidatesComplete, (user: User) =&gt; {
+          if (user.roles.candidate) {
+            return _.includes(user[criteria].toString().toLowerC<span class="fstat-no" title="function not covered" >ase(), term.toLowerCase());</span>
+<span class="cstat-no" title="statement not covered" >          }</span>
+<span class="cstat-no" title="statement not covered" >        }</span>
+<span class="cstat-no" title="statement not covered" >        )</span>
+      );
+    });
+    this.candidates = _.uniq(candidatesThatApply);
+  }
+&nbsp;
+  sortByCriteria(): void {
+    const order = this.isSortedAscendent ? 'asc' : 'desc';
+    if (this.selectedCriteriaToSort === 'startDate' || this.selectedCriteriaToSort === 'releaseDate') {
+      this.candidates = _.orderBy(this.candidatesComplete,
+        (cand: User) =&gt; moment(cand[this.selectedCriteriaToSort]), order
+      );
+    } else {
+      this.candidates = _.orderBy(this.candidatesComplete, this.selectedCriteriaToSort, order);
+    }
+  }
+&nbsp;
+  ngOnDestroy() {
+    this.adminApiService.reset();
+    this.userSubscription.unsubscribe();
+    this.searchSubscription.unsubscribe();
+  }
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Jun 27 2019 00:53:12 GMT-0500 (GMT-05:00)
+</div>
+</div>
+<script src="../../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../../sorter.js"></script>
+</body>
+</html>

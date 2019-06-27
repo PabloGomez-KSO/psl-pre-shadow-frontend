@@ -38,6 +38,7 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
     this.initObservables();
     this.getPage();
     this.selectedCriteriaToSort = 'name';
+    console.log('oelo', this.selectedCriteriaToSort);
   }
 
   scrollHandler(scrollEvent): void {
