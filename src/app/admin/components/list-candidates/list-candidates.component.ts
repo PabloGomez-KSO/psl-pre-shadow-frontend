@@ -38,7 +38,6 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
     this.initObservables();
     this.getPage();
     this.selectedCriteriaToSort = 'name';
-    console.log('oelo', this.selectedCriteriaToSort);
   }
 
   scrollHandler(scrollEvent): void {
@@ -75,6 +74,7 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
 
   addNewUsers(users: User[]): void {
     this.candidates.push(...users);
+    console.log(this.candidates);
     this.candidatesComplete.push(...users);
   }
 

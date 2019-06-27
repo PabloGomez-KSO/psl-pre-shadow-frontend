@@ -1,10 +1,10 @@
 // Karma configuration file, see link for more information
 // https://karma-runner.github.io/1.0/config/configuration-file.html
 
-module.exports = function (config) {
+module.exports = function(config) {
   config.set({
     basePath: '',
-    frameworks: ['jasmine', '@angular-devkit/build-angular', 'sinon','mocha', 'sinon-chai', 'chai'],
+    frameworks: ['jasmine', '@angular-devkit/build-angular', 'sinon', 'mocha'],
     plugins: [
       require('karma-jasmine'),
       require('karma-chrome-launcher'),
@@ -14,8 +14,6 @@ module.exports = function (config) {
       require('karma-coverage'),
       require('karma-mocha'),
       require('karma-sinon'),
-      require('karma-sinon-chai'),
-      require('karma-chai'),
       require('karma-browserify')
     ],
     client: {
