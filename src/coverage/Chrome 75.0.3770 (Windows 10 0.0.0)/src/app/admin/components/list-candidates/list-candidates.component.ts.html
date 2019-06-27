@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">62.5% </span>
+        <span class="strong">62.89% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>60/96</span>
+        <span class='fraction'>61/97</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">44.9% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>12/25</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">62.22% </span>
+        <span class="strong">62.64% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>56/90</span>
+        <span class='fraction'>57/91</span>
       </div>
     </div>
   </div>
@@ -200,8 +200,7 @@
 155
 156
 157
-158
-159</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+158</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">2×</span>
@@ -248,7 +247,6 @@
 <span class="cline-any cline-yes">3×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2×</span>
@@ -270,7 +268,8 @@
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -350,7 +349,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -410,7 +408,6 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
   getPage() {
     if (this.candidates.length) {
       const lastVisibleDocument = this.getLastVisibileDocument();
-      console.log(lastVisibleDocument);
       this.adminApiService.getMoreUsers(lastVisibleDocument);
     } else {<span class="fstat-no" title="function not covered" ></span>
       this.adminApiService.getFirs<span class="cstat-no" title="statement not covered" >tBatchOfUsers();</span>
@@ -430,71 +427,71 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
       scan((currentUsers, newUsers) =&gt; {
         this.addNewUsers(newUsers);
         return currentUsers.concat(newUsers);
-      })<span class="fstat-no" title="function not covered" ></span>
-    ).su<span class="cstat-no" title="statement not covered" >bscribe();</span>
+      })
+    ).subscribe();<span class="fstat-no" title="function not covered" ></span>
   }<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" ></span>
-  addNewUser<span class="cstat-no" title="statement not covered" >s(users: User[]): void </span>{
-   // this.candidates.push(...users);
+  addNewUser<span class="cstat-no" title="statement not covered" >s(users: User[]): void {</span>
+    this.can<span class="cstat-no" title="statement not covered" >didates.push(...users);</span>
     console.log(this.candidates);
-   //  this.<span class="cstat-no" title="statement not covered" >candidatesComplete.push(...users);</span>
+    this.candidatesComplete.push(...users);
   }<span class="cstat-no" title="statement not covered" ></span>
-&nbsp;
+<span class="cstat-no" title="statement not covered" ></span>
   sortWhenClicked(option: string): void {
-    if (this.selectedCriteriaToSort !== option) {<span class="fstat-no" title="function not covered" ></span>
-      th<span class="cstat-no" title="statement not covered" >is.selectedCriteriaToSort = option;</span>
-      this.isSortedAscendent = true;
-      this.sortByCriteria();<span class="fstat-no" title="function not covered" ></span>
-    } else {<span class="cstat-no" title="statement not covered" ></span>
-      th<span class="cstat-no" title="statement not covered" >is.isSortedAscendent = !this.isSortedAscendent;</span>
-      this.sortByCriteria();<span class="fstat-no" title="function not covered" ></span>
-    }<span class="cstat-no" title="statement not covered" ></span>
+    if (this.selectedCriteriaToSort !== option) {
+      this.selectedCriteriaToSort = option;<span class="fstat-no" title="function not covered" ></span>
+      th<span class="cstat-no" title="statement not covered" >is.isSortedAscendent = true;</span>
+      this.sortByCriteria();
+    } else {<span class="fstat-no" title="function not covered" ></span>
+      this.isSortedA<span class="cstat-no" title="statement not covered" >scend</span>ent = !this.isSortedAscendent;
+      th<span class="cstat-no" title="statement not covered" >is.sortByCriteria();</span>
+    }<span class="fstat-no" title="function not covered" ></span>
   }<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" ></span>
   editCandidate(<span class="cstat-no" title="statement not covered" >id: string): void {</span>
-    this.router.<span class="cstat-no" title="statement not covered" >navigate(['/admin-dashboard/upd</span>ate_candidate', id]);
-  }
+    this.router.<span class="cstat-no" title="statement not covered" >navigate(['/admin-dashb</span>oard/update_candidate', id]);
+  }<span class="cstat-no" title="statement not covered" ></span>
 &nbsp;
   removeCandidate(id: string) {
-    this.alertService.showAskNotification('Are you sure about this ?<span class="fstat-no" title="function not covered" >', 'You wont be able to see the candidate anymore!', 'warning')</span>
-      .s<span class="cstat-no" title="statement not covered" >ubscribe(result =&gt; {</span>
+    this.alertService.showAskNotification('Are you sure about this ?', 'You wont be able to see the candidate anymore!', 'warning')
+      .subscribe(result =&gt; {<span class="fstat-no" title="function not covered" ></span>
 <span class="cstat-no" title="statement not covered" >        if (result.value) {</span>
-          this.userApiService.deleteUserById(id).subscribe();
-          this.alertService.showMessage('Candidate has been deleted', 'in<span class="fstat-no" title="function not covered" >fo', false);</span>
-          this.candi<span class="cstat-no" title="statement not covered" >dates</span> = [];
-<span class="cstat-no" title="statement not covered" >          this.candidatesComplete = [];<span class="fstat-no" title="function not covered" ></span></span>
-        }<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >          this.userApiService.deleteUserById(id).subscribe();</span>
+          this.alertService.showMessage('Candidate has been deleted', 'info', false);
+          this.candidates = [];<span class="fstat-no" title="function not covered" ></span>
+          this.candi<span class="cstat-no" title="statement not covered" >dates</span>Complete = [];
+<span class="cstat-no" title="statement not covered" >        }<span class="fstat-no" title="function not covered" ></span></span>
       });<span class="cstat-no" title="statement not covered" ></span>
-  }
+  }<span class="cstat-no" title="statement not covered" ></span>
 &nbsp;
   createCandidate(): void {
     this.adminApiService.reset();
     this.router.navigate(['/admin-dashboard/create_candidate']);
   }
 &nbsp;
-  searchByCriteria(term: string): void {<span class="fstat-no" title="function not covered" ></span>
-    this.candida<span class="cstat-no" title="statement not covered" >tes = _.filter(this.candidatesComplete, (user: User) =&gt; {</span>
-      if (user.roles<span class="cstat-no" title="statement not covered" >.candidate) {</span>
-        return _.includes(
+  searchByCriteria(term: string): void {
+    this.candidates = _.filter(this.candidatesComplete, (user: User) =&gt; {<span class="fstat-no" title="function not covered" ></span>
+      if (user.r<span class="cstat-no" title="statement not covered" >oles.candidate) {</span>
+        return _.inc<span class="cstat-no" title="statement not covered" >ludes(</span>
           user[this.selectedCriteriaToSearch].toString().toLowerCase(),
           term.toLowerCase()
         );
       }
-    });<span class="fstat-no" title="function not covered" ></span>
-  }<span class="cstat-no" title="statement not covered" ></span>
+    });
+  }<span class="fstat-no" title="function not covered" ></span>
 <span class="cstat-no" title="statement not covered" ></span>
-  genera<span class="cstat-no" title="statement not covered" >lSearch(term: string): void {</span>
-<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span>
-    let candidatesThatApply: User[] = [];
+  generalSearch(term<span class="cstat-no" title="statement not covered" >: string): void {</span>
+<span class="cstat-no" title="statement not covered" ></span>
+    let cand<span class="cstat-no" title="statement not covered" >idatesThatApply: User[] = [];<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span>
 &nbsp;
-    this.cri<span class="cstat-no" title="statement not covered" >teriaOptions.forEach(criteria =&gt; {</span>
-      candidatesThatApply = _.concat(candidatesThatApply,
+    this.criteriaOptions.forEach(criteria =&gt; {
+      candid<span class="cstat-no" title="statement not covered" >atesThatApply = _.concat(candidatesThatApply,</span>
         _.filter(this.candidatesComplete, (user: User) =&gt; {
-          if (user.roles.candidate) {<span class="fstat-no" title="function not covered" ></span>
-<span class="cstat-no" title="statement not covered" >            return _.includes(user[cri</span>teria].toString().toLowerCase(), term.toLowerCase());
+          if (user.roles.candidate) {
+            return _.includes(user[criteria].toString().toLowerC<span class="fstat-no" title="function not covered" >ase(), term.toLowerCase());</span>
 <span class="cstat-no" title="statement not covered" >          }</span>
 <span class="cstat-no" title="statement not covered" >        }</span>
-        )
+<span class="cstat-no" title="statement not covered" >        )</span>
       );
     });
     this.candidates = _.uniq(candidatesThatApply);
@@ -523,7 +520,7 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Jun 27 2019 12:02:24 GMT-0500 (GMT-05:00)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Jun 27 2019 12:07:57 GMT-0500 (GMT-05:00)
 </div>
 </div>
 <script src="../../../../../prettify.js"></script>
