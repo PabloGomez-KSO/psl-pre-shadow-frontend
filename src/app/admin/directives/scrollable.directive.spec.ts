@@ -1,26 +1,41 @@
 import { spy } from 'sinon';
 import { DOCUMENT } from '@angular/platform-browser';
-import { ScrollableDirective} from './scrollable.directive';
+import { ScrollableDirective } from './scrollable.directive';
 
-import { expect } from 'chai';
+// import { expect } from 'chai';
+import { BehaviorSubject } from 'rxjs';
+import { fakeAsync } from '@angular/core/testing';
+import { tick } from '@angular/core/src/render3';
+import { doesNotThrow } from 'assert';
 
 describe('Tests for operations', () => {
 
-  it('4 + 4 = 8', () => {
+  const createScrollableDirective = (params: any) =>
+    new ScrollableDirective(params.adminApiService);
 
-    expect(4 + 4).to.be.equal( 8 );
+  const scrollableDirectiveMock = {
+    adminApiService: {
+      _loading: new BehaviorSubject(false)
+    }
+  };
 
+  let scrollableDirective;
+
+  beforeEach(() => {
+    scrollableDirective = createScrollableDirective(scrollableDirectiveMock);
+  });
+
+  describe('ngOnInit', () => {
+
+    it('scrollEvent should be called', (done: DoneFn) => {
+
+      scrollableDirective.scrollEvent.subscribe((data) => {
+        console.log(data);
+        done();
+      });
+
+
+    });
   });
 
 });
-/*
-describe('Admin - Scrollable Directive', () => {
-
-  const scrollableDirective: ScrollableDirective;
-
-  beforeEach(() => {
-    scrollableDirective = new ScrollableDirective(DOCUMENT);
-
-  });
-
-});*/

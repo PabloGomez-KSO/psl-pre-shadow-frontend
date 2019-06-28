@@ -11,13 +11,13 @@ export class ScrollableDirective implements OnInit {
   @Output() scrollPosition = new EventEmitter();
   private scrollEvent = new Subject();
 
+  constructor(private adminApiService: AdminApiService) { }
+
   ngOnInit() {
     this.scrollEvent.pipe(
       debounceTime(1000)
     ).subscribe(() => this.scrollPosition.emit('bottom'));
   }
-
-  constructor(private adminApiService: AdminApiService) { }
 
   @HostListener('window:scroll', ['$event'])
   onScroll() {
