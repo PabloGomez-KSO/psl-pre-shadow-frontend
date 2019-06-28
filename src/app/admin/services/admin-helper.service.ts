@@ -1,5 +1,3 @@
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { PasswordValidation } from '../validators/passwordValidator';
 import { Injectable } from '@angular/core';
 import { User } from 'src/app/shared/models/user';
 import { Subject } from 'rxjs';
@@ -45,23 +43,6 @@ export class AdminHelperService {
       startDate: null,
       releaseDate: null,
       preference: '',
-      roles: {
-        candidate: true
-      }
-    };
-    return user;
-  }
-
-  setUserWithFormValues(candidateFormValue): User {
-    const user: User = {
-      name: candidateFormValue.name,
-      username: candidateFormValue.username,
-      email: candidateFormValue.email,
-      age: candidateFormValue.age,
-      startDate: candidateFormValue.start_date,
-      releaseDate: candidateFormValue.release_date,
-      preference: candidateFormValue.preference,
-      password: candidateFormValue.password,
       roles: {
         candidate: true
       }

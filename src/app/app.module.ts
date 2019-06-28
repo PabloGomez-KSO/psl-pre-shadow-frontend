@@ -12,6 +12,12 @@ import { SharedModule } from './shared/shared.module';
 // Routes
 import { APP_ROUTES } from './app-routing.module';
 
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
+// Enviroments
+import { environment } from '../environments/environment';
+
+
 @NgModule({
   declarations: [
     AppComponent
@@ -23,7 +29,10 @@ import { APP_ROUTES } from './app-routing.module';
     CoreModule,
     APP_ROUTES,
     RouterModule,
-    SharedModule
+    SharedModule,
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -21,6 +21,7 @@
     &__text {
       font-family: $main_font;
       font-size: $size_main_font;
+      font-weight: bold;
     }
   }
 
@@ -28,6 +29,10 @@
     font-family: $main_font;
     font-size: $size_main_font;
     color: white;
-    margin-right: 10px;
+    margin-right: 32px;
+  }
+
+  .navbar_input{
+    margin-right: 25px;
   }
 }

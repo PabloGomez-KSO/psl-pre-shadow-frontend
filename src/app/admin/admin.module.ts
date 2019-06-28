@@ -21,8 +21,7 @@ import { ScrollableDirective } from './directives/scrollable.directive';
 
 // NgRx.
 import { StoreModule } from '@ngrx/store';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-
+import { adminReducer } from './store/reducers/admin.reducer';
 @NgModule({
   imports: [
     CommonModule,
@@ -31,9 +30,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     NgbModule,
     ReactiveFormsModule,
     SharedModule,
-    StoreDevtoolsModule.instrument({
-      maxAge: 25, // Retains last 25 states
-    })
+    StoreModule.forRoot({ searchTerm: adminReducer})
   ],
   declarations: [
     CreateCandidateComponent,

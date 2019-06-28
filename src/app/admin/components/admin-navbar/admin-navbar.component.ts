@@ -5,6 +5,7 @@ import { UserApiService } from '../../../shared/services/user-api.service';
 import { User } from '../../../shared/models/user';
 import { AlertService } from '../../../shared/notifications/alert.service';
 import { AdminHelperService } from '../../services/admin-helper.service';
+import { debounceTime } from 'rxjs/operators';
 @Component({
   selector: 'app-admin-navbar',
   templateUrl: './admin-navbar.component.html',
@@ -24,11 +25,8 @@ export class AdminNavbarComponent implements OnInit {
   ngOnInit() {
     this.userApiService
       .getUserById(sessionStorage.getItem('userId'))
-      .subscribe((user: User) => {
-        this.email = user.email;
+      .subscribe((user: User) => this.email = user.email);
 
-      }
-      );
   }
 
   onClickLogOut() {

@@ -48,7 +48,6 @@ describe('user-api.service', () => {
     it('getUserDocumentById method', () => {
       const email = 'pvillegasg@psl.com.co';
 
-
     });
 
   });

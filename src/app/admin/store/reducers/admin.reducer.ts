@@ -1,9 +1,10 @@
-import * as adminActions from '../actions';
+import * as actions from '../actions';
 
-export interface AdminState {
-  searchString: string;
-}
-
-export function searchReducer(state: string = '', action: adminActions.SearchAction ) {
-
+export function adminReducer(state: string = '', action: actions.AdminActions) {
+  switch (action.type) {
+    case actions.UPDATE_SEARCH_ADMIN_NAVBAR:
+      return action.searchString;
+    default:
+      return state;
+  }
 }

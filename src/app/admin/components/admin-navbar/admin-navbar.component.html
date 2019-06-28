@@ -9,17 +9,20 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto navbar-list">
       <li class="nav-item navbar-list__item" routerLinkActive="active">
-        <a class="nav-link navbar-list__item__text" [routerLink]="['/admin-dashboard', 'list_candidates']">Dashboard </a>
+        <a class="nav-link navbar-list__item__text" [routerLink]="['/admin-dashboard', 'list_candidates']">Candidates</a>
       </li>
+      <li class="nav-item navbar-list__item">
+          <a class="nav-link navbar-list__item__text" [routerLink]="['/admin-dashboard', 'list_candidates']">Courses </a>
+        </li>
     </ul>
     <li>
       <span class="navbar_text"> <strong> Admin: </strong> {{ this.email }} </span>
     </li>
-    <div class="form-inline my-2 my-lg-0">
-      <input #term (keyup)="updateTermToSearch(term.value)" class="form-control mr-sm-2" type="text" placeholder="Search">
+    <div class="form-inline my-2 my-lg-0 navbar_input">
+        <input #term (keyup)="updateTermToSearch(term.value)" class="form-control mr-sm-2" type="text" placeholder="Search">
     </div>
     <button type="button" class="btn btn-primary navbar-btn">
-      <span class="navbar-btn__text" (click)="onClickLogOut()">Log Out</span>
+        <span class="navbar-btn__text" (click)="onClickLogOut()">Sign Out</span>
     </button>
   </div>
 </nav>

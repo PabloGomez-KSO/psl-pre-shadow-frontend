@@ -11,13 +11,18 @@
       <option *ngFor="let option of criteriaOptions" [value]="option"> {{option | titlecase | convertTitle }} </option>
     </select>
 
-    <input #term (keyup)="searchByCriteria(term.value)" class="form-control mr-sm-2 list_candidates_container__criteria-list__search" type="text" placeholder="Search by criteria">
+    <input #term [(ngModel)]="termToSearch" (keyup)="searchByCriteria(term.value)" class="form-control mr-sm-2 list_candidates_container__criteria-list__search" type="text" placeholder="Search by criteria">
   </div>
 
 </div>
 
+<div class="nocandidates-container" *ngIf="this.candidates.length  === 0 && !adminApiService._loading.value">
+    <img class="nocandidates-container__image" src="../../../../assets/images/information_message.png" alt="Avatar">
+    <span class="nocandidates-container__message"> Sorry, there are not candidates </span>
+</div>
 
-<div class="table-responsive candidates_table"   appScrollable (scrollPosition)="scrollHandler($event)">
+
+<div class="table-responsive candidates_table" *ngIf="this.candidates.length > 0"  appScrollable (scrollPosition)="scrollHandler($event)">
       <table class="table table-hover table-striped ">
         <thead>
           <tr class="candidates_table__row-header">

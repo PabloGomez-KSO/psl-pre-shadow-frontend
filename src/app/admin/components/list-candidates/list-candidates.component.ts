@@ -8,8 +8,10 @@ import * as _ from 'lodash';
 import * as moment from 'moment';
 import { AlertService } from '../../../shared/notifications/alert.service';
 import { Subscription } from 'rxjs';
-import { scan } from 'rxjs/operators';
-
+import { scan, debounceTime } from 'rxjs/operators';
+import { Store, select } from '@ngrx/store';
+import { SearchNavbarState } from '../../store/interfaces/admin.state';
+import { UpdateSearchAction } from '../../store/actions/admin.actions';
 @Component({
   selector: 'app-list-candidates',
   templateUrl: './list-candidates.component.html',
@@ -24,13 +26,15 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
   isSortedAscendent = true;
   userSubscription: Subscription;
   searchSubscription: Subscription;
+  termToSearch: string;
 
   constructor(
     private router: Router,
     private userApiService: UserApiService,
     private adminHelper: AdminHelperService,
     private alertService: AlertService,
-    private adminApiService: AdminApiService
+    private adminApiService: AdminApiService,
+    private store: Store<SearchNavbarState>
   ) { }
 
   ngOnInit(): void {
@@ -38,12 +42,19 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
     this.initObservables();
     this.getPage();
     this.selectedCriteriaToSort = 'name';
+    this.selectedCriteriaToSearch = 'name';
+    this.getSearchFromStore();
   }
 
   scrollHandler(scrollEvent): void {
     if (scrollEvent === 'bottom' && !this.adminApiService._done.value) {
       this.getPage();
     }
+  }
+
+  getSearchFromStore() {
+    this.store.pipe(select('searchTerm'))
+              .subscribe(term =>  this.termToSearch = term);
   }
 
   getPage() {
@@ -74,7 +85,6 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
 
   addNewUsers(users: User[]): void {
     this.candidates.push(...users);
-    console.log(this.candidates);
     this.candidatesComplete.push(...users);
   }
 
@@ -111,14 +121,18 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
   }
 
   searchByCriteria(term: string): void {
-    this.candidates = _.filter(this.candidatesComplete, (user: User) => {
-      if (user.roles.candidate) {
-        return _.includes(
-          user[this.selectedCriteriaToSearch].toString().toLowerCase(),
-          term.toLowerCase()
-        );
-      }
-    });
+
+    const updateAction = new UpdateSearchAction(term);
+    this.store.dispatch(updateAction);
+
+    if (this.selectedCriteriaToSearch) {
+      this.candidates = _.filter(this.candidatesComplete, (user: User) => {
+        if (user.roles.candidate) {
+          return _.includes(
+            user[this.selectedCriteriaToSearch].toString().toLowerCase(), this.termToSearch.toLowerCase());
+        }
+      });
+    }
   }
 
   generalSearch(term: string): void {

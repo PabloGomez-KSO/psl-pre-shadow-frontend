@@ -1,4 +1,4 @@
-@import "../../../../assets/scss/variables";
+@import '../../../../assets/scss/variables';
 
 @mixin text {
   font-size: 17px;
@@ -33,6 +33,38 @@
         }
       }
     }
+  }
+}
+
+.nocandidates-container {
+  background: #dfe4ea;
+  padding: 0;
+  align-items: center;
+  list-style: none;
+  width: 30%;
+  margin-top: 160px;
+  padding: 50px;
+  margin: 0 auto;
+  margin-top: 80px;
+  display: flex;
+  justify-content: center;
+  min-width: 320px;
+  text-align: center;
+  border-radius: 34px;
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  &__message {
+    font-family: $main_font;
+    margin-left: 34px;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #2f3542;
+  }
+  &__image {
+    width: 80px;
+    height: 80px;
+    float: left;
   }
 }
 
@@ -84,10 +116,10 @@
       width: 180px;
       color: white;
       border: 1px solid #0062cc;
-      padding: .375rem .75rem;
+      padding: 0.375rem 0.75rem;
       font-size: 1rem;
       line-height: 1.5;
-      border-radius: .25rem;
+      border-radius: 0.25rem;
     }
 
     &__search {
@@ -97,7 +129,6 @@
       border: 1px solid rgb(169, 169, 169);
     }
   }
-
 }
 .candidates_table {
   width: 70%;
