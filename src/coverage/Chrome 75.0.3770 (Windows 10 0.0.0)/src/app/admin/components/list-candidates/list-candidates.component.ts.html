@@ -20,24 +20,24 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">62.89% </span>
+        <span class="strong">60.38% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>61/97</span>
+        <span class='fraction'>64/106</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">44.9% </span>
+        <span class="strong">43.14% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>22/49</span>
+        <span class='fraction'>22/51</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">48% </span>
+        <span class="strong">44.44% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>12/25</span>
+        <span class='fraction'>12/27</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">62.64% </span>
+        <span class="strong">60% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>57/91</span>
+        <span class='fraction'>60/100</span>
       </div>
     </div>
   </div>
@@ -200,7 +200,21 @@
 155
 156
 157
-158</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">2×</span>
@@ -218,6 +232,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">8×</span>
@@ -231,17 +247,25 @@
 <span class="cline-any cline-yes">8×</span>
 <span class="cline-any cline-yes">8×</span>
 <span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">2×</span>
 <span class="cline-any cline-yes">2×</span>
 <span class="cline-any cline-yes">2×</span>
 <span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">2×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">3×</span>
@@ -269,7 +293,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -306,6 +329,10 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -337,6 +364,7 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -367,8 +395,10 @@ import * as _ from 'lodash<span class="branch-1 cbranch-no" title="branch not co
 impo<span class="missing-if-branch" title="else path not taken" >E</span>rt * as moment from 'moment';
 import { AlertService } from '../../../shared/notifications/alert.service';
 import { Subscription } from 'rxjs';
-import { scan } from 'rxjs/operators';
-&nbsp;
+import { scan, debounceTime } from 'rxjs/operators';
+import { Store, select } from '@ngrx/store';
+import { SearchNavbarState } from '../../store/interfaces/admin.state';
+import { UpdateSearchAction } from '../../store/actions/admin.actions';
 @Component({
   selector: 'app-list-candidates',
   templateUrl: './list-candidates.component.html',
@@ -383,13 +413,15 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
   isSortedAscendent = true;
   userSubscription: Subscription;
   searchSubscription: Subscription;
+  termToSearch: string;
 &nbsp;
   constructor(
     private router: Router,
     private userApiService: UserApiService,
     private adminHelper: AdminHelperService,
     private alertService: AlertService,
-    private adminApiService: AdminApiService
+    private adminApiService: AdminApiService,
+    private store: Store&lt;SearchNavbarState&gt;
   ) { }
 &nbsp;
   ngOnInit(): void {
@@ -397,101 +429,111 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
     this.initObservables();
     this.getPage();
     this.selectedCriteriaToSort = 'name';
+    this.selectedCriteriaToSearch = 'name';
+    this.getSearchFromStore();
   }
 &nbsp;
-  scrollHandler(scrollEvent): void {
-    if (scrollEvent === 'bottom' &amp;&amp; !this.adminApiService._done.value) {
-      this.getPage();
-    }
+  scrollHandler(scrollEvent): void {<span class="fstat-no" title="function not covered" ></span>
+    if (scrollEvent <span class="cstat-no" title="statement not covered" >=== '</span>bottom' &amp;&amp; !this.adminApiService._done.value) {
+      th<span class="cstat-no" title="statement not covered" >is.getPage();</span>
+    }<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+  }
+&nbsp;
+  getSearchFromStore() {
+    this.store.pipe(select('searchTerm'))
+              .subscribe(term =&gt;  this.termToSearch = term);
   }
 &nbsp;
   getPage() {
     if (this.candidates.length) {
       const lastVisibleDocument = this.getLastVisibileDocument();
-      this.adminApiService.getMoreUsers(lastVisibleDocument);
-    } else {<span class="fstat-no" title="function not covered" ></span>
-      this.adminApiService.getFirs<span class="cstat-no" title="statement not covered" >tBatchOfUsers();</span>
-    }<span class="cstat-no" title="statement not covered" ></span>
+      this.adminApiService.getMoreUsers(lastVisibleDocument);<span class="fstat-no" title="function not covered" ></span>
+    } else {<span class="cstat-no" title="statement not covered" ></span>
+      th<span class="cstat-no" title="statement not covered" >is.adminApiService.getFirstBatchOfUsers();</span>
+    }
   }
 &nbsp;
   getLastVisibileDocument() {
     const candidatesArraySize = this.candidates.length;
-    return this.candidates[candidatesArraySize - 1].doc;
-  }<span class="fstat-no" title="function not covered" ></span>
+    return this.candidates[candidatesArraySize - 1].doc;<span class="fstat-no" title="function not covered" ></span>
+  }<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" ></span>
-  initObserv<span class="cstat-no" title="statement not covered" >ables(): void {</span>
+  initObservables(): void {
     this.searchSubscription = this.adminHelper.getGeneralSearchValue()
       .subscribe((searchValue: string) =&gt; this.generalSearch(searchValue));
 &nbsp;
     this.userSubscription = this.adminApiService._users.pipe(
       scan((currentUsers, newUsers) =&gt; {
         this.addNewUsers(newUsers);
-        return currentUsers.concat(newUsers);
-      })
-    ).subscribe();<span class="fstat-no" title="function not covered" ></span>
+        return currentUsers.concat(newUsers);<span class="fstat-no" title="function not covered" ></span>
+      })<span class="cstat-no" title="statement not covered" ></span>
+    ).subscr<span class="cstat-no" title="statement not covered" >ibe();</span>
   }<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" ></span>
-  addNewUser<span class="cstat-no" title="statement not covered" >s(users: User[]): void {</span>
-    this.can<span class="cstat-no" title="statement not covered" >didates.push(...users);</span>
-    console.log(this.candidates);
-    this.candidatesComplete.push(...users);
+  addNewUsers(users: User[]): void {
+    this.candidates.push(...users);
+    this.can<span class="cstat-no" title="statement not covered" >didatesComplete.push(...users);</span>
   }<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
   sortWhenClicked(option: string): void {
-    if (this.selectedCriteriaToSort !== option) {
-      this.selectedCriteriaToSort = option;<span class="fstat-no" title="function not covered" ></span>
-      th<span class="cstat-no" title="statement not covered" >is.isSortedAscendent = true;</span>
-      this.sortByCriteria();
-    } else {<span class="fstat-no" title="function not covered" ></span>
-      this.isSortedA<span class="cstat-no" title="statement not covered" >scend</span>ent = !this.isSortedAscendent;
-      th<span class="cstat-no" title="statement not covered" >is.sortByCriteria();</span>
-    }<span class="fstat-no" title="function not covered" ></span>
+    if (this.selectedCriteriaToSort !== option) {<span class="fstat-no" title="function not covered" ></span>
+      th<span class="cstat-no" title="statement not covered" >is.selectedCriteriaToSort = option;</span>
+      this.isSortedAscendent = true;
+      this.sortByCriteria();<span class="fstat-no" title="function not covered" ></span>
+    } else {<span class="cstat-no" title="statement not covered" ></span>
+      th<span class="cstat-no" title="statement not covered" >is.isSortedAscendent = !this.isSortedAscendent;</span>
+      this.sortByCriteria();<span class="fstat-no" title="function not covered" ></span>
+    }<span class="cstat-no" title="statement not covered" ></span>
   }<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" ></span>
   editCandidate(<span class="cstat-no" title="statement not covered" >id: string): void {</span>
-    this.router.<span class="cstat-no" title="statement not covered" >navigate(['/admin-dashb</span>oard/update_candidate', id]);
-  }<span class="cstat-no" title="statement not covered" ></span>
+    this.router.<span class="cstat-no" title="statement not covered" >navigate(['/admin-dashboard/upd</span>ate_candidate', id]);
+  }
 &nbsp;
   removeCandidate(id: string) {
-    this.alertService.showAskNotification('Are you sure about this ?', 'You wont be able to see the candidate anymore!', 'warning')
-      .subscribe(result =&gt; {<span class="fstat-no" title="function not covered" ></span>
+    this.alertService.showAskNotification('Are you sure about this ?<span class="fstat-no" title="function not covered" >', 'You wont be able to see the candidate anymore!', 'warning')</span>
+      .s<span class="cstat-no" title="statement not covered" >ubscribe(result =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >        if (result.value) {</span>
-<span class="cstat-no" title="statement not covered" >          this.userApiService.deleteUserById(id).subscribe();</span>
-          this.alertService.showMessage('Candidate has been deleted', 'info', false);
-          this.candidates = [];<span class="fstat-no" title="function not covered" ></span>
-          this.candi<span class="cstat-no" title="statement not covered" >dates</span>Complete = [];
-<span class="cstat-no" title="statement not covered" >        }<span class="fstat-no" title="function not covered" ></span></span>
-      });<span class="cstat-no" title="statement not covered" ></span>
-  }<span class="cstat-no" title="statement not covered" ></span>
-&nbsp;
-  createCandidate(): void {
+          this.userApiService.deleteUserById(id).subscribe();
+          this.alertService.showMessage('Candidate has been deleted', 'in<span class="fstat-no" title="function not covered" >fo', false);</span>
+          this.candi<span class="cstat-no" title="statement not covered" >dates</span> = [];
+          this.candidatesCo<span class="cstat-no" title="statement not covered" >mplete = [];</span>
+<span class="cstat-no" title="statement not covered" >        }</span>
+      })<span class="cstat-no" title="statement not covered" >;</span>
+  }<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+<span class="cstat-no" title="statement not covered" ></span>
+  createCandidate():<span class="cstat-no" title="statement not covered" > void {</span>
     this.adminApiService.reset();
     this.router.navigate(['/admin-dashboard/create_candidate']);
   }
 &nbsp;
   searchByCriteria(term: string): void {
-    this.candidates = _.filter(this.candidatesComplete, (user: User) =&gt; {<span class="fstat-no" title="function not covered" ></span>
-      if (user.r<span class="cstat-no" title="statement not covered" >oles.candidate) {</span>
-        return _.inc<span class="cstat-no" title="statement not covered" >ludes(</span>
-          user[this.selectedCriteriaToSearch].toString().toLowerCase(),
-          term.toLowerCase()
-        );
-      }
-    });
-  }<span class="fstat-no" title="function not covered" ></span>
-<span class="cstat-no" title="statement not covered" ></span>
-  generalSearch(term<span class="cstat-no" title="statement not covered" >: string): void {</span>
-<span class="cstat-no" title="statement not covered" ></span>
-    let cand<span class="cstat-no" title="statement not covered" >idatesThatApply: User[] = [];<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span>
 &nbsp;
-    this.criteriaOptions.forEach(criteria =&gt; {
-      candid<span class="cstat-no" title="statement not covered" >atesThatApply = _.concat(candidatesThatApply,</span>
+    const updateAction = new UpdateSearchAction(term);
+    this.store.dispatch(updateAction);
+<span class="fstat-no" title="function not covered" ></span>
+    if (this.sel<span class="cstat-no" title="statement not covered" >ectedCriteriaToSearch) {</span>
+      this.candidate<span class="cstat-no" title="statement not covered" >s = _.filter(this.candidatesComplete, (user: User) =&gt; {</span>
+        if (user.roles.candidate) {
+          return _.includes(
+            user[this.selectedCriteriaToSearch].toString().toLowerCase(), this.termToSearch.toLowerCase());
+        }
+      });
+    }<span class="fstat-no" title="function not covered" ></span>
+  }<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
+  genera<span class="cstat-no" title="statement not covered" >lSearch(term: string): void {</span>
+<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span>
+    let candidatesThatApply: User[] = [];
+&nbsp;
+    this.cri<span class="cstat-no" title="statement not covered" >teriaOptions.forEach(criteria =&gt; {</span>
+      candidatesThatApply = _.concat(candidatesThatApply,
         _.filter(this.candidatesComplete, (user: User) =&gt; {
-          if (user.roles.candidate) {
-            return _.includes(user[criteria].toString().toLowerC<span class="fstat-no" title="function not covered" >ase(), term.toLowerCase());</span>
+          if (user.roles.candidate) {<span class="fstat-no" title="function not covered" ></span>
+<span class="cstat-no" title="statement not covered" >            return _.includes(user[cri</span>teria].toString().toLowerCase(), term.toLowerCase());
 <span class="cstat-no" title="statement not covered" >          }</span>
 <span class="cstat-no" title="statement not covered" >        }</span>
-<span class="cstat-no" title="statement not covered" >        )</span>
+        )
       );
     });
     this.candidates = _.uniq(candidatesThatApply);
@@ -520,7 +562,7 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Jun 28 2019 08:26:17 GMT-0500 (GMT-05:00)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Jun 28 2019 15:07:38 GMT-0500 (GMT-05:00)
 </div>
 </div>
 <script src="../../../../../prettify.js"></script>

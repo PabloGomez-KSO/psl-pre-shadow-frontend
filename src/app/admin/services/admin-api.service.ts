@@ -48,7 +48,7 @@ export class AdminApiService {
 
     this._loading.next(true);
 
-    this.userCollectionSubsciption = userCollection
+    userCollection
       .snapshotChanges()
       .pipe(
         tap(arr => {

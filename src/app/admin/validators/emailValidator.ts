@@ -9,7 +9,7 @@ export class CustomEmailValidator {
       const email = control.value.toLowerCase();
       return angularFireStore.collection('users', ref => ref.where('email', '==', email) )
         .valueChanges().pipe(
-          debounceTime(500),
+          debounceTime(2000),
           take(1),
           map(users => users.length ? { emailNotAvailable: true } : null ),
         );

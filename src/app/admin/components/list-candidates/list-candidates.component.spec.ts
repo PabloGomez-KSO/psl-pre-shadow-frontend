@@ -13,7 +13,7 @@ describe('list-candidates.component', () => {
       params.userApiService,
       params.adminHelper,
       params.alertService,
-      params.adminApiService);
+      params.adminApiService, params.store);
 
   const listCandidatesMock = {
     userApiService: {
@@ -40,31 +40,33 @@ describe('list-candidates.component', () => {
   let listCandidatesComponent;
   let user1, user2: User;
 
+  user1 = {
+    id: '307c',
+    name: 'Jean Rodriguez',
+    email: 'jeana77@hotmail.com',
+    roles: {
+      candidate: true
+    },
+    startDate: '11/07/2019',
+    releaseDate: '11/09/2019',
+    preference: 'Backend'
+  };
+
+   user2 = {
+    id: 'a7711333hph',
+    name: 'Marcel Ann Den Boom',
+    email: 'marcel@hotmail.dh',
+    roles: {
+      candidate: true
+    },
+    startDate: '11/07/2019',
+    releaseDate: '11/09/2019',
+    preference: 'Business Analyst'
+  };
+
   beforeEach(() => {
     listCandidatesComponent = createListCandidatesComponent(listCandidatesMock);
-    user1 = {
-      id: '307c',
-      name: 'Jean Rodriguez',
-      email: 'jeana77@hotmail.com',
-      roles: {
-        candidate: true
-      },
-      startDate: '11/07/2019',
-      releaseDate: '11/09/2019',
-      preference: 'Backend'
-    };
-
-     user2 = {
-      id: 'a7711333hph',
-      name: 'Marcel Ann Den Boom',
-      email: 'marcel@hotmail.dh',
-      roles: {
-        candidate: true
-      },
-      startDate: '11/07/2019',
-      releaseDate: '11/09/2019',
-      preference: 'Business Analyst'
-    };
+    spyOn(listCandidatesComponent, 'getSearchFromStore');
   });
 
   describe('constructor', () => {

@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">56.76% </span>
+        <span class="strong">58.82% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>21/37</span>
+        <span class='fraction'>20/34</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">55.17% </span>
@@ -30,14 +30,14 @@
         <span class='fraction'>16/29</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">27.27% </span>
+        <span class="strong">30% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>3/11</span>
+        <span class='fraction'>3/10</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">53.13% </span>
+        <span class="strong">55.17% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>17/32</span>
+        <span class='fraction'>16/29</span>
       </div>
     </div>
   </div>
@@ -115,26 +115,7 @@
 70
 71
 72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88
-89
-90
-91
-92</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+73</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">2×</span>
@@ -186,22 +167,6 @@
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -222,46 +187,41 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { FormGroup, FormCo<span class="branch-1 cbranch-no" title="branch not covered" >ntrol, Validator</span>s } from '@angular/forms';
-import { PasswordValidation } from '../validators/p<span class="branch-1 cbranch-no" title="branch not covered" >asswordValidator';</span>
-impo<span class="missing-if-branch" title="if path not taken" >I</span>rt { Injectable } from '@angular/core';<span class="cstat-no" title="statement not covered" ></span>
-import { User } from 'src/app/shared/models/user';<span class="branch-1 cbranch-no" title="branch not covered" ><span class="missing-if-branch" title="else path not taken" >E</span></span>
-import { Subject } f<span class="branch-1 cbranch-no" title="branch not covered" >ro</span>m '<span class="branch-2 cbranch-no" title="branch not covered" >rxjs';</span>
-import * as moment from 'moment';
-import { AuthService } fro<span class="branch-1 cbranch-no" title="branch not covered" >m '../../core/au</span>th/auth.service';
-impo<span class="missing-if-branch" title="else path not taken" >E</span>rt { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-@Injectable({
-  providedIn: 'root'
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Injectable } from<span class="branch-1 cbranch-no" title="branch not covered" > '@angular/core'</span>;
+import { User } from 'src/app/shared/models/user';<span class="branch-1 cbranch-no" title="branch not covered" ></span>
+impo<span class="missing-if-branch" title="if path not taken" >I</span>rt { Subject } from 'rxjs';<span class="cstat-no" title="statement not covered" ></span>
+import * as moment from 'moment';<span class="branch-1 cbranch-no" title="branch not covered" ><span class="missing-if-branch" title="else path not taken" >E</span></span>
+import { AuthService<span class="branch-1 cbranch-no" title="branch not covered" > }</span> fr<span class="branch-2 cbranch-no" title="branch not covered" >om '../../core/auth/auth.service';</span>
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+@Injectable({<span class="branch-1 cbranch-no" title="branch not covered" ></span>
+  pr<span class="missing-if-branch" title="else path not taken" >E</span>ovidedIn: 'root'
 })
 export class AdminHelperService {
 &nbsp;
   constructor(private authService: AuthService) {
-  }<span class="fstat-no" title="function not covered" ></span>
-<span class="cstat-no" title="statement not covered" ></span>
-  privat<span class="cstat-no" title="statement not covered" >e criteriaOptions: string[] = [</span>
-    'name',
-    'email',
+  }
+&nbsp;
+  private criteriaOptions: string[] = [<span class="fstat-no" title="function not covered" ></span>
+    'nam<span class="cstat-no" title="statement not covered" >e',</span>
+    'ema<span class="cstat-no" title="statement not covered" >il',</span>
     'age',
     'startDate',
     'releaseDate',
     'preference'
   ];
-<span class="cstat-no" title="statement not covered" ></span>
-  privat<span class="cstat-no" title="statement not covered" >e softwareRoles: string[] = ['Frontend', 'Back</span>end', 'QA', 'DevOps', 'Business Analyst'];
 &nbsp;
-  private generalSearchObservable = new Subject();<span class="fstat-no" title="function not covered" ></span>
+  private softwareRoles: string[] = ['Frontend', 'Backend', 'QA', 'DevOps', 'Business Analyst'];
 <span class="cstat-no" title="statement not covered" ></span>
-  getGeneralSearchValue() {
-    return this.generalSearchObservable;<span class="fstat-no" title="function not covered" ></span>
-  }<span class="cstat-no" title="statement not covered" ></span>
+  privat<span class="cstat-no" title="statement not covered" >e generalSearchObservable = new Subject();</span>
 &nbsp;
-  updateGeneralSearchValue(value: string) {<span class="fstat-no" title="function not covered" ></span>
-    this.generalSea<span class="cstat-no" title="statement not covered" >rchObservable.next(value);</span>
+  getGeneralSearchValue() {<span class="fstat-no" title="function not covered" ></span>
+    retu<span class="cstat-no" title="statement not covered" >rn this.generalSearchObservable;</span>
   }
-&nbsp;
+<span class="fstat-no" title="function not covered" ></span>
+  update<span class="cstat-no" title="statement not covered" >GeneralSearchValue(value: string) {</span>
+    this.generalSearchObservable.next(value);
+  }<span class="fstat-no" title="function not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
   getUserRebooted(): User {
     const user: User = {
       id: '',
@@ -272,41 +232,24 @@ export class AdminHelperService {
       startDate: null,
       releaseDate: null,
       preference: '',
-      ro<span class="cstat-no" title="statement not covered" >les: {</span>
-        candidate: true
-      }<span class="fstat-no" title="function not covered" ></span>
-    };<span class="cstat-no" title="statement not covered" ></span>
-    return user;
-  }
-&nbsp;
-  setUserWithFormValues(candidateFormValue): User {
-    const user: User = {
-      name: candidateFormValue.name,
-      username: candidateFormValue.username,
-      email: candidateFormValue.email,
-      age: candidateFormValue.age,
-      startDate: candidateFormValue.start_date,
-      releaseDate: candidateFormValue.release_date,
-      preference: candidateFormValue.preference,
-      pa<span class="cstat-no" title="statement not covered" >ssword: candi</span>dateFormValue.password,
       roles: {
-        candidate: true<span class="fstat-no" title="function not covered" ></span>
+        candidate: true
       }<span class="cstat-no" title="statement not covered" ></span>
     };
     return user;<span class="fstat-no" title="function not covered" ></span>
   }<span class="cstat-no" title="statement not covered" ></span>
 &nbsp;
   getCriteriaOptions(): string[] {<span class="fstat-no" title="function not covered" ></span>
-    return this.cri<span class="cstat-no" title="statement not covered" >teriaOptions;</span>
-  }<span class="cstat-no" title="statement not covered" ></span>
-&nbsp;
-  getSoftwareRoles(): string[] {
-    return this.softwareRoles;
+    retu<span class="cstat-no" title="statement not covered" >rn this.criteriaOptions;</span>
   }
-<span class="cstat-no" title="statement not covered" ></span>
+<span class="fstat-no" title="function not covered" ></span>
+  getSoftwareRoles(<span class="cstat-no" title="statement not covered" >): string[] {</span>
+    return this.softwareRole<span class="cstat-no" title="statement not covered" >s;</span>
+  }
+&nbsp;
   convertStringIntoNgBootstrapDate(stringDate: string): NgbDateStruct {
 &nbsp;
-    const date = moment(stringDate);
+    cons<span class="cstat-no" title="statement not covered" >t date = moment(string</span>Date);
     const ngbDateStruct = {
       day: Number(date.format('D')),
       month: Number(date.format('M')),
@@ -322,7 +265,7 @@ export class AdminHelperService {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Jun 28 2019 08:26:17 GMT-0500 (GMT-05:00)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Jun 28 2019 15:07:38 GMT-0500 (GMT-05:00)
 </div>
 </div>
 <script src="../../../../prettify.js"></script>
