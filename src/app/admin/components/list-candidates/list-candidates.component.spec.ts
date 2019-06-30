@@ -5,6 +5,8 @@ import { User } from '../../../shared/models/user';
 const sinonChai = require('sinon-chai');
 const chai = require('chai');
 chai.use(sinonChai);
+const should = chai.should();
+const expect = chai.expect;
 
 describe('list-candidates.component', () => {
 
@@ -66,26 +68,26 @@ describe('list-candidates.component', () => {
 
   beforeEach(() => {
     listCandidatesComponent = createListCandidatesComponent(listCandidatesMock);
-    spyOn(listCandidatesComponent, 'getSearchFromStore');
+    sinon.stub(listCandidatesComponent, 'getSearchFromStore');
   });
 
   describe('constructor', () => {
     it('list-candidate component should exist', () => {
-      expect(listCandidatesComponent).toBeTruthy();
+      expect(listCandidatesComponent).exist;
     });
   });
 
   describe('ngOnInit', () => {
     it('should call method initObservables', () => {
-      const initObservables = spyOn(listCandidatesComponent, 'initObservables');
+      const initObservables = sinon.stub(listCandidatesComponent, 'initObservables');
       listCandidatesComponent.ngOnInit();
-      expect(listCandidatesComponent.initObservables).toHaveBeenCalled();
+      expect(listCandidatesComponent.initObservables).called;
     });
 
     it('should call method getPage', () => {
-      const getPage = spyOn(listCandidatesComponent, 'getPage');
+      const getPage = sinon.stub(listCandidatesComponent, 'getPage');
       listCandidatesComponent.ngOnInit();
-      expect(listCandidatesComponent.getPage).toHaveBeenCalled();
+      expect(listCandidatesComponent.getPage).called;
 
     });
   });
@@ -93,17 +95,17 @@ describe('list-candidates.component', () => {
   describe('scrollHandler', () => {
     it('should call method getPage when the output of ScrollEvent is bottom and pagination is not finished yet', () => {
       const scrollEvent = 'bottom';
-      const getPage = spyOn(listCandidatesComponent, 'getPage');
+      const getPage = sinon.stub(listCandidatesComponent, 'getPage');
       listCandidatesComponent.scrollHandler(scrollEvent);
-      expect(listCandidatesComponent.getPage).toHaveBeenCalled();
+      expect(listCandidatesComponent.getPage).called;
 
     });
 
     it('should not call getPage method when the output of ScrollEvent is different from bottom', () => {
       const scrollEvent = 'top';
-      const getPage = spyOn(listCandidatesComponent, 'getPage');
+      const getPage = sinon.stub(listCandidatesComponent, 'getPage');
       listCandidatesComponent.scrollHandler(scrollEvent);
-      expect(getPage).not.toHaveBeenCalled();
+      expect(getPage).to.not.have.been.called;
 
     });
   });
@@ -116,9 +118,7 @@ describe('list-candidates.component', () => {
         id: 'a7711333hph',
       };
 
-      const expect = chai.expect;
-
-      const getLastVisibileDocument = spyOn(listCandidatesComponent, 'getLastVisibileDocument').and.returnValue(document);
+      const getLastVisibileDocument = sinon.stub(listCandidatesComponent, 'getLastVisibileDocument').returns(document);
       listCandidatesComponent.candidates = [user1, user2];
       listCandidatesComponent.getPage();
       expect(listCandidatesMock.adminApiService.getMoreUsers).calledWith(document);
@@ -127,7 +127,6 @@ describe('list-candidates.component', () => {
     it('should call getFirstBatchOfUsers when candidates array is empty', () => {
       listCandidatesComponent.candidates = [];
       listCandidatesComponent.getPage();
-      const expect = chai.expect;
       // expect(listCandidatesMock.adminApiService.getFirstBatchOfUsers).to.be.called();
     });
   });

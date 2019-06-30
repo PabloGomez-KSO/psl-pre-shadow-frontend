@@ -1,9 +1,21 @@
-import * as chai from 'chai';
+import { expect } from 'chai';
 
-describe('Tests for operations', () => {
+import { TestBed, async } from '@angular/core/testing';
+import { AppComponent } from './app.component';
 
-  it('4 + 4 = 8', () => {
+describe('AppComponent', () => {
+ beforeEach(async(() => {
+   TestBed.configureTestingModule({
+     declarations: [
+       AppComponent
+     ],
+   }).compileComponents();
+ }));
 
-  });
+ it('should create the app', () => {
+   const fixture = TestBed.createComponent(AppComponent);
+   const app = fixture.debugElement.componentInstance;
+   expect(app).to.be.ok;
+ });
 
 });
