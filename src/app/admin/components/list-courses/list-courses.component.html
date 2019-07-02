@@ -39,3 +39,27 @@
   </div>
 
 </div>
+
+
+<div class="table-responsive courses_table">
+<table class="table table-hover table-striped table-bordered ">
+
+    <thead>
+      <tr class="courses_table__row-header">
+              <th scope="col" class="courses_table__row-header_item"  *ngFor="let option of criteriaOptions">
+                <div class="courses_table__row-header__item__data">
+                  <div class="courses_table__row-header__item__data__text">
+                    {{option | titlecase | convertTitle}}
+                  </div>
+                </div>
+              </th>
+              <th scope="col" class="courses_table__row-body__item"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+    </tbody>
+
+</table>
+</div>

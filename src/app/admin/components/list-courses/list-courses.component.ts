@@ -15,6 +15,7 @@ export class ListCoursesComponent implements OnInit {
 
   ngOnInit() {
     this.criteriaOptions = this.adminHelper.getCourseCriteriaOptions();
+    console.log(this.criteriaOptions);
     this.selectedCriteriaToSearch = 'name';
   }
 
