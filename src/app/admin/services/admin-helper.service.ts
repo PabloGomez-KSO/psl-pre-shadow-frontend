@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { User } from 'src/app/shared/models/user';
+import { Course } from 'src/app/shared/models/course';
 import { Subject } from 'rxjs';
 import * as moment from 'moment';
 import { AuthService } from '../../core/auth/auth.service';
@@ -21,7 +22,7 @@ export class AdminHelperService {
     'preference'
   ];
 
-  private courseCriteraOptions: string[] = [ 'name', 'number of candidates', 'duration', 'topics'];
+  private courseCriteraOptions: string[] = [ 'name', 'number of candidates', 'category', 'duration', 'topics'];
 
   private softwareRoles: string[] = ['Frontend', 'Backend', 'QA', 'DevOps', 'Business Analyst'];
 

@@ -24,9 +24,9 @@
 
 <div class="table-responsive candidates_table" *ngIf="this.candidates.length > 0"  appScrollable (scrollPosition)="scrollHandler($event)">
       <table class="table table-hover table-striped ">
-        <thead>
-          <tr class="candidates_table__row-header">
-              <th scope="col" class="candidates_table__row-header_item" (click)="sortWhenClicked(option)" *ngFor="let option of criteriaOptions">
+        <thead class="candidates_table__row-header">
+          <tr>
+              <th scope="col" class="candidates_table__row-header__item" (click)="sortWhenClicked(option)" *ngFor="let option of criteriaOptions">
                 <div class="candidates_table__row-header__item__data">
                   <div class="candidates_table__row-header__item__data__text">
                       {{option | titlecase | convertTitle}}
@@ -41,7 +41,7 @@
                   </button>
                 </div>
               </th>
-            <th scope="col" class="candidates_table__row-body__item"></th>
+              <th scope="col" class="candidates_table__row-body__item"></th>
 
           </tr>
         </thead>

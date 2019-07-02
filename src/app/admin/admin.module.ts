@@ -11,6 +11,8 @@ import { AdminDashboardComponent } from './components/admin-dashboard/admin-dash
 import { AdminNavbarComponent } from './components/admin-navbar/admin-navbar.component';
 import { CandidateFormComponent } from './components/candidate-form/candidate-form.component';
 import { ListCoursesComponent } from './components/list-courses/list-courses.component';
+import { CourseFormComponent } from './components/course-form/course-form.component';
+import { CreateCourseComponent } from './components/create-course/create-course.component';
 import { SharedModule } from '../shared/shared.module';
 
 // Pipes
@@ -23,6 +25,7 @@ import { ScrollableDirective } from './directives/scrollable.directive';
 // NgRx.
 import { StoreModule } from '@ngrx/store';
 import { adminReducer } from './store/reducers/admin.reducer';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -43,7 +46,9 @@ import { adminReducer } from './store/reducers/admin.reducer';
     ConvertTitlePipe,
     ScrollableDirective,
     CandidateFormComponent,
-    ListCoursesComponent
+    ListCoursesComponent,
+    CourseFormComponent,
+    CreateCourseComponent
   ],
   exports: [
     AdminDashboardComponent

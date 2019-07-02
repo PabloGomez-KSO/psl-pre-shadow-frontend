@@ -1,0 +1,168 @@
+@import '../../../../assets/scss/variables';
+@import '../../../../assets/scss/mixins';
+
+@mixin title_settings {
+  font-family: $main_font;
+  font-size: 22px;
+  font-weight: bold;
+  align-items: center;
+  color: $purple_logo_psl;
+  height: 50px;
+}
+
+@mixin notification_settings {
+  height: 30px;
+  font-family: $main_font;
+  font-size: 17px;
+  font-weight: bold;
+  color: $validation_alert;
+  margin-left: 210px;
+}
+
+.create-course-container {
+  background: $purple_psl_opacity;
+  margin: 0 auto;
+  padding: 10px;
+  align-items: center;
+  margin-bottom: 30px;
+  height: 100%;
+  width: 30%;
+  margin-top: 50px;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+
+  .create-course-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &__personal-title {
+      @include title_settings;
+    }
+
+    &__program-title {
+      @include title_settings;
+      margin-top: 30px;
+    }
+
+    &__wrap {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+
+      &__element {
+        width: 400px;
+        min-width: 400px;
+
+        &__data {
+          font-size: $size_main_font;
+          display: flex;
+          justify-content: center;
+
+          &__text {
+            padding: 10px 5px 5px 10px;
+            margin-top: 20px;
+            margin-right: 10px;
+            width: 180px;
+            color: $purple_logo_psl;
+            font-family: $main_font;
+            font-weight: bold;
+          }
+
+          &__input {
+            padding: 10px 5px 5px 10px;
+            margin-top: 20px;
+            margin-right: 10px;
+            width: 180px;
+            color: $purple_logo_psl;
+            font-family: $main_font;
+            font-weight: bold;
+            border: 1px solid rgba(0, 0, 0, 0.15);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            border-radius: 1em;
+            height: 51.5px !important;
+            background-color: #f7f7f7;
+
+            &--invalid {
+              border: 2px solid red;
+            }
+          }
+          &__dateContainer {
+            display: flex;
+            align-items: center;
+            margin-top: 15px;
+
+            &__input {
+              padding: 11px;
+              width: 143px;
+              font-family: $main_font;
+              font-size: $size_main_font;
+              background-color: #f7f7f7;
+              border: 1px solid rgba(0, 0, 0, 0.15);
+              box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+              border-radius: 1em 0 0 1em;
+
+              &--invalid {
+                border: 2px solid red;
+              }
+            }
+
+            &__btn {
+              padding: 13px;
+              border-radius: 0 1em 1em 0;
+            }
+          }
+        }
+        &__notification {
+          @include notification_settings;
+        }
+      }
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+    &__option {
+      cursor: pointer;
+      font-size: $size_main_font;
+      font-family: $main_font;
+      border-radius: 0.7rem;
+      &__icon {
+        margin-left: 10px;
+      }
+    }
+  }
+}
+
+@media all and (max-width: 815px) {
+  .create-course-container {
+    width: 90%;
+    height: 100%;
+    min-width: 360px;
+    margin-left: 300px;
+    margin: 0 auto;
+    .create-course-info {
+      &__wrap {
+        justify-content: center;
+        &__element {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+          &__data {
+            flex-direction: column;
+          }
+          &__notification {
+            margin-left: 0px;
+          }
+        }
+      }
+    }
+  }
+}
+

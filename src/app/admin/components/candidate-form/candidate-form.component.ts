@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AdminHelperService } from '../../services/admin-helper.service';
 import { User } from 'src/app/shared/models/user';
-import { enumActions } from './formActions.enum';
+import { enumActions } from '../formActions.enum';
 import { Subscription } from 'rxjs';
 import { CustomEmailValidator } from '../../validators/emailValidator';
 import { CustomUsernameValidator } from '../../validators/usernameValidator';

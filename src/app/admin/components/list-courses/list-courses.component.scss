@@ -1,13 +1,12 @@
 @import '../../../../assets/scss/variables';
 
 .list_courses_container {
-  width: 70%;
+  width: 64%;
   min-width: 360px;
   height: 70px;
   margin: 0 auto;
   display: flex;
   font-family: $main_font;
-  padding: 110px;
   align-items: center;
 
   &__btn {
@@ -65,33 +64,60 @@
     }
   }
 }
-
-.list_courses_carousel{
-   margin: 0 auto;
-   width: 350px;
-   height: 100px;
-   padding: 10px;
-
-}
-
-.courses_table { 
+.course_cards {
   width: 70%;
   margin: 0 auto;
-  font-family: $main_font;
-  font-size: $size_main_font;
+  padding: 30px;
+  .container_cards{
+    justify-content: space-around;
+    .card {
+      width: 350px;
+      cursor: pointer;
+      margin-bottom: 20px;
+      border-radius: 0.25rem;
+      .card-header {
+        font-family: $main_font;
+        font-size: 17px;
+        color: #212529;
+        font-weight: bold;
+      }
+      .card-body {
+        .card-text {
+          font-family: $main_font;
+          padding-top: 10px;
+          font-size: 15px;
+          &__attribute {
+            font-weight: bold;
+          }
+        }
 
-  &__row-header{
-    &__item{
-      width: 100px !important;
+        .card-link{
+          font-family: $main_font;
+          font-size: 15px;
 
-      &__data{
-        max-width: 100px;
-
-        &__text{
-          max-width: 100px;
         }
       }
     }
   }
 
+}
+
+@media all and (max-width: 815px) {
+  .list_courses_container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 210px;
+    &__criteria-list {
+      &__text {
+        margin-right: 10px;
+      }
+      &__select {
+        width: 160px;
+      }
+
+      &__search {
+        width: 150px;
+      }
+    }
+  }
 }

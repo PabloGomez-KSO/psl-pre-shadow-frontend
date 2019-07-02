@@ -8,13 +8,12 @@
 @mixin row_mixin {
   border: 1px solid #ddd;
   &__item {
-    padding: 1.1rem;
+    padding: 1.0rem;
     margin-bottom: 15px;
     height: 20px;
-    width: 500px;
+    width: 100px;
     &__data {
       display: flex;
-      margin-left: 5px;
       &__btn {
         display: flex;
         flex-direction: column;
@@ -131,7 +130,7 @@
   }
 }
 .candidates_table {
-  width: 70%;
+  width: 75%;
   margin: 0 auto;
   font-family: $main_font;
   font-size: $size_main_font;

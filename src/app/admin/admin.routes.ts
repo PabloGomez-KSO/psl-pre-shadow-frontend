@@ -3,6 +3,7 @@ import { CreateCandidateComponent } from './components/create-candidate/create-c
 import { UpdateCandidateComponent } from './components/update-candidate/update-candidate.component';
 import { ListCandidatesComponent } from './components/list-candidates/list-candidates.component';
 import { ListCoursesComponent } from './components/list-courses/list-courses.component';
+import { CreateCourseComponent } from './components/create-course/create-course.component';
 import {AuthGuard} from '../core/guards/auth.guard';
 
 export const ADMIN_ROUTES: Routes = [
@@ -10,5 +11,6 @@ export const ADMIN_ROUTES: Routes = [
   { path: 'list_courses', component: ListCoursesComponent, canActivate: [AuthGuard] },
   { path: 'update_candidate/:id', component: UpdateCandidateComponent, canActivate: [AuthGuard]},
   { path: 'create_candidate', component: CreateCandidateComponent, canActivate: [AuthGuard]},
+  { path: 'create_course', component: CreateCourseComponent, canActivate: [AuthGuard]},
   { path: '**', pathMatch: 'full', redirectTo: 'list_candidates' }
 ];

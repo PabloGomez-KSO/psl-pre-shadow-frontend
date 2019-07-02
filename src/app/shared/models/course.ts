@@ -1,9 +1,10 @@
 export interface Course {
 
   name: string;
-  numberOfCandidates: string;
-  duration: number;  // days
-  topics: TopicInformation[]
+  numberOfCandidates: number;
+  duration: string;  // days
+  topics: TopicInformation[];
+  category: string;
 
 }
 
