@@ -12,7 +12,7 @@ export class AdminHelperService {
   constructor(private authService: AuthService) {
   }
 
-  private criteriaOptions: string[] = [
+  private candidateCriteriaOptions: string[] = [
     'name',
     'email',
     'age',
@@ -21,12 +21,18 @@ export class AdminHelperService {
     'preference'
   ];
 
+  private courseCriteraOptions: string[] = [ 'name', 'number of candidates', 'duration', 'topics'];
+
   private softwareRoles: string[] = ['Frontend', 'Backend', 'QA', 'DevOps', 'Business Analyst'];
 
   private generalSearchObservable = new Subject();
 
   getGeneralSearchValue() {
     return this.generalSearchObservable;
+  }
+
+  getCourseCriteriaOptions() {
+    return this.courseCriteraOptions;
   }
 
   updateGeneralSearchValue(value: string) {
@@ -50,8 +56,8 @@ export class AdminHelperService {
     return user;
   }
 
-  getCriteriaOptions(): string[] {
-    return this.criteriaOptions;
+  getCandidateCriteriaOptions(): string[] {
+    return this.candidateCriteriaOptions;
   }
 
   getSoftwareRoles(): string[] {

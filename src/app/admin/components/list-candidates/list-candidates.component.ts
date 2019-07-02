@@ -8,7 +8,7 @@ import * as _ from 'lodash';
 import * as moment from 'moment';
 import { AlertService } from '../../../shared/notifications/alert.service';
 import { Subscription } from 'rxjs';
-import { scan, debounceTime } from 'rxjs/operators';
+import { scan } from 'rxjs/operators';
 import { Store, select } from '@ngrx/store';
 import { SearchNavbarState } from '../../store/interfaces/admin.state';
 import { UpdateSearchAction } from '../../store/actions/admin.actions';
@@ -38,7 +38,7 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.criteriaOptions = this.adminHelper.getCriteriaOptions();
+    this.criteriaOptions = this.adminHelper.getCandidateCriteriaOptions();
     this.initObservables();
     this.getPage();
     this.selectedCriteriaToSort = 'name';
@@ -54,7 +54,7 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
 
   getSearchFromStore() {
     this.store.pipe(select('searchTerm'))
-              .subscribe(term =>  this.termToSearch = term);
+      .subscribe(term => this.termToSearch = term);
   }
 
   getPage() {
@@ -92,11 +92,10 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
     if (this.selectedCriteriaToSort !== option) {
       this.selectedCriteriaToSort = option;
       this.isSortedAscendent = true;
-      this.sortByCriteria();
     } else {
       this.isSortedAscendent = !this.isSortedAscendent;
-      this.sortByCriteria();
     }
+    this.sortByCriteria();
   }
 
   editCandidate(id: string): void {
@@ -128,8 +127,7 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
     if (this.selectedCriteriaToSearch) {
       this.candidates = _.filter(this.candidatesComplete, (user: User) => {
         if (user.roles.candidate) {
-          return _.includes(
-            user[this.selectedCriteriaToSearch].toString().toLowerCase(), this.termToSearch.toLowerCase());
+          return _.includes(user[this.selectedCriteriaToSearch].toString().toLowerCase(), this.termToSearch.toLowerCase());
         }
       });
     }

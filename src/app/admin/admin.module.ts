@@ -10,6 +10,7 @@ import { ListCandidatesComponent } from './components/list-candidates/list-candi
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { AdminNavbarComponent } from './components/admin-navbar/admin-navbar.component';
 import { CandidateFormComponent } from './components/candidate-form/candidate-form.component';
+import { ListCoursesComponent } from './components/list-courses/list-courses.component';
 import { SharedModule } from '../shared/shared.module';
 
 // Pipes
@@ -41,7 +42,8 @@ import { adminReducer } from './store/reducers/admin.reducer';
     SortCandidatesPipe,
     ConvertTitlePipe,
     ScrollableDirective,
-    CandidateFormComponent
+    CandidateFormComponent,
+    ListCoursesComponent
   ],
   exports: [
     AdminDashboardComponent

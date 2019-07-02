@@ -1,11 +1,11 @@
 import { ListCandidatesComponent } from './list-candidates.component';
-import { empty, of, BehaviorSubject } from 'rxjs';
+import { empty, of, BehaviorSubject, Subject } from 'rxjs';
+import { fakeAsync, tick } from '@angular/core/testing';
 const sinon = require('sinon');
 import { User } from '../../../shared/models/user';
 const sinonChai = require('sinon-chai');
 const chai = require('chai');
 chai.use(sinonChai);
-const should = chai.should();
 const expect = chai.expect;
 
 describe('list-candidates.component', () => {
@@ -25,8 +25,8 @@ describe('list-candidates.component', () => {
       navigate: sinon.stub().returns(of(empty))
     },
     adminHelper: {
-      getCriteriaOptions: sinon.stub().returns(of({})),
-      getGeneralSearchValue: sinon.stub().returns(of({}))
+      getCandidateCriteriaOptions: sinon.stub().returns(of({})),
+      getGeneralSearchValue: sinon.stub().returns(new Subject())
     },
     alertService: {
       showAskNotification: sinon.stub().returns(of({}))
@@ -35,7 +35,8 @@ describe('list-candidates.component', () => {
       getMoreUsers: sinon.stub().returns(of({})),
       getFirstBatchOfUsers: sinon.stub().returns(of({})),
       _users: new BehaviorSubject([]),
-      _done: new BehaviorSubject(false)
+      _done: new BehaviorSubject(false),
+      reset: sinon.stub().returns(of({}))
     }
   };
 
@@ -54,7 +55,7 @@ describe('list-candidates.component', () => {
     preference: 'Backend'
   };
 
-   user2 = {
+  user2 = {
     id: 'a7711333hph',
     name: 'Marcel Ann Den Boom',
     email: 'marcel@hotmail.dh',
@@ -78,7 +79,7 @@ describe('list-candidates.component', () => {
   });
 
   describe('ngOnInit', () => {
-    it('should call method initObservables', () => {
+    it('should call method initObservables ', () => {
       const initObservables = sinon.stub(listCandidatesComponent, 'initObservables');
       listCandidatesComponent.ngOnInit();
       expect(listCandidatesComponent.initObservables).called;
@@ -91,6 +92,7 @@ describe('list-candidates.component', () => {
 
     });
   });
+
 
   describe('scrollHandler', () => {
     it('should call method getPage when the output of ScrollEvent is bottom and pagination is not finished yet', () => {
@@ -127,24 +129,73 @@ describe('list-candidates.component', () => {
     it('should call getFirstBatchOfUsers when candidates array is empty', () => {
       listCandidatesComponent.candidates = [];
       listCandidatesComponent.getPage();
-      // expect(listCandidatesMock.adminApiService.getFirstBatchOfUsers).to.be.called();
+      expect(listCandidatesMock.adminApiService.getFirstBatchOfUsers).called;
     });
   });
 
   describe('addNewUsers', () => {
     it('should add new users to both arrays ( candidates, candidatesComplete )', () => {
-
+     
       listCandidatesComponent.candidates = [ user1 ];
-
       const expectedCandidatesList = [ user1, user2 ];
-
       listCandidatesComponent.addNewUsers(user2);
-
-      // console.log(listCandidatesComponent.candidates);
-      // console.log(expectedCandidatesList);
-
-     // expect(listCandidatesComponent.candidates).toEqual(expectedCandidatesList);
+      //expect(listCandidatesComponent.candidates).equal(expectedCandidatesList);
     });
   });
-});
 
+  describe('sortWhenClicked', () => {
+    it('call sortByCriteria when selected criteria is different from option that user clicked', () => {
+       listCandidatesComponent.selectedCriteriaToSort = 'name';
+       const option = 'age';
+       const sortByCriteria = sinon.stub(listCandidatesComponent, 'sortByCriteria');
+
+       listCandidatesComponent.sortWhenClicked(option);
+
+       expect(listCandidatesComponent.selectedCriteriaToSort).equal(option);
+       expect(listCandidatesComponent.isSortedAscendent).equal(true);
+       expect(sortByCriteria).called;
+    });
+
+    it('call sortByCriteria when selected criteria is equal to option that user clicked', () => {
+      listCandidatesComponent.selectedCriteriaToSort = 'age';
+      const option = 'age';
+      listCandidatesComponent.isSortedAscendent = true;
+      const sortByCriteria = sinon.stub(listCandidatesComponent, 'sortByCriteria');
+      listCandidatesComponent.sortWhenClicked(option);
+
+      expect(listCandidatesComponent.isSortedAscendent).equal(false);
+      expect(sortByCriteria).called;
+   });
+  });
+
+  describe('editCandidate', () => {
+
+    it('should call update_candidate view for update', () => {
+      const idUserToEdit = user2.id;
+      listCandidatesComponent.editCandidate(idUserToEdit);
+      expect(listCandidatesMock.router.navigate).calledWith(['/admin-dashboard/update_candidate', idUserToEdit]);
+    });
+  });
+
+  describe('createCandidate', () => {
+
+    it('it should call reset method from admin api service and redirect to create candidate', () => {
+      listCandidatesComponent.createCandidate();
+      expect(listCandidatesMock.adminApiService.reset).called;
+      expect(listCandidatesMock.router.navigate).calledWith(['/admin-dashboard/create_candidate']);
+    });
+
+  });
+
+  describe('initObservables', () => {
+    it('it should call generalSearch method', fakeAsync(() => {
+       const generalSearch = sinon.stub(listCandidatesComponent, 'generalSearch');
+       listCandidatesComponent.initObservables();
+       const searchTest = 'Test Search';
+       listCandidatesMock.adminHelper.getGeneralSearchValue().next(searchTest);
+       tick();
+       expect(generalSearch).calledWith(searchTest);
+    }));
+  });
+
+});
