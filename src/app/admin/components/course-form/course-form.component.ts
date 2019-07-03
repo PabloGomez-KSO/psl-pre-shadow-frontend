@@ -27,6 +27,7 @@ export class CourseFormComponent implements OnInit {
 
   ngOnInit() {
     this.courseForm = this.getCourseForm();
+    this.addTopic();
     this.softwareRoles = this.adminHelper.getSoftwareRoles();
   }
 
@@ -42,12 +43,21 @@ export class CourseFormComponent implements OnInit {
     );
   }
 
-  addTopic(): void{
-    this.topics = this.courseForm.get('topics') as FormArray;
-    this.topics.push(this.createTopic());
+  get topicsArray() {
+    return this.courseForm.get('topics') as FormArray;
   }
 
-  createTopic(): FormGroup{
+  addTopic(): void {
+    this.topicsArray.push(this.createTopic());
+  }
+
+  deleteTopicControl(index: number): void {
+    if (this.topicsArray.length > 1) {
+      this.topicsArray.removeAt(index);
+    }
+  }
+
+  createTopic(): FormGroup {
     return this.formBuilder.group({
       name: ['', [Validators.required]],
       link: ['', [Validators.required]]
@@ -55,12 +65,12 @@ export class CourseFormComponent implements OnInit {
   }
 
   submitForm() {
-    console.log(this.courseForm.value);
+    if (this.courseForm.valid) {
+      this.formValueEmitted.emit(this.courseForm.value);
+    }
   }
 
   goBack() {
     this.router.navigate(['/admin-dashboard/list_courses']);
   }
-
-
 }

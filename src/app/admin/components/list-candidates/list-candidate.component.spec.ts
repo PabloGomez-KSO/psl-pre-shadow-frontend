@@ -135,7 +135,7 @@ describe('list-candidates.component', () => {
 
   describe('addNewUsers', () => {
     it('should add new users to both arrays ( candidates, candidatesComplete )', () => {
-     
+
       listCandidatesComponent.candidates = [ user1 ];
       const expectedCandidatesList = [ user1, user2 ];
       listCandidatesComponent.addNewUsers(user2);

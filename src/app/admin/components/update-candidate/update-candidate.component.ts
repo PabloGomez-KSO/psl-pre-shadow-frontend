@@ -9,8 +9,7 @@ import { AlertService } from '../../../shared/notifications/alert.service';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-update-candidate',
-  templateUrl: './update-candidate.component.html',
-  styleUrls: ['./update-candidate.component.scss']
+  templateUrl: './update-candidate.component.html'
 })
 export class UpdateCandidateComponent implements OnInit {
   updateCandidateForm: FormGroup;

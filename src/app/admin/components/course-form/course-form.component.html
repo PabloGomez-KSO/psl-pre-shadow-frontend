@@ -5,28 +5,47 @@
         <div class="create-course-info__wrap">
           <div class="create-course-info__wrap__element">
             <div class="create-course-info__wrap__element__data">
-              <label class="create-course-info__wrap__element__data__text" for="username">Name</label>
-              <input
+              <label class="create-course-info__wrap__element__data__text" for="username">Course Name</label>
+              <input [ngClass]="{'create-course-info__wrap__element__data__input--invalid': courseForm.get('name').errors && cForm.submitted}"
                      class="create-course-info__wrap__element__data__input"
                      type="text"
                      name="name"
                      formControlName="name"
                     >
             </div>
+            <div class="create-course-info__wrap__element__notification">
+              <div class="create-course-info__wrap__element__notification__error">
+                <div *ngIf="courseForm.get('name').errors">
+                  <div *ngIf="(cForm.submitted || courseForm.get('name')?.touched) && courseForm.get('name').errors['required']">
+                    Type course name
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div class="create-course-info__wrap__element" >
             <div class="create-course-info__wrap__element__data">
               <label class="create-course-info__wrap__element__data__text"
-                for="Preference">
+                for="category">
                 <strong> Category </strong>
               </label>
               <select class="create-course-info__wrap__element__data__input"
+                      [ngClass]="{'create-course-info__wrap__element__data__input--invalid': courseForm.get('category').errors && cForm.submitted}"
                       formControlName="category"
-                      name="preference"
+                      name="category"
               >
                 <option *ngFor="let role of softwareRoles" [value]="role">{{ role }}</option>
               </select>
+            </div>
+            <div class="create-course-info__wrap__element__notification">
+              <div class="create-course-info__wrap__element__notification__error">
+                <div *ngIf="courseForm.get('category').errors">
+                  <div *ngIf="(cForm.submitted || courseForm.get('category')?.touched) && courseForm.get('category').errors['required']">
+                    Select a category
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -35,10 +54,20 @@
                 <label class="create-course-info__wrap__element__data__text" for="numberOfCandidates">Candidates capacity </label>
                 <input
                        class="create-course-info__wrap__element__data__input"
+                       [ngClass]="{'create-course-info__wrap__element__data__input--invalid': courseForm.get('numberOfCandidates').errors && cForm.submitted}"
                        type="number"
                        name="numberOfCandidates"
                        formControlName="numberOfCandidates"
                       >
+              </div>
+              <div class="create-course-info__wrap__element__notification">
+                <div class="create-course-info__wrap__element__notification__error">
+                  <div *ngIf="courseForm.get('numberOfCandidates').errors">
+                    <div *ngIf="(cForm.submitted || courseForm.get('numberOfCandidates')?.touched) && courseForm.get('numberOfCandidates').errors['required']">
+                      Type a capacity
+                    </div>
+                  </div>
+                </div>
               </div>
           </div>
 
@@ -47,29 +76,48 @@
                 <label class="create-course-info__wrap__element__data__text" for="duration">Duration </label>
                 <input
                        class="create-course-info__wrap__element__data__input"
-                       type="number"
+                       [ngClass]="{'create-course-info__wrap__element__data__input--invalid': courseForm.get('duration').errors && cForm.submitted}"
+                       type="text"
                        name="duration"
                        formControlName="duration"
                       >
               </div>
+              <div class="create-course-info__wrap__element__notification">
+                <div class="create-course-info__wrap__element__notification__error">
+                  <div *ngIf="courseForm.get('duration').errors">
+                    <div *ngIf="(cForm.submitted || courseForm.get('duration')?.touched) && courseForm.get('duration').errors['required']">
+                      Type a duration
+                    </div>
+                  </div>
+                </div>
+              </div>
           </div>
           <div class="create-course-info__wrap__list-element-container">
               <div class="create-course-info-element">
-                  <div class="row ">
-                      <label class="create-course-info-element__text"  for="duration">Topics </label>
-                      <button class="btn btn-primary create-course-info-element__btn" type="button" (click)="addTopic()">
+                  <div class="row create-course-info-element__row">
+                      <label class="create-course-info-element__row__text"  for="duration">Topics </label>
+                      <button class="btn btn-primary create-course-info-element__row__btn" type="button" (click)="addTopic()">
                           <i class="fas fa-plus"></i>
                       </button>
-                  </div> 
-                  <div formArrayName="topics" *ngFor="let topic of courseForm.get('topics').controls; let i = index;">
+                  </div>
+                  <div formArrayName="topics" *ngFor="let topic of courseForm.get('topics')['controls']; let i = index;">
                       <div [formGroupName]="i">
-                          <input class="create-course-info-element__input" formControlName="name" placeholder="Name">
-                          <input class="create-course-info-element__input" formControlName="link" placeholder="Link">
+                          <input class="create-course-info-element__input"
+                                 [ngClass]="{'create-course-info-element__input--invalid': courseForm.get('topics')['controls'][i].get('name').status === 'INVALID' && cForm.submitted}"
+                                 formControlName="name"
+                                 placeholder="Name">
+                          <input class="create-course-info-element__input"
+                                 formControlName="link"
+                                 placeholder="Link"
+                                 [ngClass]="{'create-course-info-element__input--invalid': courseForm.get('topics')['controls'][i].get('link').status === 'INVALID' && cForm.submitted}"
+                                 >
+                          <button class="btn btn-dark create-course-info-element__btn" type="button" (click)="deleteTopicControl(i)">
+                            <i class="fas fa-trash"></i>
+                          </button>
                       </div>
                   </div>
-            </div>
+              </div>
           </div>
-
         </div>
       </div>
       <div class="create-course-container__buttons">
