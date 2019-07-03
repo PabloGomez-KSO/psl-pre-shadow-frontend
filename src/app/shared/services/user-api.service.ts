@@ -36,7 +36,6 @@ export class UserApiService {
            );
   }
 
-
   getUserByEmail(email: string): Observable<any> {
     const userCollection = this.getUserCollectionByEmail(email);
     return userCollection.snapshotChanges();
