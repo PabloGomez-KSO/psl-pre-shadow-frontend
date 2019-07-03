@@ -53,6 +53,22 @@
                       >
               </div>
           </div>
+          <div class="create-course-info__wrap__list-element-container">
+              <div class="create-course-info-element">
+                  <div class="row ">
+                      <label class="create-course-info-element__text"  for="duration">Topics </label>
+                      <button class="btn btn-primary create-course-info-element__btn" type="button" (click)="addTopic()">
+                          <i class="fas fa-plus"></i>
+                      </button>
+                  </div> 
+                  <div formArrayName="topics" *ngFor="let topic of courseForm.get('topics').controls; let i = index;">
+                      <div [formGroupName]="i">
+                          <input class="create-course-info-element__input" formControlName="name" placeholder="Name">
+                          <input class="create-course-info-element__input" formControlName="link" placeholder="Link">
+                      </div>
+                  </div>
+            </div>
+          </div>
 
         </div>
       </div>

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Course } from 'src/app/shared/models/course';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { AdminHelperService } from '../../services/admin-helper.service';
 import { Router } from '@angular/router';
 import { enumActions } from '../formActions.enum';
@@ -17,6 +17,7 @@ export class CourseFormComponent implements OnInit {
   softwareRoles: string[];
   courseForm: FormGroup;
   formActions: any = enumActions;
+  topics: FormArray;
 
   constructor(private formBuilder: FormBuilder,
               private adminHelper: AdminHelperService,
@@ -29,18 +30,32 @@ export class CourseFormComponent implements OnInit {
     this.softwareRoles = this.adminHelper.getSoftwareRoles();
   }
 
-  submitForm() {
-  }
-
   getCourseForm(): FormGroup {
     return this.formBuilder.group(
       {
         name: [ '', [Validators.required , Validators.minLength(3)]],
         category: ['', [Validators.required]],
         duration: [ '', [Validators.required, Validators.minLength(3)]],
-        numberOfCandidates: ['', [Validators.required, Validators.min(1)]]
+        numberOfCandidates: ['', [Validators.required, Validators.min(1)]],
+        topics: new FormArray([])
       }
     );
+  }
+
+  addTopic(): void{
+    this.topics = this.courseForm.get('topics') as FormArray;
+    this.topics.push(this.createTopic());
+  }
+
+  createTopic(): FormGroup{
+    return this.formBuilder.group({
+      name: ['', [Validators.required]],
+      link: ['', [Validators.required]]
+    });
+  }
+
+  submitForm() {
+    console.log(this.courseForm.value);
   }
 
   goBack() {
