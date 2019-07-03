@@ -18,10 +18,8 @@ export class CreateCourseComponent implements OnInit {
   }
 
   getFormOutput($courseEmmited: Course) {
-    this.courseAdministrationApi.addCourse($courseEmmited).subscribe((data) => {
-      console.log(data);
-      this.alertService.showMessage('Course created successfully', 'success', false);
-     }
+    this.courseAdministrationApi.addCourse($courseEmmited).subscribe(() =>
+      this.alertService.showMessage('Course created successfully', 'success', false)
     );
   }
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription, Observable } from 'rxjs';
 import {
   AngularFirestore,
   AngularFirestoreCollection
@@ -20,17 +20,17 @@ export class AdminApiService {
 
   constructor(public angularFirestore: AngularFirestore) { }
 
-  getFirstBatchOfUsers(): void {
+  getFirstBatchOfUsers(): Observable<any> {
     this.isFirstBatch = true;
     const firstBatch = this.angularFirestore.collection(
       'users',
       ref => ref.orderBy('name').limit(this.batchSize)
     );
 
-    this.mapAndUpdate(firstBatch);
+    return this.mapAndUpdate(firstBatch);
   }
 
-  getMoreUsers(lastVisibleDocument: any): void {
+  getMoreUsers(lastVisibleDocument: any): Observable<any> {
     this.isFirstBatch = false;
     const more = this.angularFirestore.collection('users', ref => {
       return ref
@@ -38,17 +38,17 @@ export class AdminApiService {
         .limit(this.batchSize)
         .startAfter(lastVisibleDocument);
     });
-    this.mapAndUpdate(more);
+    return this.mapAndUpdate(more);
   }
 
-  mapAndUpdate(userCollection: AngularFirestoreCollection<any>): void {
+  mapAndUpdate(userCollection: AngularFirestoreCollection<any>): Observable<any> {
     if (this._done.value) {
       return null;
     }
 
     this._loading.next(true);
 
-    userCollection
+    return userCollection
       .snapshotChanges()
       .pipe(
         tap(arr => {
@@ -64,8 +64,7 @@ export class AdminApiService {
           if (!values.length) {
             this._done.next(true);
           }
-        }))
-      .subscribe();
+        }));
   }
 
   reset() {

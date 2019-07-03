@@ -7,8 +7,8 @@ import { AdminApiService } from '../../services/admin-api.service';
 import * as _ from 'lodash';
 import * as moment from 'moment';
 import { AlertService } from '../../../shared/notifications/alert.service';
-import { Subscription } from 'rxjs';
-import { scan } from 'rxjs/operators';
+import { Subscription, Subject } from 'rxjs';
+import { scan, takeUntil } from 'rxjs/operators';
 import { Store, select } from '@ngrx/store';
 import { SearchNavbarState } from '../../store/interfaces/admin.state';
 import { UpdateSearchAction } from '../../store/actions/admin.actions';
@@ -27,6 +27,7 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
   userSubscription: Subscription;
   searchSubscription: Subscription;
   termToSearch: string;
+  destroy$: Subject<boolean> = new Subject();
 
   constructor(
     private router: Router,
@@ -60,9 +61,9 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
   getPage() {
     if (this.candidates.length) {
       const lastVisibleDocument = this.getLastVisibileDocument();
-      this.adminApiService.getMoreUsers(lastVisibleDocument);
+      this.adminApiService.getMoreUsers(lastVisibleDocument).pipe(takeUntil(this.destroy$)).subscribe();
     } else {
-      this.adminApiService.getFirstBatchOfUsers();
+      this.adminApiService.getFirstBatchOfUsers().pipe(takeUntil(this.destroy$)).subscribe();
     }
   }
 
@@ -162,8 +163,10 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+
     this.adminApiService.reset();
     this.userSubscription.unsubscribe();
     this.searchSubscription.unsubscribe();
+    this.destroy$.next(true);
   }
 }

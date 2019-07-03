@@ -38,6 +38,4 @@ export class ListCoursesComponent implements OnInit {
   getCourses() {
     this.courseAdministrationApi.getCourses().subscribe((courses: Course[]) => this.courses = courses);
   }
-
-
 }
