@@ -24,7 +24,7 @@ import { ScrollableDirective } from './directives/scrollable.directive';
 
 // NgRx.
 import { StoreModule } from '@ngrx/store';
-import { adminReducer } from './store/reducers/admin.reducer';
+import { reducers } from './store/reducers';
 
 @NgModule({
   imports: [
@@ -34,7 +34,7 @@ import { adminReducer } from './store/reducers/admin.reducer';
     NgbModule,
     ReactiveFormsModule,
     SharedModule,
-    StoreModule.forRoot({ searchTerm: adminReducer})
+    StoreModule.forFeature('entityCache', reducers)
   ],
   declarations: [
     CreateCandidateComponent,

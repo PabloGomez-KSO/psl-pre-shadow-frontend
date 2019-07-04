@@ -15,7 +15,7 @@ describe('list-candidates.component', () => {
       params.userApiService,
       params.adminHelper,
       params.alertService,
-      params.adminApiService, params.store);
+      params.adminApiService);
 
   const listCandidatesMock = {
     userApiService: {
@@ -69,7 +69,6 @@ describe('list-candidates.component', () => {
 
   beforeEach(() => {
     listCandidatesComponent = createListCandidatesComponent(listCandidatesMock);
-    sinon.stub(listCandidatesComponent, 'getSearchFromStore');
   });
 
   describe('constructor', () => {

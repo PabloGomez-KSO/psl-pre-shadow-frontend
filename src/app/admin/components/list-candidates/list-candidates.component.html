@@ -22,7 +22,7 @@
 </div>
 
 
-<div class="table-responsive candidates_table" *ngIf="this.candidates.length > 0"  appScrollable (scrollPosition)="scrollHandler($event)">
+<div class="table-responsive candidates_table" *ngIf="candidates.length > 0"  appScrollable (scrollPosition)="scrollHandler($event)">
       <table class="table table-hover table-striped ">
         <thead class="candidates_table__row-header">
           <tr>
@@ -46,7 +46,7 @@
           </tr>
         </thead>
         <tbody>
-          <ng-container *ngFor="let user of this.candidates">
+          <ng-container *ngFor="let user of candidates">
                 <tr *ngIf="user.roles.candidate" class="candidates_table__row-body">
                     <td class="candidates_table__row-body__item">{{user.name}} </td>
                     <td class="candidates_table__row-body__item">{{user.email}}</td>
@@ -66,7 +66,7 @@
           </ng-container>
         </tbody>
       </table>
-      <div class="candidates_spinner"  *ngIf="adminApiService._loading.value">
+      <div class="candidates_spinner"  *ngIf="loading">
           <app-loading-spinner></app-loading-spinner>
       </div>
 </div>

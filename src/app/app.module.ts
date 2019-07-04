@@ -13,11 +13,8 @@ import { SharedModule } from './shared/shared.module';
 import { APP_ROUTES } from './app-routing.module';
 
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-
-// Enviroments
-import { environment } from '../environments/environment';
-
-
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 @NgModule({
   declarations: [
     AppComponent
@@ -33,6 +30,8 @@ import { environment } from '../environments/environment';
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
     }),
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([])
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,4 +1,4 @@
-import { Course } from 'src/app/shared/models/course';
+import { Course } from '../../../shared/models/course';
 import * as courseActions from '../actions';
 
 export interface CourseState {
@@ -17,7 +17,7 @@ export const initialState: CourseState = {
 
 export function reducer(state = initialState, action: courseActions.AllCourseActions): CourseState {
 
-  switch(action.type) {
+  switch (action.type) {
     case courseActions.GET_COURSES_BATCH: {
       return {
         ...state,
@@ -34,12 +34,18 @@ export function reducer(state = initialState, action: courseActions.AllCourseAct
       };
     }
 
+    case courseActions.GET_COURSES_BATCH_ERROR: {
+      return {
+         ...state,
+         error: action.payload,
+         loading: false
+      };
+    }
+
     default: {
       return {
         ...state
-      }
+      };
     }
-
-
   }
 }

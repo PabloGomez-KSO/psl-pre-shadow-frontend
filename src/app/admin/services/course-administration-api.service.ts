@@ -13,6 +13,7 @@ import { map } from 'rxjs/internal/operators/map';
 export class CourseAdministrationApiService {
   private coursesCollection: AngularFirestoreCollection<Course>;
   courses: Observable<Course[]>;
+  private batchSize: 6;
 
   constructor(private angularFireStore: AngularFirestore) {
     this.coursesCollection = angularFireStore.collection<Course>('courses');
@@ -35,6 +36,22 @@ export class CourseAdministrationApiService {
 
   getCourseDataFromActionObject(action): Course {
     return action.payload.doc.data() as Course;
+  }
+
+  getFirstBatchOfCourses() {
+    const firstBatch = this.angularFireStore.collection(
+      'courses',
+      ref => ref.orderBy('name').limit(this.batchSize)
+    );
+  }
+
+  getMoreCourses(lastVisibleDocument) {
+    const coursesBatch = this.angularFireStore.collection('courses', ref => {
+      return ref
+        .orderBy('name')
+        .limit(this.batchSize)
+        .startAfter(lastVisibleDocument);
+    });
   }
 
 }

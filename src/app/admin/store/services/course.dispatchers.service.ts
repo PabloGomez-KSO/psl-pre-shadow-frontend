@@ -1,10 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { EntityState } from '../reducers';
+import * as courseActions from '../actions';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CourseDispatchersService {
 
-  constructor() { }
+  constructor(private store: Store<EntityState>) { }
+
+  getCoursesBatch() {
+    this.store.dispatch(new courseActions.GetCoursesBatch());
+  }
+
 }

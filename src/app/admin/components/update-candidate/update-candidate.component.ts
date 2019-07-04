@@ -55,7 +55,7 @@ export class UpdateCandidateComponent implements OnInit {
     this.userApiService.
       updateUser(this.user).subscribe(() => {
         this.alertService.showMessage('User updated successfully', 'success', false);
-        this.router.navigate(['/admin-dashboard/']);
+        setTimeout(() => this.router.navigate(['/admin-dashboard/']), 2000);
       });
   }
 

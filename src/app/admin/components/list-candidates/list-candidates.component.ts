@@ -10,8 +10,8 @@ import { AlertService } from '../../../shared/notifications/alert.service';
 import { Subscription, Subject } from 'rxjs';
 import { scan, takeUntil } from 'rxjs/operators';
 import { Store, select } from '@ngrx/store';
-import { SearchNavbarState } from '../../store/interfaces/admin.state';
-import { UpdateSearchAction } from '../../store/actions/admin.actions';
+import { EntityState } from '../../store/reducers';
+import { UpdateSearchAction } from '../../store/actions/candidate-list.actions';
 @Component({
   selector: 'app-list-candidates',
   templateUrl: './list-candidates.component.html',
@@ -28,6 +28,7 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
   searchSubscription: Subscription;
   termToSearch: string;
   destroy$: Subject<boolean> = new Subject();
+  loading = false;
 
   constructor(
     private router: Router,
@@ -35,16 +36,16 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
     private adminHelper: AdminHelperService,
     private alertService: AlertService,
     private adminApiService: AdminApiService,
-    private store: Store<SearchNavbarState>
   ) { }
 
   ngOnInit(): void {
+    console.log(this.candidates.length);
+    console.log(this.candidatesComplete.length);
     this.criteriaOptions = this.adminHelper.getCandidateCriteriaOptions();
     this.initObservables();
     this.getPage();
     this.selectedCriteriaToSort = 'name';
     this.selectedCriteriaToSearch = 'name';
-    this.getSearchFromStore();
   }
 
   scrollHandler(scrollEvent): void {
@@ -53,17 +54,17 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
     }
   }
 
-  getSearchFromStore() {
-    this.store.pipe(select('searchTerm'))
-      .subscribe(term => this.termToSearch = term);
-  }
-
   getPage() {
+    this.loading = true;
     if (this.candidates.length) {
       const lastVisibleDocument = this.getLastVisibileDocument();
-      this.adminApiService.getMoreUsers(lastVisibleDocument).pipe(takeUntil(this.destroy$)).subscribe();
+      console.log('entro a pedir este mostro mas usuarios');
+      this.adminApiService.getMoreUsers(lastVisibleDocument).pipe(takeUntil(this.destroy$))
+                                                            .subscribe((newUsers) => this.addNewUsers(newUsers));
     } else {
-      this.adminApiService.getFirstBatchOfUsers().pipe(takeUntil(this.destroy$)).subscribe();
+      console.log('entro a pedir este mostro primer batch');
+      this.adminApiService.getFirstBatchOfUsers().pipe(takeUntil(this.destroy$))
+                                                 .subscribe((newUsers) =>  this.addNewUsers(newUsers));
     }
   }
 
@@ -75,18 +76,13 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
   initObservables(): void {
     this.searchSubscription = this.adminHelper.getGeneralSearchValue()
       .subscribe((searchValue: string) => this.generalSearch(searchValue));
-
-    this.userSubscription = this.adminApiService._users.pipe(
-      scan((currentUsers, newUsers) => {
-        this.addNewUsers(newUsers);
-        return currentUsers.concat(newUsers);
-      })
-    ).subscribe();
   }
 
   addNewUsers(users: User[]): void {
+    console.log(users);
     this.candidates.push(...users);
     this.candidatesComplete.push(...users);
+    this.loading = false;
   }
 
   sortWhenClicked(option: string): void {
@@ -109,8 +105,6 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
         if (result.value) {
           this.userApiService.deleteUserById(id).subscribe();
           this.alertService.showMessage('Candidate has been deleted', 'info', false);
-          this.candidates = [];
-          this.candidatesComplete = [];
         }
       });
   }
@@ -121,9 +115,6 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
   }
 
   searchByCriteria(term: string): void {
-
-    const updateAction = new UpdateSearchAction(term);
-    this.store.dispatch(updateAction);
 
     if (this.selectedCriteriaToSearch) {
       this.candidates = _.filter(this.candidatesComplete, (user: User) => {
@@ -163,9 +154,9 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-
+    console.log(this.candidates.length);
+    console.log(this.candidatesComplete.length);
     this.adminApiService.reset();
-    this.userSubscription.unsubscribe();
     this.searchSubscription.unsubscribe();
     this.destroy$.next(true);
   }

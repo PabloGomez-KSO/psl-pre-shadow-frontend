@@ -48,13 +48,13 @@ describe('course-form.component', () => {
       expect(courseFormComponent.softwareRoles).eql(softwareRoles);
     });
 
-    it('form should have default values when the action is a creation', () => {
+   /* it('form should have default values when the action is a creation', () => {
       const addTopic = sinon.stub(courseFormComponent, 'addTopic');
       const getCourseForm = sinon.stub(courseFormComponent, 'getCourseForm');
 
       courseFormComponent.ngOnInit();
 
-    });
+    });*/
 
   });
 
