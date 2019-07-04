@@ -26,13 +26,13 @@ export class CourseFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.courseForm = this.getCourseForm();
+    this.initializeCourseForm();
     this.addTopic();
     this.softwareRoles = this.adminHelper.getSoftwareRoles();
   }
 
-  getCourseForm(): FormGroup {
-    return this.formBuilder.group(
+  initializeCourseForm() {
+    this.courseForm = this.formBuilder.group(
       {
         name: [ '', [Validators.required , Validators.minLength(3)]],
         category: ['', [Validators.required]],

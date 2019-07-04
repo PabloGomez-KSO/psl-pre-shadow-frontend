@@ -101,17 +101,17 @@
                       </button>
                   </div>
                   <div formArrayName="topics" *ngFor="let topic of courseForm.get('topics')['controls']; let i = index;">
-                      <div [formGroupName]="i">
-                          <input class="create-course-info-element__input"
-                                 [ngClass]="{'create-course-info-element__input--invalid': courseForm.get('topics')['controls'][i].get('name').status === 'INVALID' && cForm.submitted}"
+                      <div class="create-course-info-element__control" [formGroupName]="i">
+                          <input class="create-course-info-element__control__input"
+                                 [ngClass]="{'create-course-info-element__control__input--invalid': courseForm.get('topics')['controls'][i].get('name').status === 'INVALID' && cForm.submitted}"
                                  formControlName="name"
                                  placeholder="Name">
-                          <input class="create-course-info-element__input"
+                          <input class="create-course-info-element__control__input create-course-info-element__link"
                                  formControlName="link"
                                  placeholder="Link"
-                                 [ngClass]="{'create-course-info-element__input--invalid': courseForm.get('topics')['controls'][i].get('link').status === 'INVALID' && cForm.submitted}"
+                                 [ngClass]="{'create-course-info-element__control__input--invalid': courseForm.get('topics')['controls'][i].get('link').status === 'INVALID' && cForm.submitted}"
                                  >
-                          <button class="btn btn-dark create-course-info-element__btn" type="button" (click)="deleteTopicControl(i)">
+                          <button class="btn btn-dark create-course-info-element__control__btn" type="button" (click)="deleteTopicControl(i)">
                             <i class="fas fa-trash"></i>
                           </button>
                       </div>

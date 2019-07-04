@@ -11,7 +11,7 @@ export class GetCoursesBatch implements Action {
 
 export class GetCoursesBatchSuccess implements Action {
   readonly type = GET_COURSES_BATCH_SUCCESS;
-  constructor(public readonly payload: Course[]) {}
+  constructor(public readonly newCourses: Course[], public readonly document: any) {}
 }
 
 export class GetCoursesBatchError implements Action {
@@ -19,7 +19,7 @@ export class GetCoursesBatchError implements Action {
   constructor(public readonly payload: any) {}
 }
 
-export type CourseActions =
+export type AllCourseActions =
 | GetCoursesBatch
 | GetCoursesBatchSuccess
 | GetCoursesBatchError;

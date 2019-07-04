@@ -17,7 +17,7 @@ describe('course-form.component', () => {
 
   const courseFormMock = {
     formBuilder: {
-      group: sinon.stub().returns({})
+      group: sinon.stub()
     },
     adminHelper: {
       getSoftwareRoles: sinon.stub().returns(softwareRoles)
@@ -48,6 +48,14 @@ describe('course-form.component', () => {
       expect(courseFormComponent.softwareRoles).eql(softwareRoles);
     });
 
+    it('form should have default values when the action is a creation', () => {
+      const addTopic = sinon.stub(courseFormComponent, 'addTopic');
+      const getCourseForm = sinon.stub(courseFormComponent, 'getCourseForm');
+
+      courseFormComponent.ngOnInit();
+
+    });
+
   });
 
   describe('getCourseForm', () => {
@@ -55,7 +63,7 @@ describe('course-form.component', () => {
     it('should have default values when the action is a creation', () => {
       courseFormComponent.action = 'creation';
       courseFormComponent.getCourseForm();
-      expect(courseFormComponent.courseForm.controls['name']).eql('');
+      expect(courseFormMock.formBuilder.group).called;
     });
 
   });
