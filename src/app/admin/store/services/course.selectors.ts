@@ -20,6 +20,10 @@ const getAllCourses = createSelector(
   (state: CourseState) => state.courses
 );
 
+const getCoursesLoading = createSelector(
+  getCourseState,
+  (state: CourseState) => state.loading
+);
 @Injectable({
   providedIn: 'root'
 })
@@ -29,5 +33,6 @@ export class CourseSelectors {
   courses$ = this.store.select(getAllCourses);
   courseState$ = this.store.select(getCourseState);
   lastVisibleDocument$ = this.store.select(getLastVisibleDocument);
+  loading$ = this.store.select(getCoursesLoading);
 
 }

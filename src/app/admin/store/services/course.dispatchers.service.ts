@@ -14,4 +14,8 @@ export class CourseDispatchersService {
     this.store.dispatch(new courseActions.GetCoursesBatch());
   }
 
+  resetCoursesState() {
+    this.store.dispatch(new courseActions.ResetCoursesState());
+  }
+
 }

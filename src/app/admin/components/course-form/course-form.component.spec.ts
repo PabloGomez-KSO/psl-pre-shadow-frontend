@@ -63,6 +63,7 @@ describe('course-form.component', () => {
     it('should have default values when the action is a creation', () => {
       courseFormComponent.action = 'creation';
       courseFormComponent.getCourseForm();
+// tslint:disable-next-line: no-unused-expression
       expect(courseFormMock.formBuilder.group).called;
     });
 

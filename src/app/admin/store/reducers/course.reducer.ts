@@ -41,6 +41,9 @@ export function reducer(state = initialState, action: courseActions.AllCourseAct
       };
     }
 
+    case courseActions.RESET_COURSES:
+      return initialState;
+
     default: {
       return {
         ...state

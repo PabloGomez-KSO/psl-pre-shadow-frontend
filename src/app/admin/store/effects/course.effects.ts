@@ -12,8 +12,8 @@ export class CourseEffects {
 
   constructor(
     private actions$: Actions,
-    public courseAdministrationApi: CourseAdministrationApiService,
-    public courseSelectors: CourseSelectors
+    private courseAdministrationApi: CourseAdministrationApiService,
+    private courseSelectors: CourseSelectors
   ) {
   }
 
@@ -37,7 +37,8 @@ export class CourseEffects {
           return new courseActions.GetCoursesBatchSuccess(courses, getLastCourse);
         }),
         catchError((error: Error) => of(new courseActions.GetCoursesBatchError(error))
-        ));
+        )
+      );
   }
 
   sendFirstBatchRequest(): Observable<any> {
@@ -48,9 +49,9 @@ export class CourseEffects {
           return new courseActions.GetCoursesBatchSuccess(courses, getLastCourse);
         }),
         catchError((error: Error) => of(new courseActions.GetCoursesBatchError(error))
-        ));
+        )
+      );
   }
-
 
   getLastVisibileCourse(courses) {
     const coursesArraySize = courses.length;

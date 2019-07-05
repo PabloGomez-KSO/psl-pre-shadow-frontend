@@ -40,8 +40,6 @@ export class CourseAdministrationApiService {
   }
 
   getFirstBatchOfCourses(): Observable<any> {
-    console.log('por aca pidio el efecto');
-    console.log(this.batchSize);
     const firstBatch = this.angularFireStore.collection(
       'courses',
       ref => ref.orderBy('name').limit(this.batchSize)

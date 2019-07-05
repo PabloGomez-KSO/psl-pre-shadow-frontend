@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AdminHelperService } from '../../services/admin-helper.service';
 import { Course } from '../../../shared/models/course';
 import { Router } from '@angular/router';
-import { CourseAdministrationApiService } from '../../services/course-administration-api.service';
 import { CourseDispatchersService } from '../../store/services/course.dispatchers.service';
 import { CourseSelectors } from '../../store/services/course.selectors';
 import { takeUntil } from 'rxjs/operators';
@@ -24,29 +23,27 @@ export class ListCoursesComponent implements OnInit, OnDestroy {
 
   constructor(private adminHelper: AdminHelperService,
     private router: Router,
-    private courseAdministrationApi: CourseAdministrationApiService,
     private courseDispatchers: CourseDispatchersService,
-    public courseSelectors: CourseSelectors
+    private courseSelectors: CourseSelectors
   ) { }
 
   ngOnInit() {
     this.criteriaOptions = this.adminHelper.getCourseCriteriaOptions();
     this.selectedCriteriaToSearch = 'name';
     this.initObservables();
-    this.loading = true;
     this.courseDispatchers.getCoursesBatch();
   }
 
   initObservables() {
-    this.courseSelectors.courses$.pipe(takeUntil(this.destroy$)).subscribe(courses => {
-      this.courses = courses;
-      this.loading = false;
-    });
+    this.courseSelectors.courses$.pipe(takeUntil(this.destroy$))
+                                 .subscribe(courses => this.courses = courses);
+
+    this.courseSelectors.loading$.pipe(takeUntil(this.destroy$))
+                                 .subscribe((loadingStatus) => this.loading = loadingStatus);
   }
 
   scrollHandler(scrollEvent): void {
     if (scrollEvent === 'bottom') {
-      this.loading = true;
       this.courseDispatchers.getCoursesBatch();
     }
   }
@@ -56,16 +53,11 @@ export class ListCoursesComponent implements OnInit, OnDestroy {
   }
 
   createCourse() {
-    this.courseDispatchers.getCoursesBatch();
     this.router.navigate(['/admin-dashboard/create_course']);
-  }
-
-  getCourses() {
-    this.courseAdministrationApi.getAllCourses()
-      .subscribe((courses: Course[]) => this.courses = courses);
   }
 
   ngOnDestroy(): void {
      this.destroy$.next(true);
+     this.courseDispatchers.resetCoursesState();
   }
 }

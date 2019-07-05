@@ -1,6 +1,4 @@
-import {
-  ActionReducerMap
-} from '@ngrx/store';
+import { ActionReducerMap } from '@ngrx/store';
 
 import * as fromCourses from './course.reducer';
 import * as fromListCandidate from './candidate-list.reducer';

@@ -36,9 +36,7 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
     private userApiService: UserApiService,
     private adminHelper: AdminHelperService,
     private alertService: AlertService,
-    private adminApiService: AdminApiService,
-    private store: Store<EntityState>,
-    private candidateListSelectors: CandidateListSelectors
+    private adminApiService: AdminApiService
   ) { }
 
   ngOnInit(): void {
@@ -47,12 +45,6 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
     this.getPage();
     this.selectedCriteriaToSort = 'name';
     this.selectedCriteriaToSearch = 'name';
-    this.store.dispatch(new UpdateSearchAction('holaaa'));
-    this.getSearchFromStore();
-  }
-
-  getSearchFromStore() {
-    console.log(this.candidateListSelectors.searchTerm$.subscribe(data => console.log('lol' , data)));
   }
 
   scrollHandler(scrollEvent): void {
