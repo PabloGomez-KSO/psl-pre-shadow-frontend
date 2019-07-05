@@ -19,6 +19,10 @@ export class CourseFormComponent implements OnInit {
   formActions: any = enumActions;
   topics: FormArray;
 
+  get topicsArray() {
+    return this.courseForm.get('topics') as FormArray;
+  }
+
   constructor(private formBuilder: FormBuilder,
               private adminHelper: AdminHelperService,
               private router: Router
@@ -41,10 +45,6 @@ export class CourseFormComponent implements OnInit {
         topics: new FormArray([])
       }
     );
-  }
-
-  get topicsArray() {
-    return this.courseForm.get('topics') as FormArray;
   }
 
   addTopic(): void {

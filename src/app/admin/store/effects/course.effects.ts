@@ -6,6 +6,7 @@ import { CourseAdministrationApiService } from '../../services/course-administra
 import * as courseActions from '../../store/actions';
 import { CourseSelectors } from '../services/course.selectors';
 import { of, Observable } from 'rxjs';
+import { Course } from 'src/app/shared/models/course';
 
 @Injectable()
 export class CourseEffects {
@@ -29,7 +30,7 @@ export class CourseEffects {
   getCoursesRequest(lastVisibleDocument): Observable<any> {
     return this.courseAdministrationApi.getCourses(lastVisibleDocument).
       pipe(
-        map(courses => {
+        map((courses: Course[]) => {
           const getLastCourse = this.getLastVisibileCourse(courses);
           return new courseActions.GetCoursesBatchSuccess(courses, getLastCourse);
         }),

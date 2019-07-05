@@ -12,12 +12,13 @@ import { shareReplay } from 'rxjs/internal/operators/shareReplay';
   providedIn: 'root'
 })
 export class CourseAdministrationApiService {
+  readonly coursesConstant = 'courses';
   private coursesCollection: AngularFirestoreCollection<Course>;
   courses: Observable<Course[]>;
   private batchSize = 6;
 
   constructor(private angularFireStore: AngularFirestore) {
-    this.coursesCollection = angularFireStore.collection<Course>('courses');
+    this.coursesCollection = angularFireStore.collection<Course>(this.coursesConstant);
     this.courses = this.coursesCollection.valueChanges();
   }
 
@@ -36,7 +37,7 @@ export class CourseAdministrationApiService {
   }
 
   getCourseDataFromActionObject(action): Course {
-    return action.payload.doc.data() as Course;
+    return action.payload.doc.data();
   }
 
   getCourses(lastVisibleDocument): Observable<any> {
@@ -44,14 +45,14 @@ export class CourseAdministrationApiService {
     let coursesBatch;
 
     if (lastVisibleDocument) {
-      coursesBatch = this.angularFireStore.collection('courses', ref =>
+      coursesBatch = this.angularFireStore.collection(this.coursesConstant, ref =>
          ref
           .orderBy('name')
           .limit(this.batchSize)
           .startAfter(lastVisibleDocument)
       );
     } else {
-      coursesBatch = this.angularFireStore.collection('courses', ref =>
+      coursesBatch = this.angularFireStore.collection(this.coursesConstant, ref =>
           ref
            .orderBy('name')
            .limit(this.batchSize)
