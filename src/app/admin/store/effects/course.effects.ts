@@ -1,30 +1,59 @@
+
 import { Injectable } from '@angular/core';
-import { Actions, Effect } from '@ngrx/effects';
-import { map, switchMap, catchError, tap, withLatestFrom } from 'rxjs/operators';
+import { Actions, Effect, ofType } from '@ngrx/effects';
+import { switchMap, withLatestFrom, map, catchError } from 'rxjs/operators';
 import { CourseAdministrationApiService } from '../../services/course-administration-api.service';
-import { EntityState } from '../reducers';
-import * as courseActions from '../actions';
-import { of } from 'rxjs/internal/observable/of';
-import { Store, Action } from '@ngrx/store';
+import * as courseActions from '../../store/actions';
+import { CourseSelectors } from '../services/course.selectors';
+import { of, Observable } from 'rxjs';
 
 @Injectable()
-export class HeroesEffects {
-
-  isFirstBatch = true;
+export class CourseEffects {
 
   constructor(
     private actions$: Actions,
     public courseAdministrationApi: CourseAdministrationApiService,
-    private store:
+    public courseSelectors: CourseSelectors
   ) {
   }
 
   @Effect()
-  getCoursesBatch$ = this.actions$.ofType(courseActions.GET_COURSES_BATCH)
+  getCoursesBatch$ = this.actions$.pipe(ofType(courseActions.GET_COURSES_BATCH))
     .pipe(
-      withLatestFrom(this.store$),
-      switchMap(() => {
-           return null;
-      })
-    );
+      withLatestFrom(this.courseSelectors.lastVisibleDocument$),
+      switchMap(([action, lastVisibleDocument]) => {
+        if (lastVisibleDocument) {
+          return this.sendMoreCoursesRequest(lastVisibleDocument);
+        }
+        return this.sendFirstBatchRequest();
+      }));
+
+
+  sendMoreCoursesRequest(lastVisibleDocument): Observable<any> {
+    return this.courseAdministrationApi.getMoreCourses(lastVisibleDocument).
+      pipe(
+        map(courses => {
+          const getLastCourse = this.getLastVisibileCourse(courses);
+          return new courseActions.GetCoursesBatchSuccess(courses, getLastCourse);
+        }),
+        catchError((error: Error) => of(new courseActions.GetCoursesBatchError(error))
+        ));
+  }
+
+  sendFirstBatchRequest(): Observable<any> {
+    return this.courseAdministrationApi.getFirstBatchOfCourses().
+      pipe(
+        map(courses => {
+          const getLastCourse = this.getLastVisibileCourse(courses);
+          return new courseActions.GetCoursesBatchSuccess(courses, getLastCourse);
+        }),
+        catchError((error: Error) => of(new courseActions.GetCoursesBatchError(error))
+        ));
+  }
+
+
+  getLastVisibileCourse(courses) {
+    const coursesArraySize = courses.length;
+    return courses[coursesArraySize - 1].doc;
+  }
 }

@@ -24,7 +24,6 @@ export function reducer(state = initialState, action: courseActions.AllCourseAct
         loading: true
       };
     }
-
     case courseActions.GET_COURSES_BATCH_SUCCESS: {
       return {
         ...state,

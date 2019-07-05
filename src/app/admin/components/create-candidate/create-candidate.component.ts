@@ -8,8 +8,7 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-candidate',
-  templateUrl: './create-candidate.component.html',
-  styleUrls: ['./create-candidate.component.scss']
+  templateUrl: './create-candidate.component.html'
 })
 export class CreateCandidateComponent implements OnInit {
   user: User;

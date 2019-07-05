@@ -35,7 +35,6 @@ export class CandidateFormComponent implements OnInit {
   ngOnInit() {
     this.softwareRoles = this.adminHelper.getSoftwareRoles();
     this.candidateForm = this.getCandidateForm();
-    console.log(this.user);
     this.setUpdateControlsAndInputs();
   }
 

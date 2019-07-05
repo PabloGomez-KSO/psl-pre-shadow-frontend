@@ -25,6 +25,8 @@ import { ScrollableDirective } from './directives/scrollable.directive';
 // NgRx.
 import { StoreModule } from '@ngrx/store';
 import { reducers } from './store/reducers';
+import { effects } from './store/effects';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   imports: [
@@ -34,7 +36,8 @@ import { reducers } from './store/reducers';
     NgbModule,
     ReactiveFormsModule,
     SharedModule,
-    StoreModule.forFeature('entityCache', reducers)
+    StoreModule.forFeature('entityCache', reducers),
+    EffectsModule.forFeature(effects)
   ],
   declarations: [
     CreateCandidateComponent,

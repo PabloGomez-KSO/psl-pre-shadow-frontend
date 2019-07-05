@@ -6,6 +6,7 @@ import { Course } from 'src/app/shared/models/course';
 import { from } from 'rxjs/internal/observable/from';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/internal/operators/map';
+import { shareReplay } from 'rxjs/internal/operators/shareReplay';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ import { map } from 'rxjs/internal/operators/map';
 export class CourseAdministrationApiService {
   private coursesCollection: AngularFirestoreCollection<Course>;
   courses: Observable<Course[]>;
-  private batchSize: 6;
+  private batchSize = 4;
 
   constructor(private angularFireStore: AngularFirestore) {
     this.coursesCollection = angularFireStore.collection<Course>('courses');
@@ -22,11 +23,11 @@ export class CourseAdministrationApiService {
 
   addCourse(course: Course) {
     const idGenerated = this.angularFireStore.createId();
-    const courseToDB: Course = {...course, id: idGenerated };
+    const courseToDB: Course = { ...course, id: idGenerated };
     return from(this.coursesCollection.doc(idGenerated).set(courseToDB));
   }
 
-  getCourses() {
+  getAllCourses() {
     return this.coursesCollection.snapshotChanges().pipe(map(changes => this.handleCourses(changes)));
   }
 
@@ -38,20 +39,42 @@ export class CourseAdministrationApiService {
     return action.payload.doc.data() as Course;
   }
 
-  getFirstBatchOfCourses() {
+  getFirstBatchOfCourses(): Observable<any> {
+    console.log('por aca pidio el efecto');
+    console.log(this.batchSize);
     const firstBatch = this.angularFireStore.collection(
       'courses',
       ref => ref.orderBy('name').limit(this.batchSize)
     );
+
+    return this.mapAndUpdate(firstBatch);
   }
 
-  getMoreCourses(lastVisibleDocument) {
+  getMoreCourses(lastVisibleDocument): Observable<any> {
     const coursesBatch = this.angularFireStore.collection('courses', ref => {
       return ref
         .orderBy('name')
         .limit(this.batchSize)
         .startAfter(lastVisibleDocument);
     });
+
+    return this.mapAndUpdate(coursesBatch);
+  }
+
+  mapAndUpdate(coursesCollection: AngularFirestoreCollection<any>): Observable<any> {
+
+    return coursesCollection
+      .snapshotChanges()
+      .pipe(
+        shareReplay(1),
+        map(arr =>
+          arr.map(action => {
+            const data = action.payload.doc.data();
+            const doc = action.payload.doc;
+            return { ...data, doc };
+          })
+        )
+      );
   }
 
 }

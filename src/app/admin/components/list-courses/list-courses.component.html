@@ -16,7 +16,7 @@
 
 </div>
 
-<div class="course_cards">
+<div class="course_cards" appScrollable (scrollPosition)="scrollHandler($event)">
   <div class="container_cards d-flex flex-wrap">
       <ng-container *ngFor="let course of this.courses">
           <div class="card">
@@ -56,6 +56,9 @@
           </div>
     </ng-container>
   </div>
+</div>
+<div class="courses_spinner"  *ngIf="loading">
+  <app-loading-spinner></app-loading-spinner>
 </div>
 <!-- <div class="table-responsive courses_table">
 <table class="table table-hover table-striped table-bordered ">

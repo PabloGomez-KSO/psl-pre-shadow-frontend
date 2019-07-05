@@ -12,6 +12,7 @@ import { scan, takeUntil } from 'rxjs/operators';
 import { Store, select } from '@ngrx/store';
 import { EntityState } from '../../store/reducers';
 import { UpdateSearchAction } from '../../store/actions/candidate-list.actions';
+import { CandidateListSelectors } from '../../store/services/candidate-list.selectors';
 @Component({
   selector: 'app-list-candidates',
   templateUrl: './list-candidates.component.html',
@@ -36,20 +37,26 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
     private adminHelper: AdminHelperService,
     private alertService: AlertService,
     private adminApiService: AdminApiService,
+    private store: Store<EntityState>,
+    private candidateListSelectors: CandidateListSelectors
   ) { }
 
   ngOnInit(): void {
-    console.log(this.candidates.length);
-    console.log(this.candidatesComplete.length);
     this.criteriaOptions = this.adminHelper.getCandidateCriteriaOptions();
     this.initObservables();
     this.getPage();
     this.selectedCriteriaToSort = 'name';
     this.selectedCriteriaToSearch = 'name';
+    this.store.dispatch(new UpdateSearchAction('holaaa'));
+    this.getSearchFromStore();
+  }
+
+  getSearchFromStore() {
+    console.log(this.candidateListSelectors.searchTerm$.subscribe(data => console.log('lol' , data)));
   }
 
   scrollHandler(scrollEvent): void {
-    if (scrollEvent === 'bottom' && !this.adminApiService._done.value) {
+    if (scrollEvent === 'bottom') {
       this.getPage();
     }
   }
@@ -58,11 +65,9 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
     this.loading = true;
     if (this.candidates.length) {
       const lastVisibleDocument = this.getLastVisibileDocument();
-      console.log('entro a pedir este mostro mas usuarios');
       this.adminApiService.getMoreUsers(lastVisibleDocument).pipe(takeUntil(this.destroy$))
                                                             .subscribe((newUsers) => this.addNewUsers(newUsers));
     } else {
-      console.log('entro a pedir este mostro primer batch');
       this.adminApiService.getFirstBatchOfUsers().pipe(takeUntil(this.destroy$))
                                                  .subscribe((newUsers) =>  this.addNewUsers(newUsers));
     }
@@ -79,7 +84,6 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
   }
 
   addNewUsers(users: User[]): void {
-    console.log(users);
     this.candidates.push(...users);
     this.candidatesComplete.push(...users);
     this.loading = false;
@@ -154,8 +158,6 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    console.log(this.candidates.length);
-    console.log(this.candidatesComplete.length);
     this.adminApiService.reset();
     this.searchSubscription.unsubscribe();
     this.destroy$.next(true);
