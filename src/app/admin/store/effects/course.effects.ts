@@ -22,27 +22,12 @@ export class CourseEffects {
     .pipe(
       withLatestFrom(this.courseSelectors.lastVisibleDocument$),
       switchMap(([action, lastVisibleDocument]) => {
-        if (lastVisibleDocument) {
-          return this.sendMoreCoursesRequest(lastVisibleDocument);
-        }
-        return this.sendFirstBatchRequest();
+        return this.getCoursesRequest(lastVisibleDocument);
       }));
 
 
-  sendMoreCoursesRequest(lastVisibleDocument): Observable<any> {
-    return this.courseAdministrationApi.getMoreCourses(lastVisibleDocument).
-      pipe(
-        map(courses => {
-          const getLastCourse = this.getLastVisibileCourse(courses);
-          return new courseActions.GetCoursesBatchSuccess(courses, getLastCourse);
-        }),
-        catchError((error: Error) => of(new courseActions.GetCoursesBatchError(error))
-        )
-      );
-  }
-
-  sendFirstBatchRequest(): Observable<any> {
-    return this.courseAdministrationApi.getFirstBatchOfCourses().
+  getCoursesRequest(lastVisibleDocument): Observable<any> {
+    return this.courseAdministrationApi.getCourses(lastVisibleDocument).
       pipe(
         map(courses => {
           const getLastCourse = this.getLastVisibileCourse(courses);

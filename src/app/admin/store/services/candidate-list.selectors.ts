@@ -15,7 +15,6 @@ const getSearchTerm = createSelector(
   (state: SearchState) => state.searchTerm
 );
 
-
 @Injectable({
   providedIn: 'root'
 })

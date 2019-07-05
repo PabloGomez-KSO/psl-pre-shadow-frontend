@@ -44,8 +44,12 @@ export class ListCoursesComponent implements OnInit, OnDestroy {
 
   scrollHandler(scrollEvent): void {
     if (scrollEvent === 'bottom') {
-      this.courseDispatchers.getCoursesBatch();
+      this.getBatch();
     }
+  }
+
+  getBatch() {
+    this.courseDispatchers.getCoursesBatch();
   }
 
   searchByCriteria(term: string) {

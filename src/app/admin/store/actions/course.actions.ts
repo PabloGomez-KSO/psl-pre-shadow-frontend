@@ -27,5 +27,4 @@ export type AllCourseActions =
 | GetCoursesBatch
 | ResetCoursesState
 | GetCoursesBatchSuccess
-| GetCoursesBatchError
-;
+| GetCoursesBatchError;

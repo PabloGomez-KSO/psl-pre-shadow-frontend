@@ -34,8 +34,6 @@ describe('list-candidates.component', () => {
     adminApiService: {
       getMoreUsers: sinon.stub().returns(of({})),
       getFirstBatchOfUsers: sinon.stub().returns(of({})),
-      _users: new BehaviorSubject([]),
-      _done: new BehaviorSubject(false),
       reset: sinon.stub().returns(of({}))
     }
   };
@@ -73,7 +71,6 @@ describe('list-candidates.component', () => {
 
   describe('constructor', () => {
     it('list-candidate component should exist', () => {
-      // tslint:disable-next-line:no-unused-expression
       expect(listCandidatesComponent).exist;
     });
   });
@@ -82,14 +79,12 @@ describe('list-candidates.component', () => {
     it('should call method initObservables ', () => {
       const initObservables = sinon.stub(listCandidatesComponent, 'initObservables');
       listCandidatesComponent.ngOnInit();
-      // tslint:disable-next-line:no-unused-expression
       expect(listCandidatesComponent.initObservables).called;
     });
 
     it('should call method getPage', () => {
       const getPage = sinon.stub(listCandidatesComponent, 'getPage');
       listCandidatesComponent.ngOnInit();
-      // tslint:disable-next-line:no-unused-expression
       expect(listCandidatesComponent.getPage).called;
 
     });
@@ -97,11 +92,10 @@ describe('list-candidates.component', () => {
 
 
   describe('scrollHandler', () => {
-    it('should call method getPage when the output of ScrollEvent is bottom and pagination is not finished yet', () => {
+    it('should call method getPage when the output of ScrollEvent is bottom', () => {
       const scrollEvent = 'bottom';
       const getPage = sinon.stub(listCandidatesComponent, 'getPage');
       listCandidatesComponent.scrollHandler(scrollEvent);
-      // tslint:disable-next-line:no-unused-expression
       expect(listCandidatesComponent.getPage).called;
     });
 
@@ -109,7 +103,6 @@ describe('list-candidates.component', () => {
       const scrollEvent = 'top';
       const getPage = sinon.stub(listCandidatesComponent, 'getPage');
       listCandidatesComponent.scrollHandler(scrollEvent);
-      // tslint:disable-next-line:no-unused-expression
       expect(getPage).to.not.have.been.called;
     });
   });
@@ -131,7 +124,6 @@ describe('list-candidates.component', () => {
     it('should call getFirstBatchOfUsers when candidates array is empty', () => {
       listCandidatesComponent.candidates = [];
       listCandidatesComponent.getPage();
-      // tslint:disable-next-line:no-unused-expression
       expect(listCandidatesMock.adminApiService.getFirstBatchOfUsers).called;
     });
   });
@@ -156,7 +148,6 @@ describe('list-candidates.component', () => {
 
        expect(listCandidatesComponent.selectedCriteriaToSort).equal(option);
        expect(listCandidatesComponent.isSortedAscendent).equal(true);
-       // tslint:disable-next-line:no-unused-expression
        expect(sortByCriteria).called;
     });
 
@@ -168,7 +159,6 @@ describe('list-candidates.component', () => {
       listCandidatesComponent.sortWhenClicked(option);
 
       expect(listCandidatesComponent.isSortedAscendent).equal(false);
-      // tslint:disable-next-line:no-unused-expression
       expect(sortByCriteria).called;
    });
   });
@@ -186,7 +176,6 @@ describe('list-candidates.component', () => {
 
     it('it should call reset method from admin api service and redirect to create candidate', () => {
       listCandidatesComponent.createCandidate();
-      // tslint:disable-next-line:no-unused-expression
       expect(listCandidatesMock.adminApiService.reset).called;
       expect(listCandidatesMock.router.navigate).calledWith(['/admin-dashboard/create_candidate']);
     });
