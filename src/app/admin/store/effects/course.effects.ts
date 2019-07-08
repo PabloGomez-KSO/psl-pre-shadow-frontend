@@ -31,7 +31,6 @@ export class CourseEffects {
     .pipe(
       withLatestFrom(this.courseSelectors.courseState$),
       switchMap(([action, courseState]) => {
-        console.log(courseState.searchTerm);
         return this.courseAdministrationApi.searchByCriteria(courseState.searchTerm, courseState.searchCriteria)
           .pipe(map((courses: Course[]) => new courseActions.SearchCoursesByCriteriaSuccess(courses))
             );

@@ -43,7 +43,6 @@ export class ListCoursesComponent implements OnInit, OnDestroy {
   }
 
   scrollHandler(scrollEvent): void {
-    console.log(this.termToSearch);
     if (scrollEvent === 'bottom' && this.termToSearch === '') {
       this.getBatch();
     }

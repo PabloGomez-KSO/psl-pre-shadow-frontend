@@ -42,10 +42,6 @@ export class CourseAdministrationApiService {
 
   searchByCriteria(text, criteria): Observable<Course[]> {
 
-    console.log('fucking test ', text);
-
-    console.log('aaa ', criteria);
-
     const endText = text + '\uf8ff';
 
     const coursesCollection = this.angularFireStore.collection(this.coursesConstant, ref =>
