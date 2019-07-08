@@ -8,11 +8,8 @@ import * as _ from 'lodash';
 import * as moment from 'moment';
 import { AlertService } from '../../../shared/notifications/alert.service';
 import { Subscription, Subject } from 'rxjs';
-import { scan, takeUntil } from 'rxjs/operators';
-import { Store, select } from '@ngrx/store';
-import { EntityState } from '../../store/reducers';
-import { UpdateSearchAction } from '../../store/actions/candidate-list.actions';
-import { CandidateListSelectors } from '../../store/services/candidate-list.selectors';
+import { takeUntil } from 'rxjs/operators';
+
 @Component({
   selector: 'app-list-candidates',
   templateUrl: './list-candidates.component.html',
@@ -106,7 +103,6 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
   }
 
   createCandidate(): void {
-    this.adminApiService.reset();
     this.router.navigate(['/admin-dashboard/create_candidate']);
   }
 
@@ -150,7 +146,6 @@ export class ListCandidatesComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.adminApiService.reset();
     this.searchSubscription.unsubscribe();
     this.destroy$.next(true);
   }

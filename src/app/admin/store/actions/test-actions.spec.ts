@@ -50,6 +50,26 @@ describe('admin-actions', () => {
 
   });
 
+  describe('SearchCoursesByCriteria Action ', () => {
+
+    it('should create SearchCoursesByCriteria action', () => {
+      const action = new actions.SearchCoursesByCriteria('Angular', 'name');
+      expect(action.type).equals(actions.SEARCH_COURSES_BY_CRITERIA);
+      expect(action.searchTerm).equals('Angular');
+      expect(action.criteria).equals('name');
+    });
+  });
+
+  describe('SearchCoursesBySuccess Action ', () => {
+
+    it('should create SearchCoursesByCriteria action', () => {
+      const testCourses: Course[] = [course1, course2];
+      const action = new actions.SearchCoursesByCriteriaSuccess(testCourses)
+      expect(action.type).equals(actions.SEARCH_COURSES_BY_CRITERIA_SUCCESS);
+      expect(action.courses).equals(testCourses);
+    });
+  });
+
   describe('ResetCoursesState Action ', () => {
 
     it('should create ResetCoursesState action', () => {

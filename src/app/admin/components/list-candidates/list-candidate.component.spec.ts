@@ -174,9 +174,8 @@ describe('list-candidates.component', () => {
 
   describe('createCandidate', () => {
 
-    it('it should call reset method from admin api service and redirect to create candidate', () => {
+    it('should redirect to create candidate', () => {
       listCandidatesComponent.createCandidate();
-      expect(listCandidatesMock.adminApiService.reset).called;
       expect(listCandidatesMock.router.navigate).calledWith(['/admin-dashboard/create_candidate']);
     });
 

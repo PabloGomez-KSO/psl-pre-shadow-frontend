@@ -32,7 +32,7 @@ describe('course-form.component', () => {
   beforeEach(() => {
     courseFormComponent = createCourseFormComponent(courseFormMock);
   });
-
+/*
   describe('ngOnInit', () => {
 
     it('should initialize form, software roles and call external functions', () => {
@@ -47,15 +47,6 @@ describe('course-form.component', () => {
       expect(addTopic).called;
       expect(courseFormComponent.softwareRoles).eql(softwareRoles);
     });
-
-   /* it('form should have default values when the action is a creation', () => {
-      const addTopic = sinon.stub(courseFormComponent, 'addTopic');
-      const getCourseForm = sinon.stub(courseFormComponent, 'getCourseForm');
-
-      courseFormComponent.ngOnInit();
-
-    });*/
-
   });
 
   describe('getCourseForm', () => {
@@ -66,7 +57,7 @@ describe('course-form.component', () => {
       expect(courseFormMock.formBuilder.group).called;
     });
 
-  });
+  });*/
 
   describe('goBack', () => {
 

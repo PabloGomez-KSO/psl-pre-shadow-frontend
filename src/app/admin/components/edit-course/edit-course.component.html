@@ -1,3 +1,6 @@
-<p>
-  edit-course works!
-</p>
+<app-course-form  *ngIf="isCourseInitialized"
+                   [action]="action"
+                  (formValueEmitted)="getFormOutput($event)"
+                  [course]="courseToEdit"
+>
+</app-course-form>

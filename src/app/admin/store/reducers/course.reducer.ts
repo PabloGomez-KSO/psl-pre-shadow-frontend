@@ -62,14 +62,6 @@ export function reducer(state = initialState, action: courseActions.AllCourseAct
       };
     }
 
-    case courseActions.SEARCH_COURSES_BY_CRITERIA_ERROR: {
-      return {
-        ...state,
-        loading: false,
-        error: action.payload
-      };
-    }
-
     case courseActions.RESET_COURSES:
       return initialState;
 

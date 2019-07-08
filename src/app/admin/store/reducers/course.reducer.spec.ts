@@ -58,7 +58,8 @@ describe('courseReducer', () => {
       courses: [],
       lastCourseDocument: null,
       loading: false,
-      error: false
+      error: false,
+      searchTerm: ''
     };
 
 
@@ -72,7 +73,9 @@ describe('courseReducer', () => {
       courses: [],
       lastCourseDocument: null,
       loading: true,
-      error: false
+      error: false,
+      searchCriteria: '',
+      searchTerm: ''
     };
     expect(result).to.eql(expectedResult);
 
@@ -118,7 +121,8 @@ describe('courseReducer', () => {
       courses: [course1, course2, course3, course4],
       lastCourseDocument: document,
       loading: true,
-      error: false
+      error: false,
+      searchTerm: 'sdaaoidsasaijpaskdasdaso'
     };
 
     const testResetAction = new actions.ResetCoursesState();
@@ -127,6 +131,61 @@ describe('courseReducer', () => {
 
     expect(result).to.eql(initialState);
 
+  });
+
+  it('should update correct information with SEARCH_COURSES_BY_CRITERIA ACTION', () => {
+
+    const testState: CourseState = {
+      courses: [course1, course2],
+      lastCourseDocument: document,
+      loading: true,
+      error: false,
+      searchTerm: ''
+    };
+
+    const testAction = new actions.SearchCoursesByCriteria('Angular', 'name');
+
+    const result = reducer(testState, testAction);
+
+    const expectedResult: CourseState = {
+      courses: [course1, course2],
+      lastCourseDocument: document,
+      loading: true,
+      error: false,
+      searchTerm: 'Angular',
+      searchCriteria: 'name'
+    };
+
+    expect(result).to.eql(expectedResult);
+  });
+
+  it('should update correct information with SEARCH_COURSES_BY_CRITERIA_SUCCESS ACTION', () => {
+
+    const testState: CourseState = {
+      courses: [course1, course2, course3, course4],
+      lastCourseDocument: document,
+      loading: true,
+      error: false,
+      searchTerm: 'Angular',
+      searchCriteria: 'name'
+    };
+
+    const resultCourses: Course[] = [course3];
+
+    const testAction = new actions.SearchCoursesByCriteriaSuccess(resultCourses);
+
+    const result = reducer(testState, testAction);
+
+    const expectedResult: CourseState = {
+      courses: [course3],
+      lastCourseDocument: document,
+      loading: false,
+      error: false,
+      searchTerm: 'Angular',
+      searchCriteria: 'name'
+    };
+
+    expect(result).to.eql(expectedResult);
   });
 
 });

@@ -57,6 +57,17 @@ export class AdminHelperService {
     return user;
   }
 
+  getCourseRebooted(): Course {
+    const course: Course = {
+      name: '',
+      numberOfCandidates: null,
+      duration: '',
+      category: '',
+      topics: []
+    };
+    return course;
+  }
+
   getCandidateCriteriaOptions(): string[] {
     return this.candidateCriteriaOptions;
   }

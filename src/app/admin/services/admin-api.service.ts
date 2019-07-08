@@ -10,9 +10,6 @@ import { tap, map, shareReplay } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AdminApiService {
-  _done = new BehaviorSubject(false);
-  _loading = new BehaviorSubject(false);
-  _users = new BehaviorSubject([]);
 
   userCollectionSubsciption: Subscription;
   batchSize = 14;
@@ -51,11 +48,5 @@ export class AdminApiService {
             return { ...data, doc };
           })));
 
-  }
-
-  reset() {
-    this._users.next([]);
-    this._done.next(false);
-    this._loading.next(true);
   }
 }

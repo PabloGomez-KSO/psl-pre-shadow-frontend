@@ -11,17 +11,22 @@
       <option *ngFor="let option of criteriaOptions" [value]="option"> {{option | titlecase | convertTitle }} </option>
     </select>
 
-    <input #term [(ngModel)]="termToSearch" (keyup)="searchByCriteria(term.value)" class="form-control mr-sm-2 list_courses_container__criteria-list__search" type="text" placeholder="Search by criteria">
+    <input #term [(ngModel)]="termToSearch" (keyup)="updateTerm(term.value)" class="form-control mr-sm-2 list_courses_container__criteria-list__search" type="text" placeholder="Search by criteria">
   </div>
 
 </div>
 
 <div class="course_cards" appScrollable (scrollPosition)="scrollHandler($event)">
   <div class="container_cards d-flex flex-wrap">
-      <ng-container *ngFor="let course of this.courses">
+      <ng-container *ngFor="let course of courses">
           <div class="card">
-            <div class="card-header text-center">
-             {{ course.name }}
+            <div class="card-header">
+             <span class="card-header-text">
+              {{ course.name }}
+            </span>
+             <button type="button" class="btn card-header-btn" (click)="editCourse(course.id)">
+              <i class="fas fa-edit"></i>
+             </button>
             </div>
             <div class="card-body">
               <p class="card-text">
@@ -60,49 +65,4 @@
 <div class="courses_spinner"  *ngIf="loading">
   <app-loading-spinner></app-loading-spinner>
 </div>
-<!-- <div class="table-responsive courses_table">
-<table class="table table-hover table-striped table-bordered ">
 
-    <thead class="courses_table__row-header">
-      <tr>
-              <th scope="col" class="courses_table__row-header__item"  *ngFor="let option of criteriaOptions">
-                <div class="courses_table__row-header__item__data">
-                  <div class="courses_table__row-header__item__data__text">
-                    {{option | titlecase | convertTitle}}
-                  </div>
-                </div>
-              </th>
-              <th scope="col" class="courses_table__row-header__item__edit"></th>
-      </tr>
-    </thead>
-
-    <tbody class="courses_table__row-body">
-
-      <tr *ngFor="let course of this.fakeCourses">
-          <td class="courses_table__row-body__item">{{course.name}} </td>
-          <td class="courses_table__row-body__item">{{course.numberOfCandidates}} </td>
-          <td class="courses_table__row-body__item">{{course.category}} </td>
-          <td class="courses_table__row-body__item">{{course.duration}} </td>
-          <td class="courses_table__row-body__item">
-              <ul>
-                <li class="courses_table__row-body__item__topic-list" *ngFor="let topic of course.topics">
-                  <span class="courses_table__row-body__item__topic-list__text" style="display: block">
-                   {{ topic.name }}
-                  </span>
-                  <span class="courses_table__row-body__item__topic-list__text">
-                   <a [href]="topic.link"> {{ topic.link }} </a>
-                  </span>
-                </li>
-              </ul>
-          </td>
-
-          <td class="candidates_table__row-body__item"> </td>
-
-      </tr>
-
-
-
-    </tbody>
-
-</table>
-</div> -->

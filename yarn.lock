@@ -493,10 +493,10 @@
   resolved "https://registry.yarnpkg.com/@ngrx/effects/-/effects-6.1.2.tgz#602f3ee9798e00179075ddef030ded88c28b1aa1"
   integrity sha512-RUuQ5/7ofxGEZnRRdlC1oE9ugVlTYGm92MVj7c6IirHrVN9W5yQjjMTYEYceVCDOYsiXP7Pyw0dcPp6J5wD2EQ==
 
-"@ngrx/store-devtools@6.0.1":
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/@ngrx/store-devtools/-/store-devtools-6.0.1.tgz#6049208d1ef8dc5f1f96ffc63373eab2d72f957c"
-  integrity sha512-eZyguQvIltJuhCVgPPR1IyMAztykRuvGalwCH1G2ODWKGZPNrWlJbxVMqzUeSJTBS268RIFIkMTwEDKi/xCQoQ==
+"@ngrx/store-devtools@^6.0.1":
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/@ngrx/store-devtools/-/store-devtools-6.1.2.tgz#b9cb8d6bcd7ee0d171dde86c9bdd5e6a5bc5563a"
+  integrity sha512-hvWMKcRIAtAFb2lb4woRenPHPgOiLFjy8R2PtCiw4uP3WrBVB4JHqUuP230/iRMcU5XmySp+LhNqhkk1zsoUqQ==
 
 "@ngrx/store@6.0.1":
   version "6.0.1"
@@ -628,11 +628,6 @@
   version "4.1.7"
   resolved "https://registry.yarnpkg.com/@types/chai/-/chai-4.1.7.tgz#1b8e33b61a8c09cbe1f85133071baa0dbf9fa71a"
   integrity sha512-2Y8uPt0/jwjhQ6EiluT0XCri1Dbplr0ZxfFXUz+ye13gaqE8u5gL5ppao1JrUYr9cIip5S6MvQzBS7Kke7U9VA==
-
-"@types/faker@^4.1.5":
-  version "4.1.5"
-  resolved "https://registry.yarnpkg.com/@types/faker/-/faker-4.1.5.tgz#8f620f9c9a67150aa0a32b4e8a407da43fca61d4"
-  integrity sha512-YSDqoBEWYGdNk53xSkkb6REaUaVSlIjxIAGjj/nbLzlZOit7kUU+nA2zC2qQkIVO4MQ+3zl4Sz7aw+kbpHHHUQ==
 
 "@types/lodash@^4.14.133":
   version "4.14.135"

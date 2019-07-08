@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ChangeDetectionStrategy } from '@angular/core';
 import {
-  AngularFirestore, AngularFirestoreCollection
+  AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument
 } from '@angular/fire/firestore';
 import { Course } from 'src/app/shared/models/course';
 import { from } from 'rxjs/internal/observable/from';
@@ -15,7 +15,7 @@ export class CourseAdministrationApiService {
   readonly coursesConstant = 'courses';
   private coursesCollection: AngularFirestoreCollection<Course>;
   courses: Observable<Course[]>;
-  private batchSize = 6;
+  private batchSize = 8;
 
   constructor(private angularFireStore: AngularFirestore) {
     this.coursesCollection = angularFireStore.collection<Course>(this.coursesConstant);
@@ -30,6 +30,24 @@ export class CourseAdministrationApiService {
 
   getAllCourses(): Observable<Course[]> {
     return this.coursesCollection.snapshotChanges().pipe(map(changes => this.handleCourses(changes)));
+  }
+
+  getCourseDocumentById(id: string): AngularFirestoreDocument<Course> {
+    return this.angularFireStore.doc<Course>(`courses/${id}`);
+  }
+
+  getCourseById(id: string): Observable<Course> {
+    const courseDocument = this.getCourseDocumentById(id);
+
+    return courseDocument
+           .snapshotChanges()
+           .pipe(map((action) => action.payload.data()));
+
+  }
+
+  updateCourse(course: Course, id: string): Observable<any> {
+    const courseDocument = this.getCourseDocumentById(id);
+    return from(courseDocument.update(course));
   }
 
   handleCourses(changes): Course[] {

@@ -13,6 +13,7 @@ import { enumActions } from '../../utils/formActions.enum';
 export class CourseFormComponent implements OnInit {
 
   @Input() action: string;
+  @Input() course: Course;
   @Output() formValueEmitted = new EventEmitter<Course>();
   softwareRoles: string[];
   courseForm: FormGroup;
@@ -30,18 +31,19 @@ export class CourseFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.course);
     this.initializeCourseForm();
-    this.addTopic();
+    this.initializeTopicsArray();
     this.softwareRoles = this.adminHelper.getSoftwareRoles();
   }
 
   initializeCourseForm() {
     this.courseForm = this.formBuilder.group(
       {
-        name: ['', [Validators.required, Validators.minLength(3)]],
-        category: ['', [Validators.required]],
-        duration: ['', [Validators.required, Validators.minLength(3)]],
-        numberOfCandidates: ['', [Validators.required, Validators.min(1)]],
+        name: [this.course.name, [Validators.required, Validators.minLength(3)]],
+        category: [this.course.category, [Validators.required]],
+        duration: [this.course.duration, [Validators.required, Validators.minLength(3)]],
+        numberOfCandidates: [this.course.numberOfCandidates, [Validators.required, Validators.min(1)]],
         topics: new FormArray([])
       }
     );
@@ -74,6 +76,24 @@ export class CourseFormComponent implements OnInit {
     if (this.topicsArray.length > 1) {
       this.topicsArray.removeAt(index);
     }
+  }
+
+  initializeTopicsArray() {
+
+    if (!this.course.topics.length) {
+      this.addTopic();
+    } else {
+      this.course.topics
+                 .forEach( course =>
+                    this.topicsArray.push(this.addTopicInitialized(course.name, course.link)) );
+    }
+  }
+
+  addTopicInitialized(name: string, link: string): FormGroup {
+    return this.formBuilder.group({
+      name: [name, [Validators.required]],
+      link: [link, [Validators.required]]
+    });
   }
 
   createTopic(): FormGroup {

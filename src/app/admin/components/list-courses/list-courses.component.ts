@@ -4,7 +4,7 @@ import { Course } from '../../../shared/models/course';
 import { Router } from '@angular/router';
 import { CourseDispatchersService } from '../../store/services/course.dispatchers.service';
 import { CourseSelectors } from '../../store/services/course.selectors';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -16,10 +16,11 @@ export class ListCoursesComponent implements OnInit, OnDestroy {
 
   criteriaOptions: string[];
   selectedCriteriaToSearch: string;
-  termToSearch: string = '';
+  termToSearch = '';
   courses: Course[];
   loading = false;
   destroy$: Subject<boolean> = new Subject();
+  searchTextChanged = new Subject<string>();
 
   constructor(private adminHelper: AdminHelperService,
     private router: Router,
@@ -40,6 +41,13 @@ export class ListCoursesComponent implements OnInit, OnDestroy {
 
     this.courseSelectors.loading$.pipe(takeUntil(this.destroy$))
                                  .subscribe((loadingStatus) => this.loading = loadingStatus);
+
+    this.searchTextChanged.pipe(
+      debounceTime(1000),
+      distinctUntilChanged(),
+      takeUntil(this.destroy$)
+    ).subscribe(textToSearch => this.searchByCriteria(textToSearch));
+
   }
 
   scrollHandler(scrollEvent): void {
@@ -52,13 +60,21 @@ export class ListCoursesComponent implements OnInit, OnDestroy {
     this.courseDispatchers.getCoursesBatch();
   }
 
-  searchByCriteria(term: string) {
+  updateTerm(term: string) {
+    this.searchTextChanged.next(term);
+  }
+
+  searchByCriteria(termToSearch: string) {
     this.courseDispatchers.resetCoursesState();
-    if (term !== '') {
-      this.courseDispatchers.searchCoursesByCriteria(term, this.selectedCriteriaToSearch);
+    if (termToSearch !== '') {
+      this.courseDispatchers.searchCoursesByCriteria(termToSearch, this.selectedCriteriaToSearch);
     } else {
       this.getBatch();
     }
+  }
+
+  editCourse(id: string) {
+    this.router.navigate(['/admin-dashboard/update_course', id]);
   }
 
   createCourse() {

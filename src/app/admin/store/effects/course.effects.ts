@@ -1,7 +1,7 @@
 
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { switchMap, withLatestFrom, map, catchError, mergeMap } from 'rxjs/operators';
+import { switchMap, withLatestFrom, map, catchError} from 'rxjs/operators';
 import { CourseAdministrationApiService } from '../../services/course-administration-api.service';
 import * as courseActions from '../../store/actions';
 import { CourseSelectors } from '../services/course.selectors';

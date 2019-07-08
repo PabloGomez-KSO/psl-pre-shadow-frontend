@@ -1,7 +1,7 @@
 @import '../../../../assets/scss/variables';
 
 .list_courses_container {
-  width: 64%;
+  width: 80%;
   min-width: 360px;
   height: 70px;
   margin: 0 auto;
@@ -72,14 +72,28 @@
     justify-content: space-around;
     .card {
       width: 350px;
+      box-shadow: 2px 2px 2px 0px #d6d6d6;
       cursor: pointer;
       margin-bottom: 20px;
       border-radius: 0.25rem;
       .card-header {
         font-family: $main_font;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         font-size: 17px;
         color: #212529;
         font-weight: bold;
+        .card-header-text{
+          flex: 1;
+        }
+        .btn{
+          margin-left: 10px;
+          &:hover {
+            background-color: $blue_font_bootstrap;
+            color: white;
+          }
+        }
       }
       .card-body {
         .card-text {

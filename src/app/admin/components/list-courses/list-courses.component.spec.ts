@@ -98,7 +98,6 @@ describe('list-courses.component', () => {
       tick();
       expect(listCoursesComponent.loading).eql(testLoading);
     }));
-
   });
 
 
