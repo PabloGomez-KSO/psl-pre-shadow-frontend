@@ -27,11 +27,11 @@ import { EffectsModule } from '@ngrx/effects';
     APP_ROUTES,
     RouterModule,
     SharedModule,
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
     }),
-    StoreModule.forRoot({}),
-    EffectsModule.forRoot([])
   ],
   providers: [],
   bootstrap: [AppComponent]

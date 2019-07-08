@@ -42,8 +42,8 @@ describe('admin-actions', () => {
     it('should create GetCoursesBatchSuccess Action successfully', () => {
       const testCourses: Course[] = [course1, course2];
       const lastDocument = null;
-      const action = new actions.GetCoursesBatchSuccess(testCourses, lastDocument);
-      expect(action.type).equals(actions.GET_COURSES_BATCH_SUCCESS);
+      const action = new actions.SetCoursesBatchSuccess(testCourses, lastDocument);
+      expect(action.type).equals(actions.SET_COURSES_BATCH_SUCCESS);
       expect(action.document).equals(null);
       expect(action.newCourses).equals(testCourses);
     });

@@ -99,7 +99,7 @@ describe('courseReducer', () => {
 
     const newCourses: Course[] = [ course3, course4];
 
-    const testAction = new actions.GetCoursesBatchSuccess(newCourses, newLastDocumentVisible);
+    const testAction = new actions.SetCoursesBatchSuccess(newCourses, newLastDocumentVisible);
 
     const result = reducer(testState, testAction);
 

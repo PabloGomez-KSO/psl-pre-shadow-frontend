@@ -24,6 +24,16 @@ const getCoursesLoading = createSelector(
   getCourseState,
   (state: CourseState) => state.loading
 );
+
+const getCoursesSearchCriteria = createSelector(
+  getCourseState,
+  (state: CourseState) => state.searchCriteria
+);
+
+const getCoursesSearchTerm = createSelector(
+  getCourseState,
+  (state: CourseState) => state.searchTerm
+);
 @Injectable({
   providedIn: 'root'
 })
@@ -34,5 +44,7 @@ export class CourseSelectors {
   courseState$ = this.store.select(getCourseState);
   lastVisibleDocument$ = this.store.select(getLastVisibleDocument);
   loading$ = this.store.select(getCoursesLoading);
+  searchCriteria$ = this.store.select(getCoursesSearchCriteria);
+  searchTerm$ = this.store.select(getCoursesSearchTerm);
 
 }

@@ -3,32 +3,32 @@ import { CanActivate, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
 import { AuthService } from '../auth/auth.service';
-import { UserApiService } from '../../shared/services/user-api.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class AuthGuardAdmin implements CanActivate {
 
   constructor(
     private router: Router,
     private authService: AuthService,
-    private userApiService: UserApiService
   ) { }
 
   canActivate(): Observable<boolean> {
 
+    const userId = sessionStorage.getItem('userId');
+
     return this.authService.getAuth().pipe(
       take(1),
       map(user => {
-
-        this.userApiService.getUserByEmail(user.email).subscribe(data => console.log(data));
-
-
+        const rol = sessionStorage.getItem('rol');
+        if ( rol === 'Candidate') {
+          return false;
+        }
         return !!user;
       }),
       tap(loggedIn => {
-        if (!loggedIn || !sessionStorage.getItem('userId')) {
+        if (!loggedIn || !userId) {
           this.router.navigate(['/login']);
         }
       })

@@ -3,7 +3,7 @@ import { Course } from 'src/app/shared/models/course';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { AdminHelperService } from '../../services/admin-helper.service';
 import { Router } from '@angular/router';
-import { enumActions } from '../formActions.enum';
+import { enumActions } from '../../utils/formActions.enum';
 
 @Component({
   selector: 'app-course-form',
@@ -24,9 +24,9 @@ export class CourseFormComponent implements OnInit {
   }
 
   constructor(private formBuilder: FormBuilder,
-              private adminHelper: AdminHelperService,
-              private router: Router
-             ) {
+    private adminHelper: AdminHelperService,
+    private router: Router
+  ) {
   }
 
   ngOnInit() {
@@ -38,9 +38,9 @@ export class CourseFormComponent implements OnInit {
   initializeCourseForm() {
     this.courseForm = this.formBuilder.group(
       {
-        name: [ '', [Validators.required , Validators.minLength(3)]],
+        name: ['', [Validators.required, Validators.minLength(3)]],
         category: ['', [Validators.required]],
-        duration: [ '', [Validators.required, Validators.minLength(3)]],
+        duration: ['', [Validators.required, Validators.minLength(3)]],
         numberOfCandidates: ['', [Validators.required, Validators.min(1)]],
         topics: new FormArray([])
       }
@@ -48,10 +48,29 @@ export class CourseFormComponent implements OnInit {
   }
 
   addTopic(): void {
-    this.topicsArray.push(this.createTopic());
+    const topicsControlValidity = this.checkControlsStatusOfTopics();
+
+    if (topicsControlValidity) {
+      this.topicsArray.push(this.createTopic());
+    }
+  }
+
+  checkControlsStatusOfTopics(): boolean {
+
+    let controlsValidation = true;
+
+    this.topicsArray.controls
+      .forEach(control => {
+        if (control.invalid) {
+          controlsValidation = false;
+        }
+      });
+
+    return controlsValidation;
   }
 
   deleteTopicControl(index: number): void {
+
     if (this.topicsArray.length > 1) {
       this.topicsArray.removeAt(index);
     }

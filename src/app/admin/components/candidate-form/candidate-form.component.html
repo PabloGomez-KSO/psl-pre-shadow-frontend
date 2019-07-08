@@ -64,7 +64,7 @@
                 <div *ngIf="(cForm.submitted || candidateForm.get('email')?.touched) && candidateForm.get('email').pending">
                   Checking availability
                 </div>
-                <div *ngIf="(cForm.submitted || candidateForm.get('email')?.touched) && candidateForm.get('email').errors['emailNotAvailable']">
+                <div *ngIf="(cForm.submitted || candidateForm.get('email')?.touched) && candidateForm.get('email').errors['valueNotAvailable']">
                   {{ email.value }} is already taken
                 </div>
               </div>
@@ -98,7 +98,7 @@
                 <div *ngIf="(cForm.submitted || candidateForm.get('username')?.touched) && candidateForm.get('username').errors['required']">
                   Type your username
                 </div>
-                <div *ngIf="(cForm.submitted || candidateForm.get('username')?.touched) && candidateForm.get('username').errors['usernameNotAvailable']">
+                <div *ngIf="(cForm.submitted || candidateForm.get('username')?.touched) && candidateForm.get('username').errors['valueNotAvailable']">
                   {{ username.value }} is already taken
                 </div>
               </div>

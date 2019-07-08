@@ -18,4 +18,8 @@ export class CourseDispatchersService {
     this.store.dispatch(new courseActions.ResetCoursesState());
   }
 
+  searchCoursesByCriteria(term: string, criteria: string) {
+    this.store.dispatch(new courseActions.SearchCoursesByCriteria(term, criteria));
+  }
+
 }

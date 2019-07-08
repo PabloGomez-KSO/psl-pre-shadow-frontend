@@ -1,7 +1,7 @@
 
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { switchMap, withLatestFrom, map, catchError } from 'rxjs/operators';
+import { switchMap, withLatestFrom, map, catchError, mergeMap } from 'rxjs/operators';
 import { CourseAdministrationApiService } from '../../services/course-administration-api.service';
 import * as courseActions from '../../store/actions';
 import { CourseSelectors } from '../services/course.selectors';
@@ -26,15 +26,25 @@ export class CourseEffects {
         return this.getCoursesRequest(lastVisibleDocument);
       }));
 
+  @Effect()
+  searchCoursesByCriteria$ = this.actions$.pipe(ofType(courseActions.SEARCH_COURSES_BY_CRITERIA))
+    .pipe(
+      withLatestFrom(this.courseSelectors.courseState$),
+      switchMap(([action, courseState]) => {
+        console.log(courseState.searchTerm);
+        return this.courseAdministrationApi.searchByCriteria(courseState.searchTerm, courseState.searchCriteria)
+          .pipe(map((courses: Course[]) => new courseActions.SearchCoursesByCriteriaSuccess(courses))
+            );
+      }));
 
   getCoursesRequest(lastVisibleDocument): Observable<any> {
     return this.courseAdministrationApi.getCourses(lastVisibleDocument).
       pipe(
         map((courses: Course[]) => {
           const getLastCourse = this.getLastVisibileCourse(courses);
-          return new courseActions.GetCoursesBatchSuccess(courses, getLastCourse);
+          return new courseActions.SetCoursesBatchSuccess(courses, getLastCourse);
         }),
-        catchError((error: Error) => of(new courseActions.GetCoursesBatchError(error))
+        catchError((error: Error) => of(new courseActions.SetCoursesBatchError(error))
         )
       );
   }

@@ -27,6 +27,7 @@ import { StoreModule } from '@ngrx/store';
 import { reducers } from './store/reducers';
 import { effects } from './store/effects';
 import { EffectsModule } from '@ngrx/effects';
+import { EditCourseComponent } from './components/edit-course/edit-course.component';
 
 @NgModule({
   imports: [
@@ -51,7 +52,8 @@ import { EffectsModule } from '@ngrx/effects';
     CandidateFormComponent,
     ListCoursesComponent,
     CourseFormComponent,
-    CreateCourseComponent
+    CreateCourseComponent,
+    EditCourseComponent
   ],
   exports: [
     AdminDashboardComponent

@@ -4,10 +4,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AdminHelperService } from '../../services/admin-helper.service';
 import { User } from 'src/app/shared/models/user';
-import { enumActions } from '../formActions.enum';
+import { enumActions } from '../../utils/formActions.enum';
 import { Subscription } from 'rxjs';
-import { CustomEmailValidator } from '../../validators/emailValidator';
-import { CustomUsernameValidator } from '../../validators/usernameValidator';
+import { CustomValidator } from '../../validators/asyncValidatorForInput';
 import { AngularFirestore } from '@angular/fire/firestore';
 @Component({
   selector: 'app-candidate-form',
@@ -23,6 +22,14 @@ export class CandidateFormComponent implements OnInit {
   softwareRoles: string[];
   formActions: any = enumActions;
   authRegisterSubscription: Subscription;
+
+  get email() {
+    return this.candidateForm.get('email');
+  }
+
+  get username() {
+    return this.candidateForm.get('username');
+  }
 
   constructor(
     private router: Router,
@@ -53,9 +60,10 @@ export class CandidateFormComponent implements OnInit {
       {
         name: [this.user.name, [Validators.required, Validators.minLength(4)]],
         age: [this.user.age, [Validators.required, Validators.min(18)]],
-        email: ['', Validators.required, CustomEmailValidator.emailValidator(this.angularFirestore)],
+        email: ['', Validators.required,
+        CustomValidator.checkValueInDb(this.angularFirestore, 'email')],
         username: [this.user.username, [Validators.required, Validators.min(3)],
-        CustomUsernameValidator.usernameValidator(this.angularFirestore)],
+        CustomValidator.checkValueInDb(this.angularFirestore, 'username')],
         password: ['', [Validators.required]],
         cpassword: ['', [Validators.required]],
         startDate: [this.user.startDate, [Validators.required]],
@@ -76,13 +84,5 @@ export class CandidateFormComponent implements OnInit {
     if (this.candidateForm.valid) {
       this.formValueEmitted.emit(this.candidateForm.value);
     }
-  }
-
-  get email() {
-    return this.candidateForm.get('email');
-  }
-
-  get username() {
-    return this.candidateForm.get('username');
   }
 }

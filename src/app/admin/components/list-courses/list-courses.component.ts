@@ -16,7 +16,7 @@ export class ListCoursesComponent implements OnInit, OnDestroy {
 
   criteriaOptions: string[];
   selectedCriteriaToSearch: string;
-  termToSearch: string;
+  termToSearch: string = '';
   courses: Course[];
   loading = false;
   destroy$: Subject<boolean> = new Subject();
@@ -43,8 +43,9 @@ export class ListCoursesComponent implements OnInit, OnDestroy {
   }
 
   scrollHandler(scrollEvent): void {
-    if (scrollEvent === 'bottom') {
-      this.courseDispatchers.getCoursesBatch();
+    console.log(this.termToSearch);
+    if (scrollEvent === 'bottom' && this.termToSearch === '') {
+      this.getBatch();
     }
   }
 
@@ -53,7 +54,12 @@ export class ListCoursesComponent implements OnInit, OnDestroy {
   }
 
   searchByCriteria(term: string) {
-    console.log(term);
+    this.courseDispatchers.resetCoursesState();
+    if (term !== '') {
+      this.courseDispatchers.searchCoursesByCriteria(term, this.selectedCriteriaToSearch);
+    } else {
+      this.getBatch();
+    }
   }
 
   createCourse() {

@@ -28,11 +28,11 @@ export class CourseAdministrationApiService {
     return from(this.coursesCollection.doc(idGenerated).set(courseToDB));
   }
 
-  getAllCourses() {
+  getAllCourses(): Observable<Course[]> {
     return this.coursesCollection.snapshotChanges().pipe(map(changes => this.handleCourses(changes)));
   }
 
-  handleCourses(changes) {
+  handleCourses(changes): Course[] {
     return changes.map(action => this.getCourseDataFromActionObject(action));
   }
 
@@ -40,29 +40,47 @@ export class CourseAdministrationApiService {
     return action.payload.doc.data();
   }
 
-  getCourses(lastVisibleDocument): Observable<any> {
+  searchByCriteria(text, criteria): Observable<Course[]> {
+
+    console.log('fucking test ', text);
+
+    console.log('aaa ', criteria);
+
+    const endText = text + '\uf8ff';
+
+    const coursesCollection = this.angularFireStore.collection(this.coursesConstant, ref =>
+      ref
+        .orderBy(criteria)
+        .startAt(text)
+        .endAt(endText)
+    );
+
+    return this.mapAndUpdate(coursesCollection);
+  }
+
+  getCourses(lastVisibleDocument): Observable<Course[]> {
 
     let coursesBatch;
 
     if (lastVisibleDocument) {
       coursesBatch = this.angularFireStore.collection(this.coursesConstant, ref =>
-         ref
+        ref
           .orderBy('name')
           .limit(this.batchSize)
           .startAfter(lastVisibleDocument)
       );
     } else {
       coursesBatch = this.angularFireStore.collection(this.coursesConstant, ref =>
-          ref
-           .orderBy('name')
-           .limit(this.batchSize)
+        ref
+          .orderBy('name')
+          .limit(this.batchSize)
       );
     }
 
     return this.mapAndUpdate(coursesBatch);
   }
 
-  mapAndUpdate(coursesCollection: AngularFirestoreCollection<any>): Observable<any> {
+  mapAndUpdate(coursesCollection: AngularFirestoreCollection<any>): Observable<Course[]> {
 
     return coursesCollection
       .snapshotChanges()

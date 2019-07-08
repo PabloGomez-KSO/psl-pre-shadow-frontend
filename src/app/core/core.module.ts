@@ -16,7 +16,9 @@ import { AdminModule } from '../admin/admin.module';
 
 // Enviroment.
 import { environment } from '../../environments/environment';
-import { AuthGuard } from './guards/auth.guard';
+
+import { AuthGuardAdmin } from './guards/admin.auth.guard';
+import { AuthGuardCandidate } from './guards/candidate.auth.guard';
 
 @NgModule({
   imports: [
@@ -29,7 +31,7 @@ import { AuthGuard } from './guards/auth.guard';
     AngularFireStorageModule
   ],
   declarations: [LoginComponent],
-  providers: [AuthGuard, AngularFirestore, AngularFireAuth],
+  providers: [AuthGuardAdmin, AuthGuardCandidate, AngularFirestore, AngularFireAuth],
   exports: [LoginComponent]
 })
 export class CoreModule {}

@@ -6,13 +6,16 @@ export interface CourseState {
   lastCourseDocument: any;
   loading: boolean;
   error: boolean;
+  searchCriteria?: string;
+  searchTerm?: string;
 }
 
 export const initialState: CourseState = {
   courses: [],
   lastCourseDocument: null,
   loading: false,
-  error: false
+  error: false,
+  searchTerm: ''
 };
 
 export function reducer(state = initialState, action: courseActions.AllCourseActions): CourseState {
@@ -21,10 +24,11 @@ export function reducer(state = initialState, action: courseActions.AllCourseAct
     case courseActions.GET_COURSES_BATCH: {
       return {
         ...state,
-        loading: true
+        loading: true,
+        searchCriteria: ''
       };
     }
-    case courseActions.GET_COURSES_BATCH_SUCCESS: {
+    case courseActions.SET_COURSES_BATCH_SUCCESS: {
       return {
         ...state,
         loading: false,
@@ -33,11 +37,36 @@ export function reducer(state = initialState, action: courseActions.AllCourseAct
       };
     }
 
-    case courseActions.GET_COURSES_BATCH_ERROR: {
+    case courseActions.SET_COURSES_BATCH_ERROR: {
       return {
          ...state,
          error: action.payload,
          loading: false
+      };
+    }
+
+    case courseActions.SEARCH_COURSES_BY_CRITERIA: {
+      return {
+        ...state,
+        loading: true,
+        searchCriteria: action.criteria,
+        searchTerm: action.searchTerm
+      };
+    }
+
+    case courseActions.SEARCH_COURSES_BY_CRITERIA_SUCCESS: {
+      return {
+        ...state,
+        loading: false,
+        courses: [...action.courses]
+      };
+    }
+
+    case courseActions.SEARCH_COURSES_BY_CRITERIA_ERROR: {
+      return {
+        ...state,
+        loading: false,
+        error: action.payload
       };
     }
 
