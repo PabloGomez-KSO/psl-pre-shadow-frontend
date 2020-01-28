@@ -1,3 +1,5 @@
+import { NgtUniversalModule } from '@ng-toolkit/universal';
+import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -19,8 +21,11 @@ import { EffectsModule } from '@ngrx/effects';
   declarations: [
     AppComponent
   ],
-  imports: [
-    BrowserModule,
+  imports:[
+ CommonModule,
+NgtUniversalModule,
+ 
+    
     AdminModule,
     CandidateModule,
     CoreModule,
@@ -34,6 +39,5 @@ import { EffectsModule } from '@ngrx/effects';
     }),
   ],
   providers: [],
-  bootstrap: [AppComponent]
 })
 export class AppModule { }

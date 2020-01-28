@@ -1,4 +1,5 @@
-import { Directive, HostListener, EventEmitter, Output, OnInit } from '@angular/core';
+import { WINDOW } from '@ng-toolkit/universal';
+import { Directive, HostListener, EventEmitter, Output, OnInit , Inject} from '@angular/core';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
@@ -10,7 +11,7 @@ export class ScrollableDirective implements OnInit {
   @Output() scrollPosition = new EventEmitter();
   private scrollEvent = new Subject();
 
-  constructor() { }
+  constructor(@Inject(WINDOW) private window: Window, ) { }
 
   ngOnInit() {
     this.scrollEvent.pipe(
@@ -20,7 +21,7 @@ export class ScrollableDirective implements OnInit {
 
   @HostListener('window:scroll', ['$event'])
   onScroll() {
-    if (document.documentElement.scrollTop + window.innerHeight + 2
+    if (document.documentElement.scrollTop + this.window.innerHeight + 2
       >= document.documentElement.offsetHeight) {
         this.scrollEvent.next({});
     }
