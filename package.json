@@ -40,7 +40,7 @@
     "core-js": "^2.5.4",
     "cors": "~2.8.4",
     "firebase": "^6.1.0",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "karma-chai-as-promised": "^0.1.2",
     "lodash": "^4.17.13",
     "moment": "^2.24.0",
